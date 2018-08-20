@@ -53,7 +53,6 @@ def line(x0,y0,length,angle=0,speed=2000):
     penDown()
     toPosition(xf,yf)
     penUp()
-    time.sleep(1)
 
 def main():
     intializeDrawer()
