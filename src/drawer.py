@@ -65,13 +65,16 @@ def square(xc,yc,R):
 
 def main():
     intializeDrawer()
-    line(50,50,length=50,angle=0)
-    line(50,50,length=55,angle=.1)
-    line(50,50,length=60,angle=.2)
-    line(50,50,length=65,angle=.4)
-    line(50,50,length=70,angle=.8)
-    line(50,50,length=75,angle=1.6)
-    square(50,50,10)
+    try:
+        line(50,50,length=50,angle=0)
+        line(50,50,length=55,angle=.1)
+        line(50,50,length=60,angle=.2)
+        line(50,50,length=65,angle=.4)
+        line(50,50,length=70,angle=.8)
+        line(50,50,length=75,angle=1.6)
+        square(50,50,10)
+    except:
+        toPosition(0,0)
     closeDrawer()
 
 if __name__ == "__main__":
