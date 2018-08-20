@@ -6,7 +6,7 @@ s = []
 def intializeDrawer():
     global s
     s = serial.Serial('/dev/ttyUSB0',115200)
-    s.write("\r\n\r\n")
+    s.write("\r\n\r\n".encode('UTF-8'))
     time.sleep(2)
     s.flushInput()
 
