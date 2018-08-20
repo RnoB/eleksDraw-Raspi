@@ -11,6 +11,9 @@ def intializeDrawer():
     s.write("\r\n\r\n".encode('UTF-8'))
     time.sleep(2)
     s.flushInput()
+    sendCommand('G90\r\n'.encode('UTF-8')) ; Set to Absolute Positioning
+    sendCommand('G1Z0\r\n'.encode('UTF-8')) ; linear movement no z position
+    sendCommand('G21\r\n'.encode('UTF-8')) ; G21 ; Set Units to Millimeters
 
 
 def sendCommand(gCode):
@@ -50,10 +53,11 @@ def line(x0,y0,length,angle=0,speed=2000):
     penDown()
     toPosition(xf,yf)
     penUp()
+    time.sleep(1)
 
 def main():
     intializeDrawer()
-    line(10,10,5,0)
+    line(50,50,50,0)
     line(10,10,5,.1)
     line(10,10,5,.2)
     line(10,10,5,.4)
