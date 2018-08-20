@@ -45,7 +45,7 @@ def penDown():
     sendCommand(('M3S30'.strip()+'\r\n').encode('UTF-8'))
 
 
-def line(x0,y0,length,angle=0,speed=2000):
+def line(x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000):
     
     xf = x0+length*math.cos(angle)
     yf = y0+length*math.sin(angle)
@@ -54,17 +54,24 @@ def line(x0,y0,length,angle=0,speed=2000):
     toPosition(xf,yf)
     penUp()
 
+def square(xc,yc,R)
+    toPosition(xc-R/2,yc-R/2)
+    penDown()
+    toPosition(xc+R/2,yc-R/2)
+    toPosition(xc+R/2,yc+R/2)
+    toPosition(xc-R,/2yc+R/2)
+    toPosition(xc-R/2,yc-R/2)
+    penUp()
+
 def main():
     intializeDrawer()
-    line(50,50,50,0)
-    line(50,50,50,.1)
-    line(50,50,50,.2)
-    line(50,50,50,.4)
-    line(50,50,50,.8)
-    line(50,50,50,1.6)
-    penUp()
-    penUp()
-    penUp()
+    line(50,50,length=50,angle=0)
+    line(50,50,length=55,angle=.1)
+    line(50,50,length=60,angle=.2)
+    line(50,50,length=65,angle=.4)
+    line(50,50,length=70,angle=.8)
+    line(50,50,length=75,angle=1.6)
+    square(50,5)
     closeDrawer()
 
 if __name__ == "__main__":
