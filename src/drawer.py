@@ -62,6 +62,9 @@ def main():
     line(50,50,50,.4)
     line(50,50,50,.8)
     line(50,50,50,1.6)
+    penUp()
+    penUp()
+    penUp()
     closeDrawer()
 
 if __name__ == "__main__":
