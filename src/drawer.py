@@ -42,20 +42,23 @@ def penDown():
     s.write(('M3S30'.strip()+'\r\n').encode('UTF-8'))
     s.readline()
 
-def line(x0,y0,length,angle):
+def line(x0,y0,length,angle=0,speed=2000):
     
-    xf = x+L*math.cos(angle)
-
+    xf = x0+L*math.cos(angle)
+    yf = y0+L*math.sin(angle)
+    toPosition(x0,y0)
+    penDown()
+    toPosition(xf,yf)
+    penUp()
 
 def main():
     intializeDrawer()
-    penUp()
-    penDown()
-    penUp()
-    penDown()
-    penUp()
-    penDown()
-    penUp()
+    line(10,10,5,0)
+    line(10,10,5,.1)
+    line(10,10,5,.2)
+    line(10,10,5,.4)
+    line(10,10,5,.8)
+    line(10,10,5,1.6)
     closeDrawer()
 
 if __name__ == "__main__":
