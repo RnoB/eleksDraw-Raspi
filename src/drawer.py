@@ -37,6 +37,9 @@ def closeDrawer():
 
 def penUp():
     s.flushInput()
+    s.write(('G4P0'.strip()+'\r\n').encode('UTF-8'))
+    s.readline()
+    s.flushInput()
     s.write(('M5S0'.strip()+'\r\n').encode('UTF-8'))
     s.readline()
     
@@ -58,11 +61,11 @@ def line(x0,y0,length,angle=0,speed=2000):
 def main():
     intializeDrawer()
     line(50,50,50,0)
-    line(10,10,5,.1)
-    line(10,10,5,.2)
-    line(10,10,5,.4)
-    line(10,10,5,.8)
-    line(10,10,5,1.6)
+    line(50,50,50,.1)
+    line(50,50,50,.2)
+    line(50,50,50,.4)
+    line(50,50,50,.8)
+    line(50,50,50,1.6)
     closeDrawer()
 
 if __name__ == "__main__":
