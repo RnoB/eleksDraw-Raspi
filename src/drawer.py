@@ -11,7 +11,12 @@ def intializeDrawer():
     s.flushInput()
 
 def closeDrawer():
-
+    s.flushInput()
+    s.write(('G1X0Y0F3500'.strip()+'\r\n').encode('UTF-8'))
+    s.readline()
+    s.flushInput()
+    s.write(('M30'.strip()+'\r\n').encode('UTF-8'))
+    s.readline()
     s.close()
 
 def penUp():
