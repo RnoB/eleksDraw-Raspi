@@ -1,6 +1,6 @@
 import serial
 import time
-import matj-h
+import math
 
 s = []
 x = 0
