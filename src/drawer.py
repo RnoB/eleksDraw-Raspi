@@ -44,8 +44,8 @@ def penDown():
 
 def line(x0,y0,length,angle=0,speed=2000):
     
-    xf = x0+L*math.cos(angle)
-    yf = y0+L*math.sin(angle)
+    xf = x0+length*math.cos(angle)
+    yf = y0+length*math.sin(angle)
     toPosition(x0,y0)
     penDown()
     toPosition(xf,yf)
