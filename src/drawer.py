@@ -54,7 +54,7 @@ def line(x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000):
     toPosition(xf,yf)
     penUp()
 
-def square(xc,yc,R)
+def square(xc,yc,R):
     toPosition(xc-R/2,yc-R/2)
     penDown()
     toPosition(xc+R/2,yc-R/2)
