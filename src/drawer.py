@@ -36,17 +36,14 @@ def closeDrawer():
     s.close()
 
 def penUp():
-    s.flushInput()
-    s.write(('M5S0'.strip()+'\r\n').encode('UTF-8'))
-    s.readline()
-    s.flushInput()
-    s.write(('G4P0'.strip()+'\r\n').encode('UTF-8'))
-    s.readline()
+    sendCommand(('M5S0'.strip()+'\r\n').encode('UTF-8'))
+
+
     
 def penDown():
-    s.flushInput()
-    s.write(('M3S30'.strip()+'\r\n').encode('UTF-8'))
-    s.readline()
+
+    sendCommand(('M3S30'.strip()+'\r\n').encode('UTF-8'))
+
 
 def line(x0,y0,length,angle=0,speed=2000):
     
