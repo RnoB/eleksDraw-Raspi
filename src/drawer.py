@@ -37,6 +37,7 @@ def main():
     penDown()
     penUp()
     penDown()
+    penUp()
     closeDrawer()
 
 if __name__ == "__main__":
