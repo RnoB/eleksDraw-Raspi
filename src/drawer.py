@@ -37,10 +37,10 @@ def closeDrawer():
 
 def penUp():
     s.flushInput()
-    s.write(('G4P0'.strip()+'\r\n').encode('UTF-8'))
+    s.write(('M5S0'.strip()+'\r\n').encode('UTF-8'))
     s.readline()
     s.flushInput()
-    s.write(('M5S0'.strip()+'\r\n').encode('UTF-8'))
+    s.write(('G4P0'.strip()+'\r\n').encode('UTF-8'))
     s.readline()
     
 def penDown():
