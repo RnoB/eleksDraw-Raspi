@@ -59,7 +59,7 @@ def square(xc,yc,R):
     penDown()
     toPosition(xc+R/2,yc-R/2)
     toPosition(xc+R/2,yc+R/2)
-    toPosition(xc-R,/2yc+R/2)
+    toPosition(xc-R/2,yc+R/2)
     toPosition(xc-R/2,yc-R/2)
     penUp()
 
@@ -71,7 +71,7 @@ def main():
     line(50,50,length=65,angle=.4)
     line(50,50,length=70,angle=.8)
     line(50,50,length=75,angle=1.6)
-    square(50,5)
+    square(50,10)
     closeDrawer()
 
 if __name__ == "__main__":
