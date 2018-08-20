@@ -20,7 +20,7 @@ def sendCommand(gCode):
     out = s.readline()
     print(out)
 
-def toPosition(x0,y0,speed = 3500)
+def toPosition(x0,y0,speed = 3500):
     gCode = (('G1X'+str(x0)+'Y'+str(y0)+'F'+speed).strip()+'\r\n').encode('UTF-8')
     sendCommand(gCode)
     
