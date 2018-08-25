@@ -13,7 +13,7 @@ def intializeDrawer():
     time.sleep(2)
     s.flushInput()
     sendCommand('G90\r\n'.encode('UTF-8')) # Set to Absolute Positioning
-    sendCommand('G1Z0\r\n'.encode('UTF-8')) # linear movement no z position
+    sendCommand('G1Z0F10\r\n'.encode('UTF-8')) # linear movement no z position
     sendCommand('G21\r\n'.encode('UTF-8')) # G21 ; Set Units to Millimeters
 
 
