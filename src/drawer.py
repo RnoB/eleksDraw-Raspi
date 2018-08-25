@@ -84,7 +84,7 @@ def square(xc,yc,R,anisotropy = 1,angle=0,speed=2000,noise = 0):
     penUp()
 
 def circle(x,y,R,speed = 2000,cw = False):
-    toPositionCurved(x-R,y,R,speed=speed)
+    toPosition(x-R,y,R,speed=speed)
     penDown()
     toPositionCurved(x+R,y,R,speed=speed,cw=cw)
     toPositionCurved(x-R,y,R,speed=speed,cw=cw)
