@@ -68,7 +68,7 @@ def square(xc,yc,R,anisotropy = 1,angle=0,speed=2000,noise = 0):
     yIdx = [0,1,1,0]
     xSquare = []
     for k in range(0,4):
-        xSquare.append([xc+(x[xIdx[k]]*math.cos(angle)-y[yIdx[k]]*math.sin(angle))+noiser(noise),xc+(x[xIdx[k]]*math.cos(angle)-y[yIdx[k]]*math.sin(angle))+noiser(noise)])
+        xSquare.append([xc+(x[xIdx[k]]*math.cos(angle)-y[yIdx[k]]*math.sin(angle))+noiser(noise),xc+(x[xIdx[k]]*math.sin(angle)+y[yIdx[k]]*math.cos(angle))+noiser(noise)])
     toPosition(xSquare[-1][0],xSquare[-1][1],speed=speed)
     penDown()
     for xs in xSquare:
