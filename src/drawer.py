@@ -46,7 +46,9 @@ def penDown():
     sendCommand(('M3S30'.strip()+'\r\n').encode('UTF-8'))
 
 def noise(xMax):
-    return random.random(xMax)
+    return xMax*random.random()
+
+
 def line(x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000):
     
     xf = x0+length*math.cos(angle)
