@@ -38,29 +38,18 @@ class Drawer:
         self.sendCommand(gCode)
 
 
-
-
-
-
-        
-
     def closeDrawer(self):
         self.toPosition(0,0)
-        self.flushInput()
-        self.write(('M30'.strip()+'\r\n').encode('UTF-8'))
-        self.readline()
-        self.close()
+        self.s.flushInput()
+        self.s.write(('M30'.strip()+'\r\n').encode('UTF-8'))
+        self.s.readline()
+        self.s.close()
 
     def penUp(self):
         self.sendCommand(('M5S0'.strip()+'\r\n').encode('UTF-8'))
-
-
         
     def penDown(self):
-
         self.sendCommand(('M3S30'.strip()+'\r\n').encode('UTF-8'))
-
-
 
     def line(self,x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000):
         
