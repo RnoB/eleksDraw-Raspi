@@ -64,13 +64,15 @@ def line(x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000):
 def square(xc,yc,R,anisotropy = 1,angle=0,speed=2000,noise = 0):
     x = [-R/2,+R/2]
     y = [-anisotropy*R/2,+anisotropy*R/2]
-
-    toPosition(xc+(x[0]*math.cos(angle)-y[0]*math.sin(angle))+noiser(noise),yc+(x[0]*math.sin(angle)+y[0]*math.cos(angle))+noiser(noise),speed=speed)
+    xIdx = [1,1,0,0]
+    yIdx = [0,1,1,0]
+    xSquare = []
+    for k in range(0,4):
+        xSquare.append([xc+(x[xIdx[k]]*math.cos(angle)-y[yIdx[k]]*math.sin(angle))+noiser(noise),xc+(x[xIdx[k]]*math.cos(angle)-y[yIdx[k]]*math.sin(angle))+noiser(noise)])
+    toPosition(xSquare[-1][0],xSquare[-1][1],speed=speed)
     penDown()
-    toPosition(xc+(x[1]*math.cos(angle)-y[0]*math.sin(angle))+noiser(noise),yc+(x[1]*math.sin(angle)+y[0]*math.cos(angle))+noiser(noise),speed=speed)
-    toPosition(xc+(x[1]*math.cos(angle)-y[1]*math.sin(angle))+noiser(noise),yc+(x[1]*math.sin(angle)+y[1]*math.cos(angle))+noiser(noise),speed=speed)
-    toPosition(xc+(x[0]*math.cos(angle)-y[1]*math.sin(angle))+noiser(noise),yc+(x[0]*math.sin(angle)+y[1]*math.cos(angle))+noiser(noise),speed=speed)
-    toPosition(xc+(x[0]*math.cos(angle)-y[0]*math.sin(angle))+noiser(noise),yc+(x[0]*math.sin(angle)+y[0]*math.cos(angle))+noiser(noise),speed=speed)
+    for xs in xSquare:
+        toPosition(xs[0],xs[1],speed=speed)
     penUp()
 
 def main():
