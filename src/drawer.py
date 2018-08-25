@@ -78,7 +78,7 @@ def main():
         #line(50,50,length=70,angle=.8)
         #line(50,50,length=75,angle=1.6)
         for k in range(0,20):
-            square(10,7,k/2.0,noise = .5)
+            square(10,7,k/2.0,noise = .1)
             #for j in range(0,10):
                 #square((k+1)*11,(j+1)*11,10,angle=math.pi*(k*j)/(400))
     except Exception as e: 
