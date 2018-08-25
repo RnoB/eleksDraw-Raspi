@@ -60,7 +60,7 @@ class Drawer:
         self.toPosition(xf,yf)
         self.penUp()
 
-    def lines(self,x,y,speed=2000)
+    def lines(self,x,y,speed=2000):
         self.toPosition(x[0],y[0])
         self.penDown()
         for k in range(0:len(x)):
