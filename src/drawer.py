@@ -3,6 +3,9 @@ import time
 import math
 import numpy as np
 import random
+import sys
+import os
+import traceback
 s = []
 x = 0
 y = 0
@@ -84,7 +87,7 @@ def main():
             #for j in range(0,10):
                 #square((k+1)*11,(j+1)*11,10,angle=math.pi*(k*j)/(400))
     except Exception as e: 
-        print(e)
+        print(traceback.format_exc())
         toPosition(0,0)
     closeDrawer()
 
