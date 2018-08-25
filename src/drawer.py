@@ -32,7 +32,7 @@ def toPosition(x0,y0,speed = 3500):
     sendCommand(gCode)
 
 def toPositionCurved(x0,y0,R,cw=True,speed = 3500):
-    if cw = True:
+    if cw:
         gCommand = 'G2'
     else:
         gCommand = 'G3'
