@@ -58,12 +58,12 @@ def square(xc,yc,R,anisotropy = 1,angle=0,speed=2000):
     x = [-R/2,+R/2]
     y = [-anisotropy*R/2,+anisotropy*R/2]
 
-    toPosition(xc+(x[0]*math.cos(angle)+y[0]*math.sin(angle)),yc+(x[0]*math.sin(angle)+y[0]*math.cos(angle)),speed=speed)
+    toPosition(xc+(x[0]*math.cos(angle)-y[0]*math.sin(angle)),yc+(x[0]*math.sin(angle)+y[0]*math.cos(angle)),speed=speed)
     penDown()
-    toPosition(xc+(x[1]*math.cos(angle)+y[0]*math.sin(angle)),yc+(x[1]*math.sin(angle)+y[0]*math.cos(angle)),speed=speed)
-    toPosition(xc+(x[1]*math.cos(angle)+y[1]*math.sin(angle)),yc+(x[1]*math.sin(angle)+y[1]*math.cos(angle)),speed=speed)
-    toPosition(xc+(x[0]*math.cos(angle)+y[1]*math.sin(angle)),yc+(x[0]*math.sin(angle)+y[1]*math.cos(angle)),speed=speed)
-    toPosition(xc+(x[0]*math.cos(angle)+y[0]*math.sin(angle)),yc+(x[0]*math.sin(angle)+y[0]*math.cos(angle)),speed=speed)
+    toPosition(xc+(x[1]*math.cos(angle)-y[0]*math.sin(angle)),yc+(x[1]*math.sin(angle)+y[0]*math.cos(angle)),speed=speed)
+    toPosition(xc+(x[1]*math.cos(angle)-y[1]*math.sin(angle)),yc+(x[1]*math.sin(angle)+y[1]*math.cos(angle)),speed=speed)
+    toPosition(xc+(x[0]*math.cos(angle)-y[1]*math.sin(angle)),yc+(x[0]*math.sin(angle)+y[1]*math.cos(angle)),speed=speed)
+    toPosition(xc+(x[0]*math.cos(angle)-y[0]*math.sin(angle)),yc+(x[0]*math.sin(angle)+y[0]*math.cos(angle)),speed=speed)
     penUp()
 
 def main():
@@ -77,7 +77,7 @@ def main():
         #line(50,50,length=75,angle=1.6)
         for k in range(0,10):
             for j in range(0,10):
-                square((k+1)*11,(j+1)*11,10,angle=math.pi*(k+j)/(200))
+                square((k+1)*11,(j+1)*11,10,angle=math.pi*(k+j)/(20))
     except:
         toPosition(0,0)
     closeDrawer()
