@@ -94,7 +94,7 @@ class Drawer:
 
 
 
-    def init(self):
+    def __init__(self):
         
         self.s = serial.Serial('/dev/ttyUSB0',115200)
         self.s.write("\r\n\r\n".encode('UTF-8'))
