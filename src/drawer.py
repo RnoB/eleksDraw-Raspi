@@ -81,7 +81,8 @@ def main():
             square(10,7,float(k)/2.0,noise = .5)
             #for j in range(0,10):
                 #square((k+1)*11,(j+1)*11,10,angle=math.pi*(k*j)/(400))
-    except:
+    except Exception as e: 
+        print(e)
         toPosition(0,0)
     closeDrawer()
 
