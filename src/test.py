@@ -2,7 +2,7 @@
 import drawer
 import traceback
 import colorsys
-from blinker import set_pixel, set_brightness, show, clear
+from blinkt import set_pixel, set_brightness, show, clear
 
 
 running = True
