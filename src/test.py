@@ -2,7 +2,7 @@
 import drawer
 import traceback
 import colorsys
-from blinkt import set_pixel, set_brightness, show, clear
+from blinker import set_pixel, set_brightness, show, clear
 
 
 running = True
@@ -50,20 +50,24 @@ def animColor():
 
 
 def main():
+    set_brightness(.2)
     switchColor(1)
     draw = drawer.Drawer()    
     switchColor(2)
     print('---Switch is strating')
     #intializeDrawer()
     try:
+        for k in range(3,13)
+            x = np.arange(5,12,1.0/k)
+            draw.lines(x,k+2*sin(x))
         #line(50,50,length=50,angle=0)
         #line(50,50,length=55,angle=.1)
         #line(50,50,length=60,angle=.2)
         #line(50,50,length=65,angle=.4)
         #line(50,50,length=70,angle=.8)
         #line(50,50,length=75,angle=1.6)
-        for k in range(0,10):
-            draw.square(100,70,10*k/2.0,noise = 3,speed=500)
+        #for k in range(0,10):
+            #draw.square(100,70,10*k/2.0,noise = 3,speed=500)
             #for j in range(0,10):
                 #square((k+1)*11,(j+1)*11,10,angle=math.pi*(k*j)/(400))
                 #draw.circle((k+1)*11,(j+1)*11,k+j)

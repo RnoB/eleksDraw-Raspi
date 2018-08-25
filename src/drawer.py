@@ -60,6 +60,15 @@ class Drawer:
         self.toPosition(xf,yf)
         self.penUp()
 
+    def lines(self,x,y,speed=2000)
+        self.toPosition(x[0],y[0])
+        self.penDown()
+        for k in range(0:len(x)):
+            self.toPosition(x[k],y[k])
+        self.penUp()
+
+
+
     def square(self,xc,yc,R,anisotropy = 1,angle=0,speed=2000,noise = 0):
         x = [-R/2,+R/2]
         y = [-anisotropy*R/2,+anisotropy*R/2]
