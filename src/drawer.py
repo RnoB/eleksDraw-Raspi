@@ -39,17 +39,6 @@ class Drawer:
 
 
 
-    def intializeDrawer(self):
-        
-        self.s = serial.Serial('/dev/ttyUSB0',115200)
-        self.s.write("\r\n\r\n".encode('UTF-8'))
-        time.sleep(2)
-        self.s.flushInput()
-        self.sendCommand('G90\r\n'.encode('UTF-8')) # Set to Absolute Positioning
-        self.sendCommand('G1Z0F10\r\n'.encode('UTF-8')) # linear movement no z position
-        self.sendCommand('G21\r\n'.encode('UTF-8')) # G21 ; Set Units to Millimeters
-
-
 
 
 
@@ -102,5 +91,18 @@ class Drawer:
         self.toPositionCurved(x+R,y,R,speed=speed,cw=cw)
         self.toPositionCurved(x-R,y,R,speed=speed,cw=cw)
         self.penUp()
+
+
+
+    def init(self):
+        
+        self.s = serial.Serial('/dev/ttyUSB0',115200)
+        self.s.write("\r\n\r\n".encode('UTF-8'))
+        time.sleep(2)
+        self.s.flushInput()
+        self.sendCommand('G90\r\n'.encode('UTF-8')) # Set to Absolute Positioning
+        self.sendCommand('G1Z0F10\r\n'.encode('UTF-8')) # linear movement no z position
+        self.sendCommand('G21\r\n'.encode('UTF-8')) # G21 ; Set Units to Millimeters
+
 
 
