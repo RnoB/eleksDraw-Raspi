@@ -3,7 +3,7 @@ import drawer
 import traceback
 import colorsys
 from blinkt import set_pixel, set_brightness, show, clear
-
+import numpy as np
 
 running = True
 
