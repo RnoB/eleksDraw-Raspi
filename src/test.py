@@ -1,10 +1,48 @@
 
 import drawer
 import traceback
+import colorsys
+from blinkt import set_pixel, set_brightness, show, clear
+
+
+running = True
 
 
 
 
+
+def switchColor(col):
+    clear()
+    if col == 0:
+        for k in range(0,7):
+            set_pixel(k,0,255,0)
+    if col == 1:
+        for k in range(0,7):
+            set_pixel(k,255,0,0)
+    if col == 2:
+        for k in range(0,7):
+            set_pixel(k,0,0,255)
+    show()
+
+def animColor():
+
+    spacing = 360.0 / 16.0
+    hue = 0
+    clear()
+    hue = int(time.time() * 100) % 360
+    for x in range(8):
+
+        offset = x * spacing
+        h = ((hue + offset) % 360) / 360.0
+        r, g, b = [int(c * 255) for c in colorsys.hsv_to_rgb(h, 1.0, 1.0)]
+        set_pixel(x, r, g, b)
+
+        time.sleep(.05)
+        show()
+
+    time.sleep(2)
+    clear()
+    show()
 
 
 
@@ -12,7 +50,10 @@ import traceback
 
 
 def main():
-    draw = drawer.Drawer()
+    switchColor(1)
+    draw = drawer.Drawer()    
+    switchColor(2)
+    print('---Switch is strating')
     #intializeDrawer()
     try:
         #line(50,50,length=50,angle=0)
@@ -29,7 +70,8 @@ def main():
     except Exception as e: 
         print(traceback.format_exc())
         draw.toPosition(0,0)
-    draw.closeDrawer()
+    draw.closeDrawer()    
+    switchColor(1)
 
 if __name__ == "__main__":
     main()
