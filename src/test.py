@@ -57,7 +57,7 @@ def main():
     print('---Switch is strating')
     #intializeDrawer()
     try:
-        for k in range(0,10,20):
+        for k in range(0,20):
             x = np.arange(20,120,.2)
             draw.lines(x,30+k+2*np.sin(x^(1+k/5)))
         #line(50,50,length=50,angle=0)
