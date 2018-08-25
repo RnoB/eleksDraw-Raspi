@@ -1,7 +1,7 @@
 import serial
 import time
 import math
-
+import numpy as np
 s = []
 x = 0
 y = 0
@@ -54,25 +54,30 @@ def line(x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000):
     toPosition(xf,yf)
     penUp()
 
-def square(xc,yc,R):
-    toPosition(xc-R/2,yc-R/2)
+def square(xc,yc,R,anisotropy = 1,angle=0,speed=2000):
+    x = [xc-R/2,xc+R/2]
+    y = [xc-anisotropy*R/2,xc+anisotropy*R/2]
+
+    toPosition(x[0]*math.cos(angle)+y[0]*math.sin(angle),x[0]*math.sin(angle)+y[0]*math.cos(angle),speed=speed)
     penDown()
-    toPosition(xc+R/2,yc-R/2)
-    toPosition(xc+R/2,yc+R/2)
-    toPosition(xc-R/2,yc+R/2)
-    toPosition(xc-R/2,yc-R/2)
+    toPosition(x[1]*math.cos(angle)+y[0]*math.sin(angle),x[1]*math.sin(angle)+y[0]*math.cos(angle),speed=speed)
+    toPosition(x[1]*math.cos(angle)+y[1]*math.sin(angle),x[1]*math.sin(angle)+y[1]*math.cos(angle),speed=speed)
+    toPosition(x[0]*math.cos(angle)+y[1]*math.sin(angle),x[0]*math.sin(angle)+y[1]*math.cos(angle),speed=speed)
+    toPosition(x[0]*math.cos(angle)+y[0]*math.sin(angle),x[0]*math.cos(angle)+y[0]*math.sin(angle),speed=speed)
     penUp()
 
 def main():
     intializeDrawer()
     try:
-        line(50,50,length=50,angle=0)
-        line(50,50,length=55,angle=.1)
-        line(50,50,length=60,angle=.2)
-        line(50,50,length=65,angle=.4)
-        line(50,50,length=70,angle=.8)
-        line(50,50,length=75,angle=1.6)
-        square(50,50,10)
+        #line(50,50,length=50,angle=0)
+        #line(50,50,length=55,angle=.1)
+        #line(50,50,length=60,angle=.2)
+        #line(50,50,length=65,angle=.4)
+        #line(50,50,length=70,angle=.8)
+        #line(50,50,length=75,angle=1.6)
+        for k in range(0,10):
+            for j in range(0,10):
+                square((k+1)*11,(j+1)*11,10,angle=math.pi*(k+j)/(200))
     except:
         toPosition(0,0)
     closeDrawer()
