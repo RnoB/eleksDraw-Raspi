@@ -59,7 +59,7 @@ def main():
     try:
         for k in range(0,20):
             x = np.arange(20,120,.2)
-            draw.lines(x,30+k*1.2+2*np.sin(x**(1+k/5)))
+            draw.lines(x,30+k*1.2+2*np.sin((x-20)**(1+k/20)))
         #line(50,50,length=50,angle=0)
         #line(50,50,length=55,angle=.1)
         #line(50,50,length=60,angle=.2)
