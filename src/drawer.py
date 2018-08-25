@@ -2,6 +2,7 @@ import serial
 import time
 import math
 import numpy as np
+import random
 s = []
 x = 0
 y = 0
@@ -44,7 +45,8 @@ def penDown():
 
     sendCommand(('M3S30'.strip()+'\r\n').encode('UTF-8'))
 
-
+def noise(xMax):
+    return random.random(xMax)
 def line(x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000):
     
     xf = x0+length*math.cos(angle)
@@ -54,16 +56,16 @@ def line(x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000):
     toPosition(xf,yf)
     penUp()
 
-def square(xc,yc,R,anisotropy = 1,angle=0,speed=2000):
+def square(xc,yc,R,anisotropy = 1,angle=0,speed=2000,noise = 0):
     x = [-R/2,+R/2]
     y = [-anisotropy*R/2,+anisotropy*R/2]
 
-    toPosition(xc+(x[0]*math.cos(angle)-y[0]*math.sin(angle)),yc+(x[0]*math.sin(angle)+y[0]*math.cos(angle)),speed=speed)
+    toPosition(xc+(x[0]*math.cos(angle)-y[0]*math.sin(angle))+noise(noise),yc+(x[0]*math.sin(angle)+y[0]*math.cos(angle))+noise(noise),speed=speed)
     penDown()
-    toPosition(xc+(x[1]*math.cos(angle)-y[0]*math.sin(angle)),yc+(x[1]*math.sin(angle)+y[0]*math.cos(angle)),speed=speed)
-    toPosition(xc+(x[1]*math.cos(angle)-y[1]*math.sin(angle)),yc+(x[1]*math.sin(angle)+y[1]*math.cos(angle)),speed=speed)
-    toPosition(xc+(x[0]*math.cos(angle)-y[1]*math.sin(angle)),yc+(x[0]*math.sin(angle)+y[1]*math.cos(angle)),speed=speed)
-    toPosition(xc+(x[0]*math.cos(angle)-y[0]*math.sin(angle)),yc+(x[0]*math.sin(angle)+y[0]*math.cos(angle)),speed=speed)
+    toPosition(xc+(x[1]*math.cos(angle)-y[0]*math.sin(angle))+noise(noise),yc+(x[1]*math.sin(angle)+y[0]*math.cos(angle))+noise(noise),speed=speed)
+    toPosition(xc+(x[1]*math.cos(angle)-y[1]*math.sin(angle))+noise(noise),yc+(x[1]*math.sin(angle)+y[1]*math.cos(angle))+noise(noise),speed=speed)
+    toPosition(xc+(x[0]*math.cos(angle)-y[1]*math.sin(angle))+noise(noise),yc+(x[0]*math.sin(angle)+y[1]*math.cos(angle))+noise(noise),speed=speed)
+    toPosition(xc+(x[0]*math.cos(angle)-y[0]*math.sin(angle))+noise(noise),yc+(x[0]*math.sin(angle)+y[0]*math.cos(angle))+noise(noise),speed=speed)
     penUp()
 
 def main():
@@ -75,9 +77,10 @@ def main():
         #line(50,50,length=65,angle=.4)
         #line(50,50,length=70,angle=.8)
         #line(50,50,length=75,angle=1.6)
-        for k in range(0,10):
-            for j in range(0,10):
-                square((k+1)*11,(j+1)*11,10,angle=math.pi*(k+j)/(20))
+        for k in range(0,20):
+            square(10,7,float(k)/2.0,noise = .5)
+            #for j in range(0,10):
+                #square((k+1)*11,(j+1)*11,10,angle=math.pi*(k*j)/(400))
     except:
         toPosition(0,0)
     closeDrawer()
