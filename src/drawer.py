@@ -30,6 +30,14 @@ def sendCommand(gCode):
 def toPosition(x0,y0,speed = 3500):
     gCode = (('G1X'+str(x0)+'Y'+str(y0)+'F'+str(speed)).strip()+'\r\n').encode('UTF-8')
     sendCommand(gCode)
+
+def toPositionCurved(x0,y0,R,cw=True,speed = 3500):
+    if cw = True:
+        gCommand = 'G2'
+    else:
+        gCommand = 'G3'
+    gCode = ((gCommand+'X'+str(x0)+'Y'+str(y0)+'R'+str(R)+'F'+str(speed)).strip()+'\r\n').encode('UTF-8')
+    sendCommand(gCode)
     
 
 def closeDrawer():
@@ -75,6 +83,14 @@ def square(xc,yc,R,anisotropy = 1,angle=0,speed=2000,noise = 0):
         toPosition(xs[0],xs[1],speed=speed)
     penUp()
 
+def cirle(x,y,R,speed = 2000,cw = False):
+    toPositionCurve(x-R,y,R,speed=speed)
+    penDown()
+    toPosition(x+R,y,R,speed=speed,cw=cw)
+    toPosition(x-R,y,R,speed=speed,cw=cw)
+    penUp()
+
+
 def main():
     intializeDrawer()
     try:
@@ -86,8 +102,9 @@ def main():
         #line(50,50,length=75,angle=1.6)
         for k in range(0,20):
             square(100,70,10*k/2.0,noise = 3)
-            #for j in range(0,10):
+            for j in range(0,10):
                 #square((k+1)*11,(j+1)*11,10,angle=math.pi*(k*j)/(400))
+                circle((k+1)*11,(j+1)*11,k+j)
     except Exception as e: 
         print(traceback.format_exc())
         toPosition(0,0)
