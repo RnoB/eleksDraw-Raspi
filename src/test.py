@@ -70,8 +70,8 @@ def main():
         xSquare.append([x0,y0,R0])
 
     try:
-        for xS in xSquare
-        drawer.square(xS[0],xS[1],R0[0])
+        for xS in xSquare:
+            drawer.square(xS[0],xS[1],R0[0])
             for k in range(10,145):
                 x = np.arange(10,250,.2)
                 if flip:
@@ -79,7 +79,7 @@ def main():
                 y = 10+k*1.2+2*np.sin(2*math.pi*((x-10)/240)**(1+k/200))
                 y2 = np.copy(y[(x>xS[0]-R[0]/2) & (x<xS[0]+R[0]/2) & (y>xS[0]-R[0]/2) & (y<yS[0]+R[0]/2) ])
                 x2 = np.copy(x[(x>xS[0]-R[0]/2) & (x<xS[0]+R[0]/2) & (y>xS[0]-R[0]/2) & (y<yS[0]+R[0]/2) ])
-                draw.lines(x,20+k*1.2+2*np.sin(((x-20)/3)**(1+k/200)))
+                draw.lines(x2,y2)
                 flip = not flip
         #line(50,50,length=50,angle=0)
         #line(50,50,length=55,angle=.1)
