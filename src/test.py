@@ -4,7 +4,7 @@ import traceback
 import colorsys
 from blinkt import set_pixel, set_brightness, show, clear
 import numpy as np
-
+import random
 running = True
 
 
@@ -14,13 +14,13 @@ running = True
 def switchColor(col):
     clear()
     if col == 0:
-        for k in range(0,7):
+        for k in range(0,2):
             set_pixel(k,0,255,0)
     if col == 1:
-        for k in range(0,7):
+        for k in range(0,2):
             set_pixel(k,255,0,0)
     if col == 2:
-        for k in range(0,7):
+        for k in range(0,2):
             set_pixel(k,0,0,255)
     show()
 
@@ -50,16 +50,37 @@ def animColor():
 
 
 def main():
-    set_brightness(.2)
+    set_brightness(.05)
     switchColor(1)
     draw = drawer.Drawer()    
     switchColor(2)
     print('---Switch is strating')
     #intializeDrawer()
+    flip = False
+
+    xSquare = []
+    for k in range(0,4):
+        checked = False
+        while not checked:
+            x0 = 50 + 160*random.random()
+            y0 = 50 + 160*random.random()
+            R0 = 80*random.random()
+            if x0-R0>10 and x0+R0<250  and y0-R0>10 and y0+R0<170:
+                checked  = True  
+        xSquare.append([x0,y0,R0])
+
     try:
-        for k in range(0,120):
-            x = np.arange(20,220,.2)
-            draw.lines(x,20+k*1.2+2*np.sin(((x-20)/3)**(1+k/200)))
+        for xS in xSquare
+        drawer.square(xS[0],xS[1],R0[0])
+            for k in range(10,145):
+                x = np.arange(10,250,.2)
+                if flip:
+                    x = np.flip(x)
+                y = 10+k*1.2+2*np.sin(2*math.pi*((x-10)/240)**(1+k/200))
+                y2 = np.copy(y[(x>xS[0]-R[0]/2) & (x<xS[0]+R[0]/2) & (y>xS[0]-R[0]/2) & (y<yS[0]+R[0]/2) ])
+                x2 = np.copy(x[(x>xS[0]-R[0]/2) & (x<xS[0]+R[0]/2) & (y>xS[0]-R[0]/2) & (y<yS[0]+R[0]/2) ])
+                draw.lines(x,20+k*1.2+2*np.sin(((x-20)/3)**(1+k/200)))
+                flip = not flip
         #line(50,50,length=50,angle=0)
         #line(50,50,length=55,angle=.1)
         #line(50,50,length=60,angle=.2)

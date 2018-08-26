@@ -18,12 +18,16 @@ def noiser(xMax):
 
 class Drawer:
     s = []
+    penUp = True
+    output = False
     def sendCommand(self,gCode):
-        print(gCode)
+        if self.output:
+            print(gCode)
         self.s.flushInput()
         self.s.write(gCode)
         out = self.s.readline()
-        print(out)
+        if self.output:
+            print(out)
 
     def toPosition(self,x0,y0,speed = 3500):
         gCode = (('G1X'+str(x0)+'Y'+str(y0)+'F'+str(speed)).strip()+'\r\n').encode('UTF-8')
@@ -47,9 +51,11 @@ class Drawer:
 
     def penUp(self):
         self.sendCommand(('M5S0'.strip()+'\r\n').encode('UTF-8'))
+        self.penUp=True 
         
     def penDown(self):
         self.sendCommand(('M3S30'.strip()+'\r\n').encode('UTF-8'))
+        self.penUp=False
 
     def line(self,x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000):
         
@@ -92,8 +98,8 @@ class Drawer:
 
 
 
-    def __init__(self):
-        
+    def __init__(self,output = False):
+        self.penUp=False
         self.s = serial.Serial('/dev/ttyUSB0',115200)
         self.s.write("\r\n\r\n".encode('UTF-8'))
         time.sleep(2)
@@ -101,6 +107,7 @@ class Drawer:
         self.sendCommand('G90\r\n'.encode('UTF-8')) # Set to Absolute Positioning
         self.sendCommand('G1Z0F10\r\n'.encode('UTF-8')) # linear movement no z position
         self.sendCommand('G21\r\n'.encode('UTF-8')) # G21 ; Set Units to Millimeters
+        self.output = output
 
 
 
