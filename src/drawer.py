@@ -76,8 +76,8 @@ class Drawer:
 
 
     def square(self,xc,yc,R,anisotropy = 1,angle=0,speed=2000,noise = 0):
-        x = [-R/2,+R/2]
-        y = [-anisotropy*R/2,+anisotropy*R/2]
+        x = [-R,+R]
+        y = [-anisotropy*R,+anisotropy*R]
         xIdx = [1,1,0,0]
         yIdx = [0,1,1,0]
         xSquare = []
