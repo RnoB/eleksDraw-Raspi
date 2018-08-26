@@ -63,7 +63,7 @@ def main():
     for k in range(0,8):
         checked = False
         while not checked:
-            x0 = 30 + 180*random.random()
+            x0 = 30 + 200*random.random()
             y0 = 30 + 150*random.random()
             R0 = 5+15*random.random()
             if x0-R0>10 and x0+R0<250  and y0-R0>10 and y0+R0<170:
