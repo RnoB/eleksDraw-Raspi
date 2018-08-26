@@ -52,7 +52,7 @@ def animColor():
 def main():
     set_brightness(.05)
     switchColor(1)
-    draw = drawer.Drawer()    
+    draw = drawer.Drawer(output = True)    
     switchColor(2)
     print('---Switch is strating')
     #intializeDrawer()
@@ -71,7 +71,7 @@ def main():
 
     try:
         for xS in xSquare:
-            drawer.square(xS[0],xS[1],R0[0])
+            draw.square(xS[0],xS[1],R0[0])
             for k in range(10,145):
                 x = np.arange(10,250,.2)
                 if flip:
