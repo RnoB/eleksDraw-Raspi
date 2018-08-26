@@ -60,7 +60,7 @@ def main():
     flip = False
 
     xSquare = []
-    for k in range(0,4):
+    for k in range(0,1):
         checked = False
         while not checked:
             x0 = 50 + 160*random.random()
@@ -80,8 +80,8 @@ def main():
                 if flip:
                     x = np.flip(x)
                 y = 10+k*1.2+2*np.sin((4*math.pi*((x-10)/240))**(1+k/200))
-                y2 = np.copy(y[(x>xS[0]-xS[2]) & (x<xS[0]+xS[2]) & (y>xS[0]-xS[2]) & (y<xS[0]+xS[2]) ])
-                x2 = np.copy(x[(x>xS[0]-xS[2]) & (x<xS[0]+xS[2]) & (y>xS[0]-xS[2]) & (y<xS[0]+xS[2]) ])
+                y2 = np.copy(y[(x>xS[0]-xS[2]) & (x<xS[0]+xS[2]) & (y>xS[1]-xS[2]) & (y<xS[1]+xS[2]) ])
+                x2 = np.copy(x[(x>xS[0]-xS[2]) & (x<xS[0]+xS[2]) & (y>xS[1]-xS[2]) & (y<xS[1]+xS[2]) ])
                 if len(x2)>2:
                     draw.lines(x2,y2,speed = 5000)
                     flip = not flip
