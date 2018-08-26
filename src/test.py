@@ -64,7 +64,7 @@ def main():
         while not checked:
             x0 = 50 + 160*random.random()
             y0 = 50 + 160*random.random()
-            R0 = 80*random.random()
+            R0 = 40*random.random()
             if x0-R0>10 and x0+R0<250  and y0-R0>10 and y0+R0<170:
                 checked  = True  
         xSquare.append([x0,y0,R0])
@@ -73,14 +73,14 @@ def main():
 
     try:
         for xS in xSquare:
-            draw.square(xS[0],xS[1],xS[2])
+            draw.square(xS[0],xS[1],xS[2]*2)
             for k in range(10,145):
                 x = np.arange(10,250,.2)
                 if flip:
                     x = np.flip(x)
                 y = 10+k*1.2+2*np.sin(2*math.pi*((x-10)/240)**(1+k/200))
-                y2 = np.copy(y[(x>xS[0]-R[0]/2) & (x<xS[0]+R[0]/2) & (y>xS[0]-R[0]/2) & (y<yS[0]+R[0]/2) ])
-                x2 = np.copy(x[(x>xS[0]-R[0]/2) & (x<xS[0]+R[0]/2) & (y>xS[0]-R[0]/2) & (y<yS[0]+R[0]/2) ])
+                y2 = np.copy(y[(x>xS[0]-xS[2]) & (x<xS[0]+xS[2]) & (y>xS[0]-xS[2]) & (y<yS[0]+xS[2]) ])
+                x2 = np.copy(x[(x>xS[0]-xS[2]) & (x<xS[0]+xS[2]) & (y>xS[0]-xS[2]) & (y<yS[0]+xS[2]) ])
                 draw.lines(x2,y2)
                 flip = not flip
         #line(50,50,length=50,angle=0)
