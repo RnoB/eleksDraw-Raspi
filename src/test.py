@@ -68,10 +68,12 @@ def main():
             if x0-R0>10 and x0+R0<250  and y0-R0>10 and y0+R0<170:
                 checked  = True  
         xSquare.append([x0,y0,R0])
+    print('and the sqaures are : ')
+    print(xSquare)
 
     try:
         for xS in xSquare:
-            draw.square(xS[0],xS[1],R0[0])
+            draw.square(xS[0],xS[1],xS[2])
             for k in range(10,145):
                 x = np.arange(10,250,.2)
                 if flip:
