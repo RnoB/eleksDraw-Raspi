@@ -18,7 +18,7 @@ def noiser(xMax):
 
 class Drawer:
     s = []
-    penUp = True
+    penPosition = True
     output = False
     def sendCommand(self,gCode):
         if self.output:
@@ -51,11 +51,11 @@ class Drawer:
 
     def penUp(self):
         self.sendCommand(('M5S0'.strip()+'\r\n').encode('UTF-8'))
-        self.penUp=True 
+        self.penPosition=True 
         
     def penDown(self):
         self.sendCommand(('M3S30'.strip()+'\r\n').encode('UTF-8'))
-        self.penUp=False
+        self.penPosition=False
 
     def line(self,x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000):
         
@@ -99,7 +99,7 @@ class Drawer:
 
 
     def __init__(self,output = False):
-        self.penUp=False
+        self.penPosition=False
         self.s = serial.Serial('/dev/ttyUSB0',115200)
         self.s.write("\r\n\r\n".encode('UTF-8'))
         time.sleep(2)
