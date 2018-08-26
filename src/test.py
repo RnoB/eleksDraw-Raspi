@@ -75,7 +75,7 @@ def main():
     try:
         for xS in xSquare:
             draw.square(xS[0],xS[1],xS[2]*2,speed=5000)
-            for k in np.arange(10,145,40):
+            for k in range(10,145):
                 x = np.arange(10,250,.2)
                 if flip:
                     x = np.flip(x)
