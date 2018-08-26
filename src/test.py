@@ -80,8 +80,8 @@ def main():
                 if flip:
                     x = np.flip(x)
                 y = 10+k*1.2+2*np.sin(2*math.pi*((x-10)/240)**(1+k/200))
-                y2 = np.copy(y[(x>xS[0]-xS[2]) & (x<xS[0]+xS[2]) & (y>xS[0]-xS[2]) & (y<yS[0]+xS[2]) ])
-                x2 = np.copy(x[(x>xS[0]-xS[2]) & (x<xS[0]+xS[2]) & (y>xS[0]-xS[2]) & (y<yS[0]+xS[2]) ])
+                y2 = np.copy(y[(x>xS[0]-xS[2]) & (x<xS[0]+xS[2]) & (y>xS[0]-xS[2]) & (y<xS[0]+xS[2]) ])
+                x2 = np.copy(x[(x>xS[0]-xS[2]) & (x<xS[0]+xS[2]) & (y>xS[0]-xS[2]) & (y<xS[0]+xS[2]) ])
                 draw.lines(x2,y2,speed = 5000)
                 flip = not flip
         #line(50,50,length=50,angle=0)
