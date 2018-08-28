@@ -12,7 +12,7 @@ running = True
 
 
 def framer(N):
-    scale=(180-4.0/3.0)/N
+    scale=(170-4.0/3.0)/N
     dx = 5
     dy = 20.0/3.0
     Ny = N
