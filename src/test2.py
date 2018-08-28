@@ -97,7 +97,7 @@ def main():
     #intializeDrawer()
     flip = False
 
-    xSquare = framer(4)
+    xSquare = framer(6)
 
     try:
         for xS in xSquare:
