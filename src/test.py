@@ -8,9 +8,28 @@ import random
 import math
 running = True
 
+yMin = [1.0/3.0,18-(1.0/3.0)]
+xMax = [.5,25.5]
 
 
+def framer(N):
+    Ny = N
+    Nx = int(N*1.5)
 
+    frame = np.zeros((Nx,Ny))
+    count = 1
+    while (frame == 0).any():
+        x = np.random.randint(0,Nx)
+        y = np.random.randint(0,Ny)
+        Rx = np.random.randint(-x,Nx-x)
+        Ry = np.random.randint(-y,Ny-y)
+        if (frame==0).all():
+            frame[x:x+Rx] = count
+            count += 1
+    print(frame)
+    for k in range(1,count):
+        print(np.where(frame == k))
+    return frame
 
 def switchColor(col):
     clear()
