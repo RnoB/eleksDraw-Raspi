@@ -88,6 +88,7 @@ def main():
     size = 0
     try:
         for k in range(0,nLines):
+            size = 0
             while(size == 0):
                 xLines = []
                 yLines = []
