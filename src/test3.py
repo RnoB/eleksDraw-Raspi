@@ -80,7 +80,7 @@ def main():
     #intializeDrawer()
     flip = False
 
-    speed = 5
+    speed = 1
     z = frames[6]
     A = angle[6]
 
@@ -91,8 +91,8 @@ def main():
             yLines = []
             size = 0
             while(size == 0):
-                kx = random.randint(0, 640)
-                ky = random.randint(0, 480)
+                kx = random.randint(0, 639)
+                ky = random.randint(0, 479)
                 x,y = scaler(kx,ky)
                 zTest = z[ky,kx]
                 running = True
