@@ -95,6 +95,7 @@ def main():
                 ky = random.randint(0, 480)
                 x,y = scaler(kx,ky)
                 zTest = z[ky,kx]
+                print(zTest)
                 while(zTest>0):
                     xLines.append(x)
                     yLines.append(y)
