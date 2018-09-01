@@ -80,7 +80,7 @@ def main():
     #intializeDrawer()
     flip = False
 
-    speed = 1
+    speed = 2
     z = frames[6]
     A = angle[6]
 
@@ -90,9 +90,10 @@ def main():
         for k in range(0,nLines):
             size = 0
             while(size == 0):
+                print('new Line : '+str(k))
                 xLines = []
                 yLines = []
-                X=[]
+
                 size = 0
                 kx = random.randint(0, 639)
                 ky = random.randint(0, 479)
@@ -108,11 +109,11 @@ def main():
                     xLines.append(x)
                     yLines.append(y)
                     X.append((x,y))
-                    dx = x+speed*np.cos(A[ky,kx])
-                    dy = y+speed*np.sin(A[ky,kx])
-                    print('dx : '+str((dx,dy)))
+                    dx = np.round(x+speed*np.cos(A[ky,kx]))
+                    dy = np.round(y+speed*np.sin(A[ky,kx]))
+                    
                     dxk,dyk = scaler(dx,dy,invert=True)
-                    print('dk : '+str((dxk,dyk)))
+                    
                     if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100 and (dx,dy) not in X:
                         x=dx
                         y=dy
