@@ -89,24 +89,26 @@ def main():
         for k in range(0,nLines):
             xLines = []
             yLines = []
-            kx = random.randint(0, 640)
-            ky = random.randint(0, 480)
-            x,y = scaler(kx,ky)
-            zTest = z[kx,ky]
-            while(not np.isnan(zTest)):
-                xLines.append(x)
-                yLines.append(y)
-                dx = x+speed*np.cos(A[kx,ky])
-                dy = y+speed*np.cos(A[kx,ky])
-                dkx,dky = scaler(x,y,invert=True)
-                if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100*np.sin(A[kx,ky]):
-                    x=dx
-                    y=dy
-                    kx=dkx
-                    ky=dky
-                    zTest = z[kx,ky]
-                else:
-                    zTest = np.isnan
+                
+            while(xLines == []):
+                kx = random.randint(0, 640)
+                ky = random.randint(0, 480)
+                x,y = scaler(kx,ky)
+                zTest = z[kx,ky]
+                while(not np.isnan(zTest)):
+                    xLines.append(x)
+                    yLines.append(y)
+                    dx = x+speed*np.cos(A[kx,ky])
+                    dy = y+speed*np.cos(A[kx,ky])
+                    dkx,dky = scaler(x,y,invert=True)
+                    if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100*np.sin(A[kx,ky]):
+                        x=dx
+                        y=dy
+                        kx=dkx
+                        ky=dky
+                        zTest = z[kx,ky]
+                    else:
+                        zTest = np.isnan
             draw.lines(xLines,yLines)
             
         #line(50,50,length=50,angle=0)
