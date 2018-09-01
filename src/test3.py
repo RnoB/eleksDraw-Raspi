@@ -99,6 +99,8 @@ def main():
                 if np.isnan(zTest):
                     running=False
                 while running:
+                    print('x : '+str((x,y)))
+                    print('k : '+str((kx,ky)))
                     xLines.append(x)
                     yLines.append(y)
                     dx = x+speed*np.cos(A[ky,kx])
