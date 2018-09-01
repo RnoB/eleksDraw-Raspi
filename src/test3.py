@@ -103,7 +103,7 @@ def main():
                     yLines.append(y)
                     dx = x+speed*np.cos(A[ky,kx])
                     dy = y+speed*np.sin(A[ky,kx])
-                    dxk,dyk = scaler(x,y,invert=True)
+                    dxk,dyk = scaler(dx,dy,invert=True)
                     if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100*np.sin(A[ky,kx]):
                         x=dx
                         y=dy
