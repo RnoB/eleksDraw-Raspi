@@ -50,8 +50,8 @@ def animColor():
 
 def scaler(x,y,scale=100,offsetX = 5,offsetY = 5,invert=False):
     if invert:
-        x2 = 480*(x-offsetX)/scale
-        y2 = 480*(y-offsetY)/scale
+        x2 = np.int(480*(x-offsetX)/scale)
+        y2 = np.int(480*(y-offsetY)/scale)
     else:
         x2 = scale*x/480+offsetX
         y2 = scale*y/480+offsetY
