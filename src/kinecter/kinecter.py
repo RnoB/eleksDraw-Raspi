@@ -70,6 +70,7 @@ def drawGradient(z,A,nLines = 200,speed =1,scale=100,offsetX=5,offsetY=5,offsetA
     xLines= []
     yLines= []
     for k in range(0,nLines):
+        print(k)
         size = 0
         while(size == 0):
             print('new Line : '+str(k))
