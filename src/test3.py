@@ -94,6 +94,8 @@ def main():
     try:
         for j in range(0,3):
             for l in range(0,2):
+                nLines = 50*(3*l+j+1)
+
                 #z = frames[j]
                 #A = angle[j]
                 offsetX = 5+j*80
@@ -122,8 +124,8 @@ def main():
                             xLines.append(x)
                             yLines.append(y)
                             X.append((x,y))
-                            dx = round(x+speed*np.cos(offsetA[l][j]+A[ky,kx]),.1)
-                            dy = round(y+speed*np.sin(offsetA[l][j]+A[ky,kx]),.1)
+                            dx = round(x+speed*np.cos(A[ky,kx]),.1)
+                            dy = round(y+speed*np.sin(A[ky,kx]),.1)
                             
                             dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
                             
