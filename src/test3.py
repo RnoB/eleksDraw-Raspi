@@ -74,7 +74,7 @@ def main():
         noProblem = False
 
 
-    draw = drawer.Drawer(output = True)    
+    draw = drawer.Drawer(output = False)    
     switchColor(2)
     print('---Switch is strating')
     #intializeDrawer()
@@ -84,7 +84,7 @@ def main():
     z = frames[6]
     A = angle[6]
 
-    nLines = 100
+    nLines = 500
     size = 0
     try:
         for k in range(0,nLines):
@@ -111,7 +111,7 @@ def main():
                     print('dx : '+str((dx,dy)))
                     dxk,dyk = scaler(dx,dy,invert=True)
                     print('dk : '+str((dxk,dyk)))
-                    if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100*np.sin(A[ky,kx]):
+                    if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100:
                         x=dx
                         y=dy
                         kx=dxk
