@@ -1,12 +1,12 @@
 
-import drawer
+from drawer import drawer
 import traceback
 import colorsys
 from blinkt import set_pixel, set_brightness, show, clear
 import numpy as np
 import random
 import math
-import kinecter
+from kinecter import kinecter
 running = True
 
 
