@@ -80,7 +80,7 @@ def main():
     #intializeDrawer()
     flip = False
 
-    speed = 1
+    speed = .5
     z = frames[6]
     A = angle[6]
 
