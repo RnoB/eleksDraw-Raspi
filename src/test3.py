@@ -100,12 +100,12 @@ def main():
                     yLines.append(y)
                     dx = x+speed*np.cos(A[ky,kx])
                     dy = y+speed*np.cos(A[ky,kx])
-                    dkx,dky = scaler(x,y,invert=True)
+                    dxk,dyk = scaler(x,y,invert=True)
                     if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100*np.sin(A[ky,kx]):
                         x=dx
                         y=dy
-                        kx=dkx
-                        ky=dky
+                        kx=dxk
+                        ky=dyk
                         zTest = z[ky,kx]
                     else:
                         zTest = np.isnan
