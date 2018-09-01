@@ -80,6 +80,7 @@ def drawGradient(z,A,nLines = 200,speed =1,scale=100,offsetX=5,offsetY=5,offsetA
     X = []
     xLines= []
     yLines= []
+    xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     for k in range(0,nLines):
         print(k)
         size = 0
@@ -92,8 +93,8 @@ def drawGradient(z,A,nLines = 200,speed =1,scale=100,offsetX=5,offsetY=5,offsetA
             kx = random.randint(0, kinectWidth-1)
             ky = random.randint(0, kinectHeight-1)
             x,y = scaler(kx,ky,scale=scale,offsetX=offsetX,offsetY=offsetY)
-            x = round(x+(.5-random.random())*xu,.1)
-            y = round(y+(.5-random.random())*yu,.1)
+            x = round(x+(.5-random.random()),.1)
+            y = round(y+(.5-random.random()),.1)
             zTest = z[ky,kx]
             Atest = A[ky,kx]
             running = True
