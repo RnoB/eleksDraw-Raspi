@@ -95,7 +95,7 @@ def main():
                 ky = random.randint(0, 480)
                 x,y = scaler(kx,ky)
                 zTest = z[ky,kx]
-                while(~np.isnan(zTest)):
+                while(not math.isnan(zTest)):
                     xLines.append(x)
                     yLines.append(y)
                     dx = x+speed*np.cos(A[ky,kx])
