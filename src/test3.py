@@ -113,7 +113,7 @@ def main():
                     print('dx : '+str((dx,dy)))
                     dxk,dyk = scaler(dx,dy,invert=True)
                     print('dk : '+str((dxk,dyk)))
-                    if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100 and (x,y) not in X:
+                    if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100 and (dx,dy) not in X:
                         x=dx
                         y=dy
                         kx=dxk
