@@ -89,8 +89,8 @@ def main():
         for k in range(0,nLines):
             xLines = []
             yLines = []
-                
-            while(xLines == []):
+            size = 0
+            while(size == 0):
                 kx = random.randint(0, 640)
                 ky = random.randint(0, 480)
                 x,y = scaler(kx,ky)
@@ -107,6 +107,7 @@ def main():
                         kx=dxk
                         ky=dyk
                         zTest = z[ky,kx]
+                        size +=speed
                     else:
                         zTest = np.isnan
             draw.lines(xLines,yLines)
