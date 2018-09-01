@@ -86,6 +86,7 @@ def main():
 
     nLines = 500
     size = 0
+    X = []
     try:
         for k in range(0,nLines):
             size = 0
