@@ -99,7 +99,7 @@ def main():
                 offsetX = 5+j*80
                 offsetY = 5+l*80
                 nLines = 50*(3*l+j)
-                xLines,yLines = drawGradient(z,A,nLines = nLines,speed =speed,offsetX=offsetX,offsetY=offsetY,scale=scale)
+                xLines,yLines = kinecter.drawGradient(z,A,nLines = nLines,speed =speed,offsetX=offsetX,offsetY=offsetY,scale=scale)
                 draw.lines(xLines,yLines)
                 
         #line(50,50,length=50,angle=0)
