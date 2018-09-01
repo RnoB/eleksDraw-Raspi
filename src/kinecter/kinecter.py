@@ -106,5 +106,5 @@ def drawGradient(z,A,nLines = 200,speed =1,scale=100,offsetX=5,offsetY=5,offsetA
                         running=False
                 else:
                     running = False
-        return xLines,yLines
+    return xLines,yLines
 
