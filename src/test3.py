@@ -108,7 +108,7 @@ def main():
                         size = 0
                         kx = random.randint(0, 639)
                         ky = random.randint(0, 479)
-                        x,y = scaler(kx,ky,scale=scale,offsetX=offsetX,offsetY=offseY)
+                        x,y = scaler(kx,ky,scale=scale,offsetX=offsetX,offsetY=offsetY)
                         x = round(x+(.5-random.random())*xu,.1)
                         y = round(y+(.5-random.random())*yu,.1)
                         zTest = z[ky,kx]
@@ -125,7 +125,7 @@ def main():
                             dx = round(x+speed*np.cos(offsetA[l][j]+A[ky,kx]),.1)
                             dy = round(y+speed*np.sin(offsetA[l][j]+A[ky,kx]),.1)
                             
-                            dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offseY,invert=True)
+                            dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
                             
                             if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100 and (dx,dy) not in X:
                                 x=dx
