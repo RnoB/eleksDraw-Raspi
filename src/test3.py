@@ -59,7 +59,8 @@ def scaler(x,y,scale=100,offsetX = 5,offsetY = 5,invert=False):
     return x2,y2
 
 
-
+def round(x, base=1):
+    return base * np.round(x/base)
 
 
 def main():
@@ -80,54 +81,62 @@ def main():
     #intializeDrawer()
     flip = False
 
-    speed = 2
+    speed = 1
     z = frames[6]
     A = angle[6]
-
+    idx = [6,7,8]
     nLines = 500
     size = 0
     X = []
+    xu,yu = scale(1,1,offsetX=0,offsetY=0)
     try:
-        for k in range(0,nLines):
-            size = 0
-            while(size == 0):
-                print('new Line : '+str(k))
-                xLines = []
-                yLines = []
-
+        for j in range(0,idx):
+            z = frames[j]
+            A = angle[j]
+            scale = 70
+            offsetX = 5+j*70
+            for k in range(0,nLines):
                 size = 0
-                kx = random.randint(0, 639)
-                ky = random.randint(0, 479)
-                x,y = scaler(kx,ky)
-                zTest = z[ky,kx]
-                Atest = A[ky,kx]
-                running = True
-                if np.isnan(zTest) or np.isnan(Atest):
-                    running=False
-                while running:
-                    print('x  : '+str((x,y)))
-                    print('k  : '+str((kx,ky)))
-                    xLines.append(x)
-                    yLines.append(y)
-                    X.append((x,y))
-                    dx = np.round(x+speed*np.cos(A[ky,kx]))
-                    dy = np.round(y+speed*np.sin(A[ky,kx]))
-                    
-                    dxk,dyk = scaler(dx,dy,invert=True)
-                    
-                    if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100 and (dx,dy) not in X:
-                        x=dx
-                        y=dy
-                        kx=dxk
-                        ky=dyk
-                        zTest = z[ky,kx]
-                        Atest = A[ky,kx]
-                        size +=speed
-                        if np.isnan(zTest) or np.isnan(Atest):
-                            running=False
-                    else:
-                        running = False
-            draw.lines(xLines,yLines)
+                while(size == 0):
+                    print('new Line : '+str(k))
+                    xLines = []
+                    yLines = []
+
+                    size = 0
+                    kx = random.randint(0, 639)
+                    ky = random.randint(0, 479)
+                    x,y = scaler(kx,ky,scale=scale,offsetX=offsetX)
+                    x = round(x+(.5-random.random())*xu,.1)
+                    y = round(y+(.5-random.random())*yu,.1)
+                    zTest = z[ky,kx]
+                    Atest = A[ky,kx]
+                    running = True
+                    if np.isnan(zTest) or np.isnan(Atest):
+                        running=False
+                    while running:
+                        print('x  : '+str((x,y)))
+                        print('k  : '+str((kx,ky)))
+                        xLines.append(x)
+                        yLines.append(y)
+                        X.append((x,y))
+                        dx = round(x+speed*np.cos(A[ky,kx]),.1)
+                        dy = round(y+speed*np.sin(A[ky,kx]),.1)
+                        
+                        dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,invert=True)
+                        
+                        if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100 and (dx,dy) not in X:
+                            x=dx
+                            y=dy
+                            kx=dxk
+                            ky=dyk
+                            zTest = z[ky,kx]
+                            Atest = A[ky,kx]
+                            size +=speed
+                            if np.isnan(zTest) or np.isnan(Atest):
+                                running=False
+                        else:
+                            running = False
+                draw.lines(xLines,yLines)
             
         #line(50,50,length=50,angle=0)
         #line(50,50,length=55,angle=.1)
