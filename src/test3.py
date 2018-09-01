@@ -88,12 +88,12 @@ def main():
     nLines = 500
     size = 0
     X = []
-    xu,yu = scale(1,1,offsetX=0,offsetY=0)
+    scale = 70
+    xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     try:
         for j in range(0,idx):
             z = frames[j]
             A = angle[j]
-            scale = 70
             offsetX = 5+j*70
             for k in range(0,nLines):
                 size = 0
