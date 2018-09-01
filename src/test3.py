@@ -87,16 +87,17 @@ def main():
     nLines = 100
     try:
         for k in range(0,nLines):
-            xLines = []
-            yLines = []
-            size = 0
             while(size == 0):
+                xLines = []
+                yLines = []
+                size = 0
                 kx = random.randint(0, 639)
                 ky = random.randint(0, 479)
                 x,y = scaler(kx,ky)
                 zTest = z[ky,kx]
+                Atest = A[ky,kx]
                 running = True
-                if np.isnan(zTest):
+                if np.isnan(zTest) or np.isnan(Atest):
                     running=False
                 while running:
                     print('x  : '+str((x,y)))
@@ -114,8 +115,9 @@ def main():
                         kx=dxk
                         ky=dyk
                         zTest = z[ky,kx]
+                        Atest = A[ky,kx]
                         size +=speed
-                        if np.isnan(zTest):
+                        if np.isnan(zTest) or np.isnan(Atest):
                             running=False
                     else:
                         running = False
