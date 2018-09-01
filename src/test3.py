@@ -91,7 +91,7 @@ def main():
     scale = 70
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     try:
-        for j in range(0,idx):
+        for j in range(0,len(idx)):
             z = frames[j]
             A = angle[j]
             offsetX = 5+j*70
