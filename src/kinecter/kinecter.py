@@ -6,6 +6,17 @@ import time
 
 import random
 
+
+
+kinectWidth = 640
+kinectHeight = 480
+
+
+def kinectFrame(width,height):
+    kinectWidth = width
+    kinectHeight = height
+
+
 def get_depth():
     print('get depth')
     array = freenect.sync_get_depth()[0]
