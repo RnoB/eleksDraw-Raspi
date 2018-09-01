@@ -85,6 +85,7 @@ def main():
     A = angle[6]
 
     nLines = 100
+    size = 0
     try:
         for k in range(0,nLines):
             while(size == 0):
