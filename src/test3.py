@@ -92,6 +92,7 @@ def main():
             while(size == 0):
                 xLines = []
                 yLines = []
+                X=[]
                 size = 0
                 kx = random.randint(0, 639)
                 ky = random.randint(0, 479)
@@ -106,12 +107,13 @@ def main():
                     print('k  : '+str((kx,ky)))
                     xLines.append(x)
                     yLines.append(y)
+                    X.append((x,y))
                     dx = x+speed*np.cos(A[ky,kx])
                     dy = y+speed*np.sin(A[ky,kx])
                     print('dx : '+str((dx,dy)))
                     dxk,dyk = scaler(dx,dy,invert=True)
                     print('dk : '+str((dxk,dyk)))
-                    if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100:
+                    if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100 and (x,y) not in X:
                         x=dx
                         y=dy
                         kx=dxk
