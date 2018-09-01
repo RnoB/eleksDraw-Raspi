@@ -95,9 +95,10 @@ def main():
                 ky = random.randint(0, 480)
                 x,y = scaler(kx,ky)
                 zTest = z[ky,kx]
-
-
-                while zTest>0:
+                running = True
+                if np.isnan(zTest):
+                    running=False
+                while running:
                     xLines.append(x)
                     yLines.append(y)
                     dx = x+speed*np.cos(A[ky,kx])
@@ -110,8 +111,10 @@ def main():
                         ky=dyk
                         zTest = z[ky,kx]
                         size +=speed
+                        if np.isnan(zTest):
+                            running=False
                     else:
-                        zTest = np.isnan
+                        running = False
             draw.lines(xLines,yLines)
             
         #line(50,50,length=50,angle=0)
