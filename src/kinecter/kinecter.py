@@ -67,6 +67,8 @@ def round(x, base=1):
 
 def drawGradient(z,A,nLines = 200,speed =1,scale=100,offsetX=5,offsetY=5,offsetA = 0,sizeMax = 100,xMin=5,xMax=260,yMin=5,yMax=170):
     X = []
+    xLines= []
+    yLines= []
     for k in range(0,nLines):
         size = 0
         while(size == 0):
