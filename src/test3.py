@@ -6,7 +6,7 @@ from blinkt import set_pixel, set_brightness, show, clear
 import numpy as np
 import random
 import math
-import kinecter
+import kinect
 running = True
 
 
