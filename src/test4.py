@@ -98,7 +98,7 @@ def main():
                 #A = angle[j]
                 offsetX = 5+j*80
                 offsetY = 5+l*80
-                nLines = 75*(3*l+j)
+                nLines = 50*(3*l+j)
                 xLines,yLines = drawGradient(z,A,nLines = nLines,speed =speed,offsetX=offsetX,offsetY=offsetY,scale=scale)
                 draw.lines(xLines,yLines)
                 
