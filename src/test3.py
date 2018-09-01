@@ -99,13 +99,15 @@ def main():
                 if np.isnan(zTest):
                     running=False
                 while running:
-                    print('x : '+str((x,y)))
-                    print('k : '+str((kx,ky)))
+                    print('x  : '+str((x,y)))
+                    print('k  : '+str((kx,ky)))
                     xLines.append(x)
                     yLines.append(y)
                     dx = x+speed*np.cos(A[ky,kx])
                     dy = y+speed*np.sin(A[ky,kx])
+                    print('dx : '+str((dx,dy)))
                     dxk,dyk = scaler(dx,dy,invert=True)
+                    print('dk : '+str((dxk,dyk)))
                     if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100*np.sin(A[ky,kx]):
                         x=dx
                         y=dy
