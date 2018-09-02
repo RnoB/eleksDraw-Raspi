@@ -1,12 +1,12 @@
 
-from drawer import drawer
+import drawer
 import traceback
 import colorsys
 from blinkt import set_pixel, set_brightness, show, clear
 import numpy as np
 import random
 import math
-from kinecter import kinecter
+import kinecter
 running = True
 
 
@@ -50,8 +50,8 @@ def animColor():
 
 def scaler(x,y,scale=100,offsetX = 5,offsetY = 5,invert=False):
     if invert:
-        x2 = np.int(480*(x-offsetX)/scale)
-        y2 = np.int(480*(y-offsetY)/scale)
+        x2 = 480*(x-offsetX)/scale
+        y2 = 480*(y-offsetY)/scale
     else:
         x2 = scale*x/480+offsetX
         y2 = scale*y/480+offsetY
@@ -59,15 +59,14 @@ def scaler(x,y,scale=100,offsetX = 5,offsetY = 5,invert=False):
     return x2,y2
 
 
-def round(x, base=1):
-    return base * np.round(x/base)
+
 
 
 def main():
     set_brightness(.05)
     switchColor(1)
     try:
-        frames = kinecter.getFrames(7)
+        frames = kinecter.getFrames(30)
         dX,dY,angle,angleZ = kinecter.derivateFrames(frames)
         noProblem = True
     except Exception as e: 
@@ -75,34 +74,41 @@ def main():
         noProblem = False
 
 
-    draw = drawer.Drawer(output = False)    
+    draw = drawer.Drawer(output = True)    
     switchColor(2)
     print('---Switch is strating')
     #intializeDrawer()
     flip = False
 
-    speed = 1
+    speed = 5
     z = frames[6]
     A = angle[6]
-    idx = [6,7,8]
-    nLines = 200
-    size = 0
-    X = []
-    scale = 70
-    xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
-    offsetA=[[2*np.pi/3,0,np.pi/3],[2*np.pi/3,0,np.pi/3]]
-    try:
-        for j in range(0,3):
-            for l in range(0,2):
-                #z = frames[j]
-                #A = angle[j]
-                offsetX = 5+j*80
-                offsetY = 5+l*80
-                nLines = 75*(3*l+j+1)
 
-                xLines,yLines = kinecter.drawGradient(z,A,nLines = nLines,speed =speed,offsetX=offsetX,offsetY=offsetY,scale=scale)
-                draw.lines(xLines,yLines)
-                
+    nLines = 100
+    try:
+        for k in range(0,nLines):
+            xLines = []
+            yLines = []
+            kx = random.randint(0, 640)
+            ky = random.randint(0, 480)
+            x,y = scaler(kx,ky)
+            zTest = z[kx,ky]
+            while(not np.isnan(zTest)):
+                xLines.append(x)
+                yLines.append(y)
+                dx = x+speed*np.cos(A[kx,ky])
+                dy = y+speed*np.cos(A[kx,ky])
+                dkx,dky = scaler(x,y,invert=True)
+                if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100*np.sin(A[kx,ky]):
+                    x=dx
+                    y=dy
+                    kx=dkx
+                    ky=dky
+                    zTest = z[kx,ky]
+                else:
+                    zTest = np.isnan
+            draw.lines(xLines,yLines)
+            
         #line(50,50,length=50,angle=0)
         #line(50,50,length=55,angle=.1)
         #line(50,50,length=60,angle=.2)

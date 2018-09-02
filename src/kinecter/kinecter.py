@@ -3,7 +3,7 @@ import freenect
 import cv2
 import numpy as np
 import time
-
+from blinkt import set_pixel, set_brightness, show, clear
 import random
 
 
@@ -15,6 +15,23 @@ kinectHeight = 480
 def kinectFrame(width,height):
     kinectWidth = width
     kinectHeight = height
+
+
+
+
+
+def switchColor(col):
+    clear()
+    if col == 0:
+        for k in range(2,3):
+            set_pixel(k,0,255,0)
+    if col == 1:
+        for k in range(2,3):
+            set_pixel(k,255,0,0)
+    if col == 2:
+        for k in range(2,3):
+            set_pixel(k,0,0,255)
+    show()
 
 
 def get_depth():
@@ -29,7 +46,9 @@ def getFrames(nFrames=30,delay=.5,maxDepth = 945):
     frames = []
     
     for k in range(0,nFrames):
+        switchColor(0)
         depth = get_depth()
+        switchColor(1)
         depth[depth>maxDepth]=np.nan
         if np.isnan(depth).all() or len(depth[~np.isnan(depth)])<20000:
             print('all nan')
