@@ -67,7 +67,7 @@ def main():
     set_brightness(.05)
     switchColor(1)
     try:
-        frames = kinecter.getFrames(30)
+        frames = kinecter.getFrames(10)
         dX,dY,angle,angleZ = kinecter.derivateFrames(frames)
         noProblem = True
     except Exception as e: 
