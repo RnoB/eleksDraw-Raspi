@@ -21,7 +21,7 @@ def kinectFrame(width,height):
 
 
 def switchColor(col):
-    clear()
+    #clear()
     if col == 0:
         for k in range(2,3):
             set_pixel(k,0,255,0)

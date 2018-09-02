@@ -81,7 +81,7 @@ def main():
     #intializeDrawer()
     flip = False
 
-    speed = .5
+    speed = 3
     z = frames[6]
     A = angle[6]
     idx = [6,7,8]
@@ -92,12 +92,12 @@ def main():
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]
     try:
-        for j in range(0,2):
-            for l in range(0,3):
+        for l in range(0,2):
+            for j in range(0,3):
                 nLines = 400#75*(3*l+j+1)
 
-                z = frames[j]
-                A = angle[j]
+                #z = frames[j]
+                #A = angle[j]
                 offsetX = 5+j*80
                 offsetY = 5+l*80
                 for k in range(0,nLines):
@@ -118,30 +118,15 @@ def main():
                         running = True
                         if np.isnan(zTest) or np.isnan(Atest):
                             running=False
-                        while running:
-                            print('x  : '+str((x,y)))
-                            print('k  : '+str((kx,ky)))
-                            xLines.append(x)
-                            yLines.append(y)
-                            X.append((x,y))
-                            dx = round(x+speed*np.cos(A[ky,kx]),.1)
-                            dy = round(y+speed*np.sin(A[ky,kx]),.1)
+                        if running:
+                            R = random.random()*(speed * np.sin(A[ky,kx]+offsetA[]))
+                            xLines.append(round(x-R*np.cos(A[ky,kx]),.1))
+                            xLines.append(round(x+R*np.cos(A[ky,kx]),.1))
+                            yLines.append(round(x-R*np.sin(A[ky,kx]),.1))
+                            yLines.append(round(x+R*np.sin(A[ky,kx]),.1))
+
                             
-                            dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
-                            
-                            if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100 and (dx,dy) not in X:
-                                x=dx
-                                y=dy
-                                kx=dxk
-                                ky=dyk
-                                zTest = z[ky,kx]
-                                Atest = A[ky,kx]
-                                size +=speed
-                                if np.isnan(zTest) or np.isnan(Atest):
-                                    running=False
-                            else:
-                                running = False
-                    draw.lines(xLines,yLines)
+                            draw.lines(xLines,yLines)
                 
         #line(50,50,length=50,angle=0)
         #line(50,50,length=55,angle=.1)
