@@ -92,9 +92,9 @@ def main():
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]
     try:
-        for j in range(0,3):
-            for l in range(0,2):
-                nLines = 75*(3*l+j+1)
+        for j in range(0,1):
+            for l in range(0,1):
+                nLines = 250#75*(3*l+j+1)
 
                 #z = frames[j]
                 #A = angle[j]
