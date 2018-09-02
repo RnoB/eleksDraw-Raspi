@@ -122,11 +122,12 @@ def main():
                             R = random.random()*(speed * np.sin(A[ky,kx]+offsetA[l][j]))
                             xLines.append(round(x-R*np.cos(A[ky,kx]),.1))
                             xLines.append(round(x+R*np.cos(A[ky,kx]),.1))
-                            yLines.append(round(x-R*np.sin(A[ky,kx]),.1))
-                            yLines.append(round(x+R*np.sin(A[ky,kx]),.1))
+                            yLines.append(round(y-R*np.sin(A[ky,kx]),.1))
+                            yLines.append(round(y+R*np.sin(A[ky,kx]),.1))
 
                             
                             draw.lines(xLines,yLines)
+                            size+=1
                 
         #line(50,50,length=50,angle=0)
         #line(50,50,length=55,angle=.1)
