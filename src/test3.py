@@ -67,7 +67,7 @@ def main():
     set_brightness(.05)
     switchColor(1)
     try:
-        frames = kinecter.getFrames(10)
+        frames = kinecter.getFrames(14,delay=1)
         dX,dY,angle,angleZ = kinecter.derivateFrames(frames)
         noProblem = True
     except Exception as e: 
@@ -81,7 +81,7 @@ def main():
     #intializeDrawer()
     flip = False
 
-    speed = 1
+    speed = .5
     z = frames[6]
     A = angle[6]
     idx = [6,7,8]
@@ -94,10 +94,10 @@ def main():
     try:
         for j in range(0,1):
             for l in range(0,1):
-                nLines = 300#75*(3*l+j+1)
+                nLines = 400#75*(3*l+j+1)
 
-                #z = frames[j]
-                #A = angle[j]
+                z = frames[j]
+                A = angle[j]
                 offsetX = 5+j*80
                 offsetY = 5+l*80
                 for k in range(0,nLines):
