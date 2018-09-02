@@ -94,7 +94,7 @@ def main():
     try:
         for j in range(0,1):
             for l in range(0,1):
-                nLines = 250#75*(3*l+j+1)
+                nLines = 300#75*(3*l+j+1)
 
                 #z = frames[j]
                 #A = angle[j]
