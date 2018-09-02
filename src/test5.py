@@ -81,7 +81,7 @@ def main():
     #intializeDrawer()
     flip = False
 
-    speed = 3
+    speed = 2
     z = frames[6]
     A = angle[6]
     idx = [6,7,8]
@@ -94,7 +94,7 @@ def main():
     try:
         for l in range(0,2):
             for j in range(0,3):
-                nLines = 400#75*(3*l+j+1)
+                nLines = 500#75*(3*l+j+1)
 
                 #z = frames[j]
                 #A = angle[j]
