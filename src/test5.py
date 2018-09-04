@@ -81,20 +81,20 @@ def main():
     #intializeDrawer()
     flip = False
 
-    speed = 2
+    speed = 4
     z = frames[6]
     A = angle[6]
     idx = [6,7,8]
     nLines = 200
     size = 0
     X = []
-    scale = 70
+    scale = 150
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]
     try:
-        for l in range(0,2):
-            for j in range(0,3):
-                nLines = 500#75*(3*l+j+1)
+        for l in range(0,1):
+            for j in range(0,1):
+                nLines = 500000#75*(3*l+j+1)
 
                 #z = frames[j]
                 #A = angle[j]
