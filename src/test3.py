@@ -88,12 +88,12 @@ def main():
     nLines = 200
     size = 0
     X = []
-    scale = 70
+    scale = 150
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]
     try:
-        for j in range(0,6):
-            nLines = 400#75*(3*l+j+1)
+        for j in range(0,1):
+            nLines = 20000#75*(3*l+j+1)
 
             z = frames[j+3]
             A = angle[j+3]
