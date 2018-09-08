@@ -72,9 +72,8 @@ def main():
         kinect.start()
         kinect.backGroundSubstractor(nFrames=100)
         kinect.stop()
-        switchColor(1)
-        time.sleep(10)
         switchColor(0)
+        time.sleep(10)
         kinect.start()
         kinect.getDepthFrames(nFrames = 30,delay=.01,maxDepth=2049)
         kinect.stop()
@@ -106,7 +105,7 @@ def main():
         for j in range(0,5):
             nLines = 500#75*(3*l+j+1)
 
-            z =kinect.frames[j+3]
+            z =kinect.frames[9-j]
             A = angle[j+3]
             offsetX = 5+j*40
             offsetY = 5
