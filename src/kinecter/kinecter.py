@@ -130,7 +130,7 @@ class kinect:
 
 
 
-    def backgroundSubstract(self,blur=False,level=10):
+    def backgroundSubstract(blur=False,level=10):
         for frame in self.frames:
             fgmask=self.fgbg.apply(frame,learningRate=0)
             frame[fgmask==0]=np.nan
