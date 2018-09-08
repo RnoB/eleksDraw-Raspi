@@ -5,25 +5,13 @@ import numpy as np
 import time
 from blinkt import set_pixel, set_brightness, show, clear
 import random
-
+import blinker
 
 
 def round(x, base=1):
     return base * np.round(x/base)
 
 
-def switchColor(col):
-    #clear()
-    if col == 0:
-        for k in range(2,3):
-            set_pixel(k,0,255,0)
-    if col == 1:
-        for k in range(2,3):
-            set_pixel(k,255,0,0)
-    if col == 2:
-        for k in range(2,3):
-            set_pixel(k,0,0,255)
-    show()
 
 
 class kinect:    
@@ -52,9 +40,9 @@ class kinect:
         frames = []
         
         for k in range(0,nFrames):
-            switchColor(0)
+            blinker.switchColor('r',[3])
             depth = get_depth()
-            switchColor(1)
+            blinker.switchColor('g',[3])
             depth[depth>maxDepth]=np.nan
             if np.isnan(depth).all() or len(depth[~np.isnan(depth)])<20000:
                 print('all nan')
@@ -109,10 +97,11 @@ class kinect:
 
     def backAcq(self,dev, data, timestamp):
 
-        switchColor(0)
+        blinker.switchColor('r',[3])
         self.background.append(np.float32(data))
         
-        switchColor(1)
+        blinker.switchColor('g',[3])
+        
 
     def backGroundSubstractor(self,nFrames = 100):
         self.nFrames = nFrames
@@ -126,6 +115,7 @@ class kinect:
             
             freenect.process_events(self.ctx)
             time.sleep(.01)
+            blinker.progressColor(len(self.frames)/nFrames,'c','o',[2])
         for frame in self.background:
             fgmask = self.fgbg.apply(frame,learningRate=0.01)
         self.background = []
@@ -148,13 +138,15 @@ class kinect:
                 depth.append(1-(frame-depthMin)/(depthMax-depthMin))
                 if blur:
                     depth[-1] = self.frameSmoother(depth[-1],level)
+
         self.frames = depth
 
 
 
     def depthAcq(self,dev, data, timestamp):
 
-        switchColor(0)
+        blinker.switchColor('r',[3])
+        
         depth = np.float32(data)
         depth[depth>self.maxDepth]=np.nan
         if np.isnan(depth).all() or len(depth[~np.isnan(depth)])<self.nMin:
@@ -167,7 +159,8 @@ class kinect:
         
             #self.frames.append(1-(depth-depthMin)/(depthMax-depthMin))
             self.frames.append(depth)
-        switchColor(1)
+        blinker.switchColor('g',[3])
+        
 
 
     def getDepthFrames(self,delay=.01,nFrames=10,maxDepth=2049):
@@ -179,6 +172,7 @@ class kinect:
         self.frames = []
         
         while len(self.frames)<nFrames:
+            blinker.progressColor(len(self.frames)/nFrames,'c','o',[2])
             
             freenect.process_events(self.ctx)
             time.sleep(delay)

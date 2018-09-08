@@ -9,53 +9,75 @@ def clear():
     clear()
 
 
-def switchColor(col,pix = np.arange(0,8,1),brightness = .1,clear = False):
-    #clear()
-    if clear:
-        clear()
-    set_brightness(brightness)
+def defColor(col):
     if isinstance(col,str):
         r=0
         g=0
         b=0
         if col == 'r':
-            r=1
+            r=255
         elif col == 'g':
-            g=1
+            g=255
         elif col == 'b':
-            b=1
+            b=255
         elif col =='y':
-            r=1
-            g=1
+            r=255
+            g=255
         elif col == 'c':
-            g=1
-            b=1
+            g=255
+            b=255
         elif col == 'm':
-            r=1
-            b=1
+            r=255
+            b=255
         elif col == 'o':
-            r=1
-            g=.5
+            r=255
+            g=127
         elif col == 'p':
-            r=1
-            b=.5
+            r=255
+            b=127
         elif col == 'a':
-            r=.5
-            g=1
+            r=127
+            g=255
         elif col = 'v':
-            r=.5
-            b=.5
+            r=127
+            b=127
         elif col = 'f':
-            g=1
-            b=.5
+            g=255
+            b=127
         elif col = 'd':
-            g=.5
-            b=1
+            g=127
+            b=255
     else:
         r, g, b = [int(c * 255) for c in colorsys.hsv_to_rgb(col, 1.0, 1.0)]
+    return r,g,b
+
+def switchColor(col,pix = np.arange(0,8,1),brightness = .1,clear = False):
+    #clear()
+    if clear:
+        clear()
+    set_brightness(brightness)
+    r,g,b = defColor(col)
     for k in pix:
         set_pixel(k,r,g,b)
     show()
+
+def progressColor(progress,col1,col2,pix = [0]):
+    r1,g1,b1 = defColor(col1)
+    r2,g2,b2 = defColor(col2)
+
+    dr = r2-r1
+    dg = g2-g1
+    db = b2-b1
+
+    r = r1+progress*dr
+    g = g1+progress*dg
+    b = b1+progress*db
+    for k in pix:
+        set_pixel(k,r,g,b)
+    show()
+
+
+
 
 
 
