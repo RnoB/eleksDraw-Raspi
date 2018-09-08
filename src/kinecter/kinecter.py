@@ -115,7 +115,7 @@ class kinect:
             
             freenect.process_events(self.ctx)
             time.sleep(.01)
-            progress = len(self.frames)/nFrames
+            progress = len(self.background)/nFrames
             if progress>previousProgress:
                 blinked.progressColor(len(self.frames)/nFrames,'c','o',[2])
                 previousProgress = progress
@@ -173,9 +173,13 @@ class kinect:
         freenect.start_depth(self.dev)
         freenect.set_depth_callback(self.dev,self.depthAcq)
         self.frames = []
-        
+        previousProgress = -1
         while len(self.frames)<nFrames:
-            blinked.progressColor(len(self.frames)/nFrames,'c','o',[2])
+            progress = len(self.frames)/nFrames
+            if progress>previousProgress:
+                blinked.progressColor(progress,'c','o',[2])
+                previousProgress = progress
+            
             
             freenect.process_events(self.ctx)
             time.sleep(delay)
