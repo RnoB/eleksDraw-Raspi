@@ -10,7 +10,7 @@ from kinecter import kinecter
 import time
 running = True
 
-import blinked
+from blinked import blinked
 
 
 def switchColor(col):

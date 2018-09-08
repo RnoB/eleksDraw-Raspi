@@ -5,7 +5,7 @@ import numpy as np
 import time
 from blinkt import set_pixel, set_brightness, show, clear
 import random
-import blinker
+from blinked import blinked
 
 
 def round(x, base=1):
@@ -40,9 +40,9 @@ class kinect:
         frames = []
         
         for k in range(0,nFrames):
-            blinker.switchColor('r',[3])
+            blinked.switchColor('r',[3])
             depth = get_depth()
-            blinker.switchColor('g',[3])
+            blinked.switchColor('g',[3])
             depth[depth>maxDepth]=np.nan
             if np.isnan(depth).all() or len(depth[~np.isnan(depth)])<20000:
                 print('all nan')
@@ -97,10 +97,10 @@ class kinect:
 
     def backAcq(self,dev, data, timestamp):
 
-        blinker.switchColor('r',[3])
+        blinked.switchColor('r',[3])
         self.background.append(np.float32(data))
         
-        blinker.switchColor('g',[3])
+        blinked.switchColor('g',[3])
         
 
     def backGroundSubstractor(self,nFrames = 100):
@@ -115,7 +115,7 @@ class kinect:
             
             freenect.process_events(self.ctx)
             time.sleep(.01)
-            blinker.progressColor(len(self.frames)/nFrames,'c','o',[2])
+            blinked.progressColor(len(self.frames)/nFrames,'c','o',[2])
         for frame in self.background:
             fgmask = self.fgbg.apply(frame,learningRate=0.01)
         self.background = []
@@ -145,7 +145,7 @@ class kinect:
 
     def depthAcq(self,dev, data, timestamp):
 
-        blinker.switchColor('r',[3])
+        blinked.switchColor('r',[3])
         
         depth = np.float32(data)
         depth[depth>self.maxDepth]=np.nan
@@ -159,7 +159,7 @@ class kinect:
         
             #self.frames.append(1-(depth-depthMin)/(depthMax-depthMin))
             self.frames.append(depth)
-        blinker.switchColor('g',[3])
+        blinked.switchColor('g',[3])
         
 
 
@@ -172,7 +172,7 @@ class kinect:
         self.frames = []
         
         while len(self.frames)<nFrames:
-            blinker.progressColor(len(self.frames)/nFrames,'c','o',[2])
+            blinked.progressColor(len(self.frames)/nFrames,'c','o',[2])
             
             freenect.process_events(self.ctx)
             time.sleep(delay)
