@@ -110,12 +110,15 @@ class kinect:
         freenect.start_depth(self.dev)
         freenect.set_depth_callback(self.dev,self.backAcq)
         self.background = []
-        
+        previousProgress = 0
         while len(self.background)<nFrames:
             
             freenect.process_events(self.ctx)
             time.sleep(.01)
-            blinked.progressColor(len(self.frames)/nFrames,'c','o',[2])
+            progress = len(self.frames)/nFrames
+            if progress>previousProgress:
+                blinked.progressColor(len(self.frames)/nFrames,'c','o',[2])
+                previousProgress = progress
         for frame in self.background:
             fgmask = self.fgbg.apply(frame,learningRate=0.01)
         self.background = []
