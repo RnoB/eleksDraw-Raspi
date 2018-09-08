@@ -94,8 +94,9 @@ class kinect:
         return x2,y2
 
 
-    def depthAcq(dev, data, timestamp):
-
+    def depthAcq(dev, data, timestamp,unknown):
+        print(timestamp)
+        print(unknown)
         
         switchColor(0)
         self.frames.append(data)
@@ -109,21 +110,25 @@ class kinect:
         freenect.set_depth_callback(self.dev,self.depthAcq)
         self.frames = []
         while len(self.frames)<nFrames:
-           freenect.process_events(self.ctx)
-           time.sleep(delay)
+            print('event')
+            freenect.process_events(self.ctx)
+            time.sleep(delay)
 
-    def start(self):
+    def start(self,degs=10):
         self.ctx = freenect.init()
         if not self.ctx:
             freenect.error_open_device()
         self.dev = freenect.open_device(self.ctx, 0)
         if not self.dev:
             freenect.error_open_device()
+        freenect.set_tilt_degs(self.dev,degs)
         self.intialised == True
+        print('kinect Started')
 
     def stop(self):
         freenect.close_device(self.dev)
         freenect.shutdown(self.ctx)
+        print('kinect Stopped')
 
     def __init__(self,output = False,nFrames = 10,delay = .5):
         self.kinectWidth = 640
