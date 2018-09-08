@@ -100,13 +100,25 @@ class kinect:
     def depthAcq(self,dev, data, timestamp):
 
         switchColor(0)
-        self.frames.append(np.float32(data))
+        depth = np.float32(data)
+        depth[depth>self.maxDepth]=np.nan
+        if np.isnan(depth).all() or len(depth[~np.isnan(depth)])<self.nMin:
+            print('all nan')
+        else:
+        
+        
+            depthMin = np.min(depth[~np.isnan(depth)])
+            depthMax = np.max(depth[~np.isnan(depth)])
+        
+            self.frames.append(1-(depth-depthMin)/(depthMax-depthMin))
+        
         switchColor(1)
 
 
-    def getDepthFrames(self,delay=.01,nFrames=10):
+    def getDepthFrames(self,delay=.01,nFrames=10,maxDepth=2049):
         self.nFrames = nFrames
         self.delay = delay
+        self.maxDepth = maxDepth
         freenect.start_depth(self.dev)
         freenect.set_depth_callback(self.dev,self.depthAcq)
         self.frames = []
@@ -144,6 +156,9 @@ class kinect:
         self.frames = []
         self.nFrames = nFrames
         self.delay = delay
+
+        self.nMin = 2000
+        self.maxDepth = 2049
 
 
 
