@@ -100,7 +100,7 @@ class kinect:
     def depthAcq(self,dev, data, timestamp):
 
         switchColor(0)
-        self.frames.append(np.copy(data))
+        self.frames.append(np.float32(data[0]))
         switchColor(1)
 
 
