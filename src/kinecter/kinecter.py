@@ -69,7 +69,7 @@ class kinect:
         return frames
 
 
-    def derivateFrames(frames):
+    def derivateFrames(self,frames):
         dX = []
         dY = []
         angle = []
