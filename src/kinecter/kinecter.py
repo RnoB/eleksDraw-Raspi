@@ -108,7 +108,7 @@ class kinect:
     def backAcq(self,dev, data, timestamp):
 
         switchColor(0)
-        self.back.append(np.float32(data))
+        self.background.append(np.float32(data))
         
         switchColor(1)
 
@@ -124,9 +124,9 @@ class kinect:
             
             freenect.process_events(self.ctx)
             time.sleep(.01)
-        for frame in self.back:
+        for frame in self.background:
             fgmask = self.fgbg.apply(frame)
-        self.back = []
+        self.background = []
 
 
 
