@@ -125,7 +125,7 @@ class kinect:
             freenect.process_events(self.ctx)
             time.sleep(.01)
         for frame in self.background:
-            fgmask = self.fgbg.apply(frame)
+            fgmask = self.fgbg.apply(frame,learningRate=0.01)
         self.background = []
 
 
