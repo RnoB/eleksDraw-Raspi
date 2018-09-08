@@ -58,6 +58,7 @@ def switchColor(col,pix = np.arange(0,8,1),brightness = .1,clear = False):
     set_brightness(brightness)
     r,g,b = defColor(col)
     for k in pix:
+        print((k,r,g,b))
         set_pixel(k,r,g,b)
     show()
 
@@ -73,6 +74,7 @@ def progressColor(progress,col1,col2,pix = [0]):
     g = g1+progress*dg
     b = b1+progress*db
     for k in pix:
+        print((k,r,g,b))
         set_pixel(k,r,g,b)
     show()
 

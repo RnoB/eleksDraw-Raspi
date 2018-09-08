@@ -117,7 +117,7 @@ class kinect:
             time.sleep(.01)
             progress = len(self.background)/nFrames
             if progress>previousProgress:
-                blinked.progressColor(progress,'c','o',[2])
+                blinked.progressColor(progress,'c','o',pix = [2])
                 previousProgress = progress
         for frame in self.background:
             fgmask = self.fgbg.apply(frame,learningRate=0.01)
@@ -177,7 +177,7 @@ class kinect:
         while len(self.frames)<nFrames:
             progress = len(self.frames)/nFrames
             if progress>previousProgress:
-                blinked.progressColor(progress,'c','o',[2])
+                blinked.progressColor(progress,'c','o',pix = [2])
                 previousProgress = progress
             
             
