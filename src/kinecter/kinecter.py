@@ -121,6 +121,7 @@ class kinect:
         self.dev = freenect.open_device(self.ctx, 0)
         if not self.dev:
             freenect.error_open_device()
+        freenect.set_tilt_degs(self.dev,-degs)
         freenect.set_tilt_degs(self.dev,degs)
         self.intialised == True
         print('kinect Started')
