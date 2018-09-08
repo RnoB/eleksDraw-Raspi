@@ -116,7 +116,7 @@ class kinect:
     def backGroundSubstractor(self,nFrames = 100):
         self.nFrames = nFrames
 
-        self.fgbg = cv2.BackgroundSubtractorMOG2() 
+        self.fgbg = cv2.createBackgroundSubtractorMOG2() 
         freenect.start_depth(self.dev)
         freenect.set_depth_callback(self.dev,self.depthAcq)
         self.background = []
