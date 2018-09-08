@@ -120,7 +120,7 @@ class kinect:
         freenect.set_depth_callback(self.dev,self.backAcq)
         self.background = []
         
-        while len(self.back)<nFrames:
+        while len(self.background)<nFrames:
             
             freenect.process_events(self.ctx)
             time.sleep(.01)
