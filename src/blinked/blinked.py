@@ -38,13 +38,13 @@ def defColor(col):
         elif col == 'a':
             r=127
             g=255
-        elif col = 'v':
+        elif col == 'v':
             r=127
             b=127
-        elif col = 'f':
+        elif col == 'f':
             g=255
             b=127
-        elif col = 'd':
+        elif col == 'd':
             g=127
             b=255
     else:
