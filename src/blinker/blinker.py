@@ -51,7 +51,7 @@ def defColor(col):
         r, g, b = [int(c * 255) for c in colorsys.hsv_to_rgb(col, 1.0, 1.0)]
     return r,g,b
 
-def switchColor(col,pix = np.arange(0,8,1),brightness = .1,clear = False):
+def switchColors(col,pix = np.arange(0,8,1),brightness = .1,clear = False):
     #clear()
     if clear:
         clear()
