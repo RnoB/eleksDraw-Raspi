@@ -10,7 +10,7 @@ from kinecter import kinecter
 import time
 running = True
 
-import blinker
+import blinked
 
 
 def switchColor(col):
@@ -68,16 +68,16 @@ def main():
     set_brightness(.05)
     try:
         kinect = kinecter.kinect()
-        blinker.switchColor('o',[1])
+        blinked.switchColor('o',[1])
         kinect.start()
         kinect.backGroundSubstractor(nFrames=100)
         kinect.stop()
-        blinker.switchColor('p',[1])
+        blinked.switchColor('p',[1])
         time.sleep(10)
         kinect.start()
         kinect.getDepthFrames(nFrames = 30,delay=.01,maxDepth=2049)
         kinect.stop()
-        blinker.switchColor('c',[1])
+        blinked.switchColor('c',[1])
         kinect.backgroundSubstract(blur=True,level=20)
         dX,dY,angle,angleZ = kinect.derivateFrames(kinect.frames)
     except Exception as e: 
@@ -101,12 +101,12 @@ def main():
     scale = 70
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
-    blinker.switchColor('a',[0])
-    blinker.switchColor('g',[1])
+    blinked.switchColor('a',[0])
+    blinked.switchColor('g',[1])
     try:
         for j in range(0,5):
 
-            blinker.progressColor(j/5,'v','y',[4])
+            blinked.progressColor(j/5,'v','y',[4])
             nLines = 500#75*(3*l+j+1)
 
             z =kinect.frames[9-j]
@@ -114,7 +114,7 @@ def main():
             offsetX = 5+j*40
             offsetY = 5
             for k in range(0,nLines):
-                blinker.progressColor(k/nLines,'v','y',[5])
+                blinked.progressColor(k/nLines,'v','y',[5])
                 size = 0
                 while(size == 0):
                     print('new Line : '+str(k))
