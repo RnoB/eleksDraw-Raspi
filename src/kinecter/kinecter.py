@@ -141,11 +141,11 @@ class kinect:
         else:
         
         
-            depthMin = np.min(depth[~np.isnan(depth)])
-            depthMax = np.max(depth[~np.isnan(depth)])
+            #depthMin = np.min(depth[~np.isnan(depth)])
+            #depthMax = np.max(depth[~np.isnan(depth)])
         
-            self.frames.append(1-(depth-depthMin)/(depthMax-depthMin))
-        
+            #self.frames.append(1-(depth-depthMin)/(depthMax-depthMin))
+            self.frames.append(depth)
         switchColor(1)
 
 
