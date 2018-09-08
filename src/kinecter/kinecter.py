@@ -96,11 +96,10 @@ class kinect:
 
     def depthAcq(dev, data, timestamp):
 
-        self.frames = []
-        for k in range(0,self.nFrames):
-            switchColor(0)
-            self.frames.append(data)
-            switchColor(1)
+        
+        switchColor(0)
+        self.frames.append(data)
+        switchColor(1)
 
 
     def getDepthFrames(self,delay=.5,nFrames=10):
@@ -108,7 +107,8 @@ class kinect:
         self.delay = delay
         freenect.start_depth(self.dev)
         freenect.set_depth_callback(self.dev,self.depthAcq)
-        while running:
+        self.frames = []
+        while len(self.frames)<nFrames:
            freenect.process_events(self.ctx)
            time.sleep(delay)
 
@@ -130,7 +130,7 @@ class kinect:
         self.kinectHeight = 480
         self.intialised = False
         self.record = False
-        self.running = False
+
         self.ctx = []
         self.dev = []
         self.nFrames = nFrames
