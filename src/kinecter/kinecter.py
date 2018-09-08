@@ -136,7 +136,7 @@ class kinect:
             frame[fgmask==0]=np.nan
             frame[fgmask==255]=np.nan
             frame[frame<1]=np.nan
-            if blur = True:
+            if blur == True:
                  frame = frameSmoother(self,frame)
 
 
