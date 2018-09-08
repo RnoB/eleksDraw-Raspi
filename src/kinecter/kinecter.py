@@ -97,7 +97,8 @@ class kinect:
     def depthAcq(self,dev, data, timestamp):
         print('new Image')
         switchColor(0)
-        print(data)
+        print('data : '+str(data))
+        print('time : '+str(timestamp))
         self.frames.append(data)
         switchColor(1)
 
@@ -110,7 +111,7 @@ class kinect:
         self.frames = []
         for k in range(0,30):
         #while len(self.frames)<nFrames:
-            print(len(self.frames))
+            print('L    : '+str(len(self.frames)))
             freenect.process_events(self.ctx)
             time.sleep(delay)
 
