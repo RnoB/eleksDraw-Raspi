@@ -121,7 +121,7 @@ class kinect:
             freenect.error_open_device()
         self.intialised == True
 
-    def stop(self)
+    def stop(self):
         freenect.close_device(self.dev)
         freenect.shutdown(self.ctx)
 
