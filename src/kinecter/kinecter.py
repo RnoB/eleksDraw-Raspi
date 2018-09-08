@@ -11,6 +11,21 @@ import random
 def round(x, base=1):
     return base * np.round(x/base)
 
+
+def switchColor(col):
+    #clear()
+    if col == 0:
+        for k in range(2,3):
+            set_pixel(k,0,255,0)
+    if col == 1:
+        for k in range(2,3):
+            set_pixel(k,255,0,0)
+    if col == 2:
+        for k in range(2,3):
+            set_pixel(k,0,0,255)
+    show()
+
+
 class kinect:    
 
 
@@ -23,18 +38,6 @@ class kinect:
 
 
 
-    def switchColor(self,col):
-        #clear()
-        if col == 0:
-            for k in range(2,3):
-                set_pixel(k,0,255,0)
-        if col == 1:
-            for k in range(2,3):
-                set_pixel(k,255,0,0)
-        if col == 2:
-            for k in range(2,3):
-                set_pixel(k,0,0,255)
-        show()
 
 
     def get_depth(self):
@@ -96,9 +99,9 @@ class kinect:
 
     def depthAcq(self,dev, data, timestamp):
         print('new Image')
-        switchColor(0)
         print('time : '+str(timestamp))
         print('data : '+str(data))
+        switchColor(0)
         self.frames.append(data)
         switchColor(1)
 
