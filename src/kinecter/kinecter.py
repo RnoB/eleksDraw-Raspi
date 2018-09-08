@@ -130,6 +130,7 @@ class kinect:
         self.kinectHeight = 480
         self.intialised = False
         self.record = False
+        self.running = False
         self.ctx = []
         self.dev = []
         self.nFrames = nFrames
