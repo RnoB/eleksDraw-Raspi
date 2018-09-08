@@ -96,14 +96,13 @@ class kinect:
 
         return x2,y2
 
-    def frameSmoother(self,level = 10):
-        self.blur = []
-        
-        for frame in kinect.frames:
-            temp = np.copy(frame)
-            temp[np.isnan(frame)]=0
-            self.blur.append(cv2.blur(temp,(level,level)))
-            self.blur[-1][np.isnan(frame)]=np.nan
+    def frameSmoother(self,frame,level = 10):
+    
+        temp = np.copy(frame)
+        temp[np.isnan(frame)]=0
+        temp = cv2.blur(temp,(level,level))
+        temp[np.isnan(frame)]=np.nan
+        return temp
 
 
     def backAcq(self,dev, data, timestamp):
@@ -118,16 +117,27 @@ class kinect:
 
         self.fgbg = cv2.createBackgroundSubtractorMOG2() 
         freenect.start_depth(self.dev)
-        freenect.set_depth_callback(self.dev,self.depthAcq)
+        freenect.set_depth_callback(self.dev,self.backAcq)
         self.background = []
         
-        while len(self.frames)<nFrames:
+        while len(self.back)<nFrames:
             
             freenect.process_events(self.ctx)
             time.sleep(.01)
-        for frame in self.frames:
+        for frame in self.back:
             fgmask = self.fgbg.apply(frame)
+        self.back = []
 
+
+
+    def backgroundSubstract(self,blur=False):
+        for frame in self.frames:
+            fgmask=kinect.fgbg.apply(frame,learningRate=0)
+            frame[fgmask==0]=np.nan
+            frame[fgmask==255]=np.nan
+            frame[frame<1]=np.nan
+            if blur = True:
+                 frame = frameSmoother(self,frame)
 
 
 
