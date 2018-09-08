@@ -66,6 +66,7 @@ def round(x, base=1):
 
 def main():
     set_brightness(.05)
+    blinked.switchColor('g',[0])
     try:
         kinect = kinecter.kinect()
         blinked.switchColor('o',[1])

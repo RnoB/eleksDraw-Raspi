@@ -70,9 +70,9 @@ def progressColor(progress,col1,col2,pix = [0]):
     dg = g2-g1
     db = b2-b1
 
-    r = r1+progress*dr
-    g = g1+progress*dg
-    b = b1+progress*db
+    r =round(r1+progress*dr)
+    g = round(g1+progress*dg)
+    b = round(b1+progress*db)
     for k in pix:
         print((k,r,g,b))
         set_pixel(k,r,g,b)
