@@ -99,6 +99,7 @@ class kinect:
         switchColor(0)
         print(len(self.frames))
         self.frames.append(data)
+        print(len(self.frames))
         switchColor(1)
 
 
@@ -108,7 +109,8 @@ class kinect:
         freenect.start_depth(self.dev)
         freenect.set_depth_callback(self.dev,self.depthAcq)
         self.frames = []
-        while len(self.frames)<nFrames:
+        for k in range(0,30):
+        #while len(self.frames)<nFrames:
             print(len(self.frames))
             freenect.process_events(self.ctx)
             time.sleep(delay)
