@@ -72,8 +72,6 @@ def progressColor(progress,col1,col2,pix = [0]):
     r = r1+progress*dr
     g = g1+progress*dg
     b = b1+progress*db
-    print('progress : '+str(progress) )
-    print('color : '+str((r,g,b)))
     for k in pix:
         set_pixel(k,r,g,b)
     show()
