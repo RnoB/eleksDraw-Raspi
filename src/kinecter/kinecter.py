@@ -137,7 +137,9 @@ class kinect:
             frame[fgmask==255]=np.nan
             frame[frame<1]=np.nan
             if blur == True:
-                 frame = self.frameSmoother(frame,level)
+                print(np.max(frame))
+                frame = self.frameSmoother(frame,level)
+                print(np.max(frame))
 
 
 
