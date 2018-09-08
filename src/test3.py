@@ -7,6 +7,7 @@ import numpy as np
 import random
 import math
 from kinecter import kinecter
+import time
 running = True
 
 
