@@ -100,7 +100,9 @@ class kinect:
     
         temp = np.copy(frame)
         temp[np.isnan(frame)]=0
+        print(np.max(temp))
         temp = cv2.blur(temp,(level,level))
+        print(np.max(temp))
         temp[np.isnan(frame)]=np.nan
         return temp
 
@@ -131,15 +133,22 @@ class kinect:
 
 
     def backgroundSubstract(self,blur=False,level=10):
+        depth = []
         for frame in self.frames:
             fgmask=self.fgbg.apply(frame,learningRate=0)
             frame[fgmask==0]=np.nan
             frame[fgmask==255]=np.nan
             frame[frame<1]=np.nan
+            if np.isnan(frame).all() or len(frame[~np.isnan(frame)])<self.nMin:
+                print('all nan')
+            else:
+            depthMin = np.min(depth[~np.isnan(depth)])
+            depthMax = np.max(depth[~np.isnan(depth)])
+        
+            depth.append(1-(frame-depthMin)/(depthMax-depthMin))
             if blur == True:
-                print(np.max(frame))
-                frame = self.frameSmoother(frame,level)
-                print(np.max(frame))
+                depth[-1] = self.frameSmoother(depth[-1],level)
+        self.frames = depth
 
 
 
