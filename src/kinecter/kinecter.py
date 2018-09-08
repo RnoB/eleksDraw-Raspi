@@ -142,12 +142,12 @@ class kinect:
             if np.isnan(frame).all() or len(frame[~np.isnan(frame)])<self.nMin:
                 print('all nan')
             else:
-            depthMin = np.min(depth[~np.isnan(depth)])
-            depthMax = np.max(depth[~np.isnan(depth)])
-        
-            depth.append(1-(frame-depthMin)/(depthMax-depthMin))
-            if blur == True:
-                depth[-1] = self.frameSmoother(depth[-1],level)
+                depthMin = np.min(depth[~np.isnan(depth)])
+                depthMax = np.max(depth[~np.isnan(depth)])
+            
+                depth.append(1-(frame-depthMin)/(depthMax-depthMin))
+                if blur == True:
+                    depth[-1] = self.frameSmoother(depth[-1],level)
         self.frames = depth
 
 
