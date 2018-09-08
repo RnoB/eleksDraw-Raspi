@@ -14,7 +14,7 @@ running = True
 
 
 def switchColor(col):
-    clear()
+    #clear()
     if col == 0:
         for k in range(0,2):
             set_pixel(k,0,255,0)
@@ -73,8 +73,8 @@ def main():
         kinect.backGroundSubstractor(nFrames=100)
         kinect.stop()
         switchColor(1)
-        time.sleep(20)
-        swichColor(2)
+        time.sleep(10)
+        switchColor(0)
         kinect.start()
         kinect.getDepthFrames(nFrames = 30,delay=.01,maxDepth=2049)
         kinect.stop()
