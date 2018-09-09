@@ -65,11 +65,21 @@ def round(x, base=1):
 
 def main():
     set_brightness(.05)
-    switchColor(1)
+    blinked.switchColor('g',[0])
     try:
-        frames = kinecter.getFrames(14,delay=1)
-        dX,dY,angle,angleZ = kinecter.derivateFrames(frames)
-        noProblem = True
+        kinect = kinecter.kinect()
+        blinked.switchColor('o',[1])
+        kinect.start()
+        kinect.backGroundSubstractor(nFrames=100)
+        kinect.stop()
+        blinked.switchColor('p',[1])
+        time.sleep(10)
+        kinect.start()
+        kinect.getDepthFrames(nFrames = 30,delay=.01,maxDepth=2049)
+        kinect.stop()
+        blinked.switchColor('c',[1])
+        kinect.backgroundSubstract(blur=True,level=20)
+        dX,dY,angle,angleZ = kinect.derivateFrames(kinect.frames)
     except Exception as e: 
         print(traceback.format_exc())
         noProblem = False
@@ -81,16 +91,19 @@ def main():
     #intializeDrawer()
     flip = False
 
-    speed = 4
-    z = frames[6]
+    speed = .5
+    z = kinect.frames[6]
     A = angle[6]
+    AZ = angleZ[6]
     idx = [6,7,8]
     nLines = 200
     size = 0
     X = []
     scale = 150
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
-    offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]
+    offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
+    blinked.switchColor('a',[0])
+    blinked.switchColor('g',[1])
     try:
         for l in range(0,1):
             for j in range(0,1):
@@ -115,11 +128,12 @@ def main():
                         y = round(y+(.5-random.random())*yu,.1)
                         zTest = z[ky,kx]
                         Atest = A[ky,kx]
+                        Aztest = Az[ky,kx]
                         running = True
-                        if np.isnan(zTest) or np.isnan(Atest):
+                        if np.isnan(zTest) or np.isnan(Atest) or np.isnan(AzTest):
                             running=False
                         if running:
-                            R = random.random()*(speed * np.sin(A[ky,kx]+offsetA[l][j]))
+                            R = random.random()*(speed * (1+np.sin(A[ky,kx]))*cos(Az[ky,kx]))
                             xLines.append(round(x-R*np.cos(A[ky,kx]),.1))
                             xLines.append(round(x+R*np.cos(A[ky,kx]),.1))
                             yLines.append(round(y-R*np.sin(A[ky,kx]),.1))
