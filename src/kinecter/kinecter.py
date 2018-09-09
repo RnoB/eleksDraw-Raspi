@@ -25,7 +25,10 @@ class kinect:
 
 
 
-
+    def depthToDistance(self):
+        self.depthM = []
+        for frame in self.frames:
+            self.depthM.append(0.1236 * Math.Tan(depthValue / 2842.5 + 1.1863))
 
 
     def get_depth(self):
@@ -57,18 +60,19 @@ class kinect:
         return frames
 
 
-    def derivateFrames(self,frames):
+    def derivateFrames(self):
         dX = []
         dY = []
         angle = []
         angleZ = []
-        for frame in frames:
+        for frame in self.depthM:
             dX.append(cv2.Sobel(frame,cv2.CV_64F,1,0,ksize=-1))
             dY.append(cv2.Sobel(frame,cv2.CV_64F,0,1,ksize=-1))
             angle.append(np.arctan2(dX[-1],dY[-1]))
-            dZ = (dX[-1]+dY[-1])/2
+
             norm = np.sqrt(dX[-1]**2+dY[-1]**2)
-            angleZ.append(np.arctan2(norm,dZ))
+            dZ = frame*np.tan(58.5*math.pi/180)
+            angleZ.append(np.arctan2(dZ,norm))
         return dX,dY,angle,angleZ
 
 
@@ -130,6 +134,7 @@ class kinect:
             frame[fgmask==0]=np.nan
             frame[fgmask==255]=np.nan
             frame[frame<1]=np.nan
+            self.depthToDistance()
             if np.isnan(frame).all() or len(frame[~np.isnan(frame)])<self.nMin:
                 print('all nan')
             else:
@@ -216,6 +221,8 @@ class kinect:
         self.fgmask = []
         self.nMin = 2000
         self.maxDepth = 2049
+
+        self.depthM = []
 
 
 
