@@ -135,7 +135,7 @@ def main():
                         if np.isnan(zTest) or np.isnan(Atest) or np.isnan(Aztest):
                             running=False
                         if running:
-                            R = random.random()*(speed * (1+np.sin(A[ky,kx])))
+                            R = random.random()*(speed * (1+np.sin(A[ky,kx]))*np.sin(A[ky,kx]))
                             xLines.append(round(x-R*np.cos(A[ky,kx]),.1))
                             xLines.append(round(x+R*np.cos(A[ky,kx]),.1))
                             yLines.append(round(y-R*np.sin(A[ky,kx]),.1))
