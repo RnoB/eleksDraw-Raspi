@@ -8,6 +8,7 @@ import random
 import math
 from kinecter import kinecter
 from blinked import blinked
+import time
 running = True
 
 
