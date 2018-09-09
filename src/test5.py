@@ -96,7 +96,7 @@ def main():
     speed = .5
     z = kinect.frames[6]
     A = angle[6]
-    AZ = angleZ[6]
+    Az = angleZ[6]
     idx = [6,7,8]
     nLines = 200
     size = 0
