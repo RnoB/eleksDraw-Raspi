@@ -80,7 +80,7 @@ def main():
         kinect.stop()
         blinked.switchColor('c',[1])
         kinect.backgroundSubstract(blur=True,level=20)
-        dX,dY,angle,angleZ = kinect.derivateFrames(kinect.frames)
+        dX,dY,angle,angleZ = kinect.derivateFrames()
     except Exception as e: 
         print(traceback.format_exc())
         noProblem = False
