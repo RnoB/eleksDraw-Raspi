@@ -64,7 +64,7 @@ class kinect:
         dY = []
         angle = []
         angleZ = []
-        for frame in self.frame:
+        for frame in self.frames:
             dX.append(cv2.Sobel(frame,cv2.CV_64F,1,0,ksize=-1))
             dY.append(cv2.Sobel(frame,cv2.CV_64F,0,1,ksize=-1))
             angle.append(np.arctan2(dX[-1],dY[-1]))
