@@ -93,7 +93,7 @@ def main():
     #intializeDrawer()
     flip = False
 
-    speed = .5
+    speed = .2
     z = kinect.frames[6]
     A = angle[6]
     Az = angleZ[6]
@@ -135,7 +135,7 @@ def main():
                         if np.isnan(zTest) or np.isnan(Atest) or np.isnan(Aztest):
                             running=False
                         if running:
-                            R = random.random()*(speed * (1+np.sin(A[ky,kx]))*np.cos(Az[ky,kx]))
+                            R = random.random()*(speed * (1+np.sin(A[ky,kx]))*(1+np.cos(Az[ky,kx])))
                             xLines.append(round(x-R*np.cos(A[ky,kx]),.1))
                             xLines.append(round(x+R*np.cos(A[ky,kx]),.1))
                             yLines.append(round(y-R*np.sin(A[ky,kx]),.1))
