@@ -71,7 +71,7 @@ class kinect:
             angle.append(np.arctan2(dX[-1],dY[-1]))
 
             norm = np.sqrt(dX[-1]**2+dY[-1]**2)
-            dZ = frame*np.tan(58.5*math.pi/180)/640
+            dZ = frame*np.tan(58.5*np.pi/180)/640
             angleZ.append(np.arctan2(dZ,norm))
         return dX,dY,angle,angleZ
 
