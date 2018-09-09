@@ -28,7 +28,7 @@ class kinect:
     def depthToDistance(self):
         self.depthM = []
         for frame in self.frames:
-            self.depthM.append(0.1236 * Math.Tan(depthValue / 2842.5 + 1.1863))
+            self.depthM.append(0.1236 * Math.tan(depthValue / 2842.5 + 1.1863))
 
 
     def get_depth(self):
