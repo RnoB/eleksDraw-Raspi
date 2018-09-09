@@ -70,7 +70,7 @@ class kinect:
             angle.append(np.arctan2(dX[-1],dY[-1]))
 
             norm = np.sqrt(dX[-1]**2+dY[-1]**2)
-            dZ = .01
+            dZ = .05
             angleZ.append(np.arctan2(norm,dZ))
         return dX,dY,angle,angleZ
 
