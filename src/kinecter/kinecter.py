@@ -144,7 +144,7 @@ class kinect:
                 depth.append(1-(frame-depthMin)/(depthMax-depthMin))
                 if blur:
                     depth[-1] = self.frameSmoother(depth[-1],level)
-                depthM.append(self.depthToDistance((1-depth[-1])*(depthMax-depthMin)+depthMin))
+                self.depthM.append(self.depthToDistance((1-depth[-1])*(depthMax-depthMin)+depthMin))
 
         self.frames = depth
         
