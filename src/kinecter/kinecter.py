@@ -70,7 +70,7 @@ class kinect:
             angle.append(np.arctan2(dX[-1],dY[-1]))
 
             norm = np.sqrt(dX[-1]**2+dY[-1]**2)
-            dZ = frame*np.tan(58.5*np.pi/180)/640
+            dX = frame*np.tan(58.5*np.pi/180)/640
             angleZ.append(np.arctan2(dZ,norm))
         return dX,dY,angle,angleZ
 
@@ -144,6 +144,8 @@ class kinect:
                 depth.append(1-(frame-depthMin)/(depthMax-depthMin))
                 if blur:
                     depth[-1] = self.frameSmoother(depth[-1],level)
+                print(depthMax)
+                print(depthMin)
                 self.depthM.append(self.depthToDistance((1-depth[-1])*(depthMax-depthMin)+depthMin))
 
         self.frames = depth
