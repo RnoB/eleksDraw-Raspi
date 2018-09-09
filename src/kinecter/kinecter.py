@@ -88,9 +88,7 @@ class kinect:
     
         temp = np.copy(frame)
         temp[np.isnan(frame)]=0
-        print(np.max(temp))
         temp = cv2.blur(temp,(level,level))
-        print(np.max(temp))
         temp[np.isnan(frame)]=np.nan
         return temp
 
