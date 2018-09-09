@@ -25,10 +25,9 @@ class kinect:
 
 
 
-    def depthToDistance(self):
-        self.depthM = []
-        for frame in self.frames:
-            self.depthM.append(0.1236 * np.tan(frame / 2842.5 + 1.1863))
+    def depthToDistance(self,frame):
+        depthMeter = 0.1236 * np.tan(frame / 2842.5 + 1.1863)
+        return depthMeter
 
 
     def get_depth(self):
@@ -129,12 +128,13 @@ class kinect:
 
     def backgroundSubstract(self,blur=False,level=10):
         depth = []
+        self.depthM = []
         for frame in self.frames:
             fgmask=self.fgbg.apply(frame,learningRate=0)
             frame[fgmask==0]=np.nan
             frame[fgmask==255]=np.nan
             frame[frame<1]=np.nan
-            self.depthToDistance()
+            
             if np.isnan(frame).all() or len(frame[~np.isnan(frame)])<self.nMin:
                 print('all nan')
             else:
@@ -144,8 +144,10 @@ class kinect:
                 depth.append(1-(frame-depthMin)/(depthMax-depthMin))
                 if blur:
                     depth[-1] = self.frameSmoother(depth[-1],level)
+                depthM.append(self.depthToDistance((1-depth[-1])*(depthMax-depthMin)+depthMin)
 
         self.frames = depth
+        
 
 
 
