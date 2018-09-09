@@ -103,7 +103,7 @@ def main():
     X = []
     scale = 150
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
-    offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
+    offsetA=np.pi/3#[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
     blinked.switchColor('g',[1])
     try:
@@ -135,7 +135,7 @@ def main():
                         if np.isnan(zTest) or np.isnan(Atest) or np.isnan(Aztest):
                             running=False
                         if running:
-                            R = random.random()*(speed * (1+np.sin(A[ky,kx]))*np.sin(Az[ky,kx]))
+                            R = random.random()*(speed * (1+np.sin(A[ky,kx]+offsetA))*np.sin(Az[ky,kx]))
                             xLines.append(round(x-R*np.cos(A[ky,kx]),.1))
                             xLines.append(round(x+R*np.cos(A[ky,kx]),.1))
                             yLines.append(round(y-R*np.sin(A[ky,kx]),.1))
