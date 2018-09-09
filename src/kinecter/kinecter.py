@@ -64,15 +64,15 @@ class kinect:
         dY = []
         angle = []
         angleZ = []
-        for frame in self.depthM:
+        for frame in self.frame:
             dX.append(cv2.Sobel(frame,cv2.CV_64F,1,0,ksize=-1))
             dY.append(cv2.Sobel(frame,cv2.CV_64F,0,1,ksize=-1))
             angle.append(np.arctan2(dX[-1],dY[-1]))
 
             norm = np.sqrt(dX[-1]**2+dY[-1]**2)
-            dZ = frame*np.tan(58.5*np.pi/180)/640
-            angleZ.append(np.arctan2(dZ,norm))
-        return dX,dY,dZ,angle,angleZ
+            dZ = .01
+            angleZ.append(np.arctan2(norm,dZ))
+        return dX,dY,angle,angleZ
 
 
 
@@ -128,7 +128,7 @@ class kinect:
 
     def backgroundSubstract(self,blur=False,level=10):
         depth = []
-        self.depthM = []
+        
         for frame in self.frames:
             fgmask=self.fgbg.apply(frame,learningRate=0)
             frame[fgmask==0]=np.nan
@@ -145,7 +145,7 @@ class kinect:
                 if blur:
                     depth[-1] = self.frameSmoother(depth[-1],level)
 
-                self.depthM.append(self.depthToDistance((1-depth[-1])*(depthMax-depthMin)+depthMin))
+                
 
         self.frames = depth
         
