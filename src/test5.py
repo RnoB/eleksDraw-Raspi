@@ -93,7 +93,7 @@ def main():
     #intializeDrawer()
     flip = False
 
-    speed = .5
+    speed = 3
     z = kinect.frames[6]
     A = angle[6]
     Az = angleZ[6]
