@@ -132,7 +132,7 @@ def main():
                         Atest = A[ky,kx]
                         Aztest = Az[ky,kx]
                         running = True
-                        if np.isnan(zTest) or np.isnan(Atest) or np.isnan(AzTest):
+                        if np.isnan(zTest) or np.isnan(Atest) or np.isnan(Aztest):
                             running=False
                         if running:
                             R = random.random()*(speed * (1+np.sin(A[ky,kx]))*cos(Az[ky,kx]))
