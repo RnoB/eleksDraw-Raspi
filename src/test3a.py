@@ -99,7 +99,7 @@ def main():
     nLines = 400
     size = 0
     X = []
-    scale = 150
+    scale = 7
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
@@ -110,15 +110,19 @@ def main():
         speed = rounder
 
     try:
-        for j in range(0,3):
+        for j in range(0,10):
 
-            blinked.progressColor(j/5,'v','y',[4])
-            nLines = 600#75*(3*l+j+1)
+            blinked.progressColor(j/10,'v','y',[4])
+            nLines = 200#75*(3*l+j+1)
 
-            z =kinect.frames[10+j]
-            A = angle[10+j]
-            offsetX = 5
-            offsetY = 5+j*70
+            z =kinect.frames[10]
+            A = angle[10]
+            offsetX = 5+floor(j/5)*70
+            offsetY = 5+(j-5*floor(j/5))*70
+            rounder = .1+.1*j
+            speed = 2*rounder
+            if speed<rounder:
+                speed = rounder
             for k in range(0,nLines):
                 blinked.progressColor(k/nLines,'v','y',[5])
                 size = 0
