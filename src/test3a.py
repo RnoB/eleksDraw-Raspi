@@ -117,8 +117,8 @@ def main():
 
             z =kinect.frames[10]
             A = angle[10]
-            offsetX = 5+floor(j/5)*70
-            offsetY = 5+(j-5*floor(j/5))*70
+            offsetX = 5+math.floor(j/5)*70
+            offsetY = 5+(j-5*math.floor(j/5))*70
             rounder = .1+.1*j
             speed = 2*rounder
             if speed<rounder:
