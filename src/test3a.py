@@ -96,16 +96,16 @@ def main():
     z = kinect.frames[6]
     A = angle[6]
     idx = [6,7,8]
-    nLines = 200
+    nLines = 400
     size = 0
     X = []
-    scale = 70
+    scale = 150
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
     blinked.switchColor('g',[1])
     try:
-        for j in range(0,5):
+        for j in range(0,3):
 
             blinked.progressColor(j/5,'v','y',[4])
             nLines = 500#75*(3*l+j+1)
@@ -113,7 +113,7 @@ def main():
             z =kinect.frames[10+j]
             A = angle[10+j]
             offsetX = 5
-            offsetY = 5+j*40
+            offsetY = 5+j*70
             for k in range(0,nLines):
                 blinked.progressColor(k/nLines,'v','y',[5])
                 size = 0
