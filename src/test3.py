@@ -76,7 +76,7 @@ def main():
         blinked.switchColor('p',[1])
         time.sleep(10)
         kinect.start()
-        kinect.getDepthFrames(nFrames = 30,delay=.01,maxDepth=2049)
+        kinect.getDepthFrames(nFrames = 40,delay=.01,maxDepth=2049)
         kinect.stop()
         blinked.switchColor('c',[1])
         kinect.backgroundSubstract(blur=True,level=20)
@@ -96,22 +96,22 @@ def main():
     z = kinect.frames[6]
     A = angle[6]
     idx = [6,7,8]
-    nLines = 200
+    nLines = 500
     size = 0
     X = []
-    scale = 70
+    scale = 150
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
     blinked.switchColor('g',[1])
     try:
-        for j in range(0,5):
+        for j in range(0,1):
 
             blinked.progressColor(j/5,'v','y',[4])
             nLines = 500#75*(3*l+j+1)
 
-            z =kinect.frames[9-j]
-            A = angle[j+3]
+            z =kinect.frames[25]
+            A = angle[25]
             offsetX = 5+j*40
             offsetY = 5
             for k in range(0,nLines):
