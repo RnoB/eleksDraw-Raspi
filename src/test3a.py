@@ -92,7 +92,7 @@ def main():
     #intializeDrawer()
     flip = False
 
-    speed = .5
+
     z = kinect.frames[6]
     A = angle[6]
     idx = [6,7,8]
@@ -104,12 +104,16 @@ def main():
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
     blinked.switchColor('g',[1])
-    rounder = 1
+    rounder = 2
+    speed = .5
+    if speed<rounder:
+        speed = rounder
+
     try:
         for j in range(0,3):
 
             blinked.progressColor(j/5,'v','y',[4])
-            nLines = 500#75*(3*l+j+1)
+            nLines = 600#75*(3*l+j+1)
 
             z =kinect.frames[10+j]
             A = angle[10+j]
