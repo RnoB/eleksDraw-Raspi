@@ -104,6 +104,7 @@ def main():
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
     blinked.switchColor('g',[1])
+    rounder = 1
     try:
         for j in range(0,3):
 
@@ -126,8 +127,8 @@ def main():
                     kx = random.randint(0, 639)
                     ky = random.randint(0, 479)
                     x,y = scaler(kx,ky,scale=scale,offsetX=offsetX,offsetY=offsetY)
-                    x = round(x+(.5-random.random())*xu,.1)
-                    y = round(y+(.5-random.random())*yu,.1)
+                    x = round(x+(.5-random.random())*xu,rounder/2.0)
+                    y = round(y+(.5-random.random())*yu,rounder/2.0)
                     zTest = z[ky,kx]
                     Atest = A[ky,kx]
                     running = True
@@ -139,8 +140,8 @@ def main():
                         xLines.append(y)
                         yLines.append(x)
                         X.append((x,y))
-                        dx = round(x+speed*np.cos(A[ky,kx]),.25)
-                        dy = round(y+speed*np.sin(A[ky,kx]),.25)
+                        dx = round(x+speed*np.cos(A[ky,kx]),rounder)
+                        dy = round(y+speed*np.sin(A[ky,kx]),rounder)
                         
                         dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
                         

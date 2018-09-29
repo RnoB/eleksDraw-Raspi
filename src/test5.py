@@ -142,7 +142,7 @@ def main():
                             yLines.append(round(y+R*np.sin(A[ky,kx]),.1))
 
                             
-                            draw.lines(yLines,xLines)
+                            draw.lines(xLines,yLines)
                             size+=1
                 
         #line(50,50,length=50,angle=0)
