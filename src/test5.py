@@ -75,7 +75,7 @@ def main():
         kinect.backGroundSubstractor(nFrames=100)
         kinect.stop()
         blinked.switchColor('p',[1])
-        time.sleep(10)
+        time.sleep(120)
         kinect.start()
         kinect.getDepthFrames(nFrames = 30,delay=.01,maxDepth=2049)
         kinect.stop()
@@ -101,7 +101,7 @@ def main():
     nLines = 200
     size = 0
     X = []
-    scale = 150
+    scale = 200
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=np.pi/3#[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
@@ -142,7 +142,7 @@ def main():
                             yLines.append(round(y+R*np.sin(A[ky,kx]),.1))
 
                             
-                            draw.lines(xLines,yLines)
+                            draw.lines(yLines,xLines)
                             size+=1
                 
         #line(50,50,length=50,angle=0)
