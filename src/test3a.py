@@ -119,7 +119,7 @@ def main():
             A = angle[10+j]
             #offsetX = 5+math.floor(j/5)*70
             #offsetY = 5+(j-5*math.floor(j/5))*35
-            offetX = 5+j*17.5
+            offsetX = 5+j*17.5
             offsetY = 5
             rounder = .5#.1+.1*j
             speed = 2*rounder
