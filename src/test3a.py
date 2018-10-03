@@ -110,7 +110,7 @@ def main():
         speed = rounder
 
     try:
-        for j in range(0,12):
+        for j in range(0,8):
 
             blinked.progressColor(j/10,'v','y',[4])
             nLines = 200#75*(3*l+j+1)
@@ -119,7 +119,7 @@ def main():
             A = angle[6+j]
             #offsetX = 5+math.floor(j/5)*70
             #offsetY = 5+(j-5*math.floor(j/5))*35
-            offsetY = 5+j*18
+            offsetY = 5+j*27
             offsetX = 5
             rounder = .3#.1+.1*j
             speed = 2*rounder 
