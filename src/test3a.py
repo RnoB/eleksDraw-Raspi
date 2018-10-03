@@ -99,7 +99,7 @@ def main():
     nLines = 400
     size = 0
     X = []
-    scale = 35
+    scale = 70
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
@@ -110,7 +110,7 @@ def main():
         speed = rounder
 
     try:
-        for j in range(0,24):
+        for j in range(0,12):
 
             blinked.progressColor(j/10,'v','y',[4])
             nLines = 200#75*(3*l+j+1)
@@ -119,7 +119,7 @@ def main():
             A = angle[0+j]
             #offsetX = 5+math.floor(j/5)*70
             #offsetY = 5+(j-5*math.floor(j/5))*35
-            offsetY = 5+j*9
+            offsetY = 5+j*18
             offsetX = 5
             rounder = .3#.1+.1*j
             speed = 2*rounder 
