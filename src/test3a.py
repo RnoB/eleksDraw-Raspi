@@ -104,7 +104,7 @@ def main():
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
     blinked.switchColor('g',[1])
-    rounder = 2
+    rounder = .3
     speed = .5
     if speed<rounder:
         speed = rounder
@@ -115,8 +115,8 @@ def main():
             blinked.progressColor(j/10,'v','y',[4])
             nLines = 200#75*(3*l+j+1)
 
-            z =kinect.frames[0+j]
-            A = angle[0+j]
+            z =kinect.frames[6+j]
+            A = angle[6+j]
             #offsetX = 5+math.floor(j/5)*70
             #offsetY = 5+(j-5*math.floor(j/5))*35
             offsetY = 5+j*18
