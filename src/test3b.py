@@ -113,7 +113,7 @@ def main():
         for j in range(0,40):
 
             blinked.progressColor(j/10,'v','y',[4])
-            nLines = 1500#75*(3*l+j+1)
+            nLines = 200#75*(3*l+j+1)
             kFrames = random.randint(0,len(angle)-1)
             z =kinect.frames[kFrames]
             A = angle[kFrames]
