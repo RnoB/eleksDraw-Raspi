@@ -96,7 +96,7 @@ def main():
     z = kinect.frames[6]
     A = angle[6]
     idx = [6,7,8]
-    nLines = 1500
+    nLines = 200
     size = 0
     X = []
     scale = 70
