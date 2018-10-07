@@ -142,7 +142,8 @@ def main():
                     yLines = []
 
                     size = 0
-                    while (x2,y2) in X2:
+                    xChecking = True
+                    while xChecking:
                         kx = random.randint(0, 639)
                         ky = random.randint(0, 479)
                         x,y = scaler(kx,ky,scale=scale,offsetX=offsetX,offsetY=offsetY)
@@ -152,6 +153,8 @@ def main():
                         y2 = round(y,rounder2)
                         zTest = z[ky,kx]
                         Atest = A[ky,kx]
+                        if (x2,y2) not in X2:
+                            xChecking = False
                     running = True
                     if np.isnan(zTest) or np.isnan(Atest):
                         running=False
