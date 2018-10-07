@@ -99,65 +99,77 @@ def main():
     nLines = 200
     size = 0
     X = []
+    X2 = []
     scale = 70
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
     blinked.switchColor('g',[1])
     rounder = .5
-    speed = 1
+    speed = 2*rounder
+
+
+    rounder2 = 3*rounder
     if speed<rounder:
         speed = rounder
 
     try:
-        for j in range(0,40):
-
+        for j in range(0,64):
+            X3 = []
             blinked.progressColor(j/10,'v','y',[4])
-            nLines = 300#75*(3*l+j+1)
+            nLines = 200#75*(3*l+j+1)
             kFrames = random.randint(0,len(angle)-1)
             z =kinect.frames[kFrames]
             A = angle[kFrames]
-            dist = random.uniform((j-5*math.floor(j/5)),1+(j-5*math.floor(j/5)))*25
-            offsetX = 5+math.floor(j/5)*10
+            dist = random.uniform((j-8*math.floor(j/8)),1+(j-8*math.floor(j/8)))*25
+            offsetX = 5+math.floor(j/8)*10
             offsetY = 5+dist
             print('offset : ' + str((offsetX,offsetY)))
             #offsetY = 5+j*27
             #offsetX = 5
-            rounder = .3#.1+.1*j
-            speed = 2*rounder 
+            rounder = .5
+            speed = 2*rounder
+
+
+            rounder2 = 3*rounder
             if speed<rounder:
                 speed = rounder
             for k in range(0,nLines):
                 blinked.progressColor(k/nLines,'v','y',[5])
                 size = 0
                 while(size == 0):
-                    print('new Line : '+str(k))
                     xLines = []
                     yLines = []
 
                     size = 0
-                    kx = random.randint(0, 639)
-                    ky = random.randint(0, 479)
-                    x,y = scaler(kx,ky,scale=scale,offsetX=offsetX,offsetY=offsetY)
-                    x = round(x+(.5-random.random())*xu,rounder/2.0)
-                    y = round(y+(.5-random.random())*yu,rounder/2.0)
-                    zTest = z[ky,kx]
-                    Atest = A[ky,kx]
+                    while (x2,y2) in X2:
+                        kx = random.randint(0, 639)
+                        ky = random.randint(0, 479)
+                        x,y = scaler(kx,ky,scale=scale,offsetX=offsetX,offsetY=offsetY)
+                        x = round(x+(.5-random.random())*xu,rounder/2.0)
+                        y = round(y+(.5-random.random())*yu,rounder/2.0)
+                        x2 = round(x,rounder2)
+                        y2 = round(y,rounder2)
+                        zTest = z[ky,kx]
+                        Atest = A[ky,kx]
                     running = True
                     if np.isnan(zTest) or np.isnan(Atest):
                         running=False
                     while running:
-                        print('x  : '+str((x,y)))
-                        print('k  : '+str((kx,ky)))
+                        #print('x  : '+str((x,y)))
+                        #print('k  : '+str((kx,ky)))
                         xLines.append(y)
                         yLines.append(x)
                         X.append((x,y))
+                        X3.append((x2,y2))
                         dx = round(x+speed*np.cos(A[ky,kx]),rounder)
                         dy = round(y+speed*np.sin(A[ky,kx]),rounder)
+                        dx2 = round(x+speed*np.cos(A[ky,kx]),rounder2)
+                        dy2 = round(y+speed*np.sin(A[ky,kx]),rounder2)
                         
                         dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
                         
-                        if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100 and (dx,dy) not in X:
+                        if (dxk>-1) and (dxk<640) and (dyk>-1) and (dyk<480) and size < 100 and (dx,dy) not in X and (dx2,dy2) not in X2:
                             x=dx
                             y=dy
                             kx=dxk
@@ -169,8 +181,12 @@ def main():
                                 running=False
                         else:
                             running = False
+
+                print('new Line : '+str(k))
                 draw.lines(xLines,yLines)
-                
+            for x3 in X3:
+                if x3 not in X2:
+                    X2.append(x3)
         #line(50,50,length=50,angle=0)
         #line(50,50,length=55,angle=.1)
         #line(50,50,length=60,angle=.2)
