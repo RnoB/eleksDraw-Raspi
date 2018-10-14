@@ -118,7 +118,7 @@ def main():
             X3 = []
             blinked.progressColor(j/10,'v','y',[4])
             nLines = 1500#75*(3*l+j+1)
-            kFrames = k#random.randint(0,len(angle)-1)
+            kFrames = j#random.randint(0,len(angle)-1)
             z =kinect.frames[kFrames+6]
             A = angle[kFrames+6]
             #dist = random.uniform((j-8*math.floor(j/8)),1+(j-8*math.floor(j/8)))*25
