@@ -76,7 +76,7 @@ def main():
         blinked.switchColor('p',[1])
         time.sleep(10)
         kinect.start()
-        kinect.getDepthFrames(nFrames = 20,delay=.01,maxDepth=2049)
+        kinect.getDepthFrames(nFrames = 40,delay=.01,maxDepth=2049)
         kinect.stop()
         blinked.switchColor('c',[1])
         kinect.backgroundSubstract(blur=True,level=20)
@@ -100,7 +100,7 @@ def main():
     size = 0
     X = []
     X2 = []
-    scale = 140
+    scale = 70
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
@@ -114,15 +114,14 @@ def main():
         speed = rounder
 
     try:
-        for j in range(0,5):
+        for j in range(0,64):
             X3 = []
             blinked.progressColor(j/10,'v','y',[4])
-            nLines = 1500#75*(3*l+j+1)
+            nLines = 200#75*(3*l+j+1)
             kFrames = random.randint(0,len(angle)-1)
-            z =kinect.frames[kFrames+6]
-            A = angle[kFrames+6]
-            #dist = random.uniform((j-8*math.floor(j/8)),1+(j-8*math.floor(j/8)))*25
-            dist = j*50
+            z =kinect.frames[kFrames]
+            A = angle[kFrames]
+            dist = random.uniform((j-8*math.floor(j/8)),1+(j-8*math.floor(j/8)))*25
             offsetX = 5+math.floor(j/8)*10
             offsetY = 5+dist
             print('offset : ' + str((offsetX,offsetY)))
@@ -132,7 +131,7 @@ def main():
             speed = 2*rounder
 
 
-            rounder2 = 10*rounder
+            rounder2 = 3*rounder
             if speed<rounder:
                 speed = rounder
             for k in range(0,nLines):
