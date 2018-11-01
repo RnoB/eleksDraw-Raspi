@@ -114,7 +114,7 @@ def main():
             A = angle[kFrames+12]
             #dist = random.uniform((j-8*math.floor(j/8)),1+(j-8*math.floor(j/8)))*25
             dist = j*30
-            offsetX = 5+math.floor(j/8)*10
+            offsetX = 5+math.floor(j/10)*10
             offsetY = 5+dist
             print('offset : ' + str((offsetX,offsetY)))
             #offsetY = 5+j*27
