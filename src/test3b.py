@@ -76,7 +76,7 @@ def main():
         blinked.switchColor('p',[1])
         time.sleep(10)
         kinect.start()
-        kinect.getDepthFrames(nFrames = 20,delay=.01,maxDepth=2049)
+        kinect.getDepthFrames(nFrames = 30,delay=.01,maxDepth=2049)
         kinect.stop()
         blinked.switchColor('c',[1])
         kinect.backgroundSubstract(blur=True,level=20)
@@ -110,8 +110,8 @@ def main():
             blinked.progressColor(j/10,'v','y',[4])
             nLines = 1200#75*(3*l+j+1)
             kFrames = j#random.randint(0,len(angle)-1)
-            z =kinect.frames[kFrames+6]
-            A = angle[kFrames+6]
+            z =kinect.frames[kFrames+12]
+            A = angle[kFrames+12]
             #dist = random.uniform((j-8*math.floor(j/8)),1+(j-8*math.floor(j/8)))*25
             dist = j*30
             offsetX = 5+math.floor(j/8)*10
