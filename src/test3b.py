@@ -178,7 +178,7 @@ def main():
                             running = False
 
                 print('new Line : '+str(k))
-                draw.lines(xLines,yLines)
+                drawer.lines(xLines,yLines)
             for x3 in X3:
                 if x3 not in X2:
                     X2.append(x3)
@@ -195,8 +195,8 @@ def main():
                 #draw.circle((k+1)*11,(j+1)*11,k+j)
     except Exception as e: 
         print(traceback.format_exc())
-        draw.toPosition(0,0)
-    draw.closeDrawer()    
+        drawer.toPosition(0,0)
+    drawer.closeDrawer()    
     switchColor(1)
 
 if __name__ == "__main__":
