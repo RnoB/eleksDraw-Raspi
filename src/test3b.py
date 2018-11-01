@@ -83,16 +83,7 @@ def main():
         dX,dY,angle,angleZ = kinect.derivateFrames()
     except Exception as e: 
         print(traceback.format_exc())
-        noProblem = False
-
-
-    draw = drawer.Drawer(output = False)    
-    switchColor(2)
-    print('---Switch is strating')
-    #intializeDrawer()
-    flip = False
-
-
+ 
     z = kinect.frames[6]
     A = angle[6]
     idx = [6,7,8]
@@ -114,15 +105,15 @@ def main():
         speed = rounder
 
     try:
-        for j in range(0,5):
+        for j in range(0,8):
             X3 = []
             blinked.progressColor(j/10,'v','y',[4])
-            nLines = 1500#75*(3*l+j+1)
+            nLines = 1200#75*(3*l+j+1)
             kFrames = j#random.randint(0,len(angle)-1)
             z =kinect.frames[kFrames+6]
             A = angle[kFrames+6]
             #dist = random.uniform((j-8*math.floor(j/8)),1+(j-8*math.floor(j/8)))*25
-            dist = j*50
+            dist = j*30
             offsetX = 5+math.floor(j/8)*10
             offsetY = 5+dist
             print('offset : ' + str((offsetX,offsetY)))
