@@ -84,6 +84,8 @@ def main():
     except Exception as e: 
         print(traceback.format_exc())
  
+
+    draw = drawer.Drawer(output = False)    
     z = kinect.frames[6]
     A = angle[6]
     idx = [6,7,8]
@@ -114,7 +116,7 @@ def main():
             A = angle[kFrames+12]
             #dist = random.uniform((j-8*math.floor(j/8)),1+(j-8*math.floor(j/8)))*25
             dist = j*30
-            offsetX = 5+math.floor(j/10)*10
+            offsetX = 5+math.floor(j/8)*10
             offsetY = 5+dist
             print('offset : ' + str((offsetX,offsetY)))
             #offsetY = 5+j*27
@@ -178,7 +180,7 @@ def main():
                             running = False
 
                 print('new Line : '+str(k))
-                drawer.lines(xLines,yLines)
+                draw.lines(xLines,yLines)
             for x3 in X3:
                 if x3 not in X2:
                     X2.append(x3)
@@ -195,8 +197,8 @@ def main():
                 #draw.circle((k+1)*11,(j+1)*11,k+j)
     except Exception as e: 
         print(traceback.format_exc())
-        drawer.toPosition(0,0)
-    drawer.closeDrawer()    
+        draw.toPosition(0,0)
+    draw.closeDrawer()    
     switchColor(1)
 
 if __name__ == "__main__":
