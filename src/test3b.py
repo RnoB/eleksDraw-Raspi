@@ -99,7 +99,7 @@ def main():
     blinked.switchColor('a',[0])
     blinked.switchColor('g',[1])
     rounder = 1
-    speed = 2*rounder
+    speed = 5*rounder
 
 
     rounder2 = 3*rounder
@@ -107,15 +107,16 @@ def main():
         speed = rounder
 
     try:
-        for j in range(0,4):
+        for j in range(0,8):
             X3 = []
             blinked.progressColor(j/10,'v','y',[4])
             nLines = 400#75*(3*l+j+1)
             kFrames = j#random.randint(0,len(angle)-1)
             z =kinect.frames[kFrames+12]
             A = angle[kFrames+12]
+            AZ = angleZ[kFrames+12]
             #dist = random.uniform((j-8*math.floor(j/8)),1+(j-8*math.floor(j/8)))*25
-            dist = j*50
+            dist = j*25
             offsetX = 5+math.floor(j/8)*10
             offsetY = 5+dist
             print('offset : ' + str((offsetX,offsetY)))
@@ -159,10 +160,11 @@ def main():
                         yLines.append(x)
                         X.append((x,y))
                         X3.append((x2,y2))
-                        dx = round(x+speed*np.cos(A[ky,kx]),rounder)
-                        dy = round(y+speed*np.sin(A[ky,kx]),rounder)
-                        dx2 = round(x+speed*np.cos(A[ky,kx]),rounder2)
-                        dy2 = round(y+speed*np.sin(A[ky,kx]),rounder2)
+                        speedZ = speed*np.cos(AZ[ky,kx])
+                        dx = round(x+speedZ*np.cos(A[ky,kx]),rounder)
+                        dy = round(y+speedZ*np.sin(A[ky,kx]),rounder)
+                        dx2 = round(x+speedZ*np.cos(A[ky,kx]),rounder2)
+                        dy2 = round(y+speedZ*np.sin(A[ky,kx]),rounder2)
                         
                         dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
                         
@@ -173,8 +175,9 @@ def main():
                             ky=dyk
                             zTest = z[ky,kx]
                             Atest = A[ky,kx]
-                            size +=speed
-                            if np.isnan(zTest) or np.isnan(Atest):
+                            AZtest = AZ[ky,kx]
+                            size +=speedZ
+                            if np.isnan(zTest) or np.isnan(Atest)or np.isnan(AZtest):
                                 running=False
                         else:
                             running = False
