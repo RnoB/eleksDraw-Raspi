@@ -99,7 +99,7 @@ def main():
     blinked.switchColor('a',[0])
     blinked.switchColor('g',[1])
     rounder = 1
-    speed = 5*rounder
+    speed = 2*rounder
 
 
     rounder2 = 3*rounder
@@ -160,7 +160,7 @@ def main():
                         yLines.append(x)
                         X.append((x,y))
                         X3.append((x2,y2))
-                        speedZ = speed*np.cos(AZ[ky,kx])
+                        speedZ = speed*np.cos(AZ[ky,kx])**.2
                         dx = round(x+speedZ*np.cos(A[ky,kx]),rounder)
                         dy = round(y+speedZ*np.sin(A[ky,kx]),rounder)
                         dx2 = round(x+speedZ*np.cos(A[ky,kx]),rounder2)
