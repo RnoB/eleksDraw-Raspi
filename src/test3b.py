@@ -74,7 +74,7 @@ def main():
         kinect.backGroundSubstractor(nFrames=100)
         kinect.stop()
         blinked.switchColor('p',[1])
-        time.sleep(120)
+        time.sleep(12 0)
         kinect.start()
         kinect.getDepthFrames(nFrames = 30,delay=.01,maxDepth=2049)
         kinect.stop()
@@ -107,10 +107,10 @@ def main():
         speed = rounder
 
     try:
-        for j in range(0,5):
+        for j in range(0,1):
             X3 = []
             blinked.progressColor(j/10,'v','y',[4])
-            nLines = 400#75*(3*l+j+1)
+            nLines = 600#75*(3*l+j+1)
             kFrames = j#random.randint(0,len(angle)-1)
             z =kinect.frames[kFrames+12]
             A = angle[kFrames+12]
