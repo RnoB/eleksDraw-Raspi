@@ -74,7 +74,7 @@ def main():
         kinect.backGroundSubstractor(nFrames=100)
         kinect.stop()
         blinked.switchColor('p',[1])
-        time.sleep(10)
+        time.sleep(120)
         kinect.start()
         kinect.getDepthFrames(nFrames = 30,delay=.01,maxDepth=2049)
         kinect.stop()
