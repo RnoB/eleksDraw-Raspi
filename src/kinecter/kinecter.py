@@ -3,9 +3,9 @@ import freenect
 import cv2
 import numpy as np
 import time
-#from blinkt import set_pixel, set_brightness, show, clear
+from blinkt import set_pixel, set_brightness, show, clear
 import random
-#from blinked import blinked
+from blinked import blinked
 
 
 def round(x, base=1):
@@ -98,10 +98,10 @@ class kinect:
 
     def backAcq(self,dev, data, timestamp):
 
-        #blinked.switchColor('r',[3])
+        blinked.switchColor('r',[3])
         self.background.append(np.float32(data))
         
-        #blinked.switchColor('g',[3])
+        blinked.switchColor('g',[3])
         
 
     def backGroundSubstractor(self,nFrames = 100):
@@ -118,7 +118,7 @@ class kinect:
             time.sleep(.01)
             progress = len(self.background)/nFrames
             if progress>previousProgress:
-                #blinked.progressColor(progress,'c','o',pix = [2])
+                blinked.progressColor(progress,'c','o',pix = [2])
                 previousProgress = progress
         for frame in self.background:
             fgmask = self.fgbg.apply(frame,learningRate=0.01)
@@ -154,7 +154,7 @@ class kinect:
 
     def depthAcq(self,dev, data, timestamp):
 
-        #blinked.switchColor('r',[3])
+        blinked.switchColor('r',[3])
         
         depth = np.float32(data)
         depth[depth>self.maxDepth]=np.nan
@@ -168,7 +168,7 @@ class kinect:
         
             #self.frames.append(1-(depth-depthMin)/(depthMax-depthMin))
             self.frames.append(depth)
-        #blinked.switchColor('g',[3])
+        blinked.switchColor('g',[3])
         
 
 
@@ -183,7 +183,7 @@ class kinect:
         while len(self.frames)<nFrames:
             progress = len(self.frames)/nFrames
             if progress>previousProgress:
-                #blinked.progressColor(progress,'c','o',pix = [2])
+                blinked.progressColor(progress,'c','o',pix = [2])
                 previousProgress = progress
             
             
