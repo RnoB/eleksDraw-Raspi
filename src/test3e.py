@@ -112,9 +112,9 @@ def main():
             blinked.progressColor(j/300,'v','y',[4])
             nLines = 75#75*(3*l+j+1)
             kFrames = random.randint(0,len(angle)-1)
-            z =kinect.frames[kFrames+12]
-            A = angle[kFrames+12]
-            AZ = angleZ[kFrames+12]
+            z =kinect.frames[kFrames]
+            A = angle[kFrames]
+            AZ = angleZ[kFrames]
             dist = random.uniform((j-30*math.floor(j/30)),1+(j-30*math.floor(j/30)))*5
             #dist = j*6
             offsetX = 5+math.floor(j/10)*5+random.uniform(-1,1)
