@@ -76,7 +76,7 @@ def main():
         blinked.switchColor('p',[1])
         time.sleep(20)
         kinect.start()
-        kinect.getDepthFrames(nFrames = 60,delay=.01,maxDepth=2049)
+        kinect.getDepthFrames(nFrames = 100,delay=.01,maxDepth=2049)
         kinect.stop()
         blinked.switchColor('c',[1])
         kinect.backgroundSubstract(blur=True,level=20)
@@ -102,15 +102,17 @@ def main():
     speed = 2*rounder
 
 
+    nx = 40
+
     rounder2 = 3*rounder
     if speed<rounder:
         speed = rounder
 
     try:
-        for j in range(0,560):
+        for j in range(0,880):
             X3 = []
             X = []
-            blinked.progressColor(j/300,'v','y',[4])
+            blinked.progressColor(j/560,'v','y',[4])
             nLines = 75#75*(3*l+j+1)
             kFrames = random.randint(0,len(angle)-1)
             z =kinect.frames[kFrames]
@@ -118,7 +120,7 @@ def main():
             AZ = angleZ[kFrames]
             dist = random.uniform((j-40*math.floor(j/40)),1+(j-40*math.floor(j/30)))*5
             #dist = j*6
-            offsetX = 5+math.floor(j/40)*10+random.uniform(-1,1)
+            offsetX = 5+math.floor(j/40)*7+random.uniform(-1,1)
             offsetY = 5+dist
             print('offset : ' + str((offsetX,offsetY)))
             #offsetY = 5+j*27
@@ -188,7 +190,7 @@ def main():
             for x3 in X3:
                 if x3 not in X2:
                     X2.append(x3)
-                    if j>120:
+                    if len(X2)>10000000:
                         del X2[0]
         #line(50,50,length=50,angle=0)
         #line(50,50,length=55,angle=.1)
