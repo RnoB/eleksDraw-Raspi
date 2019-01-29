@@ -118,7 +118,7 @@ def main():
             z =kinect.frames[kFrames]
             A = angle[kFrames]
             AZ = angleZ[kFrames]
-            dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
+            dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*10
             #dist = j*6
             offsetX = 5+math.floor(j/nx)*14+random.uniform(-1,1)
             offsetY = 5+dist
