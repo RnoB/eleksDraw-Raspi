@@ -93,7 +93,7 @@ def main():
     size = 0
     X = []
     X2 = []
-    scale = 20
+    scale = 10
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
@@ -118,7 +118,7 @@ def main():
             z =kinect.frames[kFrames]
             A = angle[kFrames]
             AZ = angleZ[kFrames]
-            dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*10
+            dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
             #dist = j*6
             offsetX = 5+math.floor(j/nx)*10+random.uniform(-1,1)
             offsetY = 5+dist
