@@ -109,10 +109,10 @@ def main():
         speed = rounder
 
     try:
-        for j in range(0,1000):
+        for j in range(0,720):
             X3 = []
             X = []
-            blinked.progressColor(j/1000,'v','y',[4])
+            blinked.progressColor(j/720,'v','y',[4])
             nLines = 75#75*(3*l+j+1)
             kFrames = random.randint(0,len(angle)-1)
             z =kinect.frames[kFrames]
