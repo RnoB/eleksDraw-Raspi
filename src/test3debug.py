@@ -188,9 +188,11 @@ def main():
                                 running=False
                         else:
                             running = False
-
-                print('new Line : '+str(k))
-                #draw.lines(xLines,yLines)
+                    if trial>100:
+                        size = -1
+                if size>0:
+                    print('new Line : '+str(k))
+                    draw.lines(xLines,yLines)
             for x3 in X3:
                 if x3 not in X2:
                     X2.append(x3)
