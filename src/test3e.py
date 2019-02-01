@@ -135,7 +135,9 @@ def main():
             for k in range(0,nLines):
                 blinked.progressColor(k/nLines,'v','y',[5])
                 size = 0
+                trial =0
                 while(size == 0):
+                    trial+=1 
                     xLines = []
                     yLines = []
 
@@ -184,7 +186,7 @@ def main():
                                 running=False
                         else:
                             running = False
-                    if trial>100:
+                    if trial>100 and size==0:
                         size = -1
                 if size>0:
                     print('new Line : '+str(k))
