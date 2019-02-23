@@ -93,7 +93,7 @@ def main():
     size = 0
     X = []
     X2 = []
-    scale = 70
+    scale = 90
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
@@ -109,7 +109,7 @@ def main():
         speed = rounder
 
     try:
-        for j in range(0,5):
+        for j in range(0,6):
             X3 = []
             X = []
             blinked.progressColor(j/5,'v','y',[4])
