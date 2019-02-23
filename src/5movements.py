@@ -89,7 +89,7 @@ def main():
     z = kinect.frames[6]
     A = angle[6]
     idx = [6,7,8]
-    nLines = 400
+    nLines = 300
     size = 0
     X = []
     X2 = []
