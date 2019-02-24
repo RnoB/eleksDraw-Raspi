@@ -93,12 +93,12 @@ def main():
     size = 0
     X = []
     X2 = []
-    scale = 90
+    scale = 110
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
     blinked.switchColor('g',[1])
-    rounder = 1
+    rounder = 1.1
     speed = 2*rounder
 
 
@@ -109,7 +109,7 @@ def main():
         speed = rounder
 
     try:
-        for j in range(0,6):
+        for j in range(0,5):
             X3 = []
             X = []
             blinked.progressColor(j/5,'v','y',[4])
@@ -120,7 +120,7 @@ def main():
             AZ = angleZ[kFrames]
             #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
             #
-            dist = j*30
+            dist = j*35
             offsetX = 5+math.floor(j/nx)*8+random.uniform(-1,1)
             offsetY = 5+dist
             print('offset : ' + str((offsetX,offsetY)))
