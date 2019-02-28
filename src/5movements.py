@@ -205,7 +205,7 @@ def main():
     size = 0
     X = []
     X2 = []
-    nx0=len(depth)/2
+    nx0=len(kinect.frames)/2
     scale,nx,dist,offset0 =  spacer(kinect.frames,nx0)
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
