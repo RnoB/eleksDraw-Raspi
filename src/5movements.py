@@ -86,7 +86,7 @@ def round(x, base=1):
     return base * np.round(x/base)
 
 
-def drawing(kFrames,frames,angle,angleZ,drawer,nLines = 400,scale = 70,A0=0,rounder=.1,noise = 0,offsetX = 0,offsetY=0,X2 = []):
+def drawing(kFrames,frames,angle,angleZ,draw,nLines = 400,scale = 70,A0=0,rounder=.1,noise = 0,offsetX = 0,offsetY=0,X2 = []):
     kFrames = np.int(kFrames)
     X3 = []
     X = []
