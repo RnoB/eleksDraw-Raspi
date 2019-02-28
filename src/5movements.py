@@ -87,6 +87,7 @@ def round(x, base=1):
 
 
 def drawing(kFrames,frames,angle,angleZ,drawer,nLines = 400,scale = 70,A0=0,rounder=.1,noise = 0,offsetX = 0,offsetY=0,X2 = []):
+    kFrames = np.int(kFrames)
     X3 = []
     X = []
 
@@ -236,7 +237,7 @@ def main():
             offsetY = offsetY0+j*dist
 
 
-            drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nLines,scale = 70,A0=0,rounder=rounder,noise = 0.5,offsetX = offsetX,offsetY=offsetY,X2 = X2)
+            drawing(j,kinect.frames,angle,angleZ,draw,nLines = nLines,scale = 70,A0=0,rounder=rounder,noise = 0.5,offsetX = offsetX,offsetY=offsetY,X2 = X2)
             
 
     except Exception as e: 
