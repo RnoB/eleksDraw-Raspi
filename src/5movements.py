@@ -236,7 +236,7 @@ def main():
             offsetY = offsetY0+j*dist
 
 
-            draw(kFrames,kinect.frames,angle,angleZ,nLines = nLines,scale = 70,A0=0,rounder=rounder,noise = 0.5,offsetX = offset,offsetY=offsetY,X2 = X2)
+            draw(kFrames,kinect.frames,angle,angleZ,nLines = nLines,scale = 70,A0=0,rounder=rounder,noise = 0.5,offsetX = offsetX,offsetY=offsetY,X2 = X2)
             
 
     except Exception as e: 
