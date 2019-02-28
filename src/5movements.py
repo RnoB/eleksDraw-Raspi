@@ -208,6 +208,10 @@ def main():
     X2 = []
     nx0=np.int(len(kinect.frames)/2)
     scale,nx,dist,offset0 =  spacer(kinect.frames,nx0)
+    print("scale : "+str(scale))
+    print("n     : "+str(nx))
+    print("dist  : "+str(offset0))
+    print("offset0 : "+str(offset0))
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
@@ -237,7 +241,7 @@ def main():
             offsetY = offsetY0+j*dist
 
 
-            drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nLines,scale = 70,A0=0,rounder=rounder,noise = 0.5,offsetX = offsetX,offsetY=offsetY,X2 = X2)
+            drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nLines,scale = scale,A0=0,rounder=rounder,noise = 0.5,offsetX = offsetX,offsetY=offsetY,X2 = X2)
             
 
     except Exception as e: 
