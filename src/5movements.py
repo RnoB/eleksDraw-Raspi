@@ -69,7 +69,7 @@ def spacer(depth,nx0):
         heightMax = np.max(sizeImage,axis = 0)[1]
         scale=scale-5
     width = np.mean(sizeImage,axis = 0)[0]
-    nx = np.int(round((1+2*random.random())*240/width))
+    nx = np.int(round((1+1.2*random.random())*240/width))
     dist = (240-sizeImage[nx-1][0])/nx
     #dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
     return scale,nx,dist,offsetX,offsetY
