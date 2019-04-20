@@ -51,6 +51,7 @@ def spacer(depth,nx0):
     heightMax=200
     nx = 10
     nx0=np.int(nx0)
+    offsetY0 = []
     while heightMax>160:
         sizeImage = []
         offset = []
@@ -61,14 +62,16 @@ def spacer(depth,nx0):
             W = np.nonzero(Wt)
             sizeImage.append(scaler(len(W[0]),len(H[0]),scale=scale,offsetX = 0,offsetY = 0))
             offset.append(scaler(W[0][0],H[0][0],scale=scale,offsetX = 0,offsetY = 0))
+            offsetY0.append(offset[-1][1])
         heightMax = np.max(sizeImage,axis = 0)[1]
         scale=scale-5
     width = np.mean(sizeImage,axis = 0)[0]
     nx = np.int(round((1+random.random())*240/width))
     dist = 240/nx
     dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
-    offset0 = offset[0][0]
-    return scale,nx,dist,offset0
+    offsetX = offset[0][0]
+    offsetY = np.min(offsetY0)
+    return scale,nx,dist,offsetX,offsetY
 
 
 def scaler(x,y,scale=100,offsetX = 5,offsetY = 5,invert=False):
@@ -207,11 +210,11 @@ def main():
     X = []
     X2 = []
     nx0=np.int(len(kinect.frames)/2)
-    scale,nx,dist,offset0 =  spacer(kinect.frames,nx0)
+    scale,nx,dist,offsetX,offsetY =  spacer(kinect.frames,nx0)
     print("scale : "+str(scale))
     print("n     : "+str(nx))
-    print("dist  : "+str(offset0))
-    print("offset0 : "+str(offset0))
+    print("offsetX  : "+str(offsetX))
+    print("offsetY : "+str(offsetY))
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
@@ -220,8 +223,8 @@ def main():
     speed = 2*rounder
 
 
-    offsetX0 = 5
-    offsetY0 = 5-offset0
+    offsetX0 = 5-offsetY/2.0
+    offsetY0 = 5-offsetX
 
     rounder2 = 3*rounder
     if speed<rounder:
