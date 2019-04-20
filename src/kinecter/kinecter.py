@@ -133,10 +133,10 @@ class kinect:
             fgmask=self.fgbg.apply(frame,learningRate=0)
             kernel = np.ones((5,5),np.uint8)
         
-            erosion = cv2.erode(fgmask,kernel,iterations = 4)
-            dilate = cv2.dilate(erosion,kernel,iterations = 4)
+            erosion = cv2.erode(fgmask,kernel,iterations = 3)
+            dilate = cv2.dilate(erosion,kernel,iterations = 3)
             frame[dilate==0]=np.nan
-            frame[dilate<1]=np.nan
+            frame[dilate<.7]=np.nan
             
             if np.isnan(frame).all() or len(frame[~np.isnan(frame)])<self.nMin:
                 print('all nan')

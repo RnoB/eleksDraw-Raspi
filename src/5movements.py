@@ -52,7 +52,7 @@ def spacer(depth,nx0):
     nx = 10
     nx0=np.int(nx0)
     offsetY0 = []
-    while heightMax>160:
+    while heightMax>150:
         sizeImage = []
         offset = []
         for k in range(0,nx):
@@ -63,14 +63,15 @@ def spacer(depth,nx0):
             sizeImage.append(scaler(len(W[0]),len(H[0]),scale=scale,offsetX = 0,offsetY = 0))
             offset.append(scaler(W[0][0],H[0][0],scale=scale,offsetX = 0,offsetY = 0))
             offsetY0.append(offset[-1][1])
-        heightMax = np.max(sizeImage,axis = 0)[1]
+
+        offsetX = offset[0][0]
+        offsetY = np.min(offsetY0)
+        heightMax = np.max(sizeImage-offsetY,axis = 0)[1]
         scale=scale-5
     width = np.mean(sizeImage,axis = 0)[0]
     nx = np.int(round((1+random.random())*240/width))
     dist = 240/nx
     dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
-    offsetX = offset[0][0]
-    offsetY = np.min(offsetY0)
     return scale,nx,dist,offsetX,offsetY
 
 
@@ -223,7 +224,7 @@ def main():
     speed = 2*rounder
 
 
-    offsetX0 = 5-offsetY/2.0
+    offsetX0 = 5-offsetY
     offsetY0 = 5-offsetX
 
     rounder2 = 3*rounder
