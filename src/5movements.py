@@ -60,13 +60,13 @@ def spacer(depth,nx0):
             H = np.nonzero(Ht)
             Wt = np.sum(np.isnan(depth[nx0+k]),axis=1)!=640
             W = np.nonzero(Wt)
-            sizeImage.append(scaler(len(W[0]),len(H[0]),scale=scale,offsetX = 0,offsetY = 0))
+            sizeImage.append(scaler(W[0][-1]-W[0][0],H[0][-1]-H[0][0],scale=scale,offsetX = 0,offsetY = 0))
             offset.append(scaler(W[0][0],H[0][0],scale=scale,offsetX = 0,offsetY = 0))
             offsetY0.append(offset[-1][1])
 
         offsetX = offset[0][0]
         offsetY = np.min(offsetY0)
-        heightMax = np.max(sizeImage-offsetY,axis = 0)[1]
+        heightMax = np.max(sizeImage,axis = 0)[1]
         scale=scale-5
     width = np.mean(sizeImage,axis = 0)[0]
     nx = np.int(round((1+random.random())*240/width))
