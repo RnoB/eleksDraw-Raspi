@@ -155,7 +155,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,nLines = 400,scale = 70,A0=0,rounde
                 and size < 100 \
                 and (dx,dy) not in X and (dx2,dy2) not in X2 \
                 and AZ[ky,kx]-A0<1.5 \
-                and dx < 250 and dy < 170 :
+                and dx < 170 and dy < 250 :
                     
                     x=dx
                     y=dy
