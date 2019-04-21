@@ -101,6 +101,7 @@ class kinect:
 
     def frameSmoother(self,frame,level = 10):
     
+        print("fram : "+str(frame.dtype))
         temp = np.copy(frame)
         print("temp : "+str(temp.dtype))
         temp[np.isnan(frame)]=0
