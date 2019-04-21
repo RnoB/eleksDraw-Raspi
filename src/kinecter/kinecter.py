@@ -71,9 +71,10 @@ class kinect:
                 dX.append(cv2.Sobel(frame,cv2.CV_64F,1,0,ksize=ksize))
                 dY.append(cv2.Sobel(frame,cv2.CV_64F,0,1,ksize=ksize))
             else:
-                dX.append(np.roll(frame.astype(float32), 1, axis=0)-frame.astype(float32))
-                dY.append(np.roll(frame.astype(float32), 1, axis=1)-frame.astype(float32))
+                dX.append(np.roll(frame, 1, axis=0)-frame)
+                dY.append(np.roll(frame, 1, axis=1)-frame)
             if blur:
+                print('dX    : '+str(dX[-1].dtype))
                 dX[-1] = kinect.frameSmoother(dX[-1],level)
                 dY[-1] = kinect.frameSmoother(dY[-1],level)
 
