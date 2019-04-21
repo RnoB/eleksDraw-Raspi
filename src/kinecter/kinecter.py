@@ -59,14 +59,23 @@ class kinect:
         return frames
 
 
-    def derivateFrames(self):
+    def derivateFrames(self,blur=True,level=15,sobel=False,ksize=-1):
         dX = []
         dY = []
         angle = []
         angleZ = []
         for frame in self.frames:
-            dX.append(cv2.Sobel(frame,cv2.CV_64F,1,0,ksize=-1))
-            dY.append(cv2.Sobel(frame,cv2.CV_64F,0,1,ksize=-1))
+            if sobel:
+                dX.append(cv2.Sobel(frame,cv2.CV_64F,1,0,ksize=ksize))
+                dY.append(cv2.Sobel(frame,cv2.CV_64F,0,1,ksize=ksize))
+            else:
+                dX.append(np.roll(frame, 1, axis=0)-frame)
+                dY.append(np.roll(frame, 1, axis=1)-frame)
+            if blur:
+                dX[-1] = kinect.frameSmoother(dX[-1],level)
+                dY[-1] = kinect.frameSmoother(dY[-1],level)
+
+
             angle.append(np.arctan2(dX[-1],dY[-1]))
 
             norm = np.sqrt(dX[-1]**2+dY[-1]**2)

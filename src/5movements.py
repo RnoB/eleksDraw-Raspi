@@ -198,7 +198,7 @@ def main():
         kinect.getDepthFrames(nFrames = 40,delay=.01,maxDepth=2046)
         kinect.stop()
         blinked.switchColor('c',[1])
-        kinect.backgroundSubstract(blur=True,level=20)
+        kinect.backgroundSubstract(blur=True,level=10)
         dX,dY,angle,angleZ = kinect.derivateFrames()
     except Exception as e: 
         print(traceback.format_exc())
@@ -220,7 +220,7 @@ def main():
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
     blinked.switchColor('g',[1])
-    rounder = 1.0
+    rounder = 0.5
     speed = 2*rounder
 
 
