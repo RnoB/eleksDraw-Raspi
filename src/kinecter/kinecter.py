@@ -126,7 +126,7 @@ class kinect:
 
 
 
-    def backgroundSubstract(self,blur=False,level=10):
+    def backgroundSubstract(self,blur=False,level=10,maxValue=2046):
         depth = []
         
         for frame in self.frames:
@@ -137,7 +137,7 @@ class kinect:
             dilate = cv2.dilate(erosion,kernel,iterations = 3)
             frame[dilate==0]=np.nan
             frame[dilate<.7]=np.nan
-            
+            frame[frame>maxValue]=np.nan
             if np.isnan(frame).all() or len(frame[~np.isnan(frame)])<self.nMin:
                 print('all nan')
             else:
