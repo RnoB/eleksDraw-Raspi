@@ -73,6 +73,8 @@ class kinect:
                 dX.append(np.roll(frame, 1, axis=0)-frame)
                 dY.append(np.roll(frame, 1, axis=1)-frame)
             if blur:
+                print("frame : "+str(frame.dtype))
+                print("dX    : "+str(dX[-1].dtype))
                 dX[-1] = kinect.frameSmoother(dX[-1],level)
                 dY[-1] = kinect.frameSmoother(dY[-1],level)
 
@@ -146,9 +148,9 @@ class kinect:
         
             erosion = cv2.erode(fgmask,kernel,iterations = 3)
             dilate = cv2.dilate(erosion,kernel,iterations = 3)
+            frame[frame>maxValue]=np.nan
             frame[dilate==0]=np.nan
             frame[dilate<.7]=np.nan
-            frame[frame>maxValue]=np.nan
             if np.isnan(frame).all() or len(frame[~np.isnan(frame)])<self.nMin:
                 print('all nan')
             else:
