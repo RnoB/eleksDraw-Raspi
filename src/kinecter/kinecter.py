@@ -66,7 +66,6 @@ class kinect:
         angleZ = []
 
         for frame in self.frames:
-            print('frame : '+str(frame.dtype))
             if sobel:
                 dX.append(cv2.Sobel(frame,cv2.CV_64F,1,0,ksize=ksize))
                 dY.append(cv2.Sobel(frame,cv2.CV_64F,0,1,ksize=ksize))
@@ -74,7 +73,6 @@ class kinect:
                 dX.append(np.roll(frame, 1, axis=0)-frame)
                 dY.append(np.roll(frame, 1, axis=1)-frame)
             if blur:
-                print('dX    : '+str(dX[-1].dtype))
                 dX[-1] = kinect.frameSmoother(dX[-1],level)
                 dY[-1] = kinect.frameSmoother(dY[-1],level)
 
@@ -102,6 +100,7 @@ class kinect:
     def frameSmoother(self,frame,level = 10):
     
         temp = np.copy(frame)
+        print("temp : "+str(temp.dtype))
         temp[np.isnan(frame)]=0
         temp = cv2.blur(temp,(level,level))
         temp[np.isnan(frame)]=np.nan
