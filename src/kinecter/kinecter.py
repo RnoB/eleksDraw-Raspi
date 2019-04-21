@@ -67,17 +67,17 @@ class kinect:
 
         for frame in self.frames:
             if sobel:
-                dX.append(cv2.Sobel(frame,cv2.CV_64F,1,0,ksize=ksize))
-                dY.append(cv2.Sobel(frame,cv2.CV_64F,0,1,ksize=ksize))
+                dY.append(cv2.Sobel(frame,cv2.CV_64F,1,0,ksize=ksize))
+                dX.append(cv2.Sobel(frame,cv2.CV_64F,0,1,ksize=ksize))
             else:
-                dX.append(np.roll(frame, 1, axis=0)-frame)
-                dY.append(np.roll(frame, 1, axis=1)-frame)
+                dX.append(np.roll(frame, 1, axis=0)-np.roll(frame, -1, axis=0))
+                dY.append(np.roll(frame, 1, axis=1)-np.roll(frame, -1, axis=1))
             if blur:
                 dX[-1] = self.frameSmoother(dX[-1],level)
                 dY[-1] = self.frameSmoother(dY[-1],level)
 
 
-            angle.append(np.arctan2(dX[-1],dY[-1]))
+            angle.append(np.arctan2(dY[-1],dX[-1]))
 
             norm = np.sqrt(dX[-1]**2+dY[-1]**2)
             dZ = .05
