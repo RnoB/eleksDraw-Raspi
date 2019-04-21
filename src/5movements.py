@@ -220,7 +220,7 @@ def main():
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
     blinked.switchColor('g',[1])
-    rounder = 0.5
+    rounder = 1
     speed = 2*rounder
 
 
