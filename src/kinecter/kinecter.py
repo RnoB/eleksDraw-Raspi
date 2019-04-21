@@ -73,10 +73,8 @@ class kinect:
                 dX.append(np.roll(frame, 1, axis=0)-frame)
                 dY.append(np.roll(frame, 1, axis=1)-frame)
             if blur:
-                print("frame : "+str(frame.dtype))
-                print("dX    : "+str(dX[-1].dtype))
-                dX[-1] = kinect.frameSmoother(dX[-1],level)
-                dY[-1] = kinect.frameSmoother(dY[-1],level)
+                dX[-1] = self.frameSmoother(dX[-1],level)
+                dY[-1] = self.frameSmoother(dY[-1],level)
 
 
             angle.append(np.arctan2(dX[-1],dY[-1]))
@@ -101,9 +99,7 @@ class kinect:
 
     def frameSmoother(self,frame,level = 10):
     
-        print("fram : "+str(frame.dtype))
         temp = np.copy(frame)
-        print("temp : "+str(temp.dtype))
         temp[np.isnan(frame)]=0
         temp = cv2.blur(temp,(level,level))
         temp[np.isnan(frame)]=np.nan
