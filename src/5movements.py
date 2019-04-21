@@ -198,7 +198,7 @@ def main():
         kinect.getDepthFrames(nFrames = 40,delay=.01,maxDepth=2046)
         kinect.stop()
         blinked.switchColor('c',[1])
-        kinect.backgroundSubstract(blur=True,level=10)
+        kinect.backgroundSubstract(blur=True,level=20)
         dX,dY,angle,angleZ = kinect.derivateFrames()
     except Exception as e: 
         print(traceback.format_exc())
