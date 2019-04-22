@@ -71,7 +71,7 @@ def spacer(depth,nx0):
     width = np.mean(sizeImage,axis = 0)[0]
     nx = np.int(round((1+1.5*random.random())*240/width))
     print(sizeImage)
-    dist = (240-s   )/(nx-1)
+    dist = (240-sizeImage[nx-1][0])/(nx-1)
     #dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
     return scale,nx,dist,offsetX,offsetY
 
@@ -93,7 +93,7 @@ def round(x, base=1):
 
 def drawing(kFrames,frames,angle,angleZ,draw,
             nLines = 400,scale = 70,A0=0,
-            resolution=.1,speed = .6,distanceLine=.5,distanceFigure =  8.0,
+            resolution=.1,speed = .6,distanceLine=.5,distanceFigure = 10.0,
             noise = 0,offsetX = 0,offsetY=0,figurePosition = []):
     kFrames = np.int(kFrames)
 
