@@ -132,8 +132,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 x,y = scaler(kx,ky,scale=scale,offsetX=offsetX,offsetY=offsetY)
                 x = round(x+(.5-random.random())*xu,resolution/2.0)
                 y = round(y+(.5-random.random())*yu,resolution/2.0)
-                x2 = round(x,distanceLine)
-                y2 = round(y,distanceLine)
+                x1 = round(x,distanceLine)
+                y1 = round(y,distanceLine)
                 x2 = round(x,distanceFigure)
                 y2 = round(y,distanceFigure)
                 zTest = z[ky,kx]
@@ -165,7 +165,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 and (dx1,dy1) not in imagePosition \
                 and (dx2,dy2) not in figurePosition \
                 and AZ[ky,kx]-A0<1.5 \
-                and dx < 250 and dy < 170 \
+                and dx < 170 and dy < 250 \
                 and dx > 0 and dy > 0:
                     
                     x=dx
@@ -230,6 +230,7 @@ def main():
     print("n     : "+str(nx))
     print("offsetX  : "+str(offsetX))
     print("offsetY : "+str(offsetY))
+    print("dist : "+str(dist))
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
