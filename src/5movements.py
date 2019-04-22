@@ -92,7 +92,7 @@ def round(x, base=1):
 
 def drawing(kFrames,frames,angle,angleZ,draw,
             nLines = 400,scale = 70,A0=0,
-            resolution=.1,speed = .6,distanceLine=.2,distanceFigure = 2.0,
+            resolution=.1,speed = .6,distanceLine=.5,distanceFigure = 4.0,
             noise = 0,offsetX = 0,offsetY=0,figurePosition = []):
     kFrames = np.int(kFrames)
 
@@ -132,11 +132,13 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 x,y = scaler(kx,ky,scale=scale,offsetX=offsetX,offsetY=offsetY)
                 x = round(x+(.5-random.random())*xu,resolution/2.0)
                 y = round(y+(.5-random.random())*yu,resolution/2.0)
+                x2 = round(x,distanceLine)
+                y2 = round(y,distanceLine)
                 x2 = round(x,distanceFigure)
                 y2 = round(y,distanceFigure)
                 zTest = z[ky,kx]
                 Atest = A[ky,kx]
-                if (x2,y2) not in figurePosition:
+                if (x2,y2) not in figurePosition and (x1,y1) not in imagePosition:
                     xChecking = False
             running = True
             if np.isnan(zTest) or np.isnan(Atest):
@@ -163,7 +165,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 and (dx1,dy1) not in imagePosition \
                 and (dx2,dy2) not in figurePosition \
                 and AZ[ky,kx]-A0<1.5 \
-                and dx < 170 and dy < 250 \
+                and dx < 250 and dy < 170 \
                 and dx > 0 and dy > 0:
                     
                     x=dx
