@@ -53,6 +53,7 @@ def spacer(depth,nx0):
     nx0=np.int(nx0)
     offsetY0 = []
     while heightMax>160:
+        scale=scale-5
         sizeImage = []
         offset = []
         for k in range(0,nx):
@@ -67,7 +68,6 @@ def spacer(depth,nx0):
         offsetX = offset[0][0]
         offsetY = np.min(offsetY0)
         heightMax = np.max(sizeImage,axis = 0)[1]
-        scale=scale-5
     width = np.mean(sizeImage,axis = 0)[0]
     nx = np.int(round((1+1*random.random())*240/width))
     print(sizeImage)
@@ -93,7 +93,7 @@ def round(x, base=1):
 
 def drawing(kFrames,frames,angle,angleZ,draw,
             nLines = 400,scale = 70,A0=0,
-            resolution=.1,speed = .4,distanceLine=.8,distanceFigure = 10.0,
+            resolution=.1,speed = .4,distanceLine=.8 ,distanceFigure = 10.0,
             noise = 0,offsetX = 0,offsetY=0,figurePosition = []):
     kFrames = np.int(kFrames)
 
