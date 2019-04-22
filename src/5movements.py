@@ -60,7 +60,7 @@ def spacer(depth,nx0):
             H = np.nonzero(Ht)
             Wt = np.sum(np.isnan(depth[nx0+k]),axis=1)!=640
             W = np.nonzero(Wt)
-            sizeImage.append(scaler(W[0][-1]-W[0][0],H[0][-1]-H[0][0],scale=scale,offsetX = 0,offsetY = 0))
+            sizeImage.append(scaler(W[0][-2]-W[0][0],H[0][-2]-H[0][0],scale=scale,offsetX = 0,offsetY = 0))
             offset.append(scaler(W[0][0],H[0][0],scale=scale,offsetX = 0,offsetY = 0))
             offsetY0.append(offset[-1][1])
 
@@ -71,7 +71,7 @@ def spacer(depth,nx0):
     width = np.mean(sizeImage,axis = 0)[0]
     nx = np.int(round((1+1.5*random.random())*240/width))
     print(sizeImage)
-    dist = (240-sizeImage[nx-1][0])/(nx-1)
+    dist = (240-s   )/(nx-1)
     #dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
     return scale,nx,dist,offsetX,offsetY
 
@@ -93,7 +93,7 @@ def round(x, base=1):
 
 def drawing(kFrames,frames,angle,angleZ,draw,
             nLines = 400,scale = 70,A0=0,
-            resolution=.1,speed = .6,distanceLine=.5,distanceFigure = 4.0,
+            resolution=.1,speed = .6,distanceLine=.5,distanceFigure =  
             noise = 0,offsetX = 0,offsetY=0,figurePosition = []):
     kFrames = np.int(kFrames)
 
@@ -148,7 +148,6 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 xLines.append(y)
                 yLines.append(x)
                 linePosition.append((x,y))
-                repetitionPosition.append((x2,y2))
                 speedZ = speed#*np.cos(AZ[ky,kx])**.2
                 angleD = A[ky,kx]+noise*(.5-random.random())
                 dx = round(x+speedZ*np.cos(angleD),resolution)
@@ -188,6 +187,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             draw.lines(xLines,yLines)
             for position in linePosition:
                 imagePosition.append((round(position[0],distanceLine),round(position[1],distanceLine)))
+                repetitionPosition.append((round(position[0],distanceFigure),round(position[1],distanceFigure)))
 
     for position in repetitionPosition:
         if position not in figurePosition:
