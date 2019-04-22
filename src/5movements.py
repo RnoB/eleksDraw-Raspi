@@ -93,7 +93,7 @@ def round(x, base=1):
 
 def drawing(kFrames,frames,angle,angleZ,draw,
             nLines = 400,scale = 70,A0=0,
-            resolution=.1,speed = .6,distanceLine=.5,distanceFigure = 10.0,
+            resolution=.1,speed = .4,distanceLine=.8,distanceFigure = 10.0,
             noise = 0,offsetX = 0,offsetY=0,figurePosition = []):
     kFrames = np.int(kFrames)
 
