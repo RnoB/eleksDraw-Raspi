@@ -90,11 +90,14 @@ def round(x, base=1):
     return base * np.round(x/base)
 
 
-def drawing(kFrames,frames,angle,angleZ,draw,nLines = 400,scale = 70,A0=0,rounder=.1,noise = 0,offsetX = 0,offsetY=0,X2 = []):
+def drawing(kFrames,frames,angle,angleZ,draw,
+            nLines = 400,scale = 70,A0=0,
+            resolution=.1,speed = .6,distanceLine=.2,distanceFigure = 2.0,
+            noise = 0,offsetX = 0,offsetY=0,figurePosition = []):
     kFrames = np.int(kFrames)
-    X3 = []
-    X = []
 
+    imagePosition = []
+    repetitionPosition = []
 
     
     z = frames[kFrames]
@@ -102,20 +105,21 @@ def drawing(kFrames,frames,angle,angleZ,draw,nLines = 400,scale = 70,A0=0,rounde
     AZ = angleZ[kFrames]
 
     
-    speed = 2*rounder
+
     
     xL = []
     yL = []
-    rounder2 = 3*rounder
+
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
 
-    if speed<rounder:
-        speed = rounder
+    if speed<distanceLine:
+        speed = distanceLine
     for k in range(0,nLines):
 
         size = 0
         trial =0
         while(size == 0):
+            linePosition = []
             trial+=1 
             xLines = []
             yLines = []
@@ -126,13 +130,13 @@ def drawing(kFrames,frames,angle,angleZ,draw,nLines = 400,scale = 70,A0=0,rounde
                 kx = random.randint(0, 639)
                 ky = random.randint(0, 479)
                 x,y = scaler(kx,ky,scale=scale,offsetX=offsetX,offsetY=offsetY)
-                x = round(x+(.5-random.random())*xu,rounder/2.0)
-                y = round(y+(.5-random.random())*yu,rounder/2.0)
-                x2 = round(x,rounder2)
-                y2 = round(y,rounder2)
+                x = round(x+(.5-random.random())*xu,resolution/2.0)
+                y = round(y+(.5-random.random())*yu,resolution/2.0)
+                x2 = round(x,distanceFigure)
+                y2 = round(y,distanceFigure)
                 zTest = z[ky,kx]
                 Atest = A[ky,kx]
-                if (x2,y2) not in X2:
+                if (x2,y2) not in figurePosition:
                     xChecking = False
             running = True
             if np.isnan(zTest) or np.isnan(Atest):
@@ -140,22 +144,27 @@ def drawing(kFrames,frames,angle,angleZ,draw,nLines = 400,scale = 70,A0=0,rounde
             while running:
                 xLines.append(y)
                 yLines.append(x)
-                X.append((x,y))
-                X3.append((x2,y2))
+                linePosition.append((x,y))
+                repetitionPosition.append((x2,y2))
                 speedZ = speed#*np.cos(AZ[ky,kx])**.2
                 angleD = A[ky,kx]+noise*(.5-random.random())
-                dx = round(x+speedZ*np.cos(angleD),rounder)
-                dy = round(y+speedZ*np.sin(angleD),rounder)
-                dx2 = round(x+speedZ*np.cos(angleD),rounder2)
-                dy2 = round(y+speedZ*np.sin(angleD),rounder2)
+                dx = round(x+speedZ*np.cos(angleD),resolution)
+                dy = round(y+speedZ*np.sin(angleD),resolution)
+                dx1 = round(dx,distanceLine)
+                dy1 = round(dy,distanceLine)
+                dx2 = round(dx,distanceFigure)
+                dy2 = round(dy,distanceFigure)
                 dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
 
                 if (dxk > -1) and (dxk < 640) \
                 and (dyk > -1) and (dyk < 480) \
                 and size < 100 \
-                and (dx,dy) not in X and (dx2,dy2) not in X2 \
+                and (dx,dy) not in linePosition\
+                and (dx1,dy1) not in imagePosition \
+                and (dx2,dy2) not in figurePosition \
                 and AZ[ky,kx]-A0<1.5 \
-                and dx < 170 and dy < 250 :
+                and dx < 170 and dy < 250 \
+                and dx > 0 and dy > 0:
                     
                     x=dx
                     y=dy
@@ -174,12 +183,15 @@ def drawing(kFrames,frames,angle,angleZ,draw,nLines = 400,scale = 70,A0=0,rounde
                 size = -1
         if size>0:
             draw.lines(xLines,yLines)
-    for x3 in X3:
-        if x3 not in X2:
-            X2.append(x3)
-            if len(X2)>10000000:
-                del X2[0]
-    return X2
+            for position in linePosition:
+                imagePosition.append((round(position[0],distanceLine),round(position[1],distanceLine)))
+
+    for position in repetitionPosition:
+        if position not in figurePosition:
+            figurePosition.append(position)
+            if len(figurePosition)>10000000:
+                del figurePosition[0]
+    return figurePosition
 
 
 
@@ -208,7 +220,7 @@ def main():
 
     nLines = 600
     size = 0
-    X = []
+
     X2 = []
     nx0=np.int(len(kinect.frames)/2)
     scale,nx,dist,offsetX,offsetY =  spacer(kinect.frames,nx0)
@@ -233,8 +245,7 @@ def main():
 
     try:
         for j in range(0,nx):
-            X3 = []
-            X = []
+
             blinked.progressColor(j/5,'v','y',[4])
             
             kFrames = j+nx0
@@ -245,7 +256,8 @@ def main():
             offsetY = offsetY0+j*dist
 
 
-            drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nLines,scale = scale,A0=0,rounder=rounder,noise = 0.5,offsetX = offsetX,offsetY=offsetY,X2 = X2)
+            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nLines,scale = scale,A0=0,\
+                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2)
             
 
     except Exception as e: 
