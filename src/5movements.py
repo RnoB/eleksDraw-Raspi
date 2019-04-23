@@ -221,7 +221,7 @@ def main():
 
     draw = drawer.Drawer(output = False)    
 
-    nLines = 200
+    nLines = 600
     size = 0
 
     X2 = []
@@ -244,6 +244,8 @@ def main():
     offsetY0 = 5-offsetX
 
     rounder2 = 3*rounder
+
+    d = np.linspace(1,.1,nx)
     if speed<rounder:
         speed = rounder
 
@@ -261,7 +263,7 @@ def main():
 
 
             X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nLines,scale = scale,A0=0,\
-                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2)
+                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[j])
             
 
     except Exception as e: 
