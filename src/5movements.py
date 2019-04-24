@@ -61,7 +61,7 @@ def spacer(depth,nx0):
             H = np.nonzero(Ht)
             Wt = np.sum(np.isnan(depth[nx0+k]),axis=1)!=640
             W = np.nonzero(Wt)
-            sizeImage.append(scaler(W[0][-2]-W[0][0],H[0][-2]-H[0][0],scale=scale,offsetX = 0,offsetY = 0))
+            sizeImage.append(scaler(W[0][-1]-W[0][0],H[0][-1]-H[0][0],scale=scale,offsetX = 0,offsetY = 0))
             offset.append(scaler(W[0][0],H[0][0],scale=scale,offsetX = 0,offsetY = 0))
             offsetY0.append(offset[-1][1])
 
@@ -93,7 +93,7 @@ def round(x, base=1):
 
 def drawing(kFrames,frames,angle,angleZ,draw,
             nLines = 400,scale = 70,A0=0,
-            resolution=.1,speed = .4,distanceLine=.8 ,distanceFigure = 10.0,
+            resolution=.1,speed = .4,distanceLine=.8 ,distanceFigure = 5.0,
             noise = 0,offsetX = 0,offsetY=0,figurePosition = []):
     kFrames = np.int(kFrames)
 
@@ -210,7 +210,7 @@ def main():
         blinked.switchColor('p',[1])
         time.sleep(20)
         kinect.start()
-        kinect.getDepthFrames(nFrames = 40,delay=.01,maxDepth=2046)
+        kinect.getDepthFrames(nFrames = 40,delay=.01,maxDepth=2049)
         kinect.stop()
         blinked.switchColor('c',[1])
         kinect.backgroundSubstract(blur=True,level=10)
