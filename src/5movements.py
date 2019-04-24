@@ -113,8 +113,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
 
-    if speed<distanceLine:
-        speed = distanceLine
+    #if speed<distanceLine:
+        #speed = distanceLine
     for k in range(0,nLines):
 
         size = 0
@@ -245,7 +245,7 @@ def main():
 
     rounder2 = 3*rounder
 
-    d = np.linspace(1,.1,nx)
+    d = np.linspace(2.0,.1,nx)
     if speed<rounder:
         speed = rounder
 
@@ -263,7 +263,7 @@ def main():
 
 
             X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nLines,scale = scale,A0=0,\
-                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[j])
+                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .5,speed = d[j])
             
 
     except Exception as e: 
