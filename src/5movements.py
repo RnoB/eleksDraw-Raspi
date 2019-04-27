@@ -263,7 +263,7 @@ def main():
 
 
             X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nLines,scale = scale,A0=0,\
-                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .5,speed = d[j])
+                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[j],speed = .2)
             
 
     except Exception as e: 
