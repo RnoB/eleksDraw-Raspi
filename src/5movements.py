@@ -221,7 +221,7 @@ def main():
 
     draw = drawer.Drawer(output = False)    
     draw.penUp()
-    nLines = 200
+    nLines = 400
     size = 0
 
     X2 = []
@@ -263,7 +263,7 @@ def main():
 
 
             X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nLines,scale = scale,A0=0,\
-                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[j],speed = .2)
+                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[j]  ,speed = .2)
             
 
     except Exception as e: 
