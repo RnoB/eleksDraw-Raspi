@@ -220,8 +220,8 @@ def main():
  
 
     draw = drawer.Drawer(output = False)    
-
-    nLines = 600
+    draw.penUp()
+    nLines = 200
     size = 0
 
     X2 = []
