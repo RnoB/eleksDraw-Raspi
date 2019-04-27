@@ -147,11 +147,13 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             while running:
                 xLines.append(y)
                 yLines.append(x)
-                linePosition.append((x,y))
+                linePosition.append((round(x,resolution),round(y,resolution)))
                 speedZ = speed#*np.cos(AZ[ky,kx])**.2
                 angleD = A[ky,kx]+noise*(.5-random.random())
-                dx = round(x+speedZ*np.cos(angleD),resolution)
-                dy = round(y+speedZ*np.sin(angleD),resolution)
+                dxS = x+speedZ*np.cos(angleD)
+                dyS = y+speedZ*np.sin(angleD)
+                dx = round(dxS,resolution)
+                dy = round(dyS,resolution)
                 dx1 = round(dx,distanceLine)
                 dy1 = round(dy,distanceLine)
                 dx2 = round(dx,distanceFigure)
@@ -168,8 +170,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 and dx < 170 and dy < 250 \
                 and dx > 0 and dy > 0:
                     
-                    x=dx
-                    y=dy
+                    x=dxS
+                    y=dyS
                     
                     kx=dxk
                     ky=dyk
@@ -236,18 +238,18 @@ def main():
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
     blinked.switchColor('g',[1])
-    rounder = 1
-    speed = 2*rounder
+
+
 
 
     offsetX0 = 5-offsetY
     offsetY0 = 5-offsetX
 
-    rounder2 = 3*rounder
+
 
     d = np.linspace(2.0,.1,nx)
-    if speed<rounder:
-        speed = rounder
+    nL = np.linspace(800,200,nx)
+
 
     try:
         for j in range(0,nx):
@@ -262,7 +264,7 @@ def main():
             offsetY = offsetY0+j*dist
 
 
-            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nLines,scale = scale,A0=0,\
+            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = int(nL[j]),scale = scale,A0=0,\
                     offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[j]  ,speed = .2)
             
 
