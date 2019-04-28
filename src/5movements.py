@@ -265,7 +265,7 @@ def main():
             offsetX = offsetX0
             offsetY = offsetY0+j*dist
 
-            print("offset : "+str((offsetX,offestY)))
+            print("offset : "+str((offsetX,offsetY)))
             X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = int(nL[j]),scale = scale,A0=0,\
                     offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[j]  ,speed = .2)
             
