@@ -249,7 +249,7 @@ def main():
 
 
 
-    d = np.linspace(.1,1.5,nx)
+    d = np.linspace(.1,4,nx)
     nL = np.linspace(250,600,nx)
 
     sp = np.linspace(.2,2.0,nx)
@@ -269,7 +269,7 @@ def main():
 
             #print("offset : "+str((offsetX,offsetY)))
             X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 250,scale = scale,A0=0,\
-                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = sp[j])
+                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .6  ,speed = sp[j])
             
 
     except Exception as e: 
