@@ -186,6 +186,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             if trial>100 and size==0:
                 size = -1
         if size>0:
+            print("X : "+str(xLines))
+            print("Y : "+str(yLines))
             draw.lines(xLines,yLines)
             for position in linePosition:
                 imagePosition.append((round(position[0],distanceLine),round(position[1],distanceLine)))
@@ -247,14 +249,14 @@ def main():
 
 
 
-    d = np.linspace(.1,2.0,nx)
-    nL = np.linspace(200,800,nx)
+    d = np.linspace(.1,1.5,nx)
+    nL = np.linspace(250,600,nx)
 
 
     try:
         for j in range(0,nx):
 
-            blinked.progressColor(j/5,'v','y',[4])
+            blinked.progressColor(j/nx,'v','y',[4])
             
             kFrames = j+nx0
             #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
@@ -263,7 +265,7 @@ def main():
             offsetX = offsetX0
             offsetY = offsetY0+j*dist
 
-
+            print("offset : "+str((offsetX,offestY)))
             X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = int(nL[j]),scale = scale,A0=0,\
                     offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[j]  ,speed = .2)
             
