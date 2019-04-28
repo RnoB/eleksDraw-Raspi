@@ -247,8 +247,8 @@ def main():
 
 
 
-    d = np.linspace(2.0,.1,nx)
-    nL = np.linspace(800,200,nx)
+    d = np.linspace(.1,2.0,nx)
+    nL = np.linspace(200,800,nx)
 
 
     try:
