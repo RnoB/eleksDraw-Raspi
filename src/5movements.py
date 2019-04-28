@@ -252,6 +252,8 @@ def main():
     d = np.linspace(.1,1.5,nx)
     nL = np.linspace(250,600,nx)
 
+    sp = np.linspace(.2,2.0,nx)
+
 
     try:
         for j in range(0,nx):
@@ -266,8 +268,8 @@ def main():
             offsetY = offsetY0+j*dist
 
             #print("offset : "+str((offsetX,offsetY)))
-            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = int(nL[j]),scale = scale,A0=0,\
-                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[j]  ,speed = .2)
+            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 250,scale = scale,A0=0,\
+                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = sp[j])
             
 
     except Exception as e: 
