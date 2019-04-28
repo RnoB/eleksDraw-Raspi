@@ -252,7 +252,7 @@ def main():
     d = np.linspace(.1,4,nx)
     nL = np.linspace(250,600,nx)
 
-    sp = np.linspace(.2,2.0,nx)
+    sp = np.linspace(.2,4.0,nx)
 
 
     try:
