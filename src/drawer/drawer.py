@@ -29,7 +29,16 @@ class Drawer:
         if self.output:
             print(out)
 
-    def toPosition(self,x0,y0,speed = 3500):
+
+
+
+    def toPosition(self,x0,y0,speed = 3500,polar = False):
+        if polar:
+
+            lL = np.sqrt((dx + x0)**2+(dy+y0)**2)-dist
+            lR = np.sqrt((dx - x0)**2+(dy+y0)**2)-dist
+            x0 = lL
+            y0 = lR
         gCode = (('G1X'+str(x0)+'Y'+str(y0)+'F'+str(speed)).strip()+'\r\n').encode('UTF-8')
         self.sendCommand(gCode)
 
@@ -98,7 +107,7 @@ class Drawer:
 
 
 
-    def __init__(self,output = False):
+    def __init__(self,output = False,dx = 0,dy=0):
         self.penPosition=False
         self.s = serial.Serial('/dev/ttyUSB0',115200)
         self.s.write("\r\n\r\n".encode('UTF-8'))
@@ -108,6 +117,9 @@ class Drawer:
         self.sendCommand('G1Z0F10\r\n'.encode('UTF-8')) # linear movement no z position
         self.sendCommand('G21\r\n'.encode('UTF-8')) # G21 ; Set Units to Millimeters
         self.output = output
+        self.dx = dx
+        self.dy = dy
+        self.dist = np.sqrt(dx**2+dy**2)
 
 
 
