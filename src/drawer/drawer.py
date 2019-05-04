@@ -35,8 +35,8 @@ class Drawer:
     def toPosition(self,x0,y0,speed = 3500,polar = False):
         if polar:
 
-            lL = np.sqrt((dx + x0)**2+(dy+y0)**2)-dist
-            lR = np.sqrt((dx - x0)**2+(dy+y0)**2)-dist
+            lL = np.sqrt((self.dx + x0)**2+(self.dy+y0)**2)-dist
+            lR = np.sqrt((self.dx - x0)**2+(self.dy+y0)**2)-dist
             x0 = lL
             y0 = lR
         gCode = (('G1X'+str(x0)+'Y'+str(y0)+'F'+str(speed)).strip()+'\r\n').encode('UTF-8')
