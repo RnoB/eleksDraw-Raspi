@@ -13,7 +13,7 @@ s = []
 x = 0
 y = 0
 running = True
-
+draw = []
 def giveStatus(ip):
     global running
     backlog = 1  # how many connections to accept
@@ -93,6 +93,7 @@ def receiveDirection(IP,PORT):
 
 def main():
     global running
+    draw = drawer.Drawer()
     receiveThread = threading.Thread(target=receiveDirection, args=(drawIP.drawerIP, drawIP.drawerPort))
     receiveThread.daemon = True
     receiveThread.start()
