@@ -94,6 +94,7 @@ def receiveDirection(IP,PORT):
 
 def main():
     global running
+    global draw
     draw = drawer.Drawer()
     receiveThread = threading.Thread(target=receiveDirection, args=(drawIP.drawerIP, drawIP.drawerPort))
     receiveThread.daemon = True
