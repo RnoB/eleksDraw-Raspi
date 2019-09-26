@@ -83,11 +83,11 @@ def receiveDirection(IP,PORT):
             y = message[1]
             print('------ code : '+ str(code))
             if code == drawIP.drawerCode['penUp']:
-                drawer.penUp()
+                draw.penUp()
             if code == drawIP.drawerCode['penDown']:
-                drawer.penDown()
+                draw.penDown()
             if code == drawIP.drawerCode['toPosition']:
-                drawer.toPosition(x,y)
+                draw.toPosition(x,y)
 
         #except:
         #    pass
