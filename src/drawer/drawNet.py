@@ -76,7 +76,7 @@ def receiveDirection(IP,PORT):
 
 
 
-            mess = struct.unpack('ddi',connection.recv(20))[0]
+            mess = struct.unpack('ddi',connection.recv(24))[0]
             code = mess[2]
             x = mess[0]
             y = mess[1]
