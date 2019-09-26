@@ -77,10 +77,10 @@ def receiveDirection(IP,PORT):
 
 
 
-            mess = struct.unpack('ddi',connection.recv(20))[0]
-            code = mess[2]
-            x = mess[0]
-            y = mess[1]
+            message = struct.unpack('ddi',connection.recv(20))
+            code = message[2]
+            x = message[0]
+            y = message[1]
             print('------ code : '+ str(code[0]))
             if code == drawIP.drawerCode['penUp']:
                 drawer.penUp()
