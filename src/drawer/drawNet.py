@@ -70,7 +70,7 @@ def receiveDirection(IP,PORT):
     print('---- Stimuli Updater is binded on : '+ IP +' with port : '+ str(PORT))
     while running:
         print('--- waiting for a connection')
-        try:
+        #try:
             connection, client_address = server.accept()
             print('------ Connection coming from ' + str(client_address))
 
@@ -88,8 +88,8 @@ def receiveDirection(IP,PORT):
             if code == drawIP.drawerCode['toPosition']:
                 drawer.toPosition(x,y)
 
-        except:
-            pass
+        #except:
+        #    pass
 
 def main():
     global running
