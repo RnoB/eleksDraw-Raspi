@@ -91,8 +91,6 @@ def receiveDirection(IP,PORT):
 
 def main():
     
-    expStatus = 0
-    exp = experiment.experiment()
     receiveThread = threading.Thread(target=receiveDirection, args=(drawIP.drawerIP, drawIP.drawerPort))
     receiveThread.daemon = True
     receiveThread.start()
