@@ -143,14 +143,14 @@ def receiveDirection(IP,PORT):
                 draw.penDown()
             if code == drawIP.drawerCode['toPosition']:
                 draw.toPosition(x,y)
-            if code == drawIP.drawCode['lineBegin']:
+            if code == drawIP.drawerCode['lineBegin']:
                 draw.toPosition(x,y)
                 draw.penDown()
                 line = True
                 while line:
                     message = struct.unpack('ddi',connection.recv(20))
                     code = message[2]
-                    if code == drawIP.drawCode['lineEnd']:
+                    if code == drawIP.drawerCode['lineEnd']:
                         draw.penUp()
                         line = False
                     else:
