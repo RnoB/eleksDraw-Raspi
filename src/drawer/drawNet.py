@@ -12,9 +12,10 @@ import drawIP
 s = []
 x = 0
 y = 0
-
+running = True
 
 def giveStatus(ip):
+    global running
     backlog = 1  # how many connections to accept
     maxsize = 28
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -50,7 +51,7 @@ def giveStatus(ip):
 
 
 def receiveDirection(IP,PORT):
-    running = True
+    global running
     backlog = 1  # how many connections to accept
     maxsize = 28
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -91,7 +92,7 @@ def receiveDirection(IP,PORT):
             pass
 
 def main():
-    
+    global running
     receiveThread = threading.Thread(target=receiveDirection, args=(drawIP.drawerIP, drawIP.drawerPort))
     receiveThread.daemon = True
     receiveThread.start()
