@@ -107,7 +107,7 @@ class Drawer:
 
 
 
-    def __init__(self,output = False,dx = 0,dy=0):
+    def __init__(self,output = False,dx = 0,dy=0,de = 40):
         self.penPosition=False
         self.s = serial.Serial('/dev/ttyUSB0',115200)
         self.s.write("\r\n\r\n".encode('UTF-8'))
@@ -119,6 +119,7 @@ class Drawer:
         self.output = output
         self.dx = dx
         self.dy = dy
+        self.de = de
         self.dist = np.sqrt(dx**2+dy**2)
 
 
