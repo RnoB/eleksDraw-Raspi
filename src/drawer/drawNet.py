@@ -69,7 +69,7 @@ def receiveDirection(IP,PORT):
     server.listen(1)
     print('---- Stimuli Updater is binded on : '+ IP +' with port : '+ str(PORT))
     while running:
-        print('--- waiting for a connection')
+            print('--- waiting for a connection')
         #try:
             connection, client_address = server.accept()
             print('------ Connection coming from ' + str(client_address))
