@@ -143,7 +143,7 @@ def receiveDirection(IP,PORT):
                 draw.penDown()
             if code == drawIP.drawerCode['toPosition']:
                 draw.toPosition(x,y)
-            if code == drawIP.drawCode['lineBegin']
+            if code == drawIP.drawCode['lineBegin']:
                 draw.toPosition(x,y)
                 draw.penDown()
                 line = True
