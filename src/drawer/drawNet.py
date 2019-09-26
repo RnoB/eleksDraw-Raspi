@@ -50,7 +50,7 @@ def giveStatus(ip):
 
 
 def receiveDirection(IP,PORT):
-
+	running = True
     backlog = 1  # how many connections to accept
     maxsize = 28
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
