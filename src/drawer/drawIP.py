@@ -9,7 +9,8 @@ drawerIP = "192.168.0.100"
 drawerPort = 9997
 
 drawerCode = {'penUp' : 21,'penDown' : 22,
-              'toPosition' : 31}
+              'toPosition' : 31,
+              'lineBegin' : 41,'lineEnd' : 42}
 
 
 
