@@ -10,6 +10,11 @@ from kinecter import kinecter
 import time
 running = True
 
+#widthPaper = 240
+#heightPaper = 160
+widthPaper = 148
+heightPaper = 105
+
 from blinked import blinked
 
 
@@ -52,7 +57,7 @@ def spacer(depth,nx0,nx=20):
     
     nx0=np.int(nx0)
     offsetY0 = []
-    while heightMax>160:
+    while heightMax>heightPpaer:
         scale=scale-5
         sizeImage = []
         offset = []
@@ -69,9 +74,9 @@ def spacer(depth,nx0,nx=20):
         offsetY = np.min(offsetY0)
         heightMax = np.max(sizeImage,axis = 0)[1]
     width = np.mean(sizeImage,axis = 0)[0]
-    nx = np.int(round((.8+1*random.random())*240/width))
+    nx = np.int(round((.8+1*random.random())*widthPaper/width))
     print(sizeImage)
-    dist = (240-sizeImage[nx-1][0]+offset[0][0]-offset[nx-1][0])/(nx-1)
+    dist = (widthPaper-sizeImage[nx-1][0]+offset[0][0]-offset[nx-1][0])/(nx-1)
     #dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
     return scale,nx,dist,offsetX,offsetY
 
