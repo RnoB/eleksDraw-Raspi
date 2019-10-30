@@ -57,7 +57,7 @@ def spacer(depth,nx0,nx=20):
     
     nx0=np.int(nx0)
     offsetY0 = []
-    while heightMax>heightPpaer:
+    while heightMax>heightPaper:
         scale=scale-5
         sizeImage = []
         offset = []
