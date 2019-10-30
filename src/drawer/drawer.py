@@ -141,7 +141,7 @@ class DrawerNet:
 
 
     def closeDrawer(self):
-        pass
+        drawNet.sendPosition(0,0)
 
 
     def penUp(self):
