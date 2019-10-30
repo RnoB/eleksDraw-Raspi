@@ -70,6 +70,53 @@ def sendLines(x,y):
     socketClient.close()
     return dataRec
 
+def pen(position):
+    dataRec =[]
+    socketClient = socket.socket()
+    socketClient.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    connect = 0
+    
+    while connect == 0:
+        try:
+            socketClient.connect((drawIP.drawerIP, drawIP.drawerPort))
+            connect = 1
+        except:
+            connect = 0
+    if position == "down":
+        code = drawIP.drawerCode['penDown']
+    else:
+        code = drawIP.drawerCode['penUp']
+
+    data = struct.pack('ddi',x[0],y[0],code)
+    socketClient.sendall(data)
+    
+    socketClient.shutdown(socket.SHUT_RDWR)
+    socketClient.close()
+    return dataRec
+
+def sendPosition(x,y):
+    dataRec =[]
+    socketClient = socket.socket()
+    socketClient.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    connect = 0
+    
+
+
+
+    while connect == 0:
+        try:
+            socketClient.connect((drawIP.drawerIP, drawIP.drawerPort))
+            connect = 1
+        except:
+            connect = 0
+    
+    data = struct.pack('ddi',x[k],y[k],drawIP.drawerCode['toPosition'])
+    socketClient.sendall(data)
+
+    socketClient.shutdown(socket.SHUT_RDWR)
+    socketClient.close()
+    return dataRec
+
 def giveStatus(ip):
     global running
     backlog = 1  # how many connections to accept
