@@ -1,4 +1,4 @@
-import drawer
+from drawer import drawer
 import time
 import math
 import numpy as np
@@ -8,7 +8,7 @@ import os
 import traceback
 import threading
 import socket
-import drawIP
+from drawer import drawIP
 import struct
 s = []
 x = 0
