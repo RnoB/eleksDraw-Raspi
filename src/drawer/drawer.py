@@ -137,10 +137,11 @@ class DrawerNet:
         drawerNet.sendPosition(x0,y0)
 
     def toPositionCurved(self,x0,y0,R,cw=True,speed = 3500):
-        
+        pass
 
 
     def closeDrawer(self):
+        pass
 
 
     def penUp(self):
@@ -164,15 +165,15 @@ class DrawerNet:
 
 
     def square(self,xc,yc,R,anisotropy = 1,angle=0,speed=2000,noise = 0):
-
+        pass
 
     def circle(self,x,y,R,speed = 2000,cw = False):
-
+        pass
 
 
 
     def __init__(self):
-        
+        pass
 
 
 
