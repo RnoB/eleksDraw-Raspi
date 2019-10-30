@@ -1,5 +1,5 @@
 
-from drawer import drawer 
+from drawer import drawerNet
 import traceback
 import colorsys
 from blinkt import set_pixel, set_brightness, show, clear
@@ -223,7 +223,7 @@ def main():
         print(traceback.format_exc())
  
 
-    draw = drawer.DrawerNet()    
+    draw = drawerNet.Drawer()    
     draw.penUp()
     nLines = 400
     size = 0
