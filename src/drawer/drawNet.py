@@ -110,7 +110,7 @@ def sendPosition(x,y):
         except:
             connect = 0
     
-    data = struct.pack('ddi',x[k],y[k],drawIP.drawerCode['toPosition'])
+    data = struct.pack('ddi',x,y,drawIP.drawerCode['toPosition'])
     socketClient.sendall(data)
 
     socketClient.shutdown(socket.SHUT_RDWR)
