@@ -134,7 +134,7 @@ class DrawerNet:
 
 
     def toPosition(self,x0,y0,speed = 3500,polar = False):
-        drawerNet.sendPosition(x0,y0)
+        drawNet.sendPosition(x0,y0)
 
     def toPositionCurved(self,x0,y0,R,cw=True,speed = 3500):
         pass
