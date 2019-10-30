@@ -87,7 +87,7 @@ def pen(position):
     else:
         code = drawIP.drawerCode['penUp']
 
-    data = struct.pack('ddi',x[0],y[0],code)
+    data = struct.pack('ddi',0,0,code)
     socketClient.sendall(data)
     
     socketClient.shutdown(socket.SHUT_RDWR)
