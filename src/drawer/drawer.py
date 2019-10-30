@@ -154,8 +154,8 @@ class DrawerNet:
         
         xf = x0+length*math.cos(angle)
         yf = y0+length*math.sin(angle)
-        drawerNet.sendPosition(x0,y0)
-        drawerNet.penDown()
+        drawNet.sendPosition(x0,y0)
+        drawNet.penDown()
         self.toPosition(xf,yf)
         self.penUp()
 
