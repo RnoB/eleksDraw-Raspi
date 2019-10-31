@@ -175,7 +175,7 @@ def receiveDirection(IP,PORT):
     binded = False
     print('---- Stimuli Updater')
     while not binded:
-        uh.set_pixel(2, 1, 255, 0, 0)
+        uh.set_pixel(2, 1, 255, 128, 0)
         uh.show()
         try:
             server.bind((IP,PORT))
