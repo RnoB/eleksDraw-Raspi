@@ -77,7 +77,7 @@ def spacer(depth,nx0,nx=20):
     width = np.mean(sizeImage,axis = 0)[0]
     nx = np.int(round((.8+1*random.random())*widthPaper/width))
     print(sizeImage)
-    dist = (widthPaper-sizeImage[nx-1][0]+offset[0][0]-offset[nx-1][0])/(nx-1)
+    dist = ((widthPaper-10)-sizeImage[nx-1][0]+offset[0][0]-offset[nx-1][0])/(nx-1)
     #dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
     return scale,nx,dist,offsetX,offsetY
 
@@ -245,7 +245,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 size = -1
         if size>0:
             #print("X : "+str(np.min(xLines))+" Y : "+str(np.min(yLines)))
-            
+            xLines = xLines[np.floor(.1*len(xLines)):0]
+            yLines = yLines[np.floor(.1*len(xLines)):0]
             draw.lines(xLines,yLines)
             for position in linePosition:
                 imagePosition.append((round(position[0],distanceLine),round(position[1],distanceLine)))
@@ -327,7 +328,7 @@ def main():
             offsetY = offsetY0+j*dist
 
             #print("offset : "+str((offsetX,offsetY)))
-            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 400,scale = scale,A0=0,\
+            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 200,scale = scale,A0=0,\
                     offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .6  ,speed = .2)
             
 
