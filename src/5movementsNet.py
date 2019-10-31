@@ -237,8 +237,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                             running=False
                         else:
 
-                           xLines.insert(0,y+5)
-                           yLines.insert(0,x+5)
+                           xLines.insert(0,y)
+                           yLines.insert(0,x)
                     else:
                         running = False
             if trial>100 and size==0:
