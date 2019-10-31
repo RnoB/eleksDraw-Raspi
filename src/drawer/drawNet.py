@@ -12,12 +12,8 @@ try:
     from drawer import drawIP
     from drawer import drawer
 except:
-    pass
-try:
     import drawIP
     import drawer
-except:
-    pass
 import struct
 try:
     import unicornhat as uh
