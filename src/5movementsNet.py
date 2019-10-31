@@ -11,10 +11,10 @@ import time
 
 running = True
 
-widthPaper = 250
-heightPaper = 170
-#widthPaper = 148
-#heightPaper = 105
+#widthPaper = 250
+#heightPaper = 170
+widthPaper = 148
+heightPaper = 105
 
 from blinked import blinked
 
@@ -321,7 +321,7 @@ def main():
     nL = np.linspace(250,600,nx)
 
     sp = np.linspace(.2,1.0,nx)
-    crop = np.linspace(0,.8,nx)
+    crop = np.linspace(0,.6,nx)
 
     try:
         for j in range(0,nx):
@@ -337,7 +337,7 @@ def main():
 
             #print("offset : "+str((offsetX,offsetY)))
             X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 300,scale = scale,A0=0,\
-                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[j]  ,speed = .2,cropFactor=0)
+                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .2  ,speed = .2,cropFactor=crop[j])
             
 
     except Exception as e: 
