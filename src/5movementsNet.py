@@ -100,7 +100,7 @@ def round(x, base=1):
 def drawing(kFrames,frames,angle,angleZ,draw,
             nLines = 400,scale = 70,A0=0,
             resolution=.1,speed = .4,distanceLine=.8 ,distanceFigure = 5.0,
-            noise = 0,offsetX = 0,offsetY=0,figurePosition = []):
+            noise = 0,offsetX = 0,offsetY=0,figurePosition = [],cropFactor = .3):
     kFrames = np.int(kFrames)
 
     imagePosition = []
@@ -245,8 +245,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 size = -1
         if size>0:
             #print("X : "+str(np.min(xLines))+" Y : "+str(np.min(yLines)))
-            xLines = xLines[np.int(np.floor(.2*len(xLines))):]
-            yLines = yLines[np.int(np.floor(.2*len(xLines))):]
+            xLines = xLines[np.int(np.floor(cropFactor*len(xLines))):]
+            yLines = yLines[np.int(np.floor(cropFactor*len(xLines))):]
             draw.lines(xLines,yLines)
             for position in linePosition:
                 imagePosition.append((round(position[0],distanceLine),round(position[1],distanceLine)))
@@ -318,7 +318,7 @@ def main():
     nL = np.linspace(250,600,nx)
 
     sp = np.linspace(.2,1.0,nx)
-
+    crop = np.linspace(0,.8,nx)
 
     try:
         for j in range(0,nx):
@@ -334,7 +334,7 @@ def main():
 
             #print("offset : "+str((offsetX,offsetY)))
             X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 200,scale = scale,A0=0,\
-                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .6  ,speed = sp[j])
+                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .6  ,speed = .2,cropFactor=crop[j])
             
 
     except Exception as e: 
