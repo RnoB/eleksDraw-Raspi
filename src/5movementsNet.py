@@ -282,9 +282,11 @@ def main():
         print(traceback.format_exc())
  
 
+    blinked.switchColor('g',[5,6])
     draw = drawer.DrawerNet()    
     draw.penUp()
     draw.squareCorner(0,0,widthPaper,heightPaper)
+    blinked.switchColor('g',[5,6,7])
     nLines = 400
     size = 0
 
