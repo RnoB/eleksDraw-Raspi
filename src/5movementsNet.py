@@ -11,8 +11,8 @@ import time
 
 running = True
 
-widthPaper = 240
-heightPaper = 160
+widthPaper = 250
+heightPaper = 170
 #widthPaper = 148
 #heightPaper = 105
 
@@ -237,8 +237,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                             running=False
                         else:
 
-                           xLines.insert(0,y)
-                           yLines.insert(0,x)
+                           xLines.insert(0,y+5)
+                           yLines.insert(0,x+5)
                     else:
                         running = False
             if trial>100 and size==0:
@@ -262,6 +262,9 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
 def main():
+    draw = drawer.DrawerNet()    
+    draw.penUp()
+    draw.toPosition(0,0)
     set_brightness(.05)
     blinked.switchColor('g',[0])
     try:
@@ -314,7 +317,7 @@ def main():
     d = np.linspace(.1,4,nx)
     nL = np.linspace(250,600,nx)
 
-    sp = np.linspace(.2,4.0,nx)
+    sp = np.linspace(.2,1.0,nx)
 
 
     try:
@@ -326,12 +329,12 @@ def main():
             #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
             #
             
-            offsetX = 5-offsetX0
-            offsetY = 5-offsetY0+j*dist
+            offsetX = offsetX0
+            offsetY = offsetY0+j*dist
 
             #print("offset : "+str((offsetX,offsetY)))
             X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 200,scale = scale,A0=0,\
-                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .6  ,speed = .2)
+                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .6  ,speed = sp[k])
             
 
     except Exception as e: 
