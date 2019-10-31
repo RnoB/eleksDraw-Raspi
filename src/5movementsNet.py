@@ -58,7 +58,7 @@ def spacer(depth,nx0,nx=20):
     
     nx0=np.int(nx0)
     offsetY0 = []
-    while heightMax>heightPaper:
+    while heightMax>heightPaper-10:
         scale=scale-5
         sizeImage = []
         offset = []
@@ -324,8 +324,8 @@ def main():
             #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
             #
             
-            offsetX = offsetX0
-            offsetY = offsetY0+j*dist
+            offsetX = 5-offsetX0
+            offsetY = 5-offsetY0+j*dist
 
             #print("offset : "+str((offsetX,offsetY)))
             X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 200,scale = scale,A0=0,\
