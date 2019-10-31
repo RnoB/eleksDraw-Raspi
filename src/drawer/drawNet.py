@@ -18,7 +18,7 @@ import struct
 try:
     import unicornhat as uh
     uh.set_layout(uh.PHAT)
-    uh.brightness(0.5)
+    uh.brightness(0.2)
 except:
     pass
 s = []
