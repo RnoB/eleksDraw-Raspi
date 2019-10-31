@@ -254,14 +254,14 @@ def main():
     receiveThread = threading.Thread(target=receiveDirection, args=(drawIP.drawerIP, drawIP.drawerPort))
     receiveThread.daemon = True
     receiveThread.start()
-    uh.set_pixel(1, 0, 255, 0, 128)
+    uh.set_pixel(2, 0, 0, 255, 0)
     uh.show()
 
 
     statusThread = threading.Thread(target = giveStatus, args=(drawIP.drawerIP,))
     statusThread.daemon = True
     statusThread.start()
-    uh.set_pixel(2, 0, 255, 0, 255)
+    uh.set_pixel(1, 0, 255, 0, 255)
     uh.show()
 
     t0 = time.time()
