@@ -1,4 +1,4 @@
-from drawer import drawer
+
 import time
 import math
 import numpy as np
@@ -8,7 +8,16 @@ import os
 import traceback
 import threading
 import socket
-from drawer import drawIP
+try:
+    from drawer import drawIP
+    from drawer import drawer
+except:
+    pass
+try:
+    import drawIP
+    import drawer
+except:
+    pass
 import struct
 try:
     import unicornhat as uh
