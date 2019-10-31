@@ -134,13 +134,15 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             size = 0
             xChecking = True
             while xChecking:
-                kx = random.randint(0, 639)
-                ky = random.randint(0, 479)
+                kx0 = random.randint(0, 639)
+                ky0 = random.randint(0, 479)
                 x,y = scaler(kx,ky,scale=scale,offsetX=offsetX,offsetY=offsetY)
                 x0 = round(x+(.5-random.random())*xu,resolution/2.0)
                 y0 = round(y+(.5-random.random())*yu,resolution/2.0)
                 x = x0
                 y = y0
+                kx=kx0
+                ky=ky0
                 x1 = round(x,distanceLine)
                 y1 = round(y,distanceLine)
                 x2 = round(x,distanceFigure)
@@ -195,7 +197,9 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 running = True
                 
                 x = x0
-                y = y0     
+                y = y0
+                kx = kx0
+                ky = ky0     
                 while running:
                     linePosition.append((round(x,resolution),round(y,resolution)))
                     speedZ = speed#*np.cos(AZ[ky,kx])**.2
