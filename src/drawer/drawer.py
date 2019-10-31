@@ -193,7 +193,7 @@ class DrawerNet:
         yIdx = [0,1,1,0]
         xSquare = []
         for k in range(0,4):
-            xSquare.append([xc+(x[xIdx[k]]*math.cos(angle)-y[yIdx[k]]*math.sin(angle))+noiser(noise),yc+(x[xIdx[k]]*math.sin(angle)+y[yIdx[k]]*math.cos(angle))+noiser(noise)])
+            xSquare.append([(x[xIdx[k]]*math.cos(angle)-y[yIdx[k]]*math.sin(angle))+noiser(noise),(x[xIdx[k]]*math.sin(angle)+y[yIdx[k]]*math.cos(angle))+noiser(noise)])
         self.toPosition(xSquare[-1][0],xSquare[-1][1])
         self.penDown()
         for xs in xSquare:
