@@ -8,12 +8,13 @@ import random
 import math
 from kinecter import kinecter
 import time
+
 running = True
 
-#widthPaper = 240
-#heightPaper = 160
-widthPaper = 148
-heightPaper = 105
+widthPaper = 240
+heightPaper = 160
+#widthPaper = 148
+#heightPaper = 105
 
 from blinked import blinked
 
