@@ -190,7 +190,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 else:
                     running = False
             running = True
-            x=xlines[0]
+            x=xLines[0]
             y=yLines[0]     
             while running:
                 linePosition.append((round(x,resolution),round(y,resolution)))
@@ -275,7 +275,7 @@ def main():
 
     draw = drawer.DrawerNet()    
     draw.penUp()
-    draw.squareCorner(0,0,heightPaper,widthPaper)
+    draw.squareCorner(0,0,widthPaper,heightPaper)
     nLines = 400
     size = 0
 
