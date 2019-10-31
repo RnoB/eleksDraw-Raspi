@@ -139,8 +139,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 x,y = scaler(kx,ky,scale=scale,offsetX=offsetX,offsetY=offsetY)
                 x0 = round(x+(.5-random.random())*xu,resolution/2.0)
                 y0 = round(y+(.5-random.random())*yu,resolution/2.0)
-                x=x0
-                y=y0
+                x = x0
+                y = y0
                 x1 = round(x,distanceLine)
                 y1 = round(y,distanceLine)
                 x2 = round(x,distanceFigure)
@@ -152,93 +152,91 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             running = True
             if np.isnan(zTest) or np.isnan(Atest):
                 running=False
-            while running:
-                xLines.append(y)
-                yLines.append(x)
-                linePosition.append((round(x,resolution),round(y,resolution)))
-                speedZ = speed#*np.cos(AZ[ky,kx])**.2
-                angleD = A[ky,kx]+noise*(.5-random.random())
-                dxS = x+speedZ*np.cos(angleD)
-                dyS = y+speedZ*np.sin(angleD)
-                dx = round(dxS,resolution)
-                dy = round(dyS,resolution)
-                dx1 = round(dx,distanceLine)
-                dy1 = round(dy,distanceLine)
-                dx2 = round(dx,distanceFigure)
-                dy2 = round(dy,distanceFigure)
-                dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
+            else:    
+                while running:
+                    xLines.append(y)
+                    yLines.append(x)
+                    linePosition.append((round(x,resolution),round(y,resolution)))
+                    speedZ = speed#*np.cos(AZ[ky,kx])**.2
+                    angleD = A[ky,kx]+noise*(.5-random.random())
+                    dxS = x+speedZ*np.cos(angleD)
+                    dyS = y+speedZ*np.sin(angleD)
+                    dx = round(dxS,resolution)
+                    dy = round(dyS,resolution)
+                    dx1 = round(dx,distanceLine)
+                    dy1 = round(dy,distanceLine)
+                    dx2 = round(dx,distanceFigure)
+                    dy2 = round(dy,distanceFigure)
+                    dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
 
-                if (dxk > -1) and (dxk < 640) \
-                and (dyk > -1) and (dyk < 480) \
-                and size < 100 \
-                and (dx,dy) not in linePosition\
-                and (dx1,dy1) not in imagePosition \
-                and (dx2,dy2) not in figurePosition \
-                and AZ[ky,kx]-A0<1.5 \
-                and dx < 170 and dy < 250 \
-                and dx > 0 and dy > 0:
-                    
-                    x=dxS
-                    y=dyS
-                    
-                    kx=dxk
-                    ky=dyk
-                    zTest = z[ky,kx]
-                    Atest = A[ky,kx]
-                    AZtest = AZ[ky,kx]
-                    size +=speedZ
-                    if np.isnan(zTest) or np.isnan(Atest)or np.isnan(AZtest):
-                        running=False
-                else:
-                    running = False
-            running = True
-            if size>0:
-                x=xLines[0]
-                y=yLines[0]
-            else:
-                x=x0
-                y=y0     
-            while running:
-                linePosition.append((round(x,resolution),round(y,resolution)))
-                speedZ = speed#*np.cos(AZ[ky,kx])**.2
-                angleD = np.pi+A[ky,kx]+noise*(.5-random.random())
-                dxS = x+speedZ*np.cos(angleD)
-                dyS = y+speedZ*np.sin(angleD)
-                dx = round(dxS,resolution)
-                dy = round(dyS,resolution)
-                dx1 = round(dx,distanceLine)
-                dy1 = round(dy,distanceLine)
-                dx2 = round(dx,distanceFigure)
-                dy2 = round(dy,distanceFigure)
-                dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
-
-                if (dxk > -1) and (dxk < 640) \
-                and (dyk > -1) and (dyk < 480) \
-                and size < 100 \
-                and (dx,dy) not in linePosition\
-                and (dx1,dy1) not in imagePosition \
-                and (dx2,dy2) not in figurePosition \
-                and AZ[ky,kx]-A0<1.5 \
-                and dx < 170 and dy < 250 \
-                and dx > 0 and dy > 0:
-                    
-                    x=dxS
-                    y=dyS
-                    
-                    kx=dxk
-                    ky=dyk
-                    zTest = z[ky,kx]
-                    Atest = A[ky,kx]
-                    AZtest = AZ[ky,kx]
-                    size +=speedZ
-                    if np.isnan(zTest) or np.isnan(Atest)or np.isnan(AZtest):
-                        running=False
+                    if (dxk > -1) and (dxk < 640) \
+                    and (dyk > -1) and (dyk < 480) \
+                    and size < 100 \
+                    and (dx,dy) not in linePosition\
+                    and (dx1,dy1) not in imagePosition \
+                    and (dx2,dy2) not in figurePosition \
+                    and AZ[ky,kx]-A0<1.5 \
+                    and dx < 170 and dy < 250 \
+                    and dx > 0 and dy > 0:
+                        
+                        x=dxS
+                        y=dyS
+                        
+                        kx=dxk
+                        ky=dyk
+                        zTest = z[ky,kx]
+                        Atest = A[ky,kx]
+                        AZtest = AZ[ky,kx]
+                        size +=speedZ
+                        if np.isnan(zTest) or np.isnan(Atest)or np.isnan(AZtest):
+                            running=False
                     else:
+                        running = False
+                running = True
+                
+                x = x0
+                y = y0     
+                while running:
+                    linePosition.append((round(x,resolution),round(y,resolution)))
+                    speedZ = speed#*np.cos(AZ[ky,kx])**.2
+                    angleD = np.pi+A[ky,kx]+noise*(.5-random.random())
+                    dxS = x+speedZ*np.cos(angleD)
+                    dyS = y+speedZ*np.sin(angleD)
+                    dx = round(dxS,resolution)
+                    dy = round(dyS,resolution)
+                    dx1 = round(dx,distanceLine)
+                    dy1 = round(dy,distanceLine)
+                    dx2 = round(dx,distanceFigure)
+                    dy2 = round(dy,distanceFigure)
+                    dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
 
-                       xLines.insert(0,y)
-                       yLines.insert(0,x)
-                else:
-                    running = False
+                    if (dxk > -1) and (dxk < 640) \
+                    and (dyk > -1) and (dyk < 480) \
+                    and size < 100 \
+                    and (dx,dy) not in linePosition\
+                    and (dx1,dy1) not in imagePosition \
+                    and (dx2,dy2) not in figurePosition \
+                    and AZ[ky,kx]-A0<1.5 \
+                    and dx < 170 and dy < 250 \
+                    and dx > 0 and dy > 0:
+                        
+                        x=dxS
+                        y=dyS
+                        
+                        kx=dxk
+                        ky=dyk
+                        zTest = z[ky,kx]
+                        Atest = A[ky,kx]
+                        AZtest = AZ[ky,kx]
+                        size +=speedZ
+                        if np.isnan(zTest) or np.isnan(Atest)or np.isnan(AZtest):
+                            running=False
+                        else:
+
+                           xLines.insert(0,y)
+                           yLines.insert(0,x)
+                    else:
+                        running = False
             if trial>100 and size==0:
                 size = -1
         if size>0:
