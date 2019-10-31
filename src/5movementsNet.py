@@ -191,7 +191,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                     running = False
             running = True
             x=xlines[0]
-            y=yLines[0]		
+            y=yLines[0]     
             while running:
                 linePosition.append((round(x,resolution),round(y,resolution)))
                 speedZ = speed#*np.cos(AZ[ky,kx])**.2
@@ -229,8 +229,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                         running=False
                     else:
 
-         			   xLines.insert(0,y)
-                	   yLines.insert(0,x)
+                       xLines.insert(0,y)
+                       yLines.insert(0,x)
                 else:
                     running = False
             if trial>100 and size==0:
