@@ -165,7 +165,7 @@ def giveStatus(ip):
 
 
 def receiveDirection(IP,PORT):
-    uh.set_pixel(2, 0, 255, 0, 0)
+    uh.set_pixel(2, 1, 255, 0, 0)
     uh.show()
     global running
     backlog = 1  # how many connections to accept
@@ -175,7 +175,7 @@ def receiveDirection(IP,PORT):
     binded = False
     print('---- Stimuli Updater')
     while not binded:
-        uh.set_pixel(2, 1, 255, 128, 0)
+        uh.set_pixel(2, 2, 255, 128, 0)
         uh.show()
         try:
             server.bind((IP,PORT))
@@ -184,12 +184,12 @@ def receiveDirection(IP,PORT):
             print(IP)
             print('- Wait for Stimuli Update -- binding failed')
             binded = False
-    uh.set_pixel(2, 0, 255, 0, 255)
+    uh.set_pixel(2, 1, 255, 0, 255)
     uh.show()
     server.listen(1)
     print('---- Stimuli Updater is binded on : '+ IP +' with port : '+ str(PORT))
     while running:
-            uh.set_pixel(2, 2, 255, 255, 0)
+            uh.set_pixel(2, 3, 255, 255, 0)
             uh.show()
             print('--- waiting for a connection')
         #try:
@@ -204,19 +204,19 @@ def receiveDirection(IP,PORT):
             y = message[1]
             print('------ code : '+ str(code))
             if code == drawIP.drawerCode['penUp']:
-                uh.set_pixel(2, 3, 255, 0, 0)
+                uh.set_pixel(3, 3, 255, 0, 0)
                 uh.show()
                 draw.penUp()
             if code == drawIP.drawerCode['penDown']:
-                uh.set_pixel(2, 3, 0, 255, 0)
+                uh.set_pixel(3, 3, 0, 255, 0)
                 uh.show()
                 draw.penDown()
             if code == drawIP.drawerCode['toPosition']:
-                uh.set_pixel(2, 3, 0, 0, 255)
+                uh.set_pixel(3, 3, 0, 0, 255)
                 uh.show()
                 draw.toPosition(x,y)
             if code == drawIP.drawerCode['lineBegin']:
-                uh.set_pixel(2, 3, 0, 255, 255)
+                uh.set_pixel(3, 3, 0, 255, 255)
                 uh.show()
                 draw.toPosition(x,y)
                 draw.penDown()
@@ -229,15 +229,15 @@ def receiveDirection(IP,PORT):
                     if code == drawIP.drawerCode['lineEnd']:
                         draw.penUp()
                         line = False
-                        uh.set_pixel(2, 3, 0, 0, 0)
+                        uh.set_pixel(3, 4, 0, 0, 0)
                         uh.show()
                     else:
                         x = message[0]
                         y = message[1]
                         draw.toPosition(x,y)
-                        uh.set_pixel(2, 3, 0, 0, 0)
+                        uh.set_pixel(3, 4, 0, 0, 0)
                         uh.show()
-                        uh.set_pixel(3, 3, 0, 255, 255)
+                        uh.set_pixel(3, 4, 0, 255, 255)
                         uh.show()
 
 
