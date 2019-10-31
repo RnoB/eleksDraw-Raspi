@@ -10,6 +10,12 @@ import threading
 import socket
 from drawer import drawIP
 import struct
+try:
+    import unicornhat as uh
+    uh.set_layout(uh.PHAT)
+    uh.brightness(0.5)
+except:
+    pass
 s = []
 x = 0
 y = 0
@@ -154,6 +160,8 @@ def giveStatus(ip):
 
 
 def receiveDirection(IP,PORT):
+    uh.set_pixel(2, 0, 255, 0, 0)
+    uh.show()
     global running
     backlog = 1  # how many connections to accept
     maxsize = 28
@@ -162,6 +170,8 @@ def receiveDirection(IP,PORT):
     binded = False
     print('---- Stimuli Updater')
     while not binded:
+        uh.set_pixel(2, 1, 255, 0, 0)
+        uh.show()
         try:
             server.bind((IP,PORT))
             binded = True
@@ -169,9 +179,13 @@ def receiveDirection(IP,PORT):
             print(IP)
             print('- Wait for Stimuli Update -- binding failed')
             binded = False
+    uh.set_pixel(2, 0, 255, 0, 255)
+    uh.show()
     server.listen(1)
     print('---- Stimuli Updater is binded on : '+ IP +' with port : '+ str(PORT))
     while running:
+            uh.set_pixel(2, 2, 255, 255, 0)
+            uh.show()
             print('--- waiting for a connection')
         #try:
             connection, client_address = server.accept()
@@ -185,42 +199,65 @@ def receiveDirection(IP,PORT):
             y = message[1]
             print('------ code : '+ str(code))
             if code == drawIP.drawerCode['penUp']:
+                uh.set_pixel(2, 3, 255, 0, 0)
+                uh.show()
                 draw.penUp()
             if code == drawIP.drawerCode['penDown']:
+                uh.set_pixel(2, 3, 0, 255, 0)
+                uh.show()
                 draw.penDown()
             if code == drawIP.drawerCode['toPosition']:
+                uh.set_pixel(2, 3, 0, 0, 255)
+                uh.show()
                 draw.toPosition(x,y)
             if code == drawIP.drawerCode['lineBegin']:
+                uh.set_pixel(2, 3, 0, 255, 255)
+                uh.show()
                 draw.toPosition(x,y)
                 draw.penDown()
                 line = True
                 while line:
                     message = struct.unpack('ddi',connection.recv(20))
                     code = message[2]
+                    uh.set_pixel(3, 3, 0, 255, 255)
+                    uh.show()
                     if code == drawIP.drawerCode['lineEnd']:
                         draw.penUp()
                         line = False
+                        uh.set_pixel(2, 3, 0, 0, 0)
+                        uh.show()
                     else:
                         x = message[0]
                         y = message[1]
                         draw.toPosition(x,y)
+                        uh.set_pixel(2, 3, 0, 0, 0)
+                        uh.show()
+                        uh.set_pixel(3, 3, 0, 255, 255)
+                        uh.show()
 
 
         #except:
         #    pass
 
 def main():
+    uh.set_pixel(0, 0, 255, 0, 0)
+    uh.show()
+
     global running
     global draw
     draw = drawer.Drawer()
     receiveThread = threading.Thread(target=receiveDirection, args=(drawIP.drawerIP, drawIP.drawerPort))
     receiveThread.daemon = True
     receiveThread.start()
+    uh.set_pixel(1, 0, 255, 0, 128)
+    uh.show()
 
 
     statusThread = threading.Thread(target = giveStatus, args=(drawIP.drawerIP,))
     statusThread.daemon = True
     statusThread.start()
+    uh.set_pixel(2, 0, 255, 0, 255)
+    uh.show()
 
     t0 = time.time()
 

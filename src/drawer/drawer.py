@@ -165,7 +165,32 @@ class DrawerNet:
 
 
     def square(self,xc,yc,R,anisotropy = 1,angle=0,speed=2000,noise = 0):
-        pass
+        x = [-R,+R]
+        y = [-anisotropy*R,+anisotropy*R]
+        xIdx = [1,1,0,0]
+        yIdx = [0,1,1,0]
+        xSquare = []
+        for k in range(0,4):
+            xSquare.append([xc+(x[xIdx[k]]*math.cos(angle)-y[yIdx[k]]*math.sin(angle))+noiser(noise),yc+(x[xIdx[k]]*math.sin(angle)+y[yIdx[k]]*math.cos(angle))+noiser(noise)])
+        self.toPosition(xSquare[-1][0],xSquare[-1][1])
+        self.penDown()
+        for xs in xSquare:
+            self.toPosition(xs[0],xs[1])
+        self.penUp()
+
+    def squareCorner(self,x0,y0,x1,y1,noise = 0):
+        x = [x0,x1]
+        y = [y0,y1]
+        xIdx = [1,1,0,0]
+        yIdx = [0,1,1,0]
+        xSquare = []
+        for k in range(0,4):
+            xSquare.append([xc+(x[xIdx[k]]*math.cos(angle)-y[yIdx[k]]*math.sin(angle))+noiser(noise),yc+(x[xIdx[k]]*math.sin(angle)+y[yIdx[k]]*math.cos(angle))+noiser(noise)])
+        self.toPosition(xSquare[-1][0],xSquare[-1][1])
+        self.penDown()
+        for xs in xSquare:
+            self.toPosition(xs[0],xs[1])
+        self.penUp()
 
     def circle(self,x,y,R,speed = 2000,cw = False):
         pass
