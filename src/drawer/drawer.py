@@ -6,8 +6,16 @@ import random
 import sys
 import os
 import traceback
-from drawer import drawNet
-from drawer import drawIP
+try:
+    from drawer import drawNet
+    from drawer import drawIP
+except:
+    pass
+try:
+    import drawNet
+    import drawIP
+except:
+    pass
 s = []
 x = 0
 y = 0
