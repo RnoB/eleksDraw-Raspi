@@ -323,6 +323,7 @@ def main():
     crop = np.linspace(0,.6,nx)
 
     A0=0
+    X2 = []
     try:
         for l in range(0,1):
             for j in range(0,nx):
