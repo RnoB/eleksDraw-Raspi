@@ -343,7 +343,7 @@ def main():
             if l==0:
                 time.sleep(600)
                 X2 = []
-                A0=mathf.pi/3.0
+                A0=math.pi/3.0
             
 
     except Exception as e: 
