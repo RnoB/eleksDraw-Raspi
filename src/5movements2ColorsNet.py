@@ -291,7 +291,7 @@ def main():
     blinked.switchColor('g',[5,6])
     draw = drawer.DrawerNet()    
     draw.penUp()
-    draw.squareCorner(0,0,widthPaper,heightPaper)
+    #draw.squareCorner(0,0,widthPaper,heightPaper)
     blinked.switchColor('g',[5,6,7])
     nLines = 400
     size = 0
@@ -325,7 +325,8 @@ def main():
     A0=0
     X2 = []
     try:
-        for l in range(0,1):
+        for l in range(0,2):
+            print("color : "+str(l))
             for j in range(0,nx):
 
                 blinked.progressColor(j/nx,'v','y',[4])
