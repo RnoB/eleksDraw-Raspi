@@ -342,9 +342,9 @@ def main():
                 X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 300,scale = scale,A0=A0,\
                         offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .2  ,speed = .2,cropFactor=0)
             if l==0:
-                time.sleep(600)
+                time.sleep(0)
                 X2 = []
-                A0=math.pi/3.0
+                A0=math.pi/2.0
             
 
     except Exception as e: 
