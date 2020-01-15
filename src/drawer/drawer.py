@@ -80,11 +80,11 @@ class Drawer:
         self.s.close()
 
     def penUp(self):
-        self.sendCommand((penCode[0].strip()+'\r\n').encode('UTF-8'))
+        self.sendCommand((self.penCode[0].strip()+'\r\n').encode('UTF-8'))
         self.penPosition=True 
         
     def penDown(self,):
-        self.sendCommand((penCode[1].strip()+'\r\n').encode('UTF-8'))
+        self.sendCommand((self.penCode[1].strip()+'\r\n').encode('UTF-8'))
         self.penPosition=False
 
     def line(self,x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000):
