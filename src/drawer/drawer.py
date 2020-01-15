@@ -101,6 +101,7 @@ class Drawer:
         self.penDown()
         for k in range(0,len(x)):
             self.toPosition(x[k]+xOffset,y[k]+yOffset,polar=polar)
+            print((x[k]+xOffset,y[k]+yOffset))
         self.penUp()
 
 
