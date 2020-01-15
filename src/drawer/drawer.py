@@ -96,7 +96,7 @@ class Drawer:
         self.toPosition(xf,yf)
         self.penUp()
 
-    def lines(self,x,y,,xOffset=0,yOffset=0,speed=2000):
+    def lines(self,x,y,xOffset=0,yOffset=0,speed=2000):
         self.toPosition(x[0]+xOffset,y[0]+yOffset)
         self.penDown()
         for k in range(0,len(x)):
