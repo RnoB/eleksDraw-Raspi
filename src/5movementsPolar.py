@@ -86,7 +86,7 @@ def spacer(depth,nx0,nx=20):
     return scale,nx,dist,offsetX,offsetY
 
 
-def scaler(x,y,scale=100,offsetX = 5,offsetY = 5,invert=False):
+def scaler(x,y,scale=100,offsetX = 20,offsetY = 20,invert=False):
     if invert:
         x2 = np.int(480*(x-offsetX)/scale)
         y2 = np.int(480*(y-offsetY)/scale)
@@ -182,7 +182,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                     and (dx1,dy1) not in imagePosition \
                     and (dx2,dy2) not in figurePosition \
                     and AZ[ky,kx]-A0<1.5 \
-                    and dx < 170 and dy < 250 \
+                    and dx < widthPaper and dy < heightPaper \
                     and dx > 0 and dy > 0:
                         
                         x=dxS
@@ -228,7 +228,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                         and (dx1,dy1) not in imagePosition \
                         and (dx2,dy2) not in figurePosition \
                         and AZ[ky,kx]-A0<1.5 \
-                        and dx < 170 and dy < 250 \
+                        and dx < heightPaper and dy < widthPaper \
                         and dx > 0 and dy > 0:
                             
                             x=dxS
@@ -254,7 +254,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             #print("X : "+str(np.min(xLines))+" Y : "+str(np.min(yLines)))
             xLines = xLines[np.int(np.floor(cropFactor*len(xLines))):]
             yLines = yLines[np.int(np.floor(cropFactor*len(xLines))):]
-            draw.lines(xLines,yLines,xOffset = -heightPaper/2.0,polar = True)
+            draw.lines(xLines,yLines,xOffset = -heightPaper/2.0,yOffset =20,polar = True)
             for position in linePosition:
                 imagePosition.append((round(position[0],distanceLine),round(position[1],distanceLine)))
                 repetitionPosition.append((round(position[0],distanceFigure),round(position[1],distanceFigure)))
