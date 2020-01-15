@@ -87,20 +87,20 @@ class Drawer:
         self.sendCommand((self.penCode[1].strip()+'\r\n').encode('UTF-8'))
         self.penPosition=False
 
-    def line(self,x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000):
+    def line(self,x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000,xOffset=0,yOffset=0):
         
-        xf = x0+length*math.cos(angle)
-        yf = y0+length*math.sin(angle)
+        xf = x0+length*math.cos(angle)+xOffset
+        yf = y0+length*math.sin(angle)+yOffset
         self.toPosition(x0,y0)
         self.penDown()
         self.toPosition(xf,yf)
         self.penUp()
 
-    def lines(self,x,y,speed=2000):
-        self.toPosition(x[0],y[0])
+    def lines(self,x,y,,xOffset=0,yOffset=0,speed=2000):
+        self.toPosition(x[0]+xOffset,y[0]+yOffset)
         self.penDown()
         for k in range(0,len(x)):
-            self.toPosition(x[k],y[k])
+            self.toPosition(x[k]+xOffset,y[k]+yOffset)
         self.penUp()
 
 
