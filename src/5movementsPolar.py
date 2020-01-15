@@ -53,7 +53,7 @@ def animColor():
     show()
 
 def spacer(depth,nx0,nx=20):
-    scale = 60
+    scale = 200
     heightMax=420
     
     nx0=np.int(nx0)
@@ -78,6 +78,8 @@ def spacer(depth,nx0,nx=20):
     width = np.mean(sizeImage,axis = 0)[0]
     nx = np.int(round((.8+1*random.random())*widthPaper/width))
     print(sizeImage)
+    print(nx)
+    print(width)
     dist = ((widthPaper-10)-sizeImage[nx-1][0]+offset[0][0]-offset[nx-1][0])/(nx-1)
     #dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
     return scale,nx,dist,offsetX,offsetY
@@ -266,6 +268,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
 def main():
+
     draw = drawer.Drawer(dx=362,dy=150)    
     draw.penInvert()
     draw.penUp()
