@@ -53,13 +53,13 @@ def animColor():
     show()
 
 def spacer(depth,nx0,nx=20):
-    scale = 200
+    scale = 500
     heightMax=420
     
     nx0=np.int(nx0)
     offsetY0 = []
     while heightMax>heightPaper-10:
-        print(heightMax)
+
         scale=scale-5
         sizeImage = []
         offset = []
@@ -75,6 +75,7 @@ def spacer(depth,nx0,nx=20):
         offsetX = offset[0][0]
         offsetY = np.min(offsetY0)
         heightMax = np.max(sizeImage,axis = 0)[1]
+        print(heightMax)
     width = np.mean(sizeImage,axis = 0)[0]
     nx = np.int(round((.8+1*random.random())*widthPaper/width))
     print(sizeImage)
@@ -253,7 +254,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             #print("X : "+str(np.min(xLines))+" Y : "+str(np.min(yLines)))
             xLines = xLines[np.int(np.floor(cropFactor*len(xLines))):]
             yLines = yLines[np.int(np.floor(cropFactor*len(xLines))):]
-            draw.lines(xLines,yLines,xOffset = -heightPaper/2.0)
+            draw.lines(xLines,yLines,yOffset = -heightPaper/2.0)
             for position in linePosition:
                 imagePosition.append((round(position[0],distanceLine),round(position[1],distanceLine)))
                 repetitionPosition.append((round(position[0],distanceFigure),round(position[1],distanceFigure)))

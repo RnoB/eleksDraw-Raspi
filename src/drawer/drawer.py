@@ -49,7 +49,7 @@ class Drawer:
 
     def penInvert(self,invert = True):
         if invert:
-            self.penCode = [penDownCode,penDownCode]
+            self.penCode = [penDownCode,penUpCode]
         else:
             self.penCode = [penUpCode,penDownCode]
 
