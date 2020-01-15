@@ -20,6 +20,12 @@ s = []
 x = 0
 y = 0
 
+penUpCode = 'M3S30'
+penDownCode = 'M3S90'
+
+
+
+
 
 def noiser(xMax):
     return xMax*random.random()
@@ -30,6 +36,7 @@ class Drawer:
     s = []
     penPosition = True
     output = False
+    penCode = [penUpCode,penDownCode]
     def sendCommand(self,gCode):
         if self.output:
             print(gCode)
@@ -40,7 +47,11 @@ class Drawer:
             print(out)
 
 
-
+    def penInvert(self,invert = True):
+        if invert:
+            self.penCode = [penDownCode,penDownCode]
+        else:
+            self.penCode = [penUpCode,penDownCode]
 
     def toPosition(self,x0,y0,speed = 3500,polar = False):
         if polar:
@@ -69,11 +80,11 @@ class Drawer:
         self.s.close()
 
     def penUp(self):
-        self.sendCommand(('M3S30'.strip()+'\r\n').encode('UTF-8'))
+        self.sendCommand((penCode[0].strip()+'\r\n').encode('UTF-8'))
         self.penPosition=True 
         
     def penDown(self,):
-        self.sendCommand(('M3S90'.strip()+'\r\n').encode('UTF-8'))
+        self.sendCommand((penCode[1].strip()+'\r\n').encode('UTF-8'))
         self.penPosition=False
 
     def line(self,x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000):
@@ -158,10 +169,10 @@ class DrawerNet:
     def penDown(self,):
         drawNet.pen("down")
 
-    def line(self,x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000):
+    def line(self,x0,y0,xf=-999,yf=-999,xOffset=0,yOffset=0,length=1,angle=0,speed=2000):
         
-        xf = x0+length*math.cos(angle)
-        yf = y0+length*math.sin(angle)
+        xf = x0+length*math.cos(angle)+xOffset
+        yf = y0+length*math.sin(angle)+yOffset
         drawNet.sendPosition(x0,y0)
         drawNet.penDown()
         self.toPosition(xf,yf)
