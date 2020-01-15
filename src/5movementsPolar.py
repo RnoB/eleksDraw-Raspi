@@ -254,7 +254,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             #print("X : "+str(np.min(xLines))+" Y : "+str(np.min(yLines)))
             xLines = xLines[np.int(np.floor(cropFactor*len(xLines))):]
             yLines = yLines[np.int(np.floor(cropFactor*len(xLines))):]
-            draw.lines(xLines,yLines,yOffset = -heightPaper/2.0)
+            draw.lines(xLines,yLines,yOffset = -heightPaper/2.0,polar = True)
             for position in linePosition:
                 imagePosition.append((round(position[0],distanceLine),round(position[1],distanceLine)))
                 repetitionPosition.append((round(position[0],distanceFigure),round(position[1],distanceFigure)))
