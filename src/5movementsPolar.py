@@ -270,7 +270,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 def main():
 
-    draw = drawer.Drawer(dx=362,dy=150)    
+    draw = drawer.Drawer(dx=362,dy=250)    
     draw.penInvert()
     draw.penUp()
     draw.toPosition(0,0)
