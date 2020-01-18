@@ -250,7 +250,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                             running = False
             if trial>100 and size==0:
                 size = -1
-        if size>0:
+        if size>1:
             #print("X : "+str(np.min(xLines))+" Y : "+str(np.min(yLines)))
             xLines = xLines[np.int(np.floor(cropFactor*len(xLines))):]
             yLines = yLines[np.int(np.floor(cropFactor*len(xLines))):]
