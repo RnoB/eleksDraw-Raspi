@@ -182,7 +182,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                     and (dx1,dy1) not in imagePosition \
                     and (dx2,dy2) not in figurePosition \
                     and AZ[ky,kx]-A0<1.5 \
-                    and dx < widthPaper and dy < heightPaper \
+                    and dx < heightPaper and dy < widthPaper \
                     and dx > 0 and dy > 0:
                         
                         x=dxS
@@ -228,7 +228,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                         and (dx1,dy1) not in imagePosition \
                         and (dx2,dy2) not in figurePosition \
                         and AZ[ky,kx]-A0<1.5 \
-                        and dx < heightPaper and dy < widthPaper \
+                        and dx < widthPaper and dy < heightPaper \
                         and dx > 0 and dy > 0:
                             
                             x=dxS
