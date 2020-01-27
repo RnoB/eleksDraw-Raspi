@@ -340,7 +340,7 @@ def main():
             offsetY = offsetY0+j*dist
 
             #print("offset : "+str((offsetX,offsetY)))
-            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL[j],scale = scale,A0=0,\
+            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = np.int(nL[j]),scale = scale,A0=0,\
                     offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .2  ,speed = .2,cropFactor=crop[j])
             
 
