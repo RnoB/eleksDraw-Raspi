@@ -322,7 +322,7 @@ def main():
 
 
     d = np.linspace(.1,4,nx)
-    nL = np.linspace(250,600,nx)
+    nL = np.linspace(250,800,nx)
 
     sp = np.linspace(.2,1.0,nx)
     crop = np.linspace(0,.6,nx)
@@ -340,7 +340,7 @@ def main():
             offsetY = offsetY0+j*dist
 
             #print("offset : "+str((offsetX,offsetY)))
-            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 300,scale = scale,A0=0,\
+            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL[j],scale = scale,A0=0,\
                     offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .2  ,speed = .2,cropFactor=crop[j])
             
 
