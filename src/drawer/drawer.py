@@ -112,7 +112,7 @@ class Drawer:
 
 
 
-    def square(self,xc,yc,R,anisotropy = 1,angle=0,speed=2000,noise = 0):
+    def square(self,xc,yc,R,anisotropy = 1,angle=0,speed=2000,noise = 0,polar=False):
         x = [-R,+R]
         y = [-anisotropy*R,+anisotropy*R]
         xIdx = [1,1,0,0]
@@ -134,6 +134,19 @@ class Drawer:
         self.penUp()
 
 
+    def squareCorner(self,x0,y0,x1,y1,noise = 0,polar=False):
+        x = [x0,x1]
+        y = [y0,y1]
+        xIdx = [1,1,0,0]
+        yIdx = [0,1,1,0]
+        xSquare = []
+        for k in range(0,4):
+            xSquare.append([x[xIdx[k]]+noiser(noise),y[yIdx[k]]+noiser(noise)])
+        self.toPosition(xSquare[-1][0],xSquare[-1][1],polar=polar)
+        self.penDown()
+        for xs in xSquare:
+            self.toPosition(xs[0],xs[1])
+        self.penUp()
 
     def __init__(self,output = False,dx = 0,dy=0,de = 40):
         self.penPosition=False
