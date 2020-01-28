@@ -134,7 +134,7 @@ class Drawer:
         self.penUp()
 
 
-    def squareCorner(self,x0,y0,x1,y1,noise = 0,polar=False):
+    def squareCorner(self,x0,y0,x1,y1,noise = 0,polar=False,xOffset=0,yOffset=0):
         x = [x0,x1]
         y = [y0,y1]
         xIdx = [1,1,0,0]
@@ -145,7 +145,7 @@ class Drawer:
         self.toPosition(xSquare[-1][0],xSquare[-1][1],polar=polar)
         self.penDown()
         for xs in xSquare:
-            self.toPosition(xs[0],xs[1])
+            self.toPosition(xs[0]+xOffset,xs[1]+yOffset)
         self.penUp()
 
     def __init__(self,output = False,dx = 0,dy=0,de = 40):
