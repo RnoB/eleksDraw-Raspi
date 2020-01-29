@@ -277,7 +277,7 @@ def main():
     set_brightness(.05)
     blinked.switchColor('g',[0])
     #draw.squareCorner(0,0,heightPaper,widthPaper,polar=True,xOffset = -heightPaper/2.0,yOffset =20)
-    draw.lines([0,0,heightPaper,heightPaper],[0,widthPaper,widthPaper,0],xOffset = -heightPaper/2.0,yOffset =20,polar = True)
+    #draw.lines([0,0,heightPaper,heightPaper],[0,widthPaper,widthPaper,0],xOffset = -heightPaper/2.0,yOffset =20,polar = True)
     try:
         kinect = kinecter.kinect()
         blinked.switchColor('o',[1])
