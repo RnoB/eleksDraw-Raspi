@@ -328,7 +328,7 @@ def main():
 
     sp = np.linspace(.2,1.0,nx)
     crop = np.linspace(0,.6,nx)
-    speedRange = np.linspace(.1,2,nx)
+    speedRange = np.linspace(1,10,nx)
 
     try:
         for j in range(0,nx):
@@ -344,7 +344,7 @@ def main():
 
             #print("offset : "+str((offsetX,offsetY)))
             X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 500,scale = scale,A0=0,\
-                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .2  ,speed = speedRange[j],cropFactor=0)
+                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .2  ,speed = .2 * speedRange[j],cropFactor=0)
             
 
     except Exception as e: 
