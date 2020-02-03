@@ -8,7 +8,9 @@ import random
 import math
 from kinecter import kinecter
 import time
-
+import asyncio
+from evdev import InputDevice, categorize, ecodes
+import threading
 running = True
 
 #widthPaper = 250
@@ -17,6 +19,31 @@ widthPaper = 600
 heightPaper = 400
 
 from blinked import blinked
+
+backgroundSub = False
+drawLoop = False
+
+
+dev = InputDevice('/dev/input/event0')
+
+async def helper(dev):
+     async for ev in dev.async_read_loop():
+        if ev.type == 1:
+            if ev.code == 272:
+                backgroundSub = True
+            elif ev.code ==273:
+                drawLoop = True
+
+def mouseListener():
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(helper(dev))
+
+
+
+
+
+
+
 
 
 def switchColor(col):
@@ -269,6 +296,10 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
 def main():
+    mouseThread = threading.Thread(target = mouseListener)
+    mouseThread.daemon = True
+    mouseThread.start()
+
 
     draw = drawer.Drawer(dx=362,dy=250)    
     draw.penInvert()
@@ -278,6 +309,9 @@ def main():
     blinked.switchColor('g',[0])
     #draw.squareCorner(0,0,heightPaper,widthPaper,polar=True,xOffset = -heightPaper/2.0,yOffset =20)
     #draw.lines([0,0,heightPaper,heightPaper],[0,widthPaper,widthPaper,0],xOffset = -heightPaper/2.0,yOffset =20,polar = True)
+    while(not backgroundSub):
+        time.sleep(.1)
+
     try:
         kinect = kinecter.kinect()
         blinked.switchColor('o',[1])
@@ -285,6 +319,8 @@ def main():
         kinect.backGroundSubstractor(nFrames=100)
         kinect.stop()
         blinked.switchColor('p',[1])
+        while(not drawLoop):
+            time.sleep(.1)
         time.sleep(20)
         kinect.start()
         kinect.getDepthFrames(nFrames = 40,delay=.01,maxDepth=2049)
