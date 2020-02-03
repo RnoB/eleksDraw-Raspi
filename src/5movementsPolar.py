@@ -30,6 +30,8 @@ drawLoop = False
 
 
 def mouseListener():
+    global backgroundSub
+    global drawLoop
     dev = InputDevice('/dev/input/event0')
     for ev in dev.read_loop():
         if ev.type == 1:
