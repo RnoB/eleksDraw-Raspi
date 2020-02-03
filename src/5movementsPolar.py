@@ -24,19 +24,19 @@ backgroundSub = False
 drawLoop = False
 
 
-dev = InputDevice('/dev/input/event0')
 
-async def helper(dev):
-     async for ev in dev.async_read_loop():
+
+
+
+
+def mouseListener():
+    dev = InputDevice('/dev/input/event0')
+    for ev in dev.read_loop():
         if ev.type == 1:
             if ev.code == 272:
                 backgroundSub = True
             elif ev.code ==273:
                 drawLoop = True
-
-def mouseListener():
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(helper(dev))
 
 
 
