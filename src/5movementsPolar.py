@@ -382,7 +382,7 @@ def main():
 
             #print("offset : "+str((offsetX,offsetY)))
             X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 600,scale = scale,A0=0,\
-                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[j]  ,speed = .1 ,cropFactor=0)
+                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[j]  ,speed = 1.1*d[j] ,cropFactor=0)
             
 
     except Exception as e: 
