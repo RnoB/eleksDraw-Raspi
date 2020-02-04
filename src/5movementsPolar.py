@@ -283,7 +283,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             #print("X : "+str(np.min(xLines))+" Y : "+str(np.min(yLines)))
             xLines = xLines[np.int(np.floor(cropFactor*len(xLines))):]
             yLines = yLines[np.int(np.floor(cropFactor*len(xLines))):]
-            draw.lines(yLines,xLines,xOffset = -heightPaper/2.0,yOffset =20,polar = True)
+            draw.lines(yLines,xLines,xOffset = -heightPaper/2.0,yOffset =20,polar = True,speed=500)
             for position in linePosition:
                 imagePosition.append((round(position[0],distanceLine),round(position[1],distanceLine)))
                 repetitionPosition.append((round(position[0],distanceFigure),round(position[1],distanceFigure)))
@@ -381,8 +381,8 @@ def main():
             offsetY = offsetY0+j*dist
 
             #print("offset : "+str((offsetX,offsetY)))
-            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 500,scale = scale,A0=0,\
-                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .2  ,speed = .2 * speedRange[j],cropFactor=0)
+            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 600,scale = scale,A0=0,\
+                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[j]  ,speed = .1 ,cropFactor=0)
             
 
     except Exception as e: 
