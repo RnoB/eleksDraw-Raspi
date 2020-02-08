@@ -184,7 +184,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 y2 = round(y,distanceFigure)
                 zTest = z[ky,kx]
                 Atest = A[ky,kx]
-                if (x2,y2) not in figurePosition and (x1,y1) not in imagePosition:
+                if (x2,y2) not in figurePosition and (x1,y1) not in imagePosition and not np.isnan(zTest) or not np.isnan(Atest):
                     xChecking = False
             print("----- Checked Starting Point : ----- ")
             print("----- t : "+str(time.time()-t0)+"s ----- ")
