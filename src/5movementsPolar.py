@@ -187,7 +187,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 if (x2,y2) not in figurePosition and (x1,y1) not in imagePosition:
                     xChecking = False
             print("----- Checked Starting Point : ----- ")
-            print("----- t : "+str(time.time()-t0)"s ----- ")
+            print("----- t : "+str(time.time()-t0)+"s ----- ")
             running = True
             t0 = time.time() 
             if np.isnan(zTest) or np.isnan(Atest):
