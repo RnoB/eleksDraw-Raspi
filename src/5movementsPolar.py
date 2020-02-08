@@ -286,7 +286,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             if trial>100 and size==0:
                 size = -1
         print("-- -- Selected Line : -- -- ")
-        print("-- -- t     : "+str(tim.time()-t0)+" -- -- ")
+        print("-- -- t     : "+str(time.time()-t0)+" -- -- ")
         print("-- -- size  : "+str(size)+" -- -- ")
         print("-- -- trial : "+str(trial)+" -- -- ")
         if size>1:
