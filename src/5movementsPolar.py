@@ -130,7 +130,7 @@ def scaler(x,y,scale=100,offsetX = 20,offsetY = 20,invert=False):
 def round(x, base=1):
     return base * np.round(x/base)
 
-
+@profile
 def drawing(kFrames,frames,angle,angleZ,draw,
             nLines = 400,scale = 70,A0=0,
             resolution=.1,speed = .4,distanceLine=.8 ,distanceFigure = 5.0,
@@ -186,8 +186,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 Atest = A[ky,kx]
                 if (x2,y2) not in figurePosition and (x1,y1) not in imagePosition and not np.isnan(zTest) or not np.isnan(Atest):
                     xChecking = False
-            print("----- Checked Starting Point : ----- ")
-            print("----- t : "+str(time.time()-t0)+"s ----- ")
+
             running = True
             t0 = time.time() 
             if np.isnan(zTest) or np.isnan(Atest):
@@ -391,7 +390,7 @@ def main():
             offsetY = offsetY0+j*dist
 
             #print("offset : "+str((offsetX,offsetY)))
-            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 200,scale = scale,A0=0,\
+            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 20,scale = scale,A0=0,\
                     offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = .1 ,cropFactor=0,resolution=.05)
             
 
