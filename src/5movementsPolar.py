@@ -11,6 +11,7 @@ import time
 import asyncio
 from evdev import InputDevice, categorize, ecodes
 import threading
+
 running = True
 
 #widthPaper = 250
@@ -166,6 +167,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
             size = 0
             xChecking = True
+            t0=time.time()
             while xChecking:
                 kx0 = random.randint(0, 639)
                 ky0 = random.randint(0, 479)
@@ -184,10 +186,14 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 Atest = A[ky,kx]
                 if (x2,y2) not in figurePosition and (x1,y1) not in imagePosition:
                     xChecking = False
+            print("----- Checked Starting Point : ----- ")
+            print("----- t : "+str(time.time()-t0)"s ----- ")
             running = True
+            t0 = time.time() 
             if np.isnan(zTest) or np.isnan(Atest):
                 running=False
-            else:    
+            else: 
+
                 while running:
                     xLines.append(y)
                     yLines.append(x)
@@ -279,6 +285,10 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                             running = False
             if trial>100 and size==0:
                 size = -1
+        print("-- -- Selected Line : -- -- ")
+        print("-- -- t     : "+str(tim.time()-t0)+" -- -- ")
+        print("-- -- size  : "+str(size)+" -- -- ")
+        print("-- -- trial : "+str(trial)+" -- -- ")
         if size>1:
             #print("X : "+str(np.min(xLines))+" Y : "+str(np.min(yLines)))
             xLines = xLines[np.int(np.floor(cropFactor*len(xLines))):]
