@@ -130,7 +130,7 @@ def scaler(x,y,scale=100,offsetX = 20,offsetY = 20,invert=False):
 def round(x, base=1):
     return base * np.round(x/base)
 
-@profile
+
 def drawing(kFrames,frames,angle,angleZ,draw,
             nLines = 400,scale = 70,A0=0,
             resolution=.1,speed = .4,distanceLine=.8 ,distanceFigure = 5.0,
