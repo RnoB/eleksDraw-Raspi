@@ -19,6 +19,9 @@ running = True
 widthPaper = 600
 heightPaper = 400
 
+sizeMax = 200
+
+
 from blinked import blinked
 
 backgroundSub = False
@@ -130,7 +133,7 @@ def scaler(x,y,scale=100,offsetX = 20,offsetY = 20,invert=False):
 def round(x, base=1):
     return base * np.round(x/base)
 
-
+ 
 def drawing(kFrames,frames,angle,angleZ,draw,
             nLines = 400,scale = 70,A0=0,
             resolution=.1,speed = .4,distanceLine=.8 ,distanceFigure = 5.0,
@@ -211,7 +214,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
                     if (dxk > -1) and (dxk < 640) \
                     and (dyk > -1) and (dyk < 480) \
-                    and size < 100 \
+                    and size < sizeMax \
                     and (dx,dy) not in linePosition\
                     and (dx1,dy1) not in imagePosition \
                     and (dx2,dy2) not in figurePosition \
@@ -257,7 +260,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
                         if (dxk > -1) and (dxk < 640) \
                         and (dyk > -1) and (dyk < 480) \
-                        and size < 100 \
+                        and size < sizeMax \
                         and (dx,dy) not in linePosition\
                         and (dx1,dy1) not in imagePosition \
                         and (dx2,dy2) not in figurePosition \
@@ -284,10 +287,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                             running = False
             if trial>100 and size==0:
                 size = -1
-        print("-- -- Selected Line : -- -- ")
-        print("-- -- t     : "+str(time.time()-t0)+" -- -- ")
-        print("-- -- size  : "+str(size)+" -- -- ")
-        print("-- -- trial : "+str(trial)+" -- -- ")
+
         if size>1:
             #print("X : "+str(np.min(xLines))+" Y : "+str(np.min(yLines)))
             xLines = xLines[np.int(np.floor(cropFactor*len(xLines))):]
@@ -390,7 +390,7 @@ def main():
             offsetY = offsetY0+j*dist
 
             #print("offset : "+str((offsetX,offsetY)))
-            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 20,scale = scale,A0=0,\
+            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 200,scale = scale,A0=0,\
                     offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = .1 ,cropFactor=0,resolution=.05)
             
 
