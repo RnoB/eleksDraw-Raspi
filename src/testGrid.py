@@ -19,13 +19,13 @@ def main():
         for j in range(1,len(Y)):
             xLines = [X[k],X[k]]
             yLines = [Y[j-1],Y[j]]
-            draw.lines(yLines,xLines,speed=5)
+            draw.lines(xLines,yLines,polar = True,speed=5)
 
     for k in range(1,len(Y)):
         for j in range(1,len(X)):
             xLines = [X[j-1],X[j]]
             yLines = [Y[k],Y[k]]
-            draw.lines(xLines,yLines,speed=5)
+            draw.lines(xLines,yLines,polar = True,speed=5)
 
   
     draw.toPosition(0,0)
