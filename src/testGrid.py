@@ -18,13 +18,13 @@ def main():
     for k in range(1,len(Y)):
         for j in range(1,len(X)):
             xLines = [X[j-1],X[j]]
-            xLines = [Y[k],Y[k]]
+            yLines = [Y[k],Y[k]]
             draw.lines(yLines,xLines)
 
     for k in range(1,len(X)):
         for j in range(1,len(Y)):
             xLines = [X[k],X[k]]
-            xLines = [Y[j-1],Y[j]]
+            yLines = [Y[j-1],Y[j]]
             draw.lines(yLines,xLines)
     draw.toPosition(0,0)
     draw.closeDrawer()
