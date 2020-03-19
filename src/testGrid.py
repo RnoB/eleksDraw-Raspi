@@ -14,7 +14,8 @@ def main():
     
     X = np.arange(0,600,10)
     Y = np.arange(-200,200,10)
-
+    print(X)
+    print(Y)
     for k in range(1,len(X)):
         for j in range(1,len(Y)):
             xLines = [X[k],X[k]]
