@@ -19,7 +19,7 @@ def main():
         for j in range(1,len(Y)):
             xLines = [X[k],X[k]]
             yLines = [Y[j-1],Y[j]]
-            draw.lines(xLines,yLines,speed=5)
+            draw.lines(yLines,xLines,speed=5)
 
     for k in range(1,len(Y)):
         for j in range(1,len(X)):
