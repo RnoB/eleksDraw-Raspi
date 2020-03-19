@@ -27,7 +27,7 @@ def main():
             yLines = [Y[k],Y[k]]
             draw.lines(yLines,xLines)
 
-
+  
     draw.toPosition(0,0)
     draw.closeDrawer()
 
