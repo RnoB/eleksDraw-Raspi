@@ -11,13 +11,7 @@ def main():
     draw.penInvert()
     draw.penUp()
     draw.toPosition(0,0)
-
-
-
-
-if __name__ == "__main__":
-    main()
-
+    
     X = np.arange(0,60,1)
     Y = np.arange(-20,20,1)
 
@@ -34,3 +28,11 @@ if __name__ == "__main__":
             draw.lines(yLines,xLines)
     draw.toPosition(0,0)
     draw.closeDrawer()
+
+
+
+
+if __name__ == "__main__":
+    main()
+
+
