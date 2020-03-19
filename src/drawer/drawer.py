@@ -93,17 +93,17 @@ class Drawer:
         yf = y0+length*math.sin(angle)+yOffset
         self.toPosition(x0,y0)
         self.penDown()
-        self.toPosition(xf,yf)
+        self.toPosition(xf,yf,speed)
         self.penUp()
 
     def lines(self,x,y,xOffset=0,yOffset=0,speed=2000,polar=False):
-        self.toPosition(x[0]+xOffset,y[0]+yOffset,polar=polar)
+        self.toPosition(x[0]+xOffset,y[0]+yOffset,polar=polar,speed=2*speed)
         self.penDown()
         k0=0
         try:
             for k in range(0,len(x)):
                 k0 = k
-                self.toPosition(x[k]+xOffset,y[k]+yOffset,polar=polar)
+                self.toPosition(x[k]+xOffset,y[k]+yOffset,polar=polar,speed=speed)
         except:
             print('--- CRASH !!!! ---')
             print("length : "+str(len(x)))
