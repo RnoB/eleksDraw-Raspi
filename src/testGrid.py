@@ -7,13 +7,13 @@ def main():
 
 
 
-    draw = drawer.Drawer(dx=450,dy=230)    
+    draw = drawer.Drawer(dx=350,dy=230)    
     draw.penInvert()
     draw.penUp()
     draw.toPosition(0,0)
     
-    X = np.arange(0,600,10)
-    Y = np.arange(-200,200,10)
+    X = np.arange(0,600,50)
+    Y = np.arange(-200,200,50)
     print(X)
     print(Y)
     for k in range(1,len(X)):
