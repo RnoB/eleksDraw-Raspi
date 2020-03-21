@@ -20,8 +20,9 @@ s = []
 x = 0
 y = 0
 
-penUpCode = 'M3S30'
-penDownCode = 'M3S90'
+penmove = 'M3S'
+penUpCode = 30
+penDownCode = 90
 
 
 
@@ -79,12 +80,23 @@ class Drawer:
         self.s.readline()
         self.s.close()
 
-    def penUp(self):
-        self.sendCommand((self.penCode[0].strip()+'\r\n').encode('UTF-8'))
+    def penUp(self,smooth = False):
+        if not smooth:
+            self.sendCommand(((penMove+str(self.penCode[0])).strip()+'\r\n').encode('UTF-8'))
+
+        else:
+            penCodes = np.arange(self.penCode[1]+1,self.penCode[0]+1)
+            for code in penCodes:
+                self.sendCommand(((penMove+str(code)).strip()+'\r\n').encode('UTF-8'))
         self.penPosition=True 
         
-    def penDown(self,):
-        self.sendCommand((self.penCode[1].strip()+'\r\n').encode('UTF-8'))
+    def penDown(self,smooth = False):
+        if not smooth:
+            self.sendCommand(((penMove+str(self.penCode[1])).strip()+'\r\n').encode('UTF-8'))
+        else:
+            penCodes = np.arange(self.penCode[0]+1,self.penCode[1]+1)
+            for code in penCodes:
+                self.sendCommand(((penMove+str(code)).strip()+'\r\n').encode('UTF-8'))
         self.penPosition=False
 
     def line(self,x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000,xOffset=0,yOffset=0,polar=False):
