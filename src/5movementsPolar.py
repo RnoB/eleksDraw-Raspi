@@ -332,7 +332,24 @@ def main():
         blinked.switchColor('p',[1])
         while(not drawLoop):
             time.sleep(.1)
-        time.sleep(20)
+        for k in range(0,12):
+            time.sleep(.8)
+            blinked.switchColor('r',[7])
+            time.sleep(.2)
+            blinked.switchColor('k',[7])
+
+        for k in range(0,10):
+            time.sleep(.35)
+            blinked.switchColor('o',[7])
+            time.sleep(.15)
+            blinked.switchColor('k',[7])
+        
+        for k in range(0,5):
+            deltaT = .3/((k+1))
+            time.sleep(.9*deltaT)
+            blinked.switchColor('g',[7])
+            time.sleep(.1*deltaT)
+            blinked.switchColor('k',[7])
         kinect.start()
         kinect.getDepthFrames(nFrames = 40,delay=.01,maxDepth=2049)
         kinect.stop()

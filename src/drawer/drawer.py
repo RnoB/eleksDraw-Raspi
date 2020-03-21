@@ -59,8 +59,8 @@ class Drawer:
 
             lL = np.sqrt((self.dx + x0)**2+(self.dy+y0)**2)-self.dist
             lR = np.sqrt((self.dx - x0)**2+(self.dy+y0)**2)-self.dist
-            x0 = lL
-            y0 = lR
+            y0 = lL
+            x0 = lR
         gCode = (('G1X'+str(x0)+'Y'+str(y0)+'F'+str(speed)).strip()+'\r\n').encode('UTF-8')
         self.sendCommand(gCode)
 

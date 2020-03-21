@@ -16,8 +16,8 @@ running = True
 
 #widthPaper = 250
 #heightPaper = 170
-widthPaper = 600
-heightPaper = 400
+widthPaper = 400
+heightPaper = 600
 
 sizeMax = 200
 
@@ -85,38 +85,29 @@ def animColor():
     clear()
     show()
 
-def spacer(depth,nx0,nx=20):
-    scale = 500
-    heightMax=420
+def spacer(depth,nx=20):
+    scale = 800
+    heightMax=9999
     
-    nx0=np.int(nx0)
     offsetY0 = []
-    while heightMax>heightPaper-10:
+
+    Ht = np.sum(np.isnan(depth[0]),axis=0)!=480
+    H = np.nonzero(Ht)
+    Wt = np.sum(np.isnan(depth[0]),axis=1)!=640
+    W = np.nonzero(Wt)
+    while sizeImage>heightPaper-10:
 
         scale=scale-5
         sizeImage = []
         offset = []
-        for k in range(0,nx):
-            Ht = np.sum(np.isnan(depth[nx0+k]),axis=0)!=480
-            H = np.nonzero(Ht)
-            Wt = np.sum(np.isnan(depth[nx0+k]),axis=1)!=640
-            W = np.nonzero(Wt)
-            sizeImage.append(scaler(W[0][-1]-W[0][0],H[0][-1]-H[0][0],scale=scale,offsetX = 0,offsetY = 0))
-            offset.append(scaler(W[0][0],H[0][0],scale=scale,offsetX = 0,offsetY = 0))
-            offsetY0.append(offset[-1][1])
-
-        offsetX = offset[0][0]
-        offsetY = np.min(offsetY0)
-        heightMax = np.max(sizeImage,axis = 0)[1]
-        print(heightMax)
+        sizeImage = scaler(W[0][-1]-W[0][0],H[0][-1]-H[0][0],scale=scale,offsetX = 0,offsetY = 0)
+        offset = scaler(W[0][0],H[0][0],scale=scale,offsetX = 0,offsetY = 0)
+        offsetY0 = offset[-1][1]
+        print(sizeImage)
     width = np.mean(sizeImage,axis = 0)[0]
-    nx = np.int(round((.8+1*random.random())*widthPaper/width))
-    print(sizeImage)
-    print(nx)
+   print(sizeImage)
     print(width)
-    dist = ((widthPaper-10)-sizeImage[nx-1][0]+offset[0][0]-offset[nx-1][0])/(nx-1)
-    #dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
-    return scale,nx,dist,offsetX,offsetY
+     return scale,offsetX,offsetY
 
 
 def scaler(x,y,scale=100,offsetX = 20,offsetY = 20,invert=False):
@@ -183,11 +174,9 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 ky = ky0
                 x1 = round(x,distanceLine)
                 y1 = round(y,distanceLine)
-                x2 = round(x,distanceFigure)
-                y2 = round(y,distanceFigure)
                 zTest = z[ky,kx]
                 Atest = A[ky,kx]
-                if (x2,y2) not in figurePosition and (x1,y1) not in imagePosition and not np.isnan(zTest) or not np.isnan(Atest):
+                if (x1,y1) not np.isnan(zTest) or not np.isnan(Atest):
                     xChecking = False
 
             running = True
@@ -196,112 +185,37 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 running=False
             else: 
 
-                while running:
-                    xLines.append(y)
-                    yLines.append(x)
-                    linePosition.append((round(x,resolution),round(y,resolution)))
-                    speedZ = speed#*np.cos(AZ[ky,kx])**.2
-                    angleD = A[ky,kx]+noise*(.5-random.random())
-                    dxS = x+speedZ*np.cos(angleD)
-                    dyS = y+speedZ*np.sin(angleD)
-                    dx = round(dxS,resolution)
-                    dy = round(dyS,resolution)
-                    dx1 = round(dx,distanceLine)
-                    dy1 = round(dy,distanceLine)
-                    dx2 = round(dx,distanceFigure)
-                    dy2 = round(dy,distanceFigure)
-                    dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
+                linePosition.append((round(x,resolution),round(y,resolution)))
 
-                    if (dxk > -1) and (dxk < 640) \
-                    and (dyk > -1) and (dyk < 480) \
-                    and size < sizeMax \
-                    and (dx,dy) not in linePosition\
-                    and (dx1,dy1) not in imagePosition \
-                    and (dx2,dy2) not in figurePosition \
-                    and AZ[ky,kx]-A0<1.5 \
-                    and dx < heightPaper and dy < widthPaper \
-                    and dx > 0 and dy > 0:
-                        
-                        x=dxS
-                        y=dyS
-                        
-                        kx=dxk
-                        ky=dyk
-                        zTest = z[ky,kx]
-                        Atest = A[ky,kx]
-                        AZtest = AZ[ky,kx]
-                        size +=speedZ
-                        if np.isnan(zTest) or np.isnan(Atest)or np.isnan(AZtest):
-                            running=False
-                    else:
-                
-                        running = False
-                reverse = False
-                if reverse:
-                    running = True
+
+                speedZ = speed#*np.cos(AZ[ky,kx])**.2
+                angleD = (1.1+np.cos(A[ky,kx]))+noise*(.5-random.random())
+                dxS = speedZ*np.cos(angleD)
+                dyS = speedZ*np.sin(angleD)
+                dx = round(dxS,resolution)
+                dy = round(dyS,resolution)
+                dx1 = round(dx,distanceLine)
+                dy1 = round(dy,distanceLine)
+                dx2 = round(dx,distanceFigure)
+                dy2 = round(dy,distanceFigure)
+                dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
                     
-                    x = x0
-                    y = y0
-                    kx = kx0
-                    ky = ky0     
-                    while running:
-                        linePosition.append((round(x,resolution),round(y,resolution)))
-                        speedZ = speed#*np.cos(AZ[ky,kx])**.2
-                        angleD = np.pi+A[ky,kx]+noise*(.5-random.random())
-                        dxS = x+speedZ*np.cos(angleD)
-                        dyS = y+speedZ*np.sin(angleD)
-                        dx = round(dxS,resolution)
-                        dy = round(dyS,resolution)
-                        dx1 = round(dx,distanceLine)
-                        dy1 = round(dy,distanceLine)
-                        dx2 = round(dx,distanceFigure)
-                        dy2 = round(dy,distanceFigure)
-                        dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
+                xLines.append(y+dy)
+                yLines.append(x+dx)
+                xLines.append(y-dy)
+                yLines.append(x-dx)
+                size = 1
 
-                        if (dxk > -1) and (dxk < 640) \
-                        and (dyk > -1) and (dyk < 480) \
-                        and size < sizeMax \
-                        and (dx,dy) not in linePosition\
-                        and (dx1,dy1) not in imagePosition \
-                        and (dx2,dy2) not in figurePosition \
-                        and AZ[ky,kx]-A0<1.5 \
-                        and dx < widthPaper and dy < heightPaper \
-                        and dx > 0 and dy > 0:
-                            
-                            x=dxS
-                            y=dyS
-                            
-                            kx=dxk
-                            ky=dyk
-                            zTest = z[ky,kx]
-                            Atest = A[ky,kx]
-                            AZtest = AZ[ky,kx]
-                            size +=speedZ
-                            if np.isnan(zTest) or np.isnan(Atest)or np.isnan(AZtest):
-                                running=False
-                            else:
 
-                               xLines.insert(0,y)
-                               yLines.insert(0,x)
-                        else:
-                            running = False
-            if trial>100 and size==0:
-                size = -1
+                
+
 
         if size>1:
-            #print("X : "+str(np.min(xLines))+" Y : "+str(np.min(yLines)))
-            xLines = xLines[np.int(np.floor(cropFactor*len(xLines))):]
-            yLines = yLines[np.int(np.floor(cropFactor*len(xLines))):]
-            draw.lines(yLines,xLines,xOffset = -heightPaper/2.0,yOffset =20,polar = True,speed=500)
-            for position in linePosition:
-                imagePosition.append((round(position[0],distanceLine),round(position[1],distanceLine)))
-                repetitionPosition.append((round(position[0],distanceFigure),round(position[1],distanceFigure)))
 
-    for position in repetitionPosition:
-        if position not in figurePosition:
-            figurePosition.append(position)
-            if len(figurePosition)>10000000:
-                del figurePosition[0]
+            draw.lines(yLines,xLines,xOffset = -widthPaper/2.0,yOffset =20,polar = True,speed=500)
+
+
+
     return figurePosition
 
 
@@ -368,7 +282,7 @@ def main():
 
     X2 = []
     nx0=np.int(len(kinect.frames)/2)
-    scale,nx,dist,offsetX,offsetY =  spacer(kinect.frames,nx0-1,nx0)
+    scale,offsetX,offsetY =  spacer(kinect.frames,nx0-1,nx0)
     print("scale : "+str(scale))
     print("n     : "+str(nx))
     print("offsetX  : "+str(offsetX))
@@ -395,20 +309,18 @@ def main():
     speedRange = np.linspace(1,10,nx)
 
     try:
-        for j in range(0,nx):
 
-            blinked.progressColor(j/nx,'v','y',[4])
-            
-            kFrames = j+nx0
-            #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
-            #
-            
-            offsetX = offsetX0
-            offsetY = offsetY0+j*dist
+        blinked.progressColor(p,'v','y',[4])
+        
+        #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
+        #
+        
+        offsetX = offsetX0
+        offsetY = offsetY0
 
-            #print("offset : "+str((offsetX,offsetY)))
-            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 200,scale = scale,A0=0,\
-                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = .1 ,cropFactor=0,resolution=.05)
+        #print("offset : "+str((offsetX,offsetY)))
+        X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=0,\
+                offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = .3 ,cropFactor=0,resolution=.05)
             
 
     except Exception as e: 
