@@ -86,6 +86,7 @@ class Drawer:
 
         else:
             penCodes = np.arange(self.penCode[1]+1,self.penCode[0]+1)
+            print(penCodes)
             for code in penCodes:
                 self.sendCommand(((penMove+str(code)).strip()+'\r\n').encode('UTF-8'))
         self.penPosition=True 
