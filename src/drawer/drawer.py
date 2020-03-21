@@ -85,7 +85,7 @@ class Drawer:
             self.sendCommand(((penMove+str(self.penCode[0])).strip()+'\r\n').encode('UTF-8'))
 
         else:
-            penCodes = np.flip(np.arange(self.penCode[0]+1,self.penCode[1]+1))
+            penCodes = np.flip(np.arange(self.penCode[0]+1,self.penCode[1]+1,5))
 
             for code in penCodes:
                 self.sendCommand(((penMove+str(code)).strip()+'\r\n').encode('UTF-8'))
@@ -95,7 +95,7 @@ class Drawer:
         if not smooth:
             self.sendCommand(((penMove+str(self.penCode[1])).strip()+'\r\n').encode('UTF-8'))
         else:
-            penCodes = np.arange(self.penCode[0]+1,self.penCode[1]+1)
+            penCodes = np.arange(self.penCode[0]+1,self.penCode[1]+1,5)
 
             for code in penCodes:
                 self.sendCommand(((penMove+str(code)).strip()+'\r\n').encode('UTF-8'))
