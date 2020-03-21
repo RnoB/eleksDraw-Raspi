@@ -89,6 +89,7 @@ class Drawer:
 
             for code in penCodes:
                 self.sendCommand(((penMove+str(code)).strip()+'\r\n').encode('UTF-8'))
+                time.sleep(.05)
         self.penPosition=True 
         
     def penDown(self,smooth = False):
@@ -99,6 +100,7 @@ class Drawer:
 
             for code in penCodes:
                 self.sendCommand(((penMove+str(code)).strip()+'\r\n').encode('UTF-8'))
+                time.sleep(.05)
         self.penPosition=False
 
     def line(self,x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000,xOffset=0,yOffset=0,polar=False):
