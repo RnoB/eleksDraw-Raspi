@@ -346,7 +346,7 @@ def main():
         
         for k in range(0,5):
             deltaT = 1.0/(5.0-k)
-            time.sleep(3.0/(5.0-k).9*deltaT)
+            time.sleep(3.0/(5.0-k)*.9*deltaT)
             blinked.switchColor('g',[7])
             time.sleep(.1*deltaT)
             blinked.switchColor('k',[7])
