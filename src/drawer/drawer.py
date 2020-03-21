@@ -20,7 +20,7 @@ s = []
 x = 0
 y = 0
 
-penmove = 'M3S'
+penMove = 'M3S'
 penUpCode = 30
 penDownCode = 90
 
