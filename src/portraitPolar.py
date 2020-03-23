@@ -248,11 +248,11 @@ def main():
         blinked.switchColor('p',[1])
         while(not drawLoop):
             time.sleep(1)
-        for k in range(0,12):
-            time.sleep(.8)
-            blinked.switchColor('r',[7])
-            time.sleep(.2)
-            blinked.switchColor('k',[7])
+        #for k in range(0,12):
+        #    time.sleep(.8)
+        #    blinked.switchColor('r',[7])
+        #    time.sleep(.2)
+        #    blinked.switchColor('k',[7])
 
         for k in range(0,10):
             time.sleep(.35)
