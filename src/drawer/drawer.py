@@ -103,18 +103,18 @@ class Drawer:
                 time.sleep(.05)
         self.penPosition=False
 
-    def line(self,x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000,xOffset=0,yOffset=0,polar=False):
+    def line(self,x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000,xOffset=0,yOffset=0,polar=False,smooth = False):
         
         xf = x0+length*math.cos(angle)+xOffset
         yf = y0+length*math.sin(angle)+yOffset
         self.toPosition(x0,y0)
-        self.penDown()
+        self.penDown(smooth = smooth)
         self.toPosition(xf,yf,speed)
-        self.penUp()
+        self.penUp(smooth = smooth)
 
-    def lines(self,x,y,xOffset=0,yOffset=0,speed=2000,polar=False):
+    def lines(self,x,y,xOffset=0,yOffset=0,speed=2000,polar=False,smooth=False):
         self.toPosition(x[0]+xOffset,y[0]+yOffset,polar=polar,speed=2*speed)
-        self.penDown()
+        self.penDown(smooth = smooth)
         k0=0
         try:
             for k in range(0,len(x)):
@@ -124,7 +124,7 @@ class Drawer:
             print('--- CRASH !!!! ---')
             print("length : "+str(len(x)))
             print("  k0   : "+str(k0))
-        self.penUp()
+        self.penUp(smooth = smooth)
 
 
 

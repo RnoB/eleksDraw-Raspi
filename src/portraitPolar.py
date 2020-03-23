@@ -88,7 +88,7 @@ def animColor():
 def spacer(depth):
     scale = 800
     heightMax=9999
-    widthmax =9999
+    width =9999
     
     offsetY0 = []
 
@@ -213,7 +213,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
         if size>1:
 
-            draw.lines(yLines,xLines,xOffset = -widthPaper/2.0,yOffset =20,polar = True,speed=500)
+            draw.lines(yLines,xLines,xOffset = -widthPaper/2.0,yOffset =20,polar = True,speed=500,smooth=True)
 
 
 
