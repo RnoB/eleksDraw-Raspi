@@ -231,7 +231,7 @@ def main():
 
 
     draw = drawer.Drawer(dx=450,dy=230)    
-    draw.penInvert()
+    draw.penInvert(True)
     draw.penUp()
     draw.toPosition(0,0)
     set_brightness(.05)

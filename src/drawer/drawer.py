@@ -38,6 +38,7 @@ class Drawer:
     penPosition = True
     output = False
     penCode = [penUpCode,penDownCode]
+    penCodeSmooth = []
     def sendCommand(self,gCode):
         if self.output:
             print(gCode)
@@ -49,10 +50,16 @@ class Drawer:
 
 
     def penInvert(self,invert = True):
+        codeSmooth = np.arange(self.penCode[0]+1,self.penCode[1]+1,5)
         if invert:
             self.penCode = [penDownCode,penUpCode]
+            self.penCodeSmooth.append((codeSmooth))
+            self.penCodeSmooth.append((np.flip(codeSmooth)))
+
         else:
             self.penCode = [penUpCode,penDownCode]
+            self.penCodeSmooth.append((np.flip(codeSmooth)))
+            self.penCodeSmooth.append((codeSmooth))
 
     def toPosition(self,x0,y0,speed = 3500,polar = False):
         if polar:
@@ -85,9 +92,9 @@ class Drawer:
             self.sendCommand(((penMove+str(self.penCode[0])).strip()+'\r\n').encode('UTF-8'))
 
         else:
-            penCodes = np.flip(np.arange(self.penCode[0]+1,self.penCode[1]+1,5))
+            
 
-            for code in penCodes:
+            for code in self.penCodeSmooth[0]:
                 self.sendCommand(((penMove+str(code)).strip()+'\r\n').encode('UTF-8'))
                 time.sleep(.05)
         self.penPosition=True 
@@ -97,9 +104,7 @@ class Drawer:
             self.sendCommand(((penMove+str(self.penCode[1])).strip()+'\r\n').encode('UTF-8'))
         else:
             penCodes = np.arange(self.penCode[0]+1,self.penCode[1]+1,5)
-            print(penCodes)
-            print(self.penCode)
-            for code in penCodes:   
+            for code in self.penCodeSmooth[1]:   
                 self.sendCommand(((penMove+str(code)).strip()+'\r\n').encode('UTF-8'))
                 time.sleep(.05)
         self.penPosition=False
