@@ -104,7 +104,8 @@ def spacer(depth):
         sizeImage = scaler(W[0][-1]-W[0][0],H[0][-1]-H[0][0],scale=scale,offsetX = 0,offsetY = 0)
 
         offset = scaler(W[0][0],H[0][0],scale=scale,offsetX = 0,offsetY = 0)
-        offsetY0 = offset[-1][1]
+        offsetY = offset[1]
+        offsetX = offset[0]
         heightMax = sizeImage[1]
         width = sizeImage[0]
         print("sizeImage : "+str(sizeImage))
