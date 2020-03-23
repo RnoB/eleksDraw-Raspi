@@ -152,7 +152,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     #if speed<distanceLine:
         #speed = distanceLine
     for k in range(0,nLines):
-        print("lines n :"+str(k))
+        
         blinked.progressColor(k/nLines,'v','y',[4])
         size = 0
         trial =0
@@ -208,7 +208,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 yLines.append(x+dx)
                 xLines.append(y-dy)
                 yLines.append(x-dx)
-                size = 1
+                size = 2
 
 
                 
