@@ -87,7 +87,8 @@ def animColor():
 
 def spacer(depth):
     scale = 800
-    sizeImage=9999
+    heightMax=9999
+    widthmax =9999
     
     offsetY0 = []
 
@@ -95,19 +96,18 @@ def spacer(depth):
     H = np.nonzero(Ht)
     Wt = np.sum(np.isnan(depth[0]),axis=1)!=640
     W = np.nonzero(Wt)
-    while sizeImage>heightPaper-10:
+    while heightMax>heightPaper-10 and width>widthPaper-10:
 
         scale=scale-5
         
         offset = []
-        sizeImage = scaler(W[0][-1]-W[0][0],H[0][-1]-H[0][0],scale=scale,offsetX = 0,offsetY = 0)[1]
-        print(sizeImage)
+        sizeImage = scaler(W[0][-1]-W[0][0],H[0][-1]-H[0][0],scale=scale,offsetX = 0,offsetY = 0)
+
         offset = scaler(W[0][0],H[0][0],scale=scale,offsetX = 0,offsetY = 0)
         offsetY0 = offset[-1][1]
-        print(sizeImage)
-    width = np.mean(sizeImage,axis = 0)[0]
-    print(sizeImage)
-    print(width)
+        heightMax = sizeImage[1]
+        width = sizeImage[0]
+        print("sizeImage : "+str(sizeImage))
     return scale,offsetX,offsetY
 
 
