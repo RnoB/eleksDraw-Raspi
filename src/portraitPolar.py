@@ -85,7 +85,7 @@ def animColor():
     clear()
     show()
 
-def spacer(depth,nx=20):
+def spacer(depth):
     scale = 800
     heightMax=9999
     
@@ -282,7 +282,7 @@ def main():
 
     X2 = []
     nx0=np.int(len(kinect.frames)/2)
-    scale,offsetX,offsetY =  spacer(kinect.frames,nx0-1,nx0)
+    scale,offsetX,offsetY =  spacer(kinect.frames)
     print("scale : "+str(scale))
     print("n     : "+str(nx))
     print("offsetX  : "+str(offsetX))
