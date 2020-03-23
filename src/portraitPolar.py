@@ -152,7 +152,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     #if speed<distanceLine:
         #speed = distanceLine
     for k in range(0,nLines):
-
+        blinked.progressColor(k/nLines,'v','y',[4])
         size = 0
         trial =0
         while(size == 0):
@@ -307,7 +307,7 @@ def main():
 
     try:
 
-        blinked.progressColor(p,'v','y',[4])
+        blinked.progressColor(0,'v','y',[4])
         
         #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
         #
