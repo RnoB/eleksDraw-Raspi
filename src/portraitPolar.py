@@ -108,7 +108,7 @@ def spacer(depth):
         offsetX = offset[0]
         heightMax = sizeImage[1]
         width = sizeImage[0]
-        print("sizeImage : "+str(sizeImage))
+        
     return scale,offsetX,offsetY
 
 
@@ -152,6 +152,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     #if speed<distanceLine:
         #speed = distanceLine
     for k in range(0,nLines):
+        print("lines n :"+str(k))
         blinked.progressColor(k/nLines,'v','y',[4])
         size = 0
         trial =0
@@ -178,6 +179,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 y1 = round(y,distanceLine)
                 zTest = z[ky,kx]
                 Atest = A[ky,kx]
+                print(Atest)
                 if not np.isnan(zTest) or not np.isnan(Atest):
                     xChecking = False
 
@@ -307,8 +309,6 @@ def main():
 
     try:
 
-        blinked.progressColor(0,'v','y',[4])
-        
         #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
         #
         
