@@ -216,7 +216,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
         if size>1:
 
-            draw.lines(yLines,xLines,xOffset = -widthPaper/2.0,yOffset =20,polar = True,speed=750,smooth=True)
+            draw.lines(xLines,yLines,xOffset = -widthPaper/2.0,yOffset =20,polar = True,speed=750,smooth=True)
 
 
 
@@ -317,7 +317,7 @@ def main():
 
         #print("offset : "+str((offsetX,offsetY)))
         X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=0,\
-                offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = .3 ,cropFactor=0,resolution=.05)
+                offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = 20 ,cropFactor=0,resolution=.05)
             
 
     except Exception as e: 
