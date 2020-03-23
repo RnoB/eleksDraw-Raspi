@@ -105,9 +105,9 @@ def spacer(depth,nx=20):
         offsetY0 = offset[-1][1]
         print(sizeImage)
     width = np.mean(sizeImage,axis = 0)[0]
-   print(sizeImage)
+    print(sizeImage)
     print(width)
-     return scale,offsetX,offsetY
+    return scale,offsetX,offsetY
 
 
 def scaler(x,y,scale=100,offsetX = 20,offsetY = 20,invert=False):
