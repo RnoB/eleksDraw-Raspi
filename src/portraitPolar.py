@@ -179,7 +179,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 y1 = round(y,distanceLine)
                 zTest = z[ky,kx]
                 Atest = A[ky,kx]
-                print(Atest)
+                
                 if not np.isnan(zTest) or not np.isnan(Atest):
                     xChecking = False
 
@@ -216,7 +216,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
         if size>1:
 
-            draw.lines(yLines,xLines,xOffset = -widthPaper/2.0,yOffset =20,polar = True,speed=500,smooth=True)
+            draw.lines(yLines,xLines,xOffset = -widthPaper/2.0,yOffset =20,polar = True,speed=1000,smooth=True)
 
 
 
