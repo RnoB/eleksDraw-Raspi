@@ -59,8 +59,8 @@ class Drawer:
 
             lL = np.sqrt((self.dx + x0)**2+(self.dy+y0)**2)-self.dist
             lR = np.sqrt((self.dx - x0)**2+(self.dy+y0)**2)-self.dist
-            y0 = lL
-            x0 = lR
+            x0 = lL
+            y0 = lR
         gCode = (('G1X'+str(x0)+'Y'+str(y0)+'F'+str(speed)).strip()+'\r\n').encode('UTF-8')
         self.sendCommand(gCode)
 
@@ -99,6 +99,7 @@ class Drawer:
             penCodes = np.arange(self.penCode[0]+1,self.penCode[1]+1,5)
 
             for code in penCodes:
+                print(code)
                 self.sendCommand(((penMove+str(code)).strip()+'\r\n').encode('UTF-8'))
                 time.sleep(.05)
         self.penPosition=False
