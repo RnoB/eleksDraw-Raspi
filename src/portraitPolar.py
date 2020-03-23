@@ -96,7 +96,7 @@ def spacer(depth):
     H = np.nonzero(Ht)
     Wt = np.sum(np.isnan(depth[0]),axis=1)!=640
     W = np.nonzero(Wt)
-    while heightMax>heightPaper-10 and width>widthPaper-10:
+    while heightMax>heightPaper-10 or width>widthPaper-10:
 
         scale=scale-5
         
@@ -303,12 +303,7 @@ def main():
 
 
 
-    d = np.linspace(.1,4,nx)
-    nL = np.linspace(250,1200,nx)
 
-    sp = np.linspace(.2,1.0,nx)
-    crop = np.linspace(0,.6,nx)
-    speedRange = np.linspace(1,10,nx)
 
     try:
 
