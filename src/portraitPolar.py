@@ -216,7 +216,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
         if size>1:
 
-            draw.lines(yLines,xLines,xOffset = -widthPaper/2.0,yOffset =20,polar = True,speed=1000,smooth=True)
+            draw.lines(yLines,xLines,xOffset = -widthPaper/2.0,yOffset =20,polar = True,speed=750,smooth=True)
 
 
 
