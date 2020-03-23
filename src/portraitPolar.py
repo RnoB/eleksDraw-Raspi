@@ -230,7 +230,7 @@ def main():
     mouseThread.start()
 
 
-    draw = drawer.Drawer(dx=450,dy=230)    
+    draw = drawer.Drawer(dx=350,dy=230)    
     draw.penInvert(True)
     draw.penUp()
     draw.toPosition(0,0)
