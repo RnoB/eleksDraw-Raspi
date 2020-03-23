@@ -176,7 +176,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 y1 = round(y,distanceLine)
                 zTest = z[ky,kx]
                 Atest = A[ky,kx]
-                if (x1,y1) not np.isnan(zTest) or not np.isnan(Atest):
+                if not np.isnan(zTest) or not np.isnan(Atest):
                     xChecking = False
 
             running = True
