@@ -286,12 +286,12 @@ def main():
     nx0=np.int(len(kinect.frames)/2)
     scale,offsetX,offsetY =  spacer(kinect.frames)
     print("scale : "+str(scale))
-    print("n     : "+str(nx))
+
     print("offsetX  : "+str(offsetX))
     print("offsetY : "+str(offsetY))
-    print("dist : "+str(dist))
+
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
-    offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
+ 
     blinked.switchColor('a',[0])
     blinked.switchColor('g',[1])
 
