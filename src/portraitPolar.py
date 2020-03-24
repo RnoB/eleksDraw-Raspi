@@ -26,7 +26,7 @@ from blinked import blinked
 
 backgroundSub = False
 drawLoop = False
-
+pause = False
 
 
 
@@ -36,6 +36,7 @@ drawLoop = False
 def mouseListener():
     global backgroundSub
     global drawLoop
+    global pause
     dev = InputDevice('/dev/input/event0')
     for ev in dev.read_loop():
         if ev.type == 1:
@@ -43,6 +44,8 @@ def mouseListener():
                 backgroundSub = True
             elif ev.code ==273:
                 drawLoop = True
+            elif ev.code ==274:
+                pause = not pause
 
 
 
@@ -108,7 +111,7 @@ def spacer(depth):
         offsetX = offset[0]
         heightMax = sizeImage[1]
         width = sizeImage[0]
-        
+    offsetX += (widthImage-width)/2.0
     return scale,offsetX,offsetY
 
 
@@ -193,10 +196,11 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 linePosition.append((round(x,resolution),round(y,resolution)))
 
 
-                speedZ = speed#*np.cos(AZ[ky,kx])**.2
-                angleD = A[ky,kx]+noise*(.5-random.random())+A0
-                dxS = speedZ*(1.1+np.cos(angleD))
-                dyS = speedZ*(1.1+np.sin(angleD))
+                
+                angleD = A[ky,kx]+noise*(.5-random.random())
+                speedZ = speed*(1.1+np.cos(angleD+A0))
+                dxS = speedZ*(np.cos(angleD))
+                dyS = speedZ*(np.sin(angleD))
                 dx = round(dxS,resolution)
                 dy = round(dyS,resolution)
                 dx1 = round(dx,distanceLine)
