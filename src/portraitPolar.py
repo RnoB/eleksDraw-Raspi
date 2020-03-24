@@ -40,7 +40,7 @@ def mouseListener():
     pressed = False
     dev = InputDevice('/dev/input/event0')
     for ev in dev.read_loop():
-        print("code : "+str(ev.code)+ " type : "+str(ev.type))
+        
         if ev.type == 1:
             if ev.code == 272:
                 backgroundSub = True
@@ -160,7 +160,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     #if speed<distanceLine:
         #speed = distanceLine
     for k in range(0,nLines):
-        print("pause : "+str(pause))
+        
         if(not pause):
             if k%100 == 0:
                 print("number of Lines : "+str(k))
