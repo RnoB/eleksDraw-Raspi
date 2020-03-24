@@ -111,7 +111,7 @@ def spacer(depth):
         offsetX = offset[0]
         heightMax = sizeImage[1]
         width = sizeImage[0]
-    offsetX += (widthImage-width)/2.0
+    offsetX += (widthPaper-width)/2.0
     return scale,offsetX,offsetY
 
 
