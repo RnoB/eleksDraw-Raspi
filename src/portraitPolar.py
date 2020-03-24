@@ -194,8 +194,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
                 speedZ = speed#*np.cos(AZ[ky,kx])**.2
                 angleD = (1.1+np.cos(A[ky,kx]))+noise*(.5-random.random())
-                dxS = speedZ*np.cos(angleD)
-                dyS = speedZ*np.sin(angleD)
+                dxS = speedZ*(1.1+np.cos(A[ky,kx]))
+                dyS = speedZ*(1.1+np.sin(A[ky,kx]))
                 dx = round(dxS,resolution)
                 dy = round(dyS,resolution)
                 dx1 = round(dx,distanceLine)
@@ -210,7 +210,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 yLines.append(x-dx)
                 size = 2
 
-
+                print("X : "+str(xLines))
+                print("Y : "+str(yLines))
                 
 
 
@@ -317,7 +318,7 @@ def main():
 
         #print("offset : "+str((offsetX,offsetY)))
         X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=0,\
-                offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = 20 ,cropFactor=0,resolution=.05)
+                offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = 10 ,cropFactor=0,resolution=.05)
             
 
     except Exception as e: 
