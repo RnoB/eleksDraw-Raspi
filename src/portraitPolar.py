@@ -205,10 +205,10 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 dy2 = round(dy,distanceFigure)
                 dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
                     
-                xLines.append(heightPaper-(y+dy))
-                yLines.append(x+dx)
-                xLines.append(heightPaper-(y-dy))
-                yLines.append(x-dx)
+                xLines.append(y+dy)
+                yLines.append(heightPaper-(x+dx))
+                xLines.append(y-dy)
+                yLines.append(heightPaper-(x-dx))
                 size = 2
 
 
@@ -317,7 +317,7 @@ def main():
         offsetY = offsetY0
 
         #print("offset : "+str((offsetX,offsetY)))
-        X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=0,noise = .1,\
+        X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=0,noise = .1\
                 offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = 10 ,cropFactor=0,resolution=.05)
             
 
