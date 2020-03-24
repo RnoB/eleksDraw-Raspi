@@ -161,74 +161,75 @@ def drawing(kFrames,frames,angle,angleZ,draw,
         #speed = distanceLine
     for k in range(0,nLines):
         
-        if(not pause):
-            if k%100 == 0:
-                print("number of Lines : "+str(k))
-            blinked.progressColor(k/nLines,'v','y',[4])
+        while(not pause):
+            time.sleep(1)
+        if k%100 == 0:
+            print("number of Lines : "+str(k))
+        blinked.progressColor(k/nLines,'v','y',[4])
+        size = 0
+        trial =0
+        while(size == 0):
+            linePosition = []
+            trial+=1 
+            xLines = []
+            yLines = []
+
             size = 0
-            trial =0
-            while(size == 0):
-                linePosition = []
-                trial+=1 
-                xLines = []
-                yLines = []
+            xChecking = True
+            t0=time.time()
+            while xChecking:
+                kx0 = random.randint(0, 639)
+                ky0 = random.randint(0, 479)
+                x,y = scaler(kx0,ky0,scale=scale,offsetX=offsetX,offsetY=offsetY)
+                x0 = round(x+(.5-random.random())*xu,resolution/2.0)
+                y0 = round(y+(.5-random.random())*yu,resolution/2.0)
+                x = x0
+                y = y0
+                kx = kx0
+                ky = ky0
+                x1 = round(x,distanceLine)
+                y1 = round(y,distanceLine)
+                zTest = z[ky,kx]
+                Atest = A[ky,kx]
+                
+                if not np.isnan(zTest) or not np.isnan(Atest):
+                    xChecking = False
 
-                size = 0
-                xChecking = True
-                t0=time.time()
-                while xChecking:
-                    kx0 = random.randint(0, 639)
-                    ky0 = random.randint(0, 479)
-                    x,y = scaler(kx0,ky0,scale=scale,offsetX=offsetX,offsetY=offsetY)
-                    x0 = round(x+(.5-random.random())*xu,resolution/2.0)
-                    y0 = round(y+(.5-random.random())*yu,resolution/2.0)
-                    x = x0
-                    y = y0
-                    kx = kx0
-                    ky = ky0
-                    x1 = round(x,distanceLine)
-                    y1 = round(y,distanceLine)
-                    zTest = z[ky,kx]
-                    Atest = A[ky,kx]
+            running = True
+            t0 = time.time() 
+            if np.isnan(zTest) or np.isnan(Atest):
+                running=False
+            else: 
+
+                linePosition.append((round(x,resolution),round(y,resolution)))
+
+
+                
+                angleD = A[ky,kx]+noise*(.5-random.random())
+                speedZ = speed*(1.1+np.cos(angleD+A0))
+                dxS = speedZ*(np.cos(angleD))
+                dyS = speedZ*(np.sin(angleD))
+                dx = round(dxS,resolution)
+                dy = round(dyS,resolution)
+                dx1 = round(dx,distanceLine)
+                dy1 = round(dy,distanceLine)
+                dx2 = round(dx,distanceFigure)
+                dy2 = round(dy,distanceFigure)
+                dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
                     
-                    if not np.isnan(zTest) or not np.isnan(Atest):
-                        xChecking = False
-
-                running = True
-                t0 = time.time() 
-                if np.isnan(zTest) or np.isnan(Atest):
-                    running=False
-                else: 
-
-                    linePosition.append((round(x,resolution),round(y,resolution)))
+                xLines.append(y+dy)
+                yLines.append(heightPaper-(x+dx))
+                xLines.append(y-dy)
+                yLines.append(heightPaper-(x-dx))
+                size = 2
 
 
-                    
-                    angleD = A[ky,kx]+noise*(.5-random.random())
-                    speedZ = speed*(1.1+np.cos(angleD+A0))
-                    dxS = speedZ*(np.cos(angleD))
-                    dyS = speedZ*(np.sin(angleD))
-                    dx = round(dxS,resolution)
-                    dy = round(dyS,resolution)
-                    dx1 = round(dx,distanceLine)
-                    dy1 = round(dy,distanceLine)
-                    dx2 = round(dx,distanceFigure)
-                    dy2 = round(dy,distanceFigure)
-                    dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
-                        
-                    xLines.append(y+dy)
-                    yLines.append(heightPaper-(x+dx))
-                    xLines.append(y-dy)
-                    yLines.append(heightPaper-(x-dx))
-                    size = 2
+                
 
 
-                    
+        if size>1:
 
-
-            if size>1:
-
-                draw.lines(xLines,yLines,xOffset = -widthPaper/2.0,yOffset =20,polar = True,speed=750,smooth=True)
+            draw.lines(xLines,yLines,xOffset = -widthPaper/2.0,yOffset =20,polar = True,speed=750,smooth=True)
 
 
 
