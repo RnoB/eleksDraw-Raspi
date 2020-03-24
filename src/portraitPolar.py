@@ -152,7 +152,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     #if speed<distanceLine:
         #speed = distanceLine
     for k in range(0,nLines):
-        
+        if k%100 == 0:
+            print("number of Lines : "+str(k))
         blinked.progressColor(k/nLines,'v','y',[4])
         size = 0
         trial =0
@@ -193,9 +194,9 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
                 speedZ = speed#*np.cos(AZ[ky,kx])**.2
-                angleD = (1.1+np.cos(A[ky,kx]))+noise*(.5-random.random())
-                dxS = speedZ*(1.1+np.cos(A[ky,kx]))
-                dyS = speedZ*(1.1+np.sin(A[ky,kx]))
+                angleD = A[ky,kx]+noise*(.5-random.random())+A0
+                dxS = speedZ*(1.1+np.cos(angleD))
+                dyS = speedZ*(1.1+np.sin(angleD))
                 dx = round(dxS,resolution)
                 dy = round(dyS,resolution)
                 dx1 = round(dx,distanceLine)
@@ -204,14 +205,13 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 dy2 = round(dy,distanceFigure)
                 dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
                     
-                xLines.append(y+dy)
+                xLines.append(heightPaper-(y+dy))
                 yLines.append(x+dx)
-                xLines.append(y-dy)
+                xLines.append(heightPaper-(y-dy))
                 yLines.append(x-dx)
                 size = 2
 
-                print("X : "+str(xLines))
-                print("Y : "+str(yLines))
+
                 
 
 
@@ -317,7 +317,7 @@ def main():
         offsetY = offsetY0
 
         #print("offset : "+str((offsetX,offsetY)))
-        X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=0,\
+        X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=0,noise = .1\
                 offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = 10 ,cropFactor=0,resolution=.05)
             
 

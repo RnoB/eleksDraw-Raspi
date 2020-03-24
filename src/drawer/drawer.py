@@ -125,7 +125,7 @@ class Drawer:
         try:
             for k in range(0,len(x)):
                 k0 = k
-                print("k  : "+str(k))
+                
                 self.toPosition(x[k]+xOffset,y[k]+yOffset,polar=polar,speed=speed)
         except:
             print('--- CRASH !!!! ---')
