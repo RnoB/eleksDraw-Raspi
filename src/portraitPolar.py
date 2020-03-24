@@ -37,6 +37,7 @@ def mouseListener():
     global backgroundSub
     global drawLoop
     global pause
+    paused = True
     dev = InputDevice('/dev/input/event0')
     for ev in dev.read_loop():
         print("code : "+str(ev.code)+ " type : "+str(ev.type))
@@ -46,8 +47,10 @@ def mouseListener():
             elif ev.code ==273:
                 drawLoop = True
             elif ev.code ==274:
-                pause = not pause
-                print(pause)
+                paused = not paused
+                if paused:
+                    pause = not pause
+                    print(pause)
 
 
 
