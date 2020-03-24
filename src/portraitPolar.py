@@ -155,7 +155,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     #if speed<distanceLine:
         #speed = distanceLine
     for k in range(0,nLines):
-        if(not pause)
+        if(not pause):
             if k%100 == 0:
                 print("number of Lines : "+str(k))
             blinked.progressColor(k/nLines,'v','y',[4])
