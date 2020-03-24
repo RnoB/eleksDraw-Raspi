@@ -317,7 +317,7 @@ def main():
         offsetY = offsetY0
 
         #print("offset : "+str((offsetX,offsetY)))
-        X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=0,noise = .1\
+        X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=0,noise = .1,\
                 offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = 10 ,cropFactor=0,resolution=.05)
             
 
