@@ -206,7 +206,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
                 
                 angleD = A[ky,kx]+noise*(.5-random.random())
-                speedZ = speed*(1.1+np.cos(angleD+A0))
+                speedZ = 10+speed*(1+np.cos(angleD+A0))
                 dxS = speedZ*(np.cos(angleD))
                 dyS = speedZ*(np.sin(angleD))
                 dx = round(dxS,resolution)
@@ -319,7 +319,7 @@ def main():
 
 
 
-
+    A0 = 2*np.pi*np.random.rand()
     try:
 
         #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
@@ -329,7 +329,7 @@ def main():
         offsetY = offsetY0
 
         #print("offset : "+str((offsetX,offsetY)))
-        X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=0,noise = .1,\
+        X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=A0,noise = .1,\
                 offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = 10 ,cropFactor=0,resolution=.05)
             
 
