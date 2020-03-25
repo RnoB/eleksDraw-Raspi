@@ -341,8 +341,9 @@ def main():
 
     A0=0
     X2 = []
+    colors = 1
     try:
-        for l in range(0,2):
+        for l in range(0,colors):
             print("color : "+str(l))
             for j in range(0,nx):
 
