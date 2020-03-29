@@ -344,8 +344,8 @@ def main():
         
         offsetX = offsetX0
         offsetY = offsetY0
-        speedMin=  random.randrange(1, 20,.05)
-        speed=  random.randrange(10, 60,.05)
+        speedMin=  random.uniform(1, 20)
+        speed=  random.uniform(10, 60)
         #print("offset : "+str((offsetX,offsetY)))
         X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=A0,noise = 0,\
                 offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = speed ,speedMin = speedMin,cropFactor=0,resolution=.05)
