@@ -177,8 +177,25 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             size = 0
             xChecking = True
             t0=time.time()
+
+            widtmin = 0
+            widthStep = 5
+
             while xChecking:
-                kx0 = random.randint(0, 639)
+
+                widthScanMin += widthStep
+                widthScanMax = widthScanMin +20
+
+                if widthScanMin <0:
+                    widthStep = - widthStep
+                    widthMin = 0
+                    widthMax = 20
+                if widthScanMin >639:
+                    widthStep = - widthStep
+                    widthMax = 639
+                    widthMin = 619
+
+                kx0 = random.randint(widthScanMin, widthScanMax)
                 ky0 = random.randint(0, 479)
                 x,y = scaler(kx0,ky0,scale=scale,offsetX=offsetX,offsetY=offsetY)
                 x0 = round(x+(.5-random.random())*xu,resolution/2.0)
