@@ -178,22 +178,21 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             xChecking = True
             t0=time.time()
 
-            widthScanMin = 0
-            widthStep = 5
+widthScanMin = 639
+widthStep = -5
 
-            while xChecking:
-
-                widthScanMin += widthStep
-                widthScanMax = widthScanMin +20
-
-                if widthScanMin <0:
-                    widthStep = - widthStep
-                    widthMin = 0
-                    widthMax = 20
-                if widthScanMin >639:
-                    widthStep = - widthStep
-                    widthMax = 639
-                    widthMin = 619
+while xChecking:
+    widthScanMin += widthStep
+    widthScanMax = widthScanMin +10
+    if widthScanMin <0:
+        widthStep = - widthStep
+        widthScanMin = 0
+        widthScanMax = 20
+    if widthScanMax >639:
+        widthStep = - widthStep
+        widthScanMax = 639
+        widthScanMin = 619
+    print(widthScanMin)
 
                 kx0 = random.randint(widthScanMin, widthScanMax)
                 ky0 = random.randint(0, 479)
