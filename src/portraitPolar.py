@@ -196,6 +196,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
                 kx0 = random.randint(widthScanMin, widthScanMax)
                 ky0 = random.randint(0, 479)
+                print(kx0)
                 x,y = scaler(kx0,ky0,scale=scale,offsetX=offsetX,offsetY=offsetY)
                 x0 = round(x+(.5-random.random())*xu,resolution/2.0)
                 y0 = round(y+(.5-random.random())*yu,resolution/2.0)
