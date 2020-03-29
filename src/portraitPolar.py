@@ -178,7 +178,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             xChecking = True
             t0=time.time()
 
-            widtmin = 0
+            widthScanMin = 0
             widthStep = 5
 
             while xChecking:
