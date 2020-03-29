@@ -160,7 +160,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     #if speed<distanceLine:
         #speed = distanceLine
     widthScanMin = 639
-    widthStep = -2
+    widthStep = -1
     for k in range(0,nLines):
         
         while(pause):
