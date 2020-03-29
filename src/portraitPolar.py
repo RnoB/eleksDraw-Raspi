@@ -137,7 +137,7 @@ def round(x, base=1):
  
 def drawing(kFrames,frames,angle,angleZ,draw,
             nLines = 400,scale = 70,A0=0,
-            resolution=.1,speed = .4,distanceLine=.8 ,distanceFigure = 5.0,
+            resolution=.1,speed = .4,speedMin = 5,distanceLine=.8 ,distanceFigure = 5.0,
             noise = 0,offsetX = 0,offsetY=0,figurePosition = [],cropFactor = .3):
     kFrames = np.int(kFrames)
 
@@ -223,7 +223,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
                 
                 angleD = A[ky,kx]+noise*(.5-random.random())
-                speedZ = 5+speed*(1+np.cos(angleD+A0))
+                speedZ = speedMin+speed*(1+np.cos(angleD+A0))
                 dxS = speedZ*(np.cos(angleD))
                 dyS = speedZ*(np.sin(angleD))
                 dx = round(dxS,resolution)
@@ -344,10 +344,11 @@ def main():
         
         offsetX = offsetX0
         offsetY = offsetY0
-
+        speedMin=  random.randrange(1, 20,.05)
+        speed=  random.randrange(10, 60,.05)
         #print("offset : "+str((offsetX,offsetY)))
         X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=A0,noise = 0,\
-                offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = 10 ,cropFactor=0,resolution=.05)
+                offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = speed ,speedMin = speedMin,cropFactor=0,resolution=.05)
             
 
     except Exception as e: 
