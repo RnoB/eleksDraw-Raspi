@@ -187,11 +187,11 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 if widthScanMin <0:
                     widthStep = - widthStep
                     widthScanMin = 0
-                    widthScanMax = 20
+                    widthScanMax = 10
                 if widthScanMax >639:
                     widthStep = - widthStep
                     widthScanMax = 639
-                    widthScanMin = 619
+                    widthScanMin = 629
 
 
                 kx0 = random.randint(widthScanMin, widthScanMax)
