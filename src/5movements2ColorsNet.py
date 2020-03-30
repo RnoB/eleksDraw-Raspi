@@ -374,7 +374,7 @@ def main():
     else:
         crop = ( .05*random.random()) * np.ones(nx)
 
-    if np.random.random()<.85:
+    if np.random.random()<.085:
         noiseMin = (1-np.random.power(11))
         noiseMax = noiseMin + 1.0*np.random.random()
 
