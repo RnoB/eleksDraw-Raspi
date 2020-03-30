@@ -332,12 +332,48 @@ def main():
     offsetY0 = 5-offsetX
 
 
+    if np.random.random()<.12:
+        Nmin = np.random.randint(200,500)
+        Nmax = np.random.randint(50,200)
 
-    d = np.linspace(.1,4,nx)
-    nL = np.linspace(250,600,nx)
+        nL = np.linspace(Nmin,Nmax,nx)
+        if random.random()<.5:
+            nL = np.flip(nL) 
+    else:
+        nL = random.randint(250,35 0) * np.ones(nx, dtype=int)  
 
-    sp = np.linspace(.2,1.0,nx)
-    crop = np.linspace(0,.6,nx)
+
+    if np.random.random()<.09:
+        dMin = .05 + .5*np.random.random()
+        dMax = 1+4*np.random.random()
+
+        d = np.linspace(dMin,dMax,nx)
+        if random.random()<.5:
+            d = np.flip(d) 
+    else:
+        d = (.5 + random.random()) * np.ones(nx, dtype=int)  
+    
+
+    if np.random.random()<.105:
+        speedMin = .1 + .2*np.random.random()
+        speedMax = .5 + np.random.random()
+
+        speedd = np.linspace(speedMin,speedMax,nx)
+        if random.random()<.5:
+            speed = np.flip(speed) 
+    else:
+        speed = (.1 + .1*random.random()) * np.ones(nx, dtype=int)      
+    
+    if np.random.random()<.106:
+        cropMin = 0 + .1*np.random.random()
+        cropMax = .1 + .4*np.random.random()
+
+        crop = np.linspace(cropMin,cropMax,nx)
+        if random.random()<.5:
+            crop = np.flip(crop) 
+    else:
+        crop = ( .05*random.random()) * np.ones(nx, dtype=int)         
+    
 
     A0=0
     X2 = []
@@ -357,8 +393,8 @@ def main():
                 offsetY = offsetY0+j*dist
 
                 #print("offset : "+str((offsetX,offsetY)))
-                X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 300,scale = scale,A0=A0,\
-                        offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .2  ,speed = .2,cropFactor=0)
+                X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL[j],scale = scale,A0=A0,\
+                        offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[l]  ,speed = speed[l],cropFactor=crop[l])
             if l==0:
                 time.sleep(0)
                 X2 = []
