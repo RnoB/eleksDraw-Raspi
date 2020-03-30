@@ -340,7 +340,7 @@ def main():
         if random.random()<.5:
             nL = np.flip(nL) 
     else:
-        nL = random.randint(250,35 0) * np.ones(nx, dtype=int)  
+        nL = random.randint(250,350) * np.ones(nx, dtype=int)  
 
 
     if np.random.random()<.098:
