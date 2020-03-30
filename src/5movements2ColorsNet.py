@@ -380,7 +380,7 @@ def main():
 
         noise = np.linspace(noiseMin,noiseMax,nx)
         if random.random()<.5:
-            noise = np.flip(nosie) 
+            noise = np.flip(noise) 
     else:
         noise = (1-np.random.power(11)) * np.ones(nx, dtype=int)
 
