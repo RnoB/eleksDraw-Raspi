@@ -336,7 +336,7 @@ def main():
         Nmin = np.random.randint(200,500)
         Nmax = np.random.randint(50,200)
 
-        nL = np.linspace(Nmin,Nmax,nx)
+        nL = np.linspace(Nmin,Nmax,nx,dtype = int)
         if random.random()<.5:
             nL = np.flip(nL) 
     else:
@@ -351,7 +351,7 @@ def main():
         if random.random()<.5:
             d = np.flip(d) 
     else:
-        d = (.5 + random.random()) * np.ones(nx, dtype=int)  
+        d = (.5 + random.random()) * np.ones(nx)  
     
 
     if np.random.random()<.105:
@@ -362,7 +362,7 @@ def main():
         if random.random()<.5:
             speed = np.flip(speed) 
     else:
-        speed = (.1 + .1*random.random()) * np.ones(nx, dtype=int)      
+        speed = (.1 + .1*random.random()) * np.ones(nx)      
     
     if np.random.random()<.106:
         cropMin = 0 + .1*np.random.random()
@@ -372,7 +372,7 @@ def main():
         if random.random()<.5:
             crop = np.flip(crop) 
     else:
-        crop = ( .05*random.random()) * np.ones(nx, dtype=int)
+        crop = ( .05*random.random()) * np.ones(nx)
 
     if np.random.random()<.85:
         noiseMin = (1-np.random.power(11))
@@ -382,7 +382,7 @@ def main():
         if random.random()<.5:
             noise = np.flip(noise) 
     else:
-        noise = (1-np.random.power(11)) * np.ones(nx, dtype=int)
+        noise = (1-np.random.power(11)) * np.ones(nx)
 
     if np.random.random()<.19:
         colors = 2
