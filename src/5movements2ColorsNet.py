@@ -343,7 +343,7 @@ def main():
         nL = random.randint(250,35 0) * np.ones(nx, dtype=int)  
 
 
-    if np.random.random()<.09:
+    if np.random.random()<.098:
         dMin = .05 + .5*np.random.random()
         dMax = 1+4*np.random.random()
 
@@ -372,12 +372,33 @@ def main():
         if random.random()<.5:
             crop = np.flip(crop) 
     else:
-        crop = ( .05*random.random()) * np.ones(nx, dtype=int)         
-    
+        crop = ( .05*random.random()) * np.ones(nx, dtype=int)
 
+    if np.random.random()<.85:
+        noiseMin = (1-np.random.power(11))
+        noiseMax = noiseMin + 1.0*np.random.random()
+
+        noise = np.linspace(noiseMin,noiseMax,nx)
+        if random.random()<.5:
+            noise = np.flip(nosie) 
+    else:
+        noise = (1-np.random.power(11)) * np.ones(nx, dtype=int)
+
+    if np.random.random()<.19:
+        colors = 2
+    else:
+        colors = 1
     A0=0
     X2 = []
-    colors = 1
+
+    print("----- Parameters -----")
+    print("-- Lines : " + str(nL) + "--" )
+    print("-- dista : " + str(d) + "--")
+    print("-- speed : " + str(speed) + "--" )
+    print("-- crops : " + str(crop) + "--")
+    print("-- noise : " + str(noise) + "--")
+    print("-- color : " + str(colors) + "--")
+    
     try:
         for l in range(0,colors):
             print("color : "+str(l))
@@ -394,7 +415,8 @@ def main():
 
                 #print("offset : "+str((offsetX,offsetY)))
                 X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL[j],scale = scale,A0=A0,\
-                        offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[l]  ,speed = speed[l],cropFactor=crop[l])
+                        offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[l]  ,speed = speed[l],cropFactor=crop[l],\
+                        noise = noise[l])
             if l==0:
                 time.sleep(0)
                 X2 = []
