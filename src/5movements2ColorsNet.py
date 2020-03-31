@@ -358,11 +358,11 @@ def main():
         speedMin = .1 + .2*np.random.random()
         speedMax = .5 + np.random.random()
 
-        speedd = np.linspace(speedMin,speedMax,nx)
-        if random.random()<.5:
+        speed = np.linspace(speedMin,speedMax,nx)
+        if np.random.random()<.5:
             speed = np.flip(speed) 
     else:
-        speed = (.1 + .1*random.random()) * np.ones(nx)      
+        speed = (.1 + .1*np.random.random()) * np.ones(nx)      
     
     if np.random.random()<.106:
         cropMin = 0 + .1*np.random.random()
@@ -379,7 +379,7 @@ def main():
         noiseMax = noiseMin + 1.0*np.random.random()
 
         noise = np.linspace(noiseMin,noiseMax,nx)
-        if random.random()<.5:
+        if np.random.random()<.5:
             noise = np.flip(noise) 
     else:
         noise = (1-np.random.power(11)) * np.ones(nx)
