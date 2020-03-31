@@ -351,7 +351,7 @@ def main():
         if random.random()<.5:
             d = np.flip(d) 
     else:
-        d = (.2 + (1-random.power(3))) * np.ones(nx)  
+        d = (.2 + (1-np.random.power(3))) * np.ones(nx)  
     
 
     if np.random.random()<.105:
