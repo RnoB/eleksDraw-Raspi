@@ -344,14 +344,14 @@ def main():
 
 
     if np.random.random()<.098:
-        dMin = .05 + .5*np.random.random()
+        dMin =  .05 + .5*(1-np.random.power(5))
         dMax = 1+4*np.random.random()
 
         d = np.linspace(dMin,dMax,nx)
         if random.random()<.5:
             d = np.flip(d) 
     else:
-        d = (.5 + random.random()) * np.ones(nx)  
+        d = (.2 + (1-random.power(3))) * np.ones(nx)  
     
 
     if np.random.random()<.105:
