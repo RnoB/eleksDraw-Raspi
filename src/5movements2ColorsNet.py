@@ -333,7 +333,7 @@ def main():
 
 
     if np.random.random()<.12:
-        Nmin = np.random.randint(200,500)
+        Nmin = np.random.randint(300,600)
         Nmax = np.random.randint(50,200)
 
         nL = np.linspace(Nmin,Nmax,nx,dtype = int)
