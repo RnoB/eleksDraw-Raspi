@@ -30,16 +30,18 @@ pause = False
 
 
 
-
+A0Update = -999
+speedUdate = -999
+speedMinUpdate = -999
 
 
 def mouseListener():
     global backgroundSub
     global drawLoop
     global pause
-    global speedMin
-    global speed
-    global A0
+    global speedMinUpdate
+    global speedUpdate
+    global A0Update
     pressed = False
     dev = InputDevice('/dev/input/event0')
     for ev in dev.read_loop():
@@ -48,15 +50,15 @@ def mouseListener():
             if ev.code == 272:
                 backgroundSub = True
                 if pause:
-                    speedMin=  1+20*(1-np.random.power(6))
-                    speed=  10+40*(1-np.random.power(3))
-                    A0 = 2*np.pi*np.random.rand()
+                    speedMinUpdate=  1+20*(1-np.random.power(6))
+                    speedUpdate=  10+40*(1-np.random.power(3))
+                    A0Update = 2*np.pi*np.random.rand()
             elif ev.code ==273:
                 drawLoop = True
                 if pause:
-                    speedMin=  1+20*(1-np.random.power(6))
-                    speed=  10+40*(1-np.random.power(3))
-                    A0 = 2*np.pi*np.random.rand()
+                    speedMinUpdate=  1+20*(1-np.random.power(6))
+                    speedUpdate=  10+40*(1-np.random.power(3))
+                    A0Update = 2*np.pi*np.random.rand()
             elif ev.code ==274:
                 pressed = not pressed
                 if pressed:
@@ -176,6 +178,11 @@ def drawing(kFrames,frames,angle,angleZ,draw,
         
         while(pause):
             time.sleep(1)
+            if speed>0:
+                speedMin = speedMinUpdate
+                speed = speedUpdate
+                A0 = A0Update
+
         if k%100 == 0:
             print("number of Lines : "+str(k))
         blinked.progressColor(k/nLines,'v','y',[4])
