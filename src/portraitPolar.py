@@ -39,6 +39,7 @@ def mouseListener():
     global pause
     global speedMin
     global speed
+    global A0
     pressed = False
     dev = InputDevice('/dev/input/event0')
     for ev in dev.read_loop():
@@ -47,14 +48,14 @@ def mouseListener():
             if ev.code == 272:
                 backgroundSub = True
                 if pause:
-                    speedMin=  1+20*(1-np.random.power(5.8))
-                    speed=  10+50*(1-np.random.power(3))
+                    speedMin=  1+20*(1-np.random.power(6))
+                    speed=  10+40*(1-np.random.power(3))
                     A0 = 2*np.pi*np.random.rand()
             elif ev.code ==273:
                 drawLoop = True
                 if pause:
-                    speedMin=  1+20*(1-np.random.power(5.8))
-                    speed=  10+50*(1-np.random.power(3))
+                    speedMin=  1+20*(1-np.random.power(6))
+                    speed=  10+40*(1-np.random.power(3))
                     A0 = 2*np.pi*np.random.rand()
             elif ev.code ==274:
                 pressed = not pressed
@@ -356,8 +357,8 @@ def main():
         
         offsetX = offsetX0
         offsetY = offsetY0
-        speedMin=  1+20*(1-np.random.power(5))
-        speed=  10+50*(1-np.random.power(1.4))
+        speedMin=  1+20*(1-np.random.power(6))
+        speed=  10+40*(1-np.random.power(3))
         #print("offset : "+str((offsetX,offsetY)))
         X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=A0,A1=A1,noise = 0,\
                 offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = speed ,speedMin = speedMin,cropFactor=0,resolution=.05)
