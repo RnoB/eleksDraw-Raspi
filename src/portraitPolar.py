@@ -31,7 +31,7 @@ pause = False
 
 
 A0Update = -999
-speedUdate = -999
+speedUpdate = -999
 speedMinUpdate = -999
 
 
