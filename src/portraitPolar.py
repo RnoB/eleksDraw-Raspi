@@ -37,6 +37,8 @@ def mouseListener():
     global backgroundSub
     global drawLoop
     global pause
+    global speedMin
+    global speed
     pressed = False
     dev = InputDevice('/dev/input/event0')
     for ev in dev.read_loop():
@@ -44,8 +46,16 @@ def mouseListener():
         if ev.type == 1:
             if ev.code == 272:
                 backgroundSub = True
+                if pause:
+                    speedMin=  1+20*(1-np.random.power(5.8))
+                    speed=  10+50*(1-np.random.power(3))
+                    A0 = 2*np.pi*np.random.rand()
             elif ev.code ==273:
                 drawLoop = True
+                if pause:
+                    speedMin=  1+20*(1-np.random.power(5.8))
+                    speed=  10+50*(1-np.random.power(3))
+                    A0 = 2*np.pi*np.random.rand()
             elif ev.code ==274:
                 pressed = not pressed
                 if pressed:
@@ -136,7 +146,7 @@ def round(x, base=1):
 
  
 def drawing(kFrames,frames,angle,angleZ,draw,
-            nLines = 400,scale = 70,A0=0,
+            nLines = 400,scale = 70,A0=0,A1=1;
             resolution=.1,speed = .4,speedMin = 5,distanceLine=.8 ,distanceFigure = 5.0,
             noise = 0,offsetX = 0,offsetY=0,figurePosition = [],cropFactor = .3):
     kFrames = np.int(kFrames)
@@ -223,7 +233,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
                 
-                angleD = A[ky,kx]+noise*(.5-random.random())
+                angleD = A[ky,kx]+noise*(.5-random.random())+A1
                 speedZ = speedMin+speed*(1+np.cos(angleD+A0))
                 dxS = speedZ*(np.cos(angleD))
                 dyS = speedZ*(np.sin(angleD))
@@ -338,6 +348,7 @@ def main():
 
 
     A0 = 2*np.pi*np.random.rand()
+    A1 = 2*np.pi*np.random.rand()
     try:
 
         #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
@@ -348,7 +359,7 @@ def main():
         speedMin=  1+20*(1-np.random.power(5))
         speed=  10+50*(1-np.random.power(1.4))
         #print("offset : "+str((offsetX,offsetY)))
-        X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=A0,noise = 0,\
+        X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=A0,A1=A1,noise = 0,\
                 offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = speed ,speedMin = speedMin,cropFactor=0,resolution=.05)
             
 
