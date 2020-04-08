@@ -178,7 +178,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
         
         while(pause):
             time.sleep(1)
-            if speed>0:
+            if speedUpdate>0:
                 speedMin = speedMinUpdate
                 speed = speedUpdate
                 A0 = A0Update
