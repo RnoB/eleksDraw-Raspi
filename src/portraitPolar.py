@@ -29,19 +29,18 @@ drawLoop = False
 pause = False
 
 
+A0List = 0
+speedList = 0
+speedMinList = 0
 
-A0Update = -999
-speedUpdate = -999
-speedMinUpdate = -999
-
+colorK = 0
+nColors = 3
 
 def mouseListener():
     global backgroundSub
     global drawLoop
     global pause
-    global speedMinUpdate
-    global speedUpdate
-    global A0Update
+    global colorK
     pressed = False
     dev = InputDevice('/dev/input/event0')
     for ev in dev.read_loop():
@@ -50,15 +49,13 @@ def mouseListener():
             if ev.code == 272:
                 backgroundSub = True
                 if pause:
-                    speedMinUpdate=  1+20*(1-np.random.power(6))
-                    speedUpdate=  10+40*(1-np.random.power(3))
-                    A0Update = 2*np.pi*np.random.rand()
+                    colorK +=1
+                    colorK = colorK%3
             elif ev.code ==273:
                 drawLoop = True
                 if pause:
-                    speedMinUpdate=  1+20*(1-np.random.power(6))
-                    speedUpdate=  10+40*(1-np.random.power(3))
-                    A0Update = 2*np.pi*np.random.rand()
+                    colorK -=1
+                    colorK = colorK%3
             elif ev.code ==274:
                 pressed = not pressed
                 if pressed:
@@ -70,7 +67,13 @@ def mouseListener():
 
 
 
-
+def colorsChosen():
+    if colorK == 0:
+        set_pixels(7,0,0,255)
+    if colorK == 1:
+        set_pixels(7,255,0,255)
+    if colorK == 2:
+        set_pixels(7,255,0,0)
 
 
 def switchColor(col):
@@ -178,10 +181,9 @@ def drawing(kFrames,frames,angle,angleZ,draw,
         
         while(pause):
             time.sleep(1)
-            if speedUpdate>0:
-                speedMin = speedMinUpdate
-                speed = speedUpdate
-                A0 = A0Update
+            speedMin = speedMinList[colorK]
+            speed = speedList[colorK]
+            A0 = A0List[colorK]
 
         if k%100 == 0:
             print("number of Lines : "+str(k))
@@ -274,6 +276,9 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
 def main():
+    global speedList
+    global speedMinList
+    global A0List
     mouseThread = threading.Thread(target = mouseListener)
     mouseThread.daemon = True
     mouseThread.start()
@@ -354,8 +359,10 @@ def main():
 
 
 
-
-    A0 = 2*np.pi*np.random.rand()
+    for k in range( 0,nColors):
+        A0List.append( 2*np.pi*np.random.rand())
+        speedMinList.append(1+20*(1-np.random.power(6)))
+        speedList.append(10+40*(1-np.random.power(3)))
     A1 = 2*np.pi*np.random.rand()
     try:
 
@@ -364,11 +371,9 @@ def main():
         
         offsetX = offsetX0
         offsetY = offsetY0
-        speedMin=  1+20*(1-np.random.power(6))
-        speed=  10+40*(1-np.random.power(3))
         #print("offset : "+str((offsetX,offsetY)))
-        X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=A0,A1=A1,noise = 0,\
-                offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = speed ,speedMin = speedMin,cropFactor=0,resolution=.05)
+        X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=A0List[colorK],A1=A1,noise = 0,\
+                offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = speedlist[colorK] ,speedMin = speedMinList[colorK],cropFactor=0,resolution=.05)
             
 
     except Exception as e: 
