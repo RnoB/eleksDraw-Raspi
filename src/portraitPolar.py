@@ -29,9 +29,9 @@ drawLoop = False
 pause = False
 
 
-A0List = 0
-speedList = 0
-speedMinList = 0
+A0List = []
+speedList = []
+speedMinList = []
 
 colorK = 0
 nColors = 3
@@ -61,7 +61,7 @@ def mouseListener():
                     colorK -=1
                     colorK = colorK%3
                     colorsChosen()
-                    print(colorK)
+
             elif ev.code ==274:
                 pressed = not pressed
                 if pressed:
