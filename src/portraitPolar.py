@@ -385,7 +385,7 @@ def main():
         offsetY = offsetY0
         #print("offset : "+str((offsetX,offsetY)))
         X2 = drawing(0,kinect.frames,angle,angleZ,draw,nLines = 40000,scale = scale,A0=A0List[colorK],A1=A1,noise = 0,\
-                offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = speedlist[colorK] ,speedMin = speedMinList[colorK],cropFactor=0,resolution=.05)
+                offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .1  ,speed = speedList[colorK] ,speedMin = speedMinList[colorK],cropFactor=0,resolution=.05)
             
 
     except Exception as e: 
