@@ -74,13 +74,14 @@ def mouseListener():
 
 
 def colorsChosen():
-    if colorK == 0:
-        set_pixels(7,0,0,255)
-    if colorK == 1:
-        set_pixels(7,255,0,255)
-    if colorK == 2:
-        set_pixels(7,255,0,0)
+    kk = [5,6,7]
+    for k in range(0,1)
+        if colorK == kk[k]:
+            blinked.switchColor('b',kk[k])
+        else:
 
+            blinked.switchColor('r',kk[k])
+        
 
 def switchColor(col):
     #clear()
@@ -344,9 +345,7 @@ def main():
         print(traceback.format_exc())
  
 
-    blinked.switchColor('g',[5,6])
-
-    blinked.switchColor('g',[5,6,7])
+    colorsChosen()
     nLines = 400
     size = 0
 
