@@ -77,10 +77,10 @@ def colorsChosen():
     kk = [5,6,7]
     for k in range(0,len(kk)):
         if colorK == kk[k]:
-            blinked.switchColor('b',kk[k])
+            blinked.switchColor('b',[kk[k]])
         else:
 
-            blinked.switchColor('r',kk[k])
+            blinked.switchColor('r',[kk[k]])
         
 
 def switchColor(col):
