@@ -183,9 +183,15 @@ def drawing(kFrames,frames,angle,angleZ,draw,
         
         while(pause):
             time.sleep(1)
-            speedMin = speedMinList[colorK]
-            speed = speedList[colorK]
-            A0 = A0List[colorK]
+            if A0 != A0List[colorK]:
+                speedMin = speedMinList[colorK]
+                speed = speedList[colorK]
+                A0 = A0List[colorK]
+                print('--- --- ---')
+                print("A0 : "+str(A0))
+                print("speed : "+str(speed))
+                print("speedMin : "+str(speedMin))
+                print('--- --- ---')
 
         if k%100 == 0:
             print("number of Lines : "+str(k))
