@@ -48,16 +48,20 @@ def mouseListener():
         if ev.type == 1:
             if ev.code == 272:
                 backgroundSub = True
-                if pause:
+                pressed = not pressed
+                if pressed and pause:
+                
                     colorK +=1
                     colorK = colorK%3
                     colorsChosen()
             elif ev.code ==273:
                 drawLoop = True
-                if pause:
+                pressed = not pressed
+                if pressed and pause:
                     colorK -=1
                     colorK = colorK%3
                     colorsChosen()
+                    print(colorK)
             elif ev.code ==274:
                 pressed = not pressed
                 if pressed:
