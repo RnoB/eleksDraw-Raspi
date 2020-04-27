@@ -262,6 +262,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 speedZ = speedMin+speed*(1+np.cos(angleD+A0+A1))*np.cos(AZ[kx,ky])
                 dxS = speedZ*(np.cos(angleD))
                 dyS = speedZ*(np.sin(angleD))
+                print("angleD : "+str(angleD))
+                print("speedZ : "+str(speedZ))
                 dx = round(dxS,resolution)
                 dy = round(dyS,resolution)
                 dx1 = round(dx,distanceLine)
