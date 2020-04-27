@@ -244,7 +244,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 Atest = A[ky,kx]
                 AZtest = AZ[ky,kx]
                 print(AZtest)
-                
+                print(not np.isnan(AZtest))
+                print(not np.isnan(zTest) and not np.isnan(Atest) and not np.isnan(AZtest))
                 if not np.isnan(zTest) and not np.isnan(Atest) and not np.isnan(AZtest):
                     xChecking = False
 
@@ -260,12 +261,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             speedZ = speedMin+speed*(1+np.cos(angleD+A0+A1))*np.cos(AZ[kx,ky])
             dxS = speedZ*(np.cos(angleD))
             dyS = speedZ*(np.sin(angleD))
-            print("speedMin : "+str(speedMin))
-            print("speed : "+str(speed))
-            print("angleD : "+str(angleD))
-            print("A0 : "+str(A0))
-            print("A1 : "+str(A1))
-            print("AZ : "+str(AZ[kx,ky]))
+
             dx = round(dxS,resolution)
             dy = round(dyS,resolution)
             dx1 = round(dx,distanceLine)
