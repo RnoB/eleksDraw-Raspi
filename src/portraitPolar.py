@@ -250,37 +250,35 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
             running = True
             t0 = time.time() 
-            if np.isnan(zTest) or np.isnan(Atest):
-                running=False
-            else: 
+        
 
-                linePosition.append((round(x,resolution),round(y,resolution)))
+            linePosition.append((round(x,resolution),round(y,resolution)))
 
 
+            
+            angleD = A[ky,kx]+noise*(.5-random.random())
+            speedZ = speedMin+speed*(1+np.cos(angleD+A0+A1))*np.cos(AZ[kx,ky])
+            dxS = speedZ*(np.cos(angleD))
+            dyS = speedZ*(np.sin(angleD))
+            print("speedMin : "+str(speedMin))
+            print("speed : "+str(speed))
+            print("angleD : "+str(angleD))
+            print("A0 : "+str(A0))
+            print("A1 : "+str(A1))
+            print("AZ : "+str(AZ[kx,ky]))
+            dx = round(dxS,resolution)
+            dy = round(dyS,resolution)
+            dx1 = round(dx,distanceLine)
+            dy1 = round(dy,distanceLine)
+            dx2 = round(dx,distanceFigure)
+            dy2 = round(dy,distanceFigure)
+            dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
                 
-                angleD = A[ky,kx]+noise*(.5-random.random())
-                speedZ = speedMin+speed*(1+np.cos(angleD+A0+A1))*np.cos(AZ[kx,ky])
-                dxS = speedZ*(np.cos(angleD))
-                dyS = speedZ*(np.sin(angleD))
-                print("speedMin : "+str(speedMin))
-                print("speed : "+str(speed))
-                print("angleD : "+str(angleD))
-                print("A0 : "+str(A0))
-                print("A1 : "+str(A1))
-                print("AZ : "+str(AZ[kx,ky]))
-                dx = round(dxS,resolution)
-                dy = round(dyS,resolution)
-                dx1 = round(dx,distanceLine)
-                dy1 = round(dy,distanceLine)
-                dx2 = round(dx,distanceFigure)
-                dy2 = round(dy,distanceFigure)
-                dxk,dyk = scaler(dx,dy,scale=scale,offsetX=offsetX,offsetY=offsetY,invert=True)
-                    
-                xLines.append(y+dy)
-                yLines.append(heightPaper-(x+dx))
-                xLines.append(y-dy)
-                yLines.append(heightPaper-(x-dx))
-                size = 2
+            xLines.append(y+dy)
+            yLines.append(heightPaper-(x+dx))
+            xLines.append(y-dy)
+            yLines.append(heightPaper-(x-dx))
+            size = 2
 
 
                 
@@ -348,7 +346,7 @@ def main():
         kinect.stop()
         blinked.switchColor('c',[1])
         kinect.backgroundSubstract(blur=True,level=5)
-        dX,dY,angle,angleZ = kinect.derivateFrames()
+        dX,dY,angle,AZ = kinect.derivateFrames()
     except Exception as e: 
         print(traceback.format_exc())
  
