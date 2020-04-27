@@ -171,7 +171,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     z = frames[kFrames]
     A = angle[kFrames]+A0
     AZ = angleZ[kFrames]
-    print(AZ)
+    print(sum(sum(isnan(AZ)))
     
 
     
