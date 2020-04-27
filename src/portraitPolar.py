@@ -159,7 +159,7 @@ def round(x, base=1):
 
  
 def drawing(kFrames,frames,angle,angleZ,draw,
-            nLines = 400,scale = 70,A0=0,A1=1,
+            nLines = 400,scale = 70,A0=0,A1=0,
             resolution=.1,speed = .4,speedMin = 5,distanceLine=.8 ,distanceFigure = 5.0,
             noise = 0,offsetX = 0,offsetY=0,figurePosition = [],cropFactor = .3):
     kFrames = np.int(kFrames)
@@ -217,7 +217,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
             while xChecking:
                 widthScanMin += widthStep
-                widthScanMax = widthScanMin +5
+                widthScanMax = widthScanMin +1
                 if widthScanMin <0:
                     widthStep = - widthStep
                     widthScanMin = 0
@@ -242,6 +242,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 y1 = round(y,distanceLine)
                 zTest = z[ky,kx]
                 Atest = A[ky,kx]
+
                 
                 if not np.isnan(zTest) or not np.isnan(Atest):
                     xChecking = False
@@ -256,8 +257,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
                 
-                angleD = A[ky,kx]+noise*(.5-random.random())+A1
-                speedZ = speedMin+speed*(1+np.cos(angleD+A0))
+                angleD = A[ky,kx]+noise*(.5-random.random())
+                speedZ = speedMin+speed*(1+np.cos(angleD+A0+A1))*np.cos(AZ[kx,ky])
                 dxS = speedZ*(np.cos(angleD))
                 dyS = speedZ*(np.sin(angleD))
                 dx = round(dxS,resolution)
@@ -339,7 +340,7 @@ def main():
         kinect.getDepthFrames(nFrames = 1,delay=.01,maxDepth=2049)
         kinect.stop()
         blinked.switchColor('c',[1])
-        kinect.backgroundSubstract(blur=True,level=15)
+        kinect.backgroundSubstract(blur=True,level=5)
         dX,dY,angle,angleZ = kinect.derivateFrames()
     except Exception as e: 
         print(traceback.format_exc())
@@ -369,11 +370,10 @@ def main():
     offsetY0 = 5-offsetX
 
 
-
     for k in range( 0,nColors):
-        A0List.append( 2*np.pi*np.random.rand())
-        speedMinList.append(1+20*(1-np.random.power(6)))
-        speedList.append(10+40*(1-np.random.power(3)))
+        A0List.append(2*np.pi*np.random.rand())
+        speedMinList.append(1+10*(1-np.random.power(6)))
+        speedList.append(10+10*(1-np.random.power(3)))
     A1 = 2*np.pi*np.random.rand()
     try:
 
