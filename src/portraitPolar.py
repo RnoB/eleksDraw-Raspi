@@ -171,7 +171,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     z = frames[kFrames]
     A = angle[kFrames]+A0
     AZ = angleZ[kFrames]
-
+    print(AZ)
     
 
     
@@ -346,7 +346,7 @@ def main():
         kinect.stop()
         blinked.switchColor('c',[1])
         kinect.backgroundSubstract(blur=True,level=5)
-        dX,dY,angle,AZ = kinect.derivateFrames()
+        dX,dY,angle,angleZ = kinect.derivateFrames()
     except Exception as e: 
         print(traceback.format_exc())
  
