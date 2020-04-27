@@ -171,7 +171,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     z = frames[kFrames]
     A = angle[kFrames]+A0
     AZ = angleZ[kFrames]
-    print(sum(sum(not np.isnan(AZ))))
+
     
 
     
@@ -243,9 +243,9 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 zTest = z[ky,kx]
                 Atest = A[ky,kx]
                 AZtest = AZ[ky,kx]
-
+                print(AZtest)
                 
-                if not np.isnan(zTest) or not np.isnan(Atest) or not np.isnan(AZtest):
+                if not np.isnan(zTest) and not np.isnan(Atest) and not np.isnan(AZtest):
                     xChecking = False
 
             running = True
