@@ -171,7 +171,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     z = frames[kFrames]
     A = angle[kFrames]+A0
     AZ = angleZ[kFrames]
-    print(sum(sum(np.isnan(AZ))))
+    print(sum(sum(not np.isnan(AZ))))
     
 
     
