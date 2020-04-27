@@ -242,9 +242,10 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 y1 = round(y,distanceLine)
                 zTest = z[ky,kx]
                 Atest = A[ky,kx]
+                AzTest = AZ[ky,kx]
 
                 
-                if not np.isnan(zTest) or not np.isnan(Atest):
+                if not np.isnan(zTest) or not np.isnan(Atest) or not np.isnan(Aztest):
                     xChecking = False
 
             running = True
