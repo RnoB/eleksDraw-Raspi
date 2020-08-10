@@ -117,7 +117,7 @@ def animColor():
     show()
 
 def spacer(depth):
-    scale = 800
+    scale = 4000
     heightMax=9999
     width =9999
     
