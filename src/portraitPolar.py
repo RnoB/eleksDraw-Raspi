@@ -17,7 +17,7 @@ running = True
 #widthPaper = 250
 #heightPaper = 170
 widthPaper = 600
-heightPaper = 900
+heightPaper = 1000
 
 sizeMax = 200
 
