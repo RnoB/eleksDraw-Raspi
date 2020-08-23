@@ -32,6 +32,7 @@ draw = []
 drawerIPSelected = drawIP.drawerIP
 
 def selectMachine(machine = 1):
+    global drawerIPSelected
     if machine == 1:
         drawerIPSelected = drawIP.drawerIP
     elif machine == 2:
