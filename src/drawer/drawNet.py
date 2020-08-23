@@ -243,7 +243,7 @@ def receiveDirection(IP,PORT):
                         x = message[0]
                         y = message[1]
                         draw.toPosition(x,y)
-                        uh.set_pixel(3, 4, 0, 0, 0)
+                        uh.set_pixel(3, 4, 0, 0, 0) 
                         uh.show()
                         uh.set_pixel(3, 4, 0, 255, 255)
                         uh.show()
@@ -286,3 +286,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+ 
