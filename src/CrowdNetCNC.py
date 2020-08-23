@@ -265,7 +265,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
 def main():
-    draw = drawer.DrawerNet()    
+    draw = drawer.DrawerNet(2)    
     draw.penUp()
     draw.toPosition(0,0)
     set_brightness(.05)
