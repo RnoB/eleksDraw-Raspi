@@ -29,6 +29,14 @@ draw = []
 
 
 
+drawerIPSelected = drawIP.drawerIP
+
+def selectMachine(machine = 1):
+    if machine == 1:
+        drawerIPSelected = drawIP.drawerIP
+    else if machine == 2:
+        drawerIPSelected = drawIP.drawerIP2
+    
 def sendCommand(code,x = 0,y = 0):
     dataRec =[]
     socketClient = socket.socket()
@@ -40,7 +48,7 @@ def sendCommand(code,x = 0,y = 0):
 
     while connect == 0:
         try:
-            socketClient.connect((drawIP.drawerIP, drawIP.drawerPort))
+            socketClient.connect((drawerIPSelected, drawIP.drawerPort))
             connect = 1
         except:
             connect = 0
@@ -63,7 +71,7 @@ def sendLines(x,y):
 
     while connect == 0:
         try:
-            socketClient.connect((drawIP.drawerIP, drawIP.drawerPort))
+            socketClient.connect((drawerIPSelected, drawIP.drawerPort))
             connect = 1
         except:
             connect = 0
@@ -89,7 +97,7 @@ def pen(position):
     
     while connect == 0:
         try:
-            socketClient.connect((drawIP.drawerIP, drawIP.drawerPort))
+            socketClient.connect((drawerIPSelected, drawIP.drawerPort))
             connect = 1
         except:
             connect = 0
@@ -116,7 +124,7 @@ def sendPosition(x,y):
 
     while connect == 0:
         try:
-            socketClient.connect((drawIP.drawerIP, drawIP.drawerPort))
+            socketClient.connect((drawerIPSelected, drawIP.drawerPort))
             connect = 1
         except:
             connect = 0
@@ -251,14 +259,14 @@ def main():
     global running
     global draw
     draw = drawer.Drawer()
-    receiveThread = threading.Thread(target=receiveDirection, args=(drawIP.drawerIP, drawIP.drawerPort))
+    receiveThread = threading.Thread(target=receiveDirection, args=(drawerIPSelected, drawIP.drawerPort))
     receiveThread.daemon = True
     receiveThread.start()
     uh.set_pixel(2, 0, 0, 255, 0)
     uh.show()
 
 
-    statusThread = threading.Thread(target = giveStatus, args=(drawIP.drawerIP,))
+    statusThread = threading.Thread(target = giveStatus, args=(drawerIPSelected,))
     statusThread.daemon = True
     statusThread.start()
     uh.set_pixel(1, 0, 255, 0, 255)
