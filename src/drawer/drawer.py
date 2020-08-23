@@ -259,7 +259,8 @@ class DrawerNet:
 
 
 
-    def __init__(self):
+    def __init__(self,machine = 1):
+        drawIP = drawNet.selectMachine(machine)):
         pass
 
 
