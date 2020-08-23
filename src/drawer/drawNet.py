@@ -34,7 +34,7 @@ drawerIPSelected = drawIP.drawerIP
 def selectMachine(machine = 1):
     if machine == 1:
         drawerIPSelected = drawIP.drawerIP
-    else if machine == 2:
+    elif machine == 2:
         drawerIPSelected = drawIP.drawerIP2
     
 def sendCommand(code,x = 0,y = 0):
