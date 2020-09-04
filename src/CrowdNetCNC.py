@@ -11,10 +11,10 @@ import time
 
 running = True
 
-#widthPaper = 250
-#heightPaper = 170
 widthPaper = 950
 heightPaper = 950
+#widthPaper = 148
+#heightPaper = 105
 
 from blinked import blinked
 
@@ -178,7 +178,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                     and (dx1,dy1) not in imagePosition \
                     and (dx2,dy2) not in figurePosition \
                     and AZ[ky,kx]-A0<1.5 \
-                    and dx < 170 and dy < 250 \
+                    and dx < 950 and dy < 950 \
                     and dx > 0 and dy > 0:
                         
                         x=dxS
@@ -224,7 +224,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                         and (dx1,dy1) not in imagePosition \
                         and (dx2,dy2) not in figurePosition \
                         and AZ[ky,kx]-A0<1.5 \
-                        and dx < 170 and dy < 250 \
+                        and dx < 950 and dy < 950 \
                         and dx > 0 and dy > 0:
                             
                             x=dxS
@@ -265,7 +265,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
 def main():
-    draw = drawer.DrawerNet(2)    
+    draw = drawer.DrawerNet()    
     draw.penUp()
     draw.toPosition(0,0)
     set_brightness(.05)
@@ -277,7 +277,24 @@ def main():
         kinect.backGroundSubstractor(nFrames=100)
         kinect.stop()
         blinked.switchColor('p',[1])
-        time.sleep(20)
+        for k in range(0,12):
+            time.sleep(.8)
+            blinked.switchColor('r',[7])
+            time.sleep(.2)
+            blinked.switchColor('k',[7])
+
+        for k in range(0,10):
+            time.sleep(.35)
+            blinked.switchColor('o',[7])
+            time.sleep(.15)
+            blinked.switchColor('k',[7])
+        
+        for k in range(0,5):
+            deltaT = .3/((k+1))
+            time.sleep(.9*deltaT)
+            blinked.switchColor('g',[7])
+            time.sleep(.1*deltaT)
+            blinked.switchColor('k',[7])
         kinect.start()
         kinect.getDepthFrames(nFrames = 40,delay=.01,maxDepth=2049)
         kinect.stop()
@@ -291,12 +308,11 @@ def main():
     blinked.switchColor('g',[5,6])
     draw = drawer.DrawerNet()    
     draw.penUp()
-    draw.squareCorner(0,0,widthPaper,heightPaper)
+    #draw.squareCorner(0,0,widthPaper,heightPaper)
     blinked.switchColor('g',[5,6,7])
     nLines = 400
     size = 0
 
-    X2 = []
     nx0=np.int(len(kinect.frames)/2)
     scale,nx,dist,offsetX,offsetY =  spacer(kinect.frames,nx0-1,nx0)
     print("scale : "+str(scale))
@@ -316,28 +332,95 @@ def main():
     offsetY0 = 5-offsetX
 
 
+    if np.random.random()<.12:
+        Nmin = np.random.randint(300,600)
+        Nmax = np.random.randint(50,200)
 
-    d = np.linspace(.1,4,nx)
-    nL = np.linspace(250,600,nx)
+        nL = np.linspace(Nmin,Nmax,nx,dtype = int)
+        if random.random()<.5:
+            nL = np.flip(nL) 
+    else:
+        nL = random.randint(250,350) * np.ones(nx, dtype=int)  
 
-    sp = np.linspace(.2,1.0,nx)
-    crop = np.linspace(0,.6,nx)
 
+    if np.random.random()<.098:
+        dMin =  .05 + .5*(1-np.random.power(5))
+        dMax = 1+4*np.random.random()
+
+        d = np.linspace(dMin,dMax,nx)
+        if random.random()<.5:
+            d = np.flip(d) 
+    else:
+        d = (.2 + (1-np.random.power(3))) * np.ones(nx)  
+    
+
+    if np.random.random()<.105:
+        speedMin = .1 + .2*np.random.random()
+        speedMax = .5 + np.random.random()
+
+        speed = np.linspace(speedMin,speedMax,nx)
+        if np.random.random()<.5:
+            speed = np.flip(speed) 
+    else:
+        speed = (.1 + .1*np.random.random()) * np.ones(nx)      
+    
+    if np.random.random()<.106:
+        cropMin = 0 + .1*np.random.random()
+        cropMax = .1 + .4*np.random.random()
+
+        crop = np.linspace(cropMin,cropMax,nx)
+        if random.random()<.5:
+            crop = np.flip(crop) 
+    else:
+        crop = ( .05*random.random()) * np.ones(nx)
+
+    if np.random.random()<.085:
+        noiseMin = (1-np.random.power(11))
+        noiseMax = noiseMin + 1.0*np.random.random()
+
+        noise = np.linspace(noiseMin,noiseMax,nx)
+        if np.random.random()<.5:
+            noise = np.flip(noise) 
+    else:
+        noise = (1-np.random.power(11)) * np.ones(nx)
+
+    if np.random.random()<.19:
+        colors = 2
+    else:
+        colors = 1
+    A0=0
+    X2 = []
+
+    print("----- Parameters -----")
+    print("-- Lines : " + str(nL) + "--" )
+    print("-- dista : " + str(d) + "--")
+    print("-- speed : " + str(speed) + "--" )
+    print("-- crops : " + str(crop) + "--")
+    print("-- noise : " + str(noise) + "--")
+    print("-- color : " + str(colors) + "--")
+    
     try:
-        for j in range(0,nx):
+        for l in range(0,colors):
+            print("color : "+str(l))
+            for j in range(0,nx):
 
-            blinked.progressColor(j/nx,'v','y',[4])
-            
-            kFrames = j+nx0
-            #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
-            #
-            
-            offsetX = offsetX0
-            offsetY = offsetY0+j*dist
+                blinked.progressColor(j/nx,'v','y',[4])
+                
+                kFrames = j+nx0
+                #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
+                #
+                
+                offsetX = offsetX0
+                offsetY = offsetY0+j*dist
 
-            #print("offset : "+str((offsetX,offsetY)))
-            X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = 300,scale = scale,A0=0,\
-                    offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = .2  ,speed = .2,cropFactor=crop[j])
+                #print("offset : "+str((offsetX,offsetY)))
+                X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL[j],scale = scale,A0=A0,\
+                        offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[l]  ,speed = speed[l],cropFactor=crop[l],\
+                        noise = noise[l])
+            if l==0:
+                time.sleep(0)
+                X2 = []
+                A0=math.pi/2.0
             
 
     except Exception as e: 
