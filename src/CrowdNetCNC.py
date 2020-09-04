@@ -13,8 +13,8 @@ running = True
 
 #widthPaper = 250
 #heightPaper = 170
-widthPaper = 148
-heightPaper = 105
+widthPaper = 950
+heightPaper = 950
 
 from blinked import blinked
 
