@@ -67,7 +67,7 @@ def spacer(depth):
         H = np.nonzero(Ht)
         Wt = np.sum(np.isnan(image),axis=1)!=640
         W = np.nonzero(Wt)
-        offsets.append(-W[0][0],-H[0][0])
+        offsets.append([-W[0][0],-H[0][0]])
         widths.append(W[0][-1]-W[0][0])
         heights.append(H[0][-1]-H[0][0])
 
