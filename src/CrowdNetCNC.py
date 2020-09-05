@@ -58,7 +58,7 @@ def spacer(depth):
     nx = 20
     overlap = 0
 
-    heightReal = heightPaper / (1+((1-overlap)*(1-ny)))
+    heightReal = heightPaper / (1+((1-overlap)*(ny-1)))
     widths = []
     heights = []
     offsets = []
@@ -274,7 +274,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
 def main():
-    draw = drawer.DrawerNet(2)    
+    draw = drawer.DrawerNet(2)
+    draw.penInvert(True)    
     draw.penUp()
     draw.toPosition(0,0)
     set_brightness(.05)
