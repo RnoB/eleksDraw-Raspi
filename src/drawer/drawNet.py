@@ -260,6 +260,7 @@ def main():
     global running
     global draw
     draw = drawer.Drawer()
+    print(sys.argv)
     try:
         if sys.argv[2] == 1:
             draw.penInvert(True)
