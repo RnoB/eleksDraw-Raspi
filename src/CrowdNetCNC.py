@@ -11,8 +11,8 @@ import time
 
 running = True
 
-widthPaper = 950
-heightPaper = 950
+widthPaper = 400
+heightPaper = 400
 #widthPaper = 148
 #heightPaper = 105
 
@@ -273,7 +273,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
 def main():
-    draw = drawer.DrawerNet()    
+    draw = drawer.DrawerNet(2)    
     draw.penUp()
     draw.toPosition(0,0)
     set_brightness(.05)
