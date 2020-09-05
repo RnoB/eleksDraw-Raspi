@@ -274,6 +274,7 @@ def main():
         print(drawerIPSelected)
     except:
         pass
+    draw.penUp()
     receiveThread = threading.Thread(target=receiveDirection, args=(drawerIPSelected, drawIP.drawerPort))
     receiveThread.daemon = True
     receiveThread.start()
