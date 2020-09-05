@@ -275,7 +275,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 def main():
     draw = drawer.DrawerNet(2)
-    
+
     draw.penUp()
     draw.toPosition(0,0)
     set_brightness(.05)
@@ -341,7 +341,7 @@ def main():
     #offsetY0 = 5-offsetX
 
 
-    nL = random.randint(10,30) * np.ones(nx, dtype=int)  
+    nL = random.randint(10,30) 
 
 
     d = (.2 + (1-np.random.power(3)))   
