@@ -361,7 +361,6 @@ def main():
     print("-- speed : " + str(speed) + "--" )
     print("-- crops : " + str(crop) + "--")
     print("-- noise : " + str(noise) + "--")
-    print("-- color : " + str(colors) + "--")
     
     try:
         for k in range(0,ny):
