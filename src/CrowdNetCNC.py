@@ -344,14 +344,14 @@ def main():
     nL = random.randint(10,30) 
 
 
-    d = (.2 + (1-np.random.power(3)))   
+    d = .2 #+ (1-np.random.power(3)))   
     
 
     speed = (.1 + .1*np.random.random())       
     
     crop = ( .0*random.random())
 
-    noise = (1-np.random.power(11))
+    noise = .1*(1-np.random.power(11))
 
     
     A0=0
@@ -369,7 +369,7 @@ def main():
             for j in range(0,nx):
                 blinked.progressColor(((k*ny)+j)/(nx*ny),'v','y',[4])
                 
-                kFrames = random.randint(0,len(kinect.frames))
+                kFrames = random.randint(0,len(kinect.frames)-1)
                 #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
                 #
                 
