@@ -97,7 +97,7 @@ def scaler(x,y,scale=100,offsetX = 5,offsetY = 5,invert=False):
     return x2,y2
 
 def getScale(wPixel,wPaper):
-    return 480*wPaper/wPix
+    return 480*wPaper/wPixel
 
 
 
