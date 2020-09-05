@@ -260,6 +260,11 @@ def main():
     global running
     global draw
     draw = drawer.Drawer()
+    try:
+        if sys.argv[2] == 1:
+            draw.penInvert(True)
+    try:
+        selectMachine(sys.argv[1])
     receiveThread = threading.Thread(target=receiveDirection, args=(drawerIPSelected, drawIP.drawerPort))
     receiveThread.daemon = True
     receiveThread.start()
