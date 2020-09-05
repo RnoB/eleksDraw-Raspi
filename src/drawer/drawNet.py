@@ -262,10 +262,14 @@ def main():
     draw = drawer.Drawer()
     print(sys.argv)
     try:
+        print(int(sys.argv[2]))
+        print(int(sys.argv[2]) == 1)
         if int(sys.argv[2]) == 1:
             draw.penInvert(True)
     except:
+        print(int(sys.argv[1]))
         selectMachine(int(sys.argv[1]))
+        print(drawerIPSelected)
     receiveThread = threading.Thread(target=receiveDirection, args=(drawerIPSelected, drawIP.drawerPort))
     receiveThread.daemon = True
     receiveThread.start()
