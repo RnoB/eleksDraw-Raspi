@@ -52,34 +52,38 @@ def animColor():
     clear()
     show()
 
-def spacer(depth,nx0,nx=20):
-    scale = 220
-    heightMax=200
-    
-    nx0=np.int(nx0)
-    offsetY0 = []
-    while heightMax>heightPaper-10:
-        scale=scale-5
-        sizeImage = []
-        offset = []
-        for k in range(0,nx):
-            Ht = np.sum(np.isnan(depth[nx0+k]),axis=0)!=480
-            H = np.nonzero(Ht)
-            Wt = np.sum(np.isnan(depth[nx0+k]),axis=1)!=640
-            W = np.nonzero(Wt)
-            sizeImage.append(scaler(W[0][-1]-W[0][0],H[0][-1]-H[0][0],scale=scale,offsetX = 0,offsetY = 0))
-            offset.append(scaler(W[0][0],H[0][0],scale=scale,offsetX = 0,offsetY = 0))
-            offsetY0.append(offset[-1][1])
+def spacer(depth):
 
-        offsetX = offset[0][0]
-        offsetY = np.min(offsetY0)
-        heightMax = np.max(sizeImage,axis = 0)[1]
-    width = np.mean(sizeImage,axis = 0)[0]
-    nx = np.int(round((.8+1*random.random())*widthPaper/width))
-    print(sizeImage)
-    dist = ((widthPaper-10)-sizeImage[nx-1][0]+offset[0][0]-offset[nx-1][0])/(nx-1)
+    ny = 20
+    nx = 20
+    overlap = 0
+
+    heightReal = heightPaper / (1+((1-overlap)*(1-ny)))
+    widths = []
+    heights = []
+    offsets = []
+    for image in depth:
+        Ht = np.sum(np.isnan(image),axis=0)!=480
+        H = np.nonzero(Ht)
+        Wt = np.sum(np.isnan(image),axis=1)!=640
+        W = np.nonzero(Wt)
+        offsets.append(-W[0][0],-H[0][0])
+        widths.append(W[0][-1]-W[0][0])
+        heights.append(H[0][-1]-H[0][0])
+
+    heightMax = np.max(heights)
+    widthMax = np.max(widths)
+    scale = getScale(heightMax,heightReal)
+
+    offset = []
+
+    for k in range(0,len(offsets)):
+        offset.append(scaler(offsets[k][0],offsets[k][1],scale=scale,offsetX = 0,offsetY = 0))
+    dist = [widthPaper/(nx-1)-widthMax,(1-overlap)*heightReal]
+    
+   
     #dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
-    return scale,nx,dist,offsetX,offsetY
+    return scale,nx,ny,dist,offset
 
 
 def scaler(x,y,scale=100,offsetX = 5,offsetY = 5,invert=False):
@@ -91,6 +95,10 @@ def scaler(x,y,scale=100,offsetX = 5,offsetY = 5,invert=False):
         y2 = scale*y/480+offsetY
 
     return x2,y2
+
+def getScale(wPixel,wPaper):
+    return scale = 480*wPaper/wPix
+
 
 
 def round(x, base=1):
@@ -178,7 +186,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                     and (dx1,dy1) not in imagePosition \
                     and (dx2,dy2) not in figurePosition \
                     and AZ[ky,kx]-A0<1.5 \
-                    and dx < 950 and dy < 950 \
+                    and dx < heightPaper and dy < widthPaper \
                     and dx > 0 and dy > 0:
                         
                         x=dxS
@@ -224,7 +232,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                         and (dx1,dy1) not in imagePosition \
                         and (dx2,dy2) not in figurePosition \
                         and AZ[ky,kx]-A0<1.5 \
-                        and dx < 950 and dy < 950 \
+                        and dx < `heightPaper and dy < widthPaper \
                         and dx > 0 and dy > 0:
                             
                             x=dxS
@@ -296,7 +304,7 @@ def main():
             time.sleep(.1*deltaT)
             blinked.switchColor('k',[7])
         kinect.start()
-        kinect.getDepthFrames(nFrames = 40,delay=.01,maxDepth=2049)
+        kinect.getDepthFrames(nFrames = 50,delay=.01,maxDepth=2049)
         kinect.stop()
         blinked.switchColor('c',[1])
         kinect.backgroundSubstract(blur=True,level=15)
@@ -313,12 +321,11 @@ def main():
     nLines = 400
     size = 0
 
-    nx0=np.int(len(kinect.frames)/2)
-    scale,nx,dist,offsetX,offsetY =  spacer(kinect.frames,nx0-1,nx0)
+
+    scale,nx,ny,dist,offset =  spacer(kinect.frames)
     print("scale : "+str(scale))
     print("n     : "+str(nx))
-    print("offsetX  : "+str(offsetX))
-    print("offsetY : "+str(offsetY))
+
     print("dist : "+str(dist))
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
@@ -328,66 +335,23 @@ def main():
 
 
 
-    offsetX0 = 5-offsetY
-    offsetY0 = 5-offsetX
+    #offsetX0 = 5-offsetY
+    #offsetY0 = 5-offsetX
 
 
-    if np.random.random()<.12:
-        Nmin = np.random.randint(300,600)
-        Nmax = np.random.randint(50,200)
-
-        nL = np.linspace(Nmin,Nmax,nx,dtype = int)
-        if random.random()<.5:
-            nL = np.flip(nL) 
-    else:
-        nL = random.randint(250,350) * np.ones(nx, dtype=int)  
+    nL = random.randint(10,30) * np.ones(nx, dtype=int)  
 
 
-    if np.random.random()<.098:
-        dMin =  .05 + .5*(1-np.random.power(5))
-        dMax = 1+4*np.random.random()
-
-        d = np.linspace(dMin,dMax,nx)
-        if random.random()<.5:
-            d = np.flip(d) 
-    else:
-        d = (.2 + (1-np.random.power(3))) * np.ones(nx)  
+    d = (.2 + (1-np.random.power(3))) * np.ones(nx)  
     
 
-    if np.random.random()<.105:
-        speedMin = .1 + .2*np.random.random()
-        speedMax = .5 + np.random.random()
-
-        speed = np.linspace(speedMin,speedMax,nx)
-        if np.random.random()<.5:
-            speed = np.flip(speed) 
-    else:
-        speed = (.1 + .1*np.random.random()) * np.ones(nx)      
+    speed = (.1 + .1*np.random.random()) * np.ones(nx)      
     
-    if np.random.random()<.106:
-        cropMin = 0 + .1*np.random.random()
-        cropMax = .1 + .4*np.random.random()
+    crop = ( .05*random.random()) * np.ones(nx)
 
-        crop = np.linspace(cropMin,cropMax,nx)
-        if random.random()<.5:
-            crop = np.flip(crop) 
-    else:
-        crop = ( .05*random.random()) * np.ones(nx)
+    noise = (1-np.random.power(11)) * np.ones(nx)
 
-    if np.random.random()<.085:
-        noiseMin = (1-np.random.power(11))
-        noiseMax = noiseMin + 1.0*np.random.random()
-
-        noise = np.linspace(noiseMin,noiseMax,nx)
-        if np.random.random()<.5:
-            noise = np.flip(noise) 
-    else:
-        noise = (1-np.random.power(11)) * np.ones(nx)
-
-    if np.random.random()<.19:
-        colors = 2
-    else:
-        colors = 1
+    
     A0=0
     X2 = []
 
@@ -400,27 +364,22 @@ def main():
     print("-- color : " + str(colors) + "--")
     
     try:
-        for l in range(0,colors):
-            print("color : "+str(l))
+        for k in range(0,ny):
             for j in range(0,nx):
-
-                blinked.progressColor(j/nx,'v','y',[4])
+                blinked.progressColor(((k*ny)+j)/(nx*ny),'v','y',[4])
                 
-                kFrames = j+nx0
+                kFrames = random.randint(0,len(depth))
                 #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
                 #
                 
-                offsetX = offsetX0
-                offsetY = offsetY0+j*dist
+                offsetX = offset[kFrames][0]+j*dist[0]
+                offsetY = offset[kFrames][1]+k*dist[1]
 
                 #print("offset : "+str((offsetX,offsetY)))
                 X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL[j],scale = scale,A0=A0,\
                         offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[l]  ,speed = speed[l],cropFactor=crop[l],\
                         noise = noise[l])
-            if l==0:
-                time.sleep(0)
-                X2 = []
-                A0=math.pi/2.0
+
             
 
     except Exception as e: 
