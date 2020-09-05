@@ -80,7 +80,7 @@ def spacer(depth):
 
     for k in range(0,len(offsets)):
         offset.append(scaler(offsets[k][0],offsets[k][1],scale=scale,offsetX = 0,offsetY = 0))
-    dist = [widthPaper/(nx-1)-widthMax,(1-overlap)*heightReal]
+    dist = [(widthPaper-widthMax)/(nx-1),(1-overlap)*heightReal]
     
    
     #dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
