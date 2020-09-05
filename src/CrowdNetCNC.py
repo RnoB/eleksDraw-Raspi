@@ -70,7 +70,8 @@ def spacer(depth):
         offsets.append([-W[0][0],-H[0][0]])
         widths.append(W[0][-1]-W[0][0])
         heights.append(H[0][-1]-H[0][0])
-
+    print(widths)
+    print(heights)
     heightMax = np.max(heights)
     widthMax = np.max(widths)
     scale = getScale(heightMax,heightReal)
@@ -367,7 +368,7 @@ def main():
             for j in range(0,nx):
                 blinked.progressColor(((k*ny)+j)/(nx*ny),'v','y',[4])
                 
-                kFrames = random.randint(0,len(depth))
+                kFrames = random.randint(0,len(kinect.frames))
                 #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
                 #
                 
