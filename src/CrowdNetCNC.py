@@ -342,14 +342,14 @@ def main():
     nL = random.randint(10,30) * np.ones(nx, dtype=int)  
 
 
-    d = (.2 + (1-np.random.power(3))) * np.ones(nx)  
+    d = (.2 + (1-np.random.power(3)))   
     
 
-    speed = (.1 + .1*np.random.random()) * np.ones(nx)      
+    speed = (.1 + .1*np.random.random())       
     
-    crop = ( .05*random.random()) * np.ones(nx)
+    crop = ( .0*random.random())
 
-    noise = (1-np.random.power(11)) * np.ones(nx)
+    noise = (1-np.random.power(11))
 
     
     A0=0
@@ -375,9 +375,9 @@ def main():
                 offsetY = offset[kFrames][1]+k*dist[1]
 
                 #print("offset : "+str((offsetX,offsetY)))
-                X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL[j],scale = scale,A0=A0,\
-                        offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[l]  ,speed = speed[l],cropFactor=crop[l],\
-                        noise = noise[l])
+                X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL,scale = scale,A0=A0,\
+                        offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d  ,speed = speed,cropFactor=crop,\
+                        noise = noise)
 
             
 
