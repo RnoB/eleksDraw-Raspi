@@ -373,8 +373,8 @@ def main():
                 #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
                 #
                 
-                offsetX = offset[kFrames][0]+j*dist[0]
-                offsetY = offset[kFrames][1]+k*dist[1]
+                offsetY = offset[kFrames][0]+j*dist[0]
+                offsetX = offset[kFrames][1]+k*dist[1]
 
                 #print("offset : "+str((offsetX,offsetY)))
                 X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL,scale = scale,A0=A0,\
