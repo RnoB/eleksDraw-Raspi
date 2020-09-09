@@ -380,6 +380,7 @@ def main():
                 #
                 
                 offsetY = offset[kFrames][0]+j*dist[0]
+                offsetX = -9999
                 while offsetX<offset[kFrames][1] or offsetX>offset[kFrames][1]+(nx-1)*dist[1]:
                     offsetX = offset[kFrames][1]+k*dist[1]+np.random.uniform(-dist[1],dist[1])
 
