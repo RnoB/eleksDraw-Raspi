@@ -77,7 +77,7 @@ def spacer(depth):
     scale = getScale(heightMax,heightReal)
     sizeReal = scaler(widthMax,heightMax,scale,0,0)
 
-    nx = round(widthPaper/(2*sizeReal[0]))
+    nx = np.int(round(widthPaper/(2*sizeReal[0])))
     offset = []
 
     for k in range(0,len(offsets)):
