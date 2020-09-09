@@ -56,7 +56,7 @@ def spacer(depth):
 
     ny = 20
     nx = 20
-    overlap = 0
+    overlap = 0.1
 
     heightReal = heightPaper / (1+((1-overlap)*(ny-1)))
     widths = []
@@ -75,12 +75,14 @@ def spacer(depth):
     heightMax = np.max(heights)
     widthMax = np.max(widths)
     scale = getScale(heightMax,heightReal)
+    sizeReal = scaler(widthMax,heightMax,scale,0,0)
 
+    nx = round(widthPaper/(2*sizeReal[0]))
     offset = []
 
     for k in range(0,len(offsets)):
         offset.append(scaler(offsets[k][0],offsets[k][1],scale=scale,offsetX = 0,offsetY = 0))
-    dist = [(widthPaper-widthMax)/(nx-1),(1-overlap)*heightReal]
+    dist = [(widthPaper-sizeReal[0])/(nx-1),(1-overlap)*heightReal]
     
    
     #dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
@@ -341,7 +343,7 @@ def main():
     #offsetY0 = 5-offsetX
 
 
-    nL = random.randint(10,30) 
+    nL = random.randint(20,30) 
 
 
     d = .2 #+ (1-np.random.power(3)))   
@@ -366,7 +368,11 @@ def main():
     
     try:
         for k in range(0,ny):
-            for j in range(0,nx):
+            for j2 in range(0,nx):
+                if k%2==0:
+                    j=j2
+                else:
+                    j=nx-1-j2
                 blinked.progressColor(((k*ny)+j)/(nx*ny),'v','y',[4])
                 
                 kFrames = random.randint(0,len(kinect.frames)-1)
@@ -374,7 +380,8 @@ def main():
                 #
                 
                 offsetY = offset[kFrames][0]+j*dist[0]
-                offsetX = offset[kFrames][1]+k*dist[1]
+                while offsetX<offset[kFrames][1] or offsetX>offset[kFrames][1]+(nx-1)*dist[1]:
+                    offsetX = offset[kFrames][1]+k*dist[1]+np.random.uniform(-dist[1],dist[1])
 
                 #print("offset : "+str((offsetX,offsetY)))
                 X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL,scale = scale,A0=A0,\
