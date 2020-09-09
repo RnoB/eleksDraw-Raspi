@@ -77,7 +77,7 @@ def spacer(depth):
     scale = getScale(heightMax,heightReal)
     sizeReal = scaler(widthMax,heightMax,scale,0,0)
 
-    nx = np.int(round(widthPaper/(2*sizeReal[0])))
+    nx = np.int(round(widthPaper/(sizeReal[0])))
     offset = []
 
     for k in range(0,len(offsets)):
@@ -378,11 +378,13 @@ def main():
                 kFrames = random.randint(0,len(kinect.frames)-1)
                 #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
                 #
+                offsetY = -9999
+                while offsetY<offset[kFrames][0] or offsetY>offset[kFrames][0]+(nx-1)*dist[0]:
+                    offsetY = offset[kFrames][0]+j*dist[0]+random.uniform(-dist[0],dist[0])
                 
-                offsetY = offset[kFrames][0]+j*dist[0]
-                offsetX = -9999
-                while offsetX<offset[kFrames][1] or offsetX>offset[kFrames][1]+(nx-1)*dist[1]:
-                    offsetX = offset[kFrames][1]+k*dist[1]+np.random.uniform(-dist[1],dist[1])
+                offsetX = offset[kFrames][1]+k*dist[1]
+
+
 
                 #print("offset : "+str((offsetX,offsetY)))
                 X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL,scale = scale,A0=A0,\
