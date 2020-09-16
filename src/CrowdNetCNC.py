@@ -318,6 +318,10 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
 def main():
+    mouseThread = threading.Thread(target = mouseListener)
+    mouseThread.daemon = True
+    mouseThread.start()
+
     draw = drawer.DrawerNet(2)
 
     draw.penUp()
