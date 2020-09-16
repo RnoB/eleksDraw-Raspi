@@ -96,7 +96,7 @@ def spacer(depth):
 
     ny = 40
     nx = 20
-    overlap = 0.2
+    overlap = 0.3
 
     heightReal = heightPaper / (1+((1-overlap)*(ny-1)))
     widths = []
@@ -113,7 +113,7 @@ def spacer(depth):
     print(widths)
     print(heights)
     heightMax = np.max(heights)
-    widthMax = np.max(widths)
+    widthMax = np.mean(widths)
     scale = getScale(heightMax,heightReal)
     sizeReal = scaler(widthMax,heightMax,scale,0,0)
     print("Max Size : "+str(sizeReal))
@@ -122,7 +122,7 @@ def spacer(depth):
 
     for k in range(0,len(offsets)):
         offset.append(scaler(offsets[k][0],offsets[k][1],scale=scale,offsetX = 0,offsetY = 0))
-    dist = [(widthPaper-sizeReal[0])/nx,(1-overlap)*heightReal]
+    dist = [1.1*(widthPaper-sizeReal[0])/nx,(1-overlap)*heightReal]
     
    
     #dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
@@ -391,7 +391,7 @@ def main():
     #offsetY0 = 5-offsetX
 
 
-    nL = random.randint(20,30) 
+    nL = random.randint(80,100) 
 
 
     d = .2 #+ (1-np.random.power(3)))   
