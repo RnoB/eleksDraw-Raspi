@@ -96,7 +96,7 @@ def spacer(depth):
 
     ny = 40
     nx = 20
-    overlap = 0.3
+    overlap = 0.2
 
     heightReal = heightPaper / (1+((1-overlap)*(ny-1)))
     widths = []
@@ -112,7 +112,7 @@ def spacer(depth):
         heights.append(H[0][-1]-H[0][0])
     print(widths)
     print(heights)
-    heightMax = np.max(heights)
+    heightMax = np.mean(heights)
     widthMax = np.mean(widths)
     scale = getScale(heightMax,heightReal)
     sizeReal = scaler(widthMax,heightMax,scale,0,0)
@@ -122,7 +122,7 @@ def spacer(depth):
 
     for k in range(0,len(offsets)):
         offset.append(scaler(offsets[k][0],offsets[k][1],scale=scale,offsetX = 0,offsetY = 0))
-    dist = [1.1*(widthPaper-sizeReal[0])/nx,(1-overlap)*heightReal]
+    dist = [1.0*(widthPaper-sizeReal[0])/nx,(1-overlap)*heightReal]
     
    
     #dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
@@ -399,6 +399,8 @@ def main():
 
 
     d = .2 #+ (1-np.random.power(3)))   
+
+    d = 1 #+ (1-np.random.power(3)))   
     
 
     speed = (.1 + .1*np.random.random())       
@@ -441,7 +443,7 @@ def main():
 
                 #print("offset : "+str((offsetX,offsetY)))
                 X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL,scale = scale,A0=A0,\
-                        offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d  ,speed = speed,cropFactor=crop,\
+                        offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d  ,distanceFigure=d2,speed = speed,cropFactor=crop,\
                         noise = noise)
 
             
