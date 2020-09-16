@@ -8,6 +8,9 @@ import random
 import math
 from kinecter import kinecter
 import time
+import asyncio
+from evdev import InputDevice, categorize, ecodes
+import threading
 
 running = True
 
@@ -17,6 +20,43 @@ heightPaper = 400
 #heightPaper = 105
 
 from blinked import blinked
+
+backgroundSub = False
+drawLoop = False
+pause = False
+
+
+def mouseListener():
+    global backgroundSub
+    global drawLoop
+    global pause
+    global colorK
+    pressed = False
+    dev = InputDevice('/dev/input/event0')
+    for ev in dev.read_loop():
+        
+        if ev.type == 1:
+            if ev.code == 272:
+                backgroundSub = True
+                pressed = not pressed
+                if pressed and pause:
+                
+                    colorK +=1
+                    colorK = colorK%3
+                    #colorsChosen()
+            elif ev.code ==273:
+                drawLoop = True
+                pressed = not pressed
+                if pressed and pause:
+                    colorK -=1
+                    colorK = colorK%3
+                    #colorsChosen()
+
+            elif ev.code ==274:
+                pressed = not pressed
+                if pressed:
+                    pause = not pause
+                    print(pause)
 
 
 def switchColor(col):
@@ -54,9 +94,9 @@ def animColor():
 
 def spacer(depth):
 
-    ny = 20
+    ny = 40
     nx = 20
-    overlap = 0.1
+    overlap = 0.2
 
     heightReal = heightPaper / (1+((1-overlap)*(ny-1)))
     widths = []
@@ -76,13 +116,13 @@ def spacer(depth):
     widthMax = np.max(widths)
     scale = getScale(heightMax,heightReal)
     sizeReal = scaler(widthMax,heightMax,scale,0,0)
-
+    print("Max Size : "+str(sizeReal))
     nx = np.int(round(widthPaper/(sizeReal[0])))
     offset = []
 
     for k in range(0,len(offsets)):
         offset.append(scaler(offsets[k][0],offsets[k][1],scale=scale,offsetX = 0,offsetY = 0))
-    dist = [(widthPaper-sizeReal[0])/(nx-1),(1-overlap)*heightReal]
+    dist = [(widthPaper-sizeReal[0])/nx,(1-overlap)*heightReal]
     
    
     #dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
@@ -133,6 +173,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     #if speed<distanceLine:
         #speed = distanceLine
     for k in range(0,nLines):
+        while(pause):
+            time.sleep(1)
 
         size = 0
         trial =0
@@ -282,6 +324,10 @@ def main():
     draw.toPosition(0,0)
     set_brightness(.05)
     blinked.switchColor('g',[0])
+
+    while(not backgroundSub):
+        time.sleep(.1)
+
     try:
         kinect = kinecter.kinect()
         blinked.switchColor('o',[1])
@@ -289,16 +335,18 @@ def main():
         kinect.backGroundSubstractor(nFrames=100)
         kinect.stop()
         blinked.switchColor('p',[1])
-        for k in range(0,12):
-            time.sleep(.8)
+        while(not drawLoop):
+            time.sleep(1)
+        for k in range(0,6):
+            time.sleep(.4)
             blinked.switchColor('r',[7])
             time.sleep(.2)
             blinked.switchColor('k',[7])
 
-        for k in range(0,10):
-            time.sleep(.35)
+        for k in range(0,5):
+            time.sleep(.3)
             blinked.switchColor('o',[7])
-            time.sleep(.15)
+            time.sleep(.1)
             blinked.switchColor('k',[7])
         
         for k in range(0,5):
