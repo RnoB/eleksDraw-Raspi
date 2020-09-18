@@ -395,12 +395,12 @@ def main():
     #offsetY0 = 5-offsetX
 
 
-    nL = random.randint(80,100) 
+    nL = 1#random.randint(80,100) 
 
 
     d = .2 #+ (1-np.random.power(3)))   
 
-    d = 1 #+ (1-np.random.power(3)))   
+    d2 = 1 #+ (1-np.random.power(3)))   
     
 
     speed = (.1 + .1*np.random.random())       
@@ -409,9 +409,9 @@ def main():
 
     noise = .1*(1-np.random.power(11))
 
-    
+    nLstep = 1
     A0=0
-    X2 = []
+    X2 = [] 
 
     print("----- Parameters -----")
     print("-- Lines : " + str(nL) + "--" )
@@ -445,8 +445,10 @@ def main():
                 X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL,scale = scale,A0=A0,\
                         offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d  ,distanceFigure=d2,speed = speed,cropFactor=crop,\
                         noise = noise)
-
-            
+                
+                nL+=nLStep
+                if nL>99:
+                    nLStep = -nLStep
 
     except Exception as e: 
         print(traceback.format_exc())
