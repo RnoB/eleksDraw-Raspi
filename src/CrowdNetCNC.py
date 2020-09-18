@@ -439,7 +439,7 @@ def main():
                 while offsetX>offset[kFrames][1] or offsetX<heightPaper+offset[kFrames][1]:
                     offsetY = offset[kFrames][1]+k*dist[1]+0.1*random.uniform(-dist[1],dist[1])                
                 
-
+                print((offsetX,offsetY))
 
 
                 #print("offset : "+str((offsetX,offsetY)))
