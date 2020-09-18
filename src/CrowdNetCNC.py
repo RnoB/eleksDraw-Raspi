@@ -433,6 +433,7 @@ def main():
                 #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
                 #
                 offsetY = -9999
+                offsetX = -9999
                 while offsetY<offset[kFrames][0] or offsetY>offset[kFrames][0]+(nx-1)*dist[0]:
                     offsetY = offset[kFrames][0]+j*dist[0]+random.uniform(-dist[0],dist[0])
                 while offsetX<offset[kFrames][1] or offsetX>offset[kFrames][1]+(ny-1)*dist[1]:
