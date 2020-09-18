@@ -409,7 +409,7 @@ def main():
 
     noise = .1*(1-np.random.power(11))
 
-    nLstep = 1
+    nLStep = 1
     A0=0
     X2 = [] 
 
