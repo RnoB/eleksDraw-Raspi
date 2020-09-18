@@ -434,14 +434,12 @@ def main():
                 #
                 offsetY = -9999
                 offsetX = -9999
-                while offsetY>offset[kFrames][0] or offsetY<widthPaper+offset[kFrames][0]:
+                while offsetY<offset[kFrames][0] or offsetY>widthPaper+offset[kFrames][0]:
                     offsetY = offset[kFrames][0]+j*dist[0]+random.uniform(-dist[0],dist[0])
-                    print("offsetY : "+str((offsetY,offset[kFrames][0],dist[0],widthPaper+offset[kFrames][0])))
-                    print(offsetY>offset[kFrames][0])
-                    print(offsetY<widthPaper+offset[kFrames][0])
-                while offsetX>offset[kFrames][1] or offsetX<heightPaper+offset[kFrames][1]:
+
+                while offsetX<offset[kFrames][1] or offsetX>heightPaper+offset[kFrames][1]:
                     offsetX = offset[kFrames][1]+k*dist[1]+0.1*random.uniform(-dist[1],dist[1])
-                    print("offsetX : "+str(offsetX))                
+               
                 
 
                 #print("offset : "+str((offsetX,offsetY)))
