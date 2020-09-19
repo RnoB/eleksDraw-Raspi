@@ -14,8 +14,8 @@ import threading
 
 running = True
 
-widthPaper = 400
-heightPaper = 400
+widthPaper = 950
+heightPaper = 950
 #widthPaper = 148
 #heightPaper = 105
 
@@ -94,7 +94,7 @@ def animColor():
 
 def spacer(depth):
 
-    ny = 40
+    ny = 95
     nx = 20
     overlap = 0.2
 
@@ -395,10 +395,10 @@ def main():
     #offsetY0 = 5-offsetX
 
 
-    nL = 1#random.randint(80,100) 
+    nL = 55#random.randint(80,100) 
 
 
-    d = .2 #+ (1-np.random.power(3)))   
+    d = .1 #+ (1-np.random.power(3)))   
 
     d2 = 1 #+ (1-np.random.power(3)))   
     
@@ -419,7 +419,7 @@ def main():
     print("-- speed : " + str(speed) + "--" )
     print("-- crops : " + str(crop) + "--")
     print("-- noise : " + str(noise) + "--")
-    
+     
     try:
         for k in range(0,ny):
             for j2 in range(0,nx):
@@ -438,7 +438,7 @@ def main():
                     offsetY = offset[kFrames][0]+j*dist[0]+random.uniform(-dist[0],dist[0])
 
                 while offsetX<offset[kFrames][1] or offsetX>heightPaper+offset[kFrames][1]:
-                    offsetX = offset[kFrames][1]+k*dist[1]+0.1*random.uniform(-dist[1],dist[1])
+                    offsetX = offset[kFrames][1]+k*dist[1]+0.2*random.uniform(-dist[1],dist[1])
                
                 
 
@@ -446,10 +446,8 @@ def main():
                 X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL,scale = scale,A0=A0,\
                         offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d  ,distanceFigure=d2,speed = speed,cropFactor=crop,\
                         noise = noise)
+                print(len(X2))
                 
-                nL+=nLStep
-                if nL>99:
-                    nLStep = -nLStep
 
     except Exception as e: 
         print(traceback.format_exc())
