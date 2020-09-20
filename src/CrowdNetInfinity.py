@@ -94,9 +94,9 @@ def animColor():
 
 def spacer(depth):
 
-    ny = 10
+    ny = 95
     nx = 20
-    overlap = 0.3
+    overlap = 0.2
 
     heightReal = heightPaper / (1+((1-overlap)*(ny-1)))
     widths = []
@@ -395,12 +395,12 @@ def main():
     #offsetY0 = 5-offsetX
 
 
-    nL = 350#random.randint(80,100) 
+    nL = 55#random.randint(80,100) 
 
 
     d = .1 #+ (1-np.random.power(3)))   
 
-    d2 = 3 #+ (1-np.random.power(3)))   
+    d2 = 1 #+ (1-np.random.power(3)))   
     
 
     speed = (.1 + .1*np.random.random())       
@@ -447,7 +447,7 @@ def main():
                         offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d  ,distanceFigure=d2,speed = speed,cropFactor=crop,\
                         noise = noise)
                 
-                while len(X2)>50000:
+                while len(X2)>15000:
                     del X2[0]
                 
 
