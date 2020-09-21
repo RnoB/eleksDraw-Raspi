@@ -8,6 +8,8 @@ import random
 import math
 from kinecter import kinecter
 import time
+from evdev import InputDevice, categorize, ecodes
+
 
 running = True
 
@@ -17,6 +19,44 @@ heightPaper = 260
 #heightPaper = 105
 
 from blinked import blinked
+
+backgroundSub = False
+drawLoop = False
+pause = False
+
+
+def mouseListener():
+    global backgroundSub
+    global drawLoop
+    global pause
+    global colorK
+    pressed = False
+    dev = InputDevice('/dev/input/event0')
+    for ev in dev.read_loop():
+        
+        if ev.type == 1:
+            if ev.code == 272:
+                backgroundSub = True
+                pressed = not pressed
+                if pressed and pause:
+                
+                    colorK +=1
+                    colorK = colorK%3
+                    #colorsChosen()
+            elif ev.code ==273:
+                drawLoop = True
+                pressed = not pressed
+                if pressed and pause:
+                    colorK -=1
+                    colorK = colorK%3
+                    #colorsChosen()
+
+            elif ev.code ==274:
+                pressed = not pressed
+                if pressed:
+                    pause = not pause
+                    print(pause)
+
 
 
 def switchColor(col):
@@ -122,7 +162,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     #if speed<distanceLine:
         #speed = distanceLine
     for k in range(0,nLines):
-
+        while(pause):
+            time.sleep(1)
         size = 0
         trial =0
         while(size == 0):
@@ -178,7 +219,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                     and (dx1,dy1) not in imagePosition \
                     and (dx2,dy2) not in figurePosition \
                     and AZ[ky,kx]-A0<1.5 \
-                    and dx < 170 and dy < 250 \
+                    and dx < heightPaper and dy < widthPaper \
                     and dx > 0 and dy > 0:
                         
                         x=dxS
@@ -224,7 +265,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                         and (dx1,dy1) not in imagePosition \
                         and (dx2,dy2) not in figurePosition \
                         and AZ[ky,kx]-A0<1.5 \
-                        and dx < 170 and dy < 250 \
+                        and dx < heightPaper and dy < widthPaper \
                         and dx > 0 and dy > 0:
                             
                             x=dxS
@@ -270,6 +311,10 @@ def main():
     draw.toPosition(0,0)
     set_brightness(.05)
     blinked.switchColor('g',[0])
+
+
+    while(not backgroundSub):
+        time.sleep(.1)
     try:
         kinect = kinecter.kinect()
         blinked.switchColor('o',[1])
@@ -277,16 +322,18 @@ def main():
         kinect.backGroundSubstractor(nFrames=100)
         kinect.stop()
         blinked.switchColor('p',[1])
-        for k in range(0,12):
-            time.sleep(.8)
+        while(not drawLoop):
+            time.sleep(1)
+        for k in range(0,6):
+            time.sleep(.4)
             blinked.switchColor('r',[7])
             time.sleep(.2)
             blinked.switchColor('k',[7])
 
-        for k in range(0,10):
-            time.sleep(.35)
+        for k in range(0,5):
+            time.sleep(.3)
             blinked.switchColor('o',[7])
-            time.sleep(.15)
+            time.sleep(.1)
             blinked.switchColor('k',[7])
         
         for k in range(0,5):
