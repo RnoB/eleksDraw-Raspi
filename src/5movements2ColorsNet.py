@@ -11,8 +11,8 @@ import time
 
 running = True
 
-widthPaper = 250
-heightPaper = 170
+widthPaper = 840
+heightPaper = 260
 #widthPaper = 148
 #heightPaper = 105
 
@@ -53,8 +53,8 @@ def animColor():
     show()
 
 def spacer(depth,nx0,nx=20):
-    scale = 220
-    heightMax=200
+    scale = 500
+    heightMax=400
     
     nx0=np.int(nx0)
     offsetY0 = []
