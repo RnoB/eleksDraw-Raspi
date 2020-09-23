@@ -14,7 +14,7 @@ import threading
 running = True
 
 widthPaper = 840
-heightPaper = 170 
+heightPaper = 100 
 #widthPaper = 148
 #heightPaper = 105
 
@@ -98,7 +98,7 @@ def spacer(depth,nx0,nx=20):
     
     nx0=np.int(nx0)
     offsetY0 = []
-    while heightMax>heightPaper-10:
+    while heightMax>heightPaper-2:
         scale=scale-5
         sizeImage = []
         offset = []
@@ -347,7 +347,7 @@ def main():
             time.sleep(.1*deltaT)
             blinked.switchColor('k',[7])
         kinect.start()
-        kinect.getDepthFrames(nFrames = 60,delay=.01,maxDepth=2049)
+        kinect.getDepthFrames(nFrames = 100,delay=.01,maxDepth=2049)
         kinect.stop()
         blinked.switchColor('c',[1])
         kinect.backgroundSubstract(blur=True,level=15)
@@ -364,8 +364,8 @@ def main():
     nLines = 400
     size = 0
 
-    nx0=10
-    scale,nx,dist,offsetX,offsetY =  spacer(kinect.frames,nx0-1,50)
+    nx0=0
+    scale,nx,dist,offsetX,offsetY =  spacer(kinect.frames,nx0,100)
     print("scale : "+str(scale))
     print("n     : "+str(nx))
     print("offsetX  : "+str(offsetX))
@@ -379,8 +379,8 @@ def main():
 
 
 
-    offsetX0 = 5-offsetY
-    offsetY0 = 5-offsetX
+    offsetX0 = 1-offsetY
+    offsetY0 = 1-offsetX
 
 
     if np.random.random()<.12:
