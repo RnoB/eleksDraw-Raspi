@@ -95,7 +95,7 @@ def animColor():
 def spacer(depth):
 
     ny = 10
-    nx = 20
+    nx = 40
     overlap = 0.3
 
     heightReal = heightPaper / (1+((1-overlap)*(ny-1)))
@@ -151,7 +151,7 @@ def round(x, base=1):
 def drawing(kFrames,frames,angle,angleZ,draw,
             nLines = 400,scale = 70,A0=0,
             resolution=.1,speed = .4,distanceLine=.8 ,distanceFigure = 5.0,
-            noise = 0,offsetX = 0,offsetY=0,figurePosition = [],cropFactor = .3):
+            noise = 0,offsetX = 0,offsetY=0,figurePosition = [],cropFactor = .3,reverse=True):
     kFrames = np.int(kFrames)
 
     imagePosition = []
@@ -226,11 +226,10 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
                     if (dxk > -1) and (dxk < 640) \
                     and (dyk > -1) and (dyk < 480) \
-                    and size < 100 \
+                    and size < 200 \
                     and (dx,dy) not in linePosition\
                     and (dx1,dy1) not in imagePosition \
                     and (dx2,dy2) not in figurePosition \
-                    and AZ[ky,kx]-A0<1.5 \
                     and dx < heightPaper and dy < widthPaper \
                     and dx > 0 and dy > 0:
                         
@@ -248,7 +247,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                     else:
                 
                         running = False
-                reverse = False
+
                 if reverse:
                     running = True
                     
@@ -272,11 +271,10 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
                         if (dxk > -1) and (dxk < 640) \
                         and (dyk > -1) and (dyk < 480) \
-                        and size < 100 \
+                        and size < 200 \
                         and (dx,dy) not in linePosition\
                         and (dx1,dy1) not in imagePosition \
                         and (dx2,dy2) not in figurePosition \
-                        and AZ[ky,kx]-A0<1.5 \
                         and dx < heightPaper and dy < widthPaper \
                         and dx > 0 and dy > 0:
                             
@@ -395,19 +393,19 @@ def main():
     #offsetY0 = 5-offsetX
 
 
-    nL = 350#random.randint(80,100) 
+    nL = 30#random.randint(80,100) 
 
 
-    d = .1 #+ (1-np.random.power(3)))   
+    d = .01 #+ (1-np.random.power(3)))   
 
-    d2 = 3 #+ (1-np.random.power(3)))   
+    d2 = 1 #+ (1-np.random.power(3)))   
     
 
     speed = (.1 + .1*np.random.random())       
     
-    crop = ( .0*random.random())
+    crop = 0#( .0*random.random())
 
-    noise = .1*(1-np.random.power(11))
+    noise = 0#.1*(1-np.random.power(11))
 
     nLStep = 1
     A0=0
@@ -444,8 +442,8 @@ def main():
 
                 #print("offset : "+str((offsetX,offsetY)))
                 X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL,scale = scale,A0=A0,\
-                        offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d  ,distanceFigure=d2,speed = speed,cropFactor=crop,\
-                        noise = noise)
+                        offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d1  ,distanceFigure=d2,speed = speed,cropFactor=crop,\
+                        noise = noise,resolution = 0.1)
                 
                 while len(X2)>50000:
                     del X2[0]
