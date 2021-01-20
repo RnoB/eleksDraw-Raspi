@@ -33,7 +33,7 @@ savePath = "/home/pi/save/"
 def saveState(k,j2,nL,scale,A0,X2,d,d2,speed,crop,noise,dist):
     np.savetxt(savePath+"parameters.txt",[k,j2,nL,nL,scale,A0,X2,d,d2,speed,crop,noise,dist[0],dist[1]])
 
-    
+
     
 def saveFrames(frames,angle,angleZ):
     nSave = len(frames)
@@ -460,7 +460,7 @@ def main():
         
         frames = kinect.frames
         
-        saveState(k,j2,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist):
+        saveState(k,j2,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist)
         saveFrames(frames,angle,angleZ)
 
     try:
