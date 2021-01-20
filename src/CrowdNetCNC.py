@@ -351,18 +351,22 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 def main():
     global save
-    print("here")
+
     mouseThread = threading.Thread(target = mouseListener)
     mouseThread.daemon = True
     mouseThread.start()
-    print("here")
+
 
     draw = drawer.DrawerNet(2)
-    print("here")
 
+
+    print("here")
     draw.penUp()
+    print("here")
     draw.toPosition(0,0)
+    print("here")
     set_brightness(.05)
+    print("here")
     blinked.switchColor('g',[0])
     print("here")
     
