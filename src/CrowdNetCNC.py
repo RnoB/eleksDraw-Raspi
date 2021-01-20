@@ -12,6 +12,7 @@ import asyncio
 from evdev import InputDevice, categorize, ecodes
 import threading
 import glob
+import os
 
 running = True
 
