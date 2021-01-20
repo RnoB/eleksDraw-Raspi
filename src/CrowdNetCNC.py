@@ -351,6 +351,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 def main():
     global save
+    print("here")
     mouseThread = threading.Thread(target = mouseListener)
     mouseThread.daemon = True
     mouseThread.start()
