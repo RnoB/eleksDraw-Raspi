@@ -351,24 +351,16 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 def main():
     global save
-
     mouseThread = threading.Thread(target = mouseListener)
     mouseThread.daemon = True
     mouseThread.start()
 
-
     draw = drawer.DrawerNet(2)
 
-
-    print("here")
     draw.penUp()
-    print("here")
     draw.toPosition(0,0)
-    print("here")
     set_brightness(.05)
-    print("here")
     blinked.switchColor('g',[0])
-    print("here")
     
     k0 = 0
     j0 = 0
@@ -479,15 +471,15 @@ def main():
     try:
         for k in range(k0,ny):
             for j2 in range(j0,nx):
-                print("save : "+str(save))
-                print("pause : "+str(pause))
-                if save:
-                    print("---- save -----")
-                    saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny)
-                    save = False
-                    draw.toPosition(0,0)
                 while pause:
                     time.sleep(.1)
+                    print("save : "+str(save))
+                    print("pause : "+str(pause))
+                    if save:
+                        print("---- save -----")
+                        saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny)
+                        save = False
+                        draw.toPosition(0,0)
                 
                 if k%2==0:
                     j=j2
