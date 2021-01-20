@@ -469,6 +469,11 @@ def main():
     try:
         for k in range(k0,ny):
             for j2 in range(j0,nx):
+                if save:
+                    print("---- save -----")
+                    saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny)
+                    save = False
+                    draw.toPosition(0,0)
                 if not pause:
                     if k%2==0:
                         j=j2
@@ -487,7 +492,7 @@ def main():
                     while offsetX<offset[kFrames][1] or offsetX>heightPaper+offset[kFrames][1]:
                         offsetX = offset[kFrames][1]+k*dist[1]+0.2*random.uniform(-dist[1],dist[1])
                    
-                    
+                    nl=1
 
                     #print("offset : "+str((offsetX,offsetY)))
                     X2 = drawing(kFrames,frames,angle,angleZ,draw,nLines = nL,scale = scale,A0=A0,\
@@ -498,11 +503,6 @@ def main():
                         del X2[0]
                 else:
                     time.sleep(.1)
-                if save:
-                    print("---- save -----")
-                    saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny)
-                    save = False
-                    draw.toPosition(0,0)
                 
 
     except Exception as e: 
