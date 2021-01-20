@@ -472,7 +472,7 @@ def main():
         for k in range(k0,ny):
             for j2 in range(j0,nx):
                 while pause:
-                    time.sleep(.1)
+                    time.sleep(1)
                     print("save : "+str(save))
                     print("pause : "+str(pause))
                     if save:
