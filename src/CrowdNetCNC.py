@@ -32,10 +32,12 @@ savePath = "/home/pi/save/"
 
 def saveState(k,j2,nL,scale,A0,X2,d,d2,speed,crop,noise,dist):
     np.savetxt(savePath+"parameters.txt",[k,j2,nL,nL,scale,A0,X2,d,d2,speed,crop,noise,dist[0],dist[1]])
+
+    
     
 def saveFrames(frames,angle,angleZ):
     nSave = len(frames)
-    for k in range(0,frames):
+    for k in range(0,nSave):
         np.savetxt(savePath+"frames"+k.zfill(5)+".txt",frames[k])
         np.savetxt(savePath+"angles"+k.zfill(5)+".txt",angle[k])
         np.savetxt(savePath+"angleZ"+k.zfill(5)+".txt",angleZ[k])
