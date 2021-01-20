@@ -11,6 +11,7 @@ import time
 import asyncio
 from evdev import InputDevice, categorize, ecodes
 import threading
+import glob
 
 running = True
 
@@ -29,8 +30,10 @@ save = False
 savePath = "/home/pi/save/"
 
 
-def saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d,d2,speed,crop,noise,dist):
+def saveState(k,j2,nL,scale,A0,X2,d,d2,speed,crop,noise,dist):
     np.savetxt(savePath+"parameters.txt",[k,j2,nL,nL,scale,A0,X2,d,d2,speed,crop,noise,dist[0],dist[1]])
+    
+def saveFrames(frames,angle,angleZ)
     nSave = len(frames)
     for k in range(0,frames):
         np.savetxt(savePath+"frames"+k.zfill(5)+".txt",frames[k])
@@ -41,6 +44,16 @@ def saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d,d2,speed,crop,noise,dist
 def loadState() :
     parameters = np.loadtxt("parameters.txt")
     return parameters
+
+def loadFrames():
+    frames = []
+    angle = []
+    angleZ = []
+    for k in range(0,frames):
+        frames.append(np.loadtxt(savePath+"frames"+k.zfill(5)+".txt"))
+        angle.append(np.loadtxt(savePath+"angles"+k.zfill(5)+".txt"))
+        angleZ.append(np.loadtxt(savePath+"angleZ"+k.zfill(5)+".txt"))
+    return frames,angle,angleZ
     
     
 def mouseListener():
@@ -61,6 +74,8 @@ def mouseListener():
                     colorK +=1
                     colorK = colorK%3
                     #colorsChosen()
+                if pause:
+                    save = True
             elif ev.code ==273:
                 drawLoop = True
                 pressed = not pressed
@@ -343,101 +358,112 @@ def main():
     draw.toPosition(0,0)
     set_brightness(.05)
     blinked.switchColor('g',[0])
-
+    
+    k0 = 0
+    j0 = 0
     while(not backgroundSub):
         time.sleep(.1)
+    if os.path.isfile(savePath+"parameters.txt"):
+        dist = [0,0]
+        [k0,j0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist[0],dist[1]] = loadState()
+        frames,angle,angleZ = loadFrames()
+    else:
+        try:
+            kinect = kinecter.kinect()
+            blinked.switchColor('o',[1])
+            kinect.start()
+            kinect.backGroundSubstractor(nFrames=100)
+            kinect.stop()
+            blinked.switchColor('p',[1])
+            while(not drawLoop):
+                time.sleep(1)
+            for k in range(0,6):
+                time.sleep(.4)
+                blinked.switchColor('r',[7])
+                time.sleep(.2)
+                blinked.switchColor('k',[7])
 
-    try:
-        kinect = kinecter.kinect()
-        blinked.switchColor('o',[1])
-        kinect.start()
-        kinect.backGroundSubstractor(nFrames=100)
-        kinect.stop()
-        blinked.switchColor('p',[1])
-        while(not drawLoop):
-            time.sleep(1)
-        for k in range(0,6):
-            time.sleep(.4)
-            blinked.switchColor('r',[7])
-            time.sleep(.2)
-            blinked.switchColor('k',[7])
+            for k in range(0,5):
+                time.sleep(.3)
+                blinked.switchColor('o',[7])
+                time.sleep(.1)
+                blinked.switchColor('k',[7])
 
-        for k in range(0,5):
-            time.sleep(.3)
-            blinked.switchColor('o',[7])
-            time.sleep(.1)
-            blinked.switchColor('k',[7])
+            for k in range(0,5):
+                deltaT = .3/((k+1))
+                time.sleep(.9*deltaT)
+                blinked.switchColor('g',[7])
+                time.sleep(.1*deltaT)
+                blinked.switchColor('k',[7])
+            kinect.start()
+            kinect.getDepthFrames(nFrames = 50,delay=.01,maxDepth=2049)
+            kinect.stop()
+            blinked.switchColor('c',[1])
+            kinect.backgroundSubstract(blur=True,level=15)
+            dX,dY,angle,angleZ = kinect.derivateFrames()
+        except Exception as e: 
+            print(traceback.format_exc())
+
+
+        blinked.switchColor('g',[5,6])
+
+        draw.penUp()
+        #draw.squareCorner(0,0,widthPaper,heightPaper)
+        blinked.switchColor('g',[5,6,7])
+        nLines = 400
+        size = 0
+
+
+        scale,nx,ny,dist,offset =  spacer(kinect.frames)
+        print("scale : "+str(scale))
+        print("n     : "+str(nx))
+
+        print("dist : "+str(dist))
+        xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
+        offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
+        blinked.switchColor('a',[0])
+        blinked.switchColor('g',[1])
+
+
+
+
+        #offsetX0 = 5-offsetY
+        #offsetY0 = 5-offsetX
+
+
+        nL = 30#random.randint(80,100) 
+
+
+        d = .01 #+ (1-np.random.power(3)))   
+
+        d2 = 1 #+ (1-np.random.power(3)))   
+
+
+        speed = (.1 + .1*np.random.random())       
+
+        crop = 0#( .0*random.random())
+
+        noise = 0#.1*(1-np.random.power(11))
+
+        nLStep = 1
+        A0=0
+        X2 = [] 
+
+        print("----- Parameters -----")
+        print("-- Lines : " + str(nL) + "--" )
+        print("-- dista : " + str(d) + "--")
+        print("-- speed : " + str(speed) + "--" )
+        print("-- crops : " + str(crop) + "--")
+        print("-- noise : " + str(noise) + "--")
         
-        for k in range(0,5):
-            deltaT = .3/((k+1))
-            time.sleep(.9*deltaT)
-            blinked.switchColor('g',[7])
-            time.sleep(.1*deltaT)
-            blinked.switchColor('k',[7])
-        kinect.start()
-        kinect.getDepthFrames(nFrames = 50,delay=.01,maxDepth=2049)
-        kinect.stop()
-        blinked.switchColor('c',[1])
-        kinect.backgroundSubstract(blur=True,level=15)
-        dX,dY,angle,angleZ = kinect.derivateFrames()
-    except Exception as e: 
-        print(traceback.format_exc())
- 
+        frames = kinect.frames
+        
+        saveState(k,j2,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist):
+        saveFrames(frames,angle,angleZ)
 
-    blinked.switchColor('g',[5,6])
-  
-    draw.penUp()
-    #draw.squareCorner(0,0,widthPaper,heightPaper)
-    blinked.switchColor('g',[5,6,7])
-    nLines = 400
-    size = 0
-
-
-    scale,nx,ny,dist,offset =  spacer(kinect.frames)
-    print("scale : "+str(scale))
-    print("n     : "+str(nx))
-
-    print("dist : "+str(dist))
-    xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
-    offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
-    blinked.switchColor('a',[0])
-    blinked.switchColor('g',[1])
-
-
-
-
-    #offsetX0 = 5-offsetY
-    #offsetY0 = 5-offsetX
-
-
-    nL = 30#random.randint(80,100) 
-
-
-    d = .01 #+ (1-np.random.power(3)))   
-
-    d2 = 1 #+ (1-np.random.power(3)))   
-    
-
-    speed = (.1 + .1*np.random.random())       
-    
-    crop = 0#( .0*random.random())
-
-    noise = 0#.1*(1-np.random.power(11))
-
-    nLStep = 1
-    A0=0
-    X2 = [] 
-
-    print("----- Parameters -----")
-    print("-- Lines : " + str(nL) + "--" )
-    print("-- dista : " + str(d) + "--")
-    print("-- speed : " + str(speed) + "--" )
-    print("-- crops : " + str(crop) + "--")
-    print("-- noise : " + str(noise) + "--")
-     
     try:
-        for k in range(0,ny):
-            for j2 in range(0,nx):
+        for k in range(k0,ny):
+            for j2 in range(j0,nx):
                 if k%2==0:
                     j=j2
                 else:
@@ -465,8 +491,9 @@ def main():
                 while len(X2)>50000:
                     del X2[0]
                 if save:
-                    saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d,d2,speed,crop,noise,dist)
+                    saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist)
                     save = False
+                    draw.toPosition(0,0)
                 
 
     except Exception as e: 
