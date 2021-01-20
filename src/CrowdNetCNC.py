@@ -365,8 +365,9 @@ def main():
     
     k0 = 0
     j0 = 0
-    while(not backgroundSub):
-        time.sleep(.1)
+    #while(not backgroundSub):
+    #    time.sleep(.1)
+    print('check')
     if os.path.isfile(savePath+"parameters.p"):
         dist = [0,0]
         k0,j0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny = loadState()
