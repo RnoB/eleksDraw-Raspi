@@ -73,7 +73,7 @@ def mouseListener():
                 if pressed and pause:
                     save = True
                 
-                    pass()
+                    
                     #colorsChosen()
 
             elif ev.code ==273:
