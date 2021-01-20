@@ -476,7 +476,7 @@ def main():
                     j=nx-1-j2
                 blinked.progressColor(((k*ny)+j)/(nx*ny),'v','y',[4])
                 
-                kFrames = random.randint(0,len(kinect.frames)-1)
+                kFrames = random.randint(0,len(frames)-1)
                 #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
                 #
                 offsetY = -9999
