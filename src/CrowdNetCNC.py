@@ -369,8 +369,10 @@ def main():
 
     if os.path.isfile(savePath+"parameters.p"):
         dist = [0,0]
+        print("---- load --- -")
         k0,j0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny = loadState()
         frames,angle,angleZ,offset = loadFrames()
+        print("--- loaded -- -")
 
     if False:
         try:
