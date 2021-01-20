@@ -48,12 +48,12 @@ def saveFrames(frames,angle,angleZ,offset):
     
     
 def loadState():
-    with open(savePath+"parameters.json", 'rb') as fp:
+    with open(savePath+"parameters.p", 'rb') as fp:
         data = json.load(fp)
     return data['k0'],data['j0'],data['nL'],data['scale'],data['A0'],data['X2'],data['d1'],data['d2'],data['speed'],data['crop'],data['noise'],data['dist'],data['nx'],data['ny']
 
 def loadFrames():
-    with open(savePath+"frames.json", 'rb') as fp:
+    with open(savePath+"frames.p", 'rb') as fp:
         data = json.load(fp)
     return data['frames'],data['angle'],data['angleZ']
     
@@ -367,11 +367,12 @@ def main():
     j0 = 0
     while(not backgroundSub):
         time.sleep(.1)
-    if os.path.isfile(savePath+"parameters.txt"):
+    if os.path.isfile(savePath+"parameters.p"):
         dist = [0,0]
         k0,j0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny = loadState()
         frames,angle,angleZ,offset = loadFrames()
-    else:
+
+    if False:
         try:
             kinect = kinecter.kinect()
             blinked.switchColor('o',[1])
