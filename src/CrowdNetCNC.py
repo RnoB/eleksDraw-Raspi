@@ -55,7 +55,7 @@ def loadState():
 def loadFrames():
     with open(savePath+"frames.p", 'rb') as fp:
         data = pickle.load(fp)
-    return data['frames'],data['angle'],data['angleZ']
+    return data['frames'],data['angle'],data['angleZ'],data["offset"]
     
     
 def mouseListener():
