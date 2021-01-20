@@ -14,6 +14,7 @@ import threading
 import glob
 import os
 import json
+import pickle
 
 running = True
 
@@ -35,15 +36,15 @@ savePath = "/home/pi/save/"
 def saveState(k0,j0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny):
     data = {'k0':k0,'j0':j0,'nL':nL,'scale':scale,'A0':A0,"X2":X2,"d1":d1,"d2":d2,"speed":speed,"crop":crop,"noise":noise,"dist":dist,"nx":nx,"ny":ny}
 
-    with open(savePath+"parameters.json", 'w') as fp:
-        json.dump(data,fp)
+    with open(savePath+"parameters.p", 'w') as fp:
+        pickle.dump(data,fp, protocol=pickle.HIGHEST_PROTOCOL)
 
 
     
 def saveFrames(frames,angle,angleZ,offset):
     data = {"frames":frames,"angle":angle,"angleZ":angleZ,"offset":offset}
-    with open(savePath+"frames.json", 'w') as fp:
-        json.dump(data,fp)
+    with open(savePath+"frames.p", 'w') as fp:
+        pickle.dump(data,fp,protocol=pickle.HIGHEST_PROTOCOL)
     
     
 def loadState():
