@@ -62,7 +62,6 @@ def mouseListener():
     global backgroundSub
     global drawLoop
     global pause
-    global colorK
     pressed = False
     dev = InputDevice('/dev/input/event0')
     for ev in dev.read_loop():
@@ -72,18 +71,16 @@ def mouseListener():
                 backgroundSub = True
                 pressed = not pressed
                 if pressed and pause:
-                
-                    colorK +=1
-                    colorK = colorK%3
-                    #colorsChosen()
-                if pause:
                     save = True
+                
+                    pass()
+                    #colorsChosen()
+
             elif ev.code ==273:
                 drawLoop = True
                 pressed = not pressed
                 if pressed and pause:
-                    colorK -=1
-                    colorK = colorK%3
+                    pass
                     #colorsChosen()
 
             elif ev.code ==274:
