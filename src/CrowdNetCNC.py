@@ -495,7 +495,7 @@ def main():
                 while offsetX<offset[kFrames][1] or offsetX>heightPaper+offset[kFrames][1]:
                     offsetX = offset[kFrames][1]+k*dist[1]+0.2*random.uniform(-dist[1],dist[1])
                 ##############
-                nl=1
+                nL=1
 
                 #print("offset : "+str((offsetX,offsetY)))
                 X2 = drawing(kFrames,frames,angle,angleZ,draw,nLines = nL,scale = scale,A0=A0,\
