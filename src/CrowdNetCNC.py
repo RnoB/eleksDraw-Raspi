@@ -461,7 +461,7 @@ def main():
         
         frames = kinect.frames
         
-        saveState(k,j2,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist)
+        saveState(0,0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist)
         saveFrames(frames,angle,angleZ)
 
     try:
@@ -494,6 +494,7 @@ def main():
                 while len(X2)>50000:
                     del X2[0]
                 if save:
+                    print("---- save -----")
                     saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist)
                     save = False
                     draw.toPosition(0,0)
