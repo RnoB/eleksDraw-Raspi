@@ -454,7 +454,7 @@ def main():
 
         print("----- Parameters -----")
         print("-- Lines : " + str(nL) + "--" )
-        print("-- dista : " + str(d) + "--")
+        print("-- dista : " + str(d1) + "--")
         print("-- speed : " + str(speed) + "--" )
         print("-- crops : " + str(crop) + "--")
         print("-- noise : " + str(noise) + "--")
