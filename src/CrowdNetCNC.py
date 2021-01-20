@@ -437,7 +437,7 @@ def main():
         nL = 30#random.randint(80,100) 
 
 
-        d = .01 #+ (1-np.random.power(3)))   
+        d1 = .01 #+ (1-np.random.power(3)))   
 
         d2 = 1 #+ (1-np.random.power(3)))   
 
