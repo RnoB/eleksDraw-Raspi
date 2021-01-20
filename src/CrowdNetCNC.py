@@ -470,6 +470,7 @@ def main():
         for k in range(k0,ny):
             for j2 in range(j0,nx):
                 print("save : "+str(save))
+                print("pause : "+str(pause))
                 if save:
                     print("---- save -----")
                     saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny)
