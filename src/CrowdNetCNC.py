@@ -480,7 +480,7 @@ def main():
                         saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny)
                         save = False
                         draw.toPosition(0,0)
-                
+                print('exit')
                 if k%2==0:
                     j=j2
                 else:
