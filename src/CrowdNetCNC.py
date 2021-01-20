@@ -355,13 +355,16 @@ def main():
     mouseThread = threading.Thread(target = mouseListener)
     mouseThread.daemon = True
     mouseThread.start()
+    print("here")
 
     draw = drawer.DrawerNet(2)
+    print("here")
 
     draw.penUp()
     draw.toPosition(0,0)
     set_brightness(.05)
     blinked.switchColor('g',[0])
+    print("here")
     
     k0 = 0
     j0 = 0
