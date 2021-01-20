@@ -67,11 +67,13 @@ def mouseListener():
     for ev in dev.read_loop():
         
         if ev.type == 1:
+            print(ev.code)
             if ev.code == 272:
                 backgroundSub = True
                 pressed = not pressed
                 if pressed and pause:
                     save = True
+                    print("save")
                 
                     
                     #colorsChosen()
@@ -364,7 +366,7 @@ def main():
     j0 = 0
     #while(not backgroundSub):
     #    time.sleep(.1)
-    print('check')
+
     if os.path.isfile(savePath+"parameters.p"):
         dist = [0,0]
         k0,j0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny = loadState()
@@ -494,7 +496,8 @@ def main():
                     
                     while len(X2)>50000:
                         del X2[0]
-                
+                else:
+                    time.sleep(.1)
                 if save:
                     print("---- save -----")
                     saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny)
