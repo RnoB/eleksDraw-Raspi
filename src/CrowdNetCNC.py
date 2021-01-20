@@ -470,32 +470,34 @@ def main():
     try:
         for k in range(k0,ny):
             for j2 in range(j0,nx):
-                if k%2==0:
-                    j=j2
-                else:
-                    j=nx-1-j2
-                blinked.progressColor(((k*ny)+j)/(nx*ny),'v','y',[4])
-                
-                kFrames = random.randint(0,len(frames)-1)
-                #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
-                #
-                offsetY = -9999
-                offsetX = -9999
-                while offsetY<offset[kFrames][0] or offsetY>widthPaper+offset[kFrames][0]:
-                    offsetY = offset[kFrames][0]+j*dist[0]+random.uniform(-dist[0],dist[0])
+                if not pause:
+                    if k%2==0:
+                        j=j2
+                    else:
+                        j=nx-1-j2
+                    blinked.progressColor(((k*ny)+j)/(nx*ny),'v','y',[4])
+                    
+                    kFrames = random.randint(0,len(frames)-1)
+                    #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
+                    #
+                    offsetY = -9999
+                    offsetX = -9999
+                    while offsetY<offset[kFrames][0] or offsetY>widthPaper+offset[kFrames][0]:
+                        offsetY = offset[kFrames][0]+j*dist[0]+random.uniform(-dist[0],dist[0])
 
-                while offsetX<offset[kFrames][1] or offsetX>heightPaper+offset[kFrames][1]:
-                    offsetX = offset[kFrames][1]+k*dist[1]+0.2*random.uniform(-dist[1],dist[1])
-               
-                
+                    while offsetX<offset[kFrames][1] or offsetX>heightPaper+offset[kFrames][1]:
+                        offsetX = offset[kFrames][1]+k*dist[1]+0.2*random.uniform(-dist[1],dist[1])
+                   
+                    
 
-                #print("offset : "+str((offsetX,offsetY)))
-                X2 = drawing(kFrames,frames,angle,angleZ,draw,nLines = nL,scale = scale,A0=A0,\
-                        offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d1  ,distanceFigure=d2,speed = speed,cropFactor=crop,\
-                        noise = noise,resolution = 0.1)
+                    #print("offset : "+str((offsetX,offsetY)))
+                    X2 = drawing(kFrames,frames,angle,angleZ,draw,nLines = nL,scale = scale,A0=A0,\
+                            offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d1  ,distanceFigure=d2,speed = speed,cropFactor=crop,\
+                            noise = noise,resolution = 0.1)
+                    
+                    while len(X2)>50000:
+                        del X2[0]
                 
-                while len(X2)>50000:
-                    del X2[0]
                 if save:
                     print("---- save -----")
                     saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny)
