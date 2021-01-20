@@ -13,6 +13,7 @@ from evdev import InputDevice, categorize, ecodes
 import threading
 import glob
 import os
+import json
 
 running = True
 
@@ -31,32 +32,29 @@ save = False
 savePath = "/home/pi/save/"
 
 
-def saveState(k,j2,nL,scale,A0,X2,d,d2,speed,crop,noise,dist):
-    np.savetxt(savePath+"parameters.txt",[k,j2,nL,nL,scale,A0,X2,d,d2,speed,crop,noise,dist[0],dist[1]])
+def saveState(k0,j0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny):
+    data = {'k0':k,'j0':j0,'nL':nL,'scale':scale,'A0':A0,"X2":X2,"d1":d1,"d2":d2,"speed":speed,"crop":crop,"noise":noise,"dist":dist,"nx":nx,"ny":ny}
+
+    with open(savePath+"parameters.json", 'w') as fp:
+        json.dump(data,fp)
 
 
     
-def saveFrames(frames,angle,angleZ):
-    nSave = len(frames)
-    for k in range(0,nSave):
-        np.savetxt(savePath+"frames"+k.zfill(5)+".txt",frames[k])
-        np.savetxt(savePath+"angles"+k.zfill(5)+".txt",angle[k])
-        np.savetxt(savePath+"angleZ"+k.zfill(5)+".txt",angleZ[k])
+def saveFrames(frames,angle,angleZ,offset):
+    data = {"frames":frames,"angle":angle,"angleZ":angleZ,"offset":offset}
+    with open(savePath+"frames.json", 'w') as fp:
+        json.dump(data,fp)
     
     
 def loadState():
-    parameters = np.loadtxt("parameters.txt")
-    return parameters
+    with open(savePath+"parameters.json", 'r') as fp:
+        data = json.load(fp)
+    return data['k0'],data['j0'],data['nL'],data['scale'],data['A0'],data['X2'],data['d1'],data['d2'],data['speed'],data['crop'],data['noise'],data['dist'],data['nx'],data['ny']
 
 def loadFrames():
-    frames = []
-    angle = []
-    angleZ = []
-    for k in range(0,frames):
-        frames.append(np.loadtxt(savePath+"frames"+k.zfill(5)+".txt"))
-        angle.append(np.loadtxt(savePath+"angles"+k.zfill(5)+".txt"))
-        angleZ.append(np.loadtxt(savePath+"angleZ"+k.zfill(5)+".txt"))
-    return frames,angle,angleZ
+    with open(savePath+"frames.json", 'r') as fp:
+        data = json.load(fp)
+    return data['frames'],data['angle'],data['angleZ']
     
     
 def mouseListener():
@@ -368,8 +366,8 @@ def main():
         time.sleep(.1)
     if os.path.isfile(savePath+"parameters.txt"):
         dist = [0,0]
-        [k0,j0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist[0],dist[1]] = loadState()
-        frames,angle,angleZ = loadFrames()
+        k0,j0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny = loadState()
+        frames,angle,angleZ,offset = loadFrames()
     else:
         try:
             kinect = kinecter.kinect()
@@ -461,8 +459,8 @@ def main():
         
         frames = kinect.frames
         
-        saveState(0,0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist)
-        saveFrames(frames,angle,angleZ)
+        saveState(0,0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny)
+        saveFrames(frames,angle,angleZ,offset)
 
     try:
         for k in range(k0,ny):
@@ -495,7 +493,7 @@ def main():
                     del X2[0]
                 if save:
                     print("---- save -----")
-                    saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist)
+                    saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny)
                     save = False
                     draw.toPosition(0,0)
                 
