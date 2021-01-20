@@ -24,6 +24,7 @@ from blinked import blinked
 backgroundSub = False
 drawLoop = False
 pause = False
+save = False
 
 savePath = "/home/pi/save/"
 
@@ -463,6 +464,9 @@ def main():
                 
                 while len(X2)>50000:
                     del X2[0]
+                if save:
+                    saveState(k,j2,frames,angle,angleZ,nL,scale,A0,X2,d,d2,speed,crop,noise,dist)
+                    save = False
                 
 
     except Exception as e: 
