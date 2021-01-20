@@ -36,24 +36,24 @@ savePath = "/home/pi/save/"
 def saveState(k0,j0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny):
     data = {'k0':k0,'j0':j0,'nL':nL,'scale':scale,'A0':A0,"X2":X2,"d1":d1,"d2":d2,"speed":speed,"crop":crop,"noise":noise,"dist":dist,"nx":nx,"ny":ny}
 
-    with open(savePath+"parameters.p", 'w') as fp:
+    with open(savePath+"parameters.p", 'wb') as fp:
         pickle.dump(data,fp, protocol=pickle.HIGHEST_PROTOCOL)
 
 
     
 def saveFrames(frames,angle,angleZ,offset):
     data = {"frames":frames,"angle":angle,"angleZ":angleZ,"offset":offset}
-    with open(savePath+"frames.p", 'w') as fp:
+    with open(savePath+"frames.p", 'wb') as fp:
         pickle.dump(data,fp,protocol=pickle.HIGHEST_PROTOCOL)
     
     
 def loadState():
-    with open(savePath+"parameters.json", 'r') as fp:
+    with open(savePath+"parameters.json", 'rb') as fp:
         data = json.load(fp)
     return data['k0'],data['j0'],data['nL'],data['scale'],data['A0'],data['X2'],data['d1'],data['d2'],data['speed'],data['crop'],data['noise'],data['dist'],data['nx'],data['ny']
 
 def loadFrames():
-    with open(savePath+"frames.json", 'r') as fp:
+    with open(savePath+"frames.json", 'rb') as fp:
         data = json.load(fp)
     return data['frames'],data['angle'],data['angleZ']
     
