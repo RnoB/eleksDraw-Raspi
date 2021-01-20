@@ -33,7 +33,7 @@ savePath = "/home/pi/save/"
 
 
 def saveState(k0,j0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny):
-    data = {'k0':k,'j0':j0,'nL':nL,'scale':scale,'A0':A0,"X2":X2,"d1":d1,"d2":d2,"speed":speed,"crop":crop,"noise":noise,"dist":dist,"nx":nx,"ny":ny}
+    data = {'k0':k0,'j0':j0,'nL':nL,'scale':scale,'A0':A0,"X2":X2,"d1":d1,"d2":d2,"speed":speed,"crop":crop,"noise":noise,"dist":dist,"nx":nx,"ny":ny}
 
     with open(savePath+"parameters.json", 'w') as fp:
         json.dump(data,fp)
