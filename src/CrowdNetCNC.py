@@ -49,12 +49,12 @@ def saveFrames(frames,angle,angleZ,offset):
     
 def loadState():
     with open(savePath+"parameters.p", 'rb') as fp:
-        data = json.load(fp)
+        data = pickle.load(fp)
     return data['k0'],data['j0'],data['nL'],data['scale'],data['A0'],data['X2'],data['d1'],data['d2'],data['speed'],data['crop'],data['noise'],data['dist'],data['nx'],data['ny']
 
 def loadFrames():
     with open(savePath+"frames.p", 'rb') as fp:
-        data = json.load(fp)
+        data = picle.load(fp)
     return data['frames'],data['angle'],data['angleZ']
     
     
