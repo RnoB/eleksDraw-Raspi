@@ -129,7 +129,7 @@ def animColor():
 def spacer(depth):
 
     ny = 10
-    nx = 40
+    nx = 140
     overlap = 0.3
 
     heightReal = heightPaper / (1+((1-overlap)*(ny-1)))
