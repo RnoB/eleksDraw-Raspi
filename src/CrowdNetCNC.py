@@ -375,7 +375,7 @@ def main():
         frames,angle,angleZ,offset = loadFrames()
         print("--- loaded -- -")
 
-    if False:
+    else:
         try:
             kinect = kinecter.kinect()
             blinked.switchColor('o',[1])
