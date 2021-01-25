@@ -128,7 +128,7 @@ def animColor():
 
 def spacer(depth):
 
-    ny = 10
+    ny = 40
     nx = 140
     overlap = 0.3
 
@@ -344,7 +344,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     for position in repetitionPosition:
         if position not in figurePosition:
             figurePosition.append(position)
-            if len(figurePosition)>10000000:
+            if len(figurePosition)>1000000:
                 del figurePosition[0]
     return figurePosition
 
