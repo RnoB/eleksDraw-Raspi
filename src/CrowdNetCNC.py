@@ -367,7 +367,7 @@ def main():
     j0 = 0
     #while(not backgroundSub):
     #    time.sleep(.1)
-
+    print(os.path.isfile(savePath+"parameters.p"))
     if os.path.isfile(savePath+"parameters.p"):
         dist = [0,0]
         print("---- load --- -")
