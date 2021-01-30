@@ -15,7 +15,7 @@ import glob
 import os
 import json
 import pickle
-
+import bisect
 running = True
 
 widthPaper = 950
@@ -28,6 +28,7 @@ from blinked import blinked
 backgroundSub = False
 drawLoop = False
 pause = False
+pause2 = False
 save = False
 
 savePath = "/home/pi/save/"
@@ -62,6 +63,7 @@ def mouseListener():
     global backgroundSub
     global drawLoop
     global pause
+    global pause2
     global save
     pressed = False
     dev = InputDevice('/dev/input/event0')
@@ -83,8 +85,9 @@ def mouseListener():
                 drawLoop = True
                 pressed = not pressed
                 if pressed and pause:
-                    pass
+                    pause2 = not pause2
                     #colorsChosen()
+
 
             elif ev.code ==274:
                 pressed = not pressed
@@ -177,9 +180,14 @@ def getScale(wPixel,wPaper):
     return 480*wPaper/wPixel
 
 
+def round(x,base=1):
+    return int(x / base + 0.5)*base
 
-def round(x, base=1):
-    return base * np.round(x/base)
+def checkInList(liste,element):
+    try:
+        return liste[bisect.bisect(liste,element)-1] == element
+    except:
+        return False
 
 
 def drawing(kFrames,frames,angle,angleZ,draw,
@@ -208,7 +216,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
     #if speed<distanceLine:
         #speed = distanceLine
     for k in range(0,nLines):
-        while(pause):
+        while(pause2):
             time.sleep(1)
 
         size = 0
@@ -237,7 +245,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 y2 = round(y,distanceFigure)
                 zTest = z[ky,kx]
                 Atest = A[ky,kx]
-                if (x2,y2) not in figurePosition and (x1,y1) not in imagePosition:
+                if not checkInList(figurePosition,(x2,y2)) and not checkInList(imagePosition,(x1,y1)):
                     xChecking = False
             running = True
             if np.isnan(zTest) or np.isnan(Atest):
@@ -263,8 +271,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                     and (dyk > -1) and (dyk < 480) \
                     and size < 200 \
                     and (dx,dy) not in linePosition\
-                    and (dx1,dy1) not in imagePosition \
-                    and (dx2,dy2) not in figurePosition \
+                    and not checkInList(imagePosition,(dx1,dy1)) \
+                    and not checkInList(figurePosition,(dx2,dy2)) \
                     and dx < heightPaper and dy < widthPaper \
                     and dx > 0 and dy > 0:
                         
@@ -308,8 +316,8 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                         and (dyk > -1) and (dyk < 480) \
                         and size < 200 \
                         and (dx,dy) not in linePosition\
-                        and (dx1,dy1) not in imagePosition \
-                        and (dx2,dy2) not in figurePosition \
+                        and not checkInList(imagePosition,(dx1,dy1)) \
+                        and not checkInList(figurePosition,(dx2,dy2)) \
                         and dx < heightPaper and dy < widthPaper \
                         and dx > 0 and dy > 0:
                             
@@ -341,11 +349,10 @@ def drawing(kFrames,frames,angle,angleZ,draw,
                 imagePosition.append((round(position[0],distanceLine),round(position[1],distanceLine)))
                 repetitionPosition.append((round(position[0],distanceFigure),round(position[1],distanceFigure)))
 
-    for position in repetitionPosition:
-        if position not in figurePosition:
-            figurePosition.append(position)
-            if len(figurePosition)>1000000:
-                del figurePosition[0]
+    figurePosition+=repetitionPosition
+    figurePosition = list(set(figurePosition))
+    figurePosition.sort()
+
     return figurePosition
 
 
@@ -473,30 +480,30 @@ def main():
         for k in range(k0,ny):
             for j2 in range(j0,nx):
                 while pause:
-                    time.sleep(1)
 
                     if save:
                         print("---- save -----")
                         saveState(k,j2,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny)
                         save = False
                         draw.toPosition(0,0)
+                    time.sleep(1)
                 print('exit')
                 if k%2==0:
                     j=j2
                 else:
-                    j=nx-1-j2
+                    j=ny-1-j2
                 blinked.progressColor(((k*ny)+j)/(nx*ny),'v','y',[4])
                 
                 kFrames = random.randint(0,len(frames)-1)
                 #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
                 #
-                offsetY = -9999
-                offsetX = -9999
-                while offsetY<offset[kFrames][0] or offsetY>widthPaper+offset[kFrames][0]:
-                    offsetY = offset[kFrames][0]+j*dist[0]+random.uniform(-dist[0],dist[0])
-
-                while offsetX<offset[kFrames][1] or offsetX>heightPaper+offset[kFrames][1]:
-                    offsetX = offset[kFrames][1]+k*dist[1]+0.2*random.uniform(-dist[1],dist[1])
+                rInt = .2
+                rMin = offset[kFrames][1]+np.max((0,(k-rInt)*dist[0]))
+                rMax = -offset[kFrames][1]+np.min((heightPaper,(k+rInt)*dist[0]))
+                offsetX = random.uniform(rMin,rMax)
+                rMin = offset[kFrames][0]+np.max((0,(j-1)*dist[0]))
+                rMax = -offset[kFrames][0]+np.min((widthPaper,(j+1)*dist[0]))
+                offsetY = random.uniform(rMin,rMax)
 
 
                 #print("offset : "+str((offsetX,offsetY)))
@@ -504,7 +511,7 @@ def main():
                         offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d1  ,distanceFigure=d2,speed = speed,cropFactor=crop,\
                         noise = noise,resolution = 0.1)
                 
-                while len(X2)>50000:
+                while len(X2)>500000:
                     del X2[0]
                 
 
