@@ -436,7 +436,7 @@ def main():
         size = 0
 
 
-        scale,nx,ny,dist,offset =  spacer(kinect.frames)
+        scale,nx,ny,dist,offset =  spacer(frames)
         print("scale : "+str(scale))
         print("n     : "+str(nx))
 
