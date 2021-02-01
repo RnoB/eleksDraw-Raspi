@@ -383,7 +383,7 @@ def main():
         print("--- loaded -- -")
 
     else:
-        if os.path.isfile(savePath+"parameters.p"):
+        if os.path.isfile(savePath+"frames.p"):
             dist = [0,0]
             print("---- load --- -")
             frames,angle,angleZ,offset = loadFrames()
@@ -424,7 +424,7 @@ def main():
                 dX,dY,angle,angleZ = kinect.derivateFrames()
             except Exception as e: 
                 print(traceback.format_exc())
-        
+
 
         blinked.switchColor('g',[5,6])
 
@@ -493,7 +493,7 @@ def main():
                         save = False
                         draw.toPosition(0,0)
                     time.sleep(1)
-                print('exit')
+
                 if k%2==0:
                     j=j2
                 else:
