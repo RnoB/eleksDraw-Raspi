@@ -374,7 +374,7 @@ def main():
     j0 = 0
     #while(not backgroundSub):
     #    time.sleep(.1)
-    print(os.path.isfile(savePath+"parameters.p"))
+
     if os.path.isfile(savePath+"parameters.p"):
         dist = [0,0]
         print("---- load --- -")
@@ -383,42 +383,48 @@ def main():
         print("--- loaded -- -")
 
     else:
-        try:
-            kinect = kinecter.kinect()
-            blinked.switchColor('o',[1])
-            kinect.start()
-            kinect.backGroundSubstractor(nFrames=100)
-            kinect.stop()
-            blinked.switchColor('p',[1])
-            while(not drawLoop):
-                time.sleep(1)
-            for k in range(0,6):
-                time.sleep(.4)
-                blinked.switchColor('r',[7])
-                time.sleep(.2)
-                blinked.switchColor('k',[7])
+        if os.path.isfile(savePath+"parameters.p"):
+            dist = [0,0]
+            print("---- load --- -")
+            frames,angle,angleZ,offset = loadFrames()
+            print("--- loaded -- -")
+        else:
+            try:
+                kinect = kinecter.kinect()
+                blinked.switchColor('o',[1])
+                kinect.start()
+                kinect.backGroundSubstractor(nFrames=100)
+                kinect.stop()
+                blinked.switchColor('p',[1])
+                while(not drawLoop):
+                    time.sleep(1)
+                for k in range(0,6):
+                    time.sleep(.4)
+                    blinked.switchColor('r',[7])
+                    time.sleep(.2)
+                    blinked.switchColor('k',[7])
 
-            for k in range(0,5):
-                time.sleep(.3)
-                blinked.switchColor('o',[7])
-                time.sleep(.1)
-                blinked.switchColor('k',[7])
+                for k in range(0,5):
+                    time.sleep(.3)
+                    blinked.switchColor('o',[7])
+                    time.sleep(.1)
+                    blinked.switchColor('k',[7])
 
-            for k in range(0,5):
-                deltaT = .3/((k+1))
-                time.sleep(.9*deltaT)
-                blinked.switchColor('g',[7])
-                time.sleep(.1*deltaT)
-                blinked.switchColor('k',[7])
-            kinect.start()
-            kinect.getDepthFrames(nFrames = 50,delay=.01,maxDepth=2049)
-            kinect.stop()
-            blinked.switchColor('c',[1])
-            kinect.backgroundSubstract(blur=True,level=15)
-            dX,dY,angle,angleZ = kinect.derivateFrames()
-        except Exception as e: 
-            print(traceback.format_exc())
-
+                for k in range(0,5):
+                    deltaT = .3/((k+1))
+                    time.sleep(.9*deltaT)
+                    blinked.switchColor('g',[7])
+                    time.sleep(.1*deltaT)
+                    blinked.switchColor('k',[7])
+                kinect.start()
+                kinect.getDepthFrames(nFrames = 50,delay=.01,maxDepth=2049)
+                kinect.stop()
+                blinked.switchColor('c',[1])
+                kinect.backgroundSubstract(blur=True,level=15)
+                dX,dY,angle,angleZ = kinect.derivateFrames()
+            except Exception as e: 
+                print(traceback.format_exc())
+        
 
         blinked.switchColor('g',[5,6])
 
