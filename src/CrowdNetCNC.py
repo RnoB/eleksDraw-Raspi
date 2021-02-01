@@ -422,6 +422,7 @@ def main():
                 blinked.switchColor('c',[1])
                 kinect.backgroundSubstract(blur=True,level=15)
                 dX,dY,angle,angleZ = kinect.derivateFrames()
+                frames = kinect.frames
             except Exception as e: 
                 print(traceback.format_exc())
 
@@ -477,7 +478,7 @@ def main():
         print("-- crops : " + str(crop) + "--")
         print("-- noise : " + str(noise) + "--")
         
-        frames = kinect.frames
+
         
         saveState(0,0,nL,scale,A0,X2,d1,d2,speed,crop,noise,dist,nx,ny)
         saveFrames(frames,angle,angleZ,offset)
