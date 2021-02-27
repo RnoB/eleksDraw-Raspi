@@ -498,15 +498,15 @@ def main():
                 if k%2==0:
                     j=j2
                 else:
-                    j=ny-1-j2
+                    j=nx-1-j2
                 blinked.progressColor(((k*ny)+j)/(nx*ny),'v','y',[4])
                 
                 kFrames = random.randint(0,len(frames)-1)
                 #dist = random.uniform((j-nx*math.floor(j/nx)),1+(j-nx*math.floor(j/nx)))*5
                 #
                 rInt = .2
-                rMin = offset[kFrames][1]+np.max((0,(k-rInt)*dist[0]))
-                rMax = -offset[kFrames][1]+np.min((heightPaper,(k+rInt)*dist[0]))
+                rMin = offset[kFrames][1]+np.max((0,(k-rInt)*dist[1]))
+                rMax = -offset[kFrames][1]+np.min((heightPaper,(k+rInt)*dist[1]))
                 offsetX = random.uniform(rMin,rMax)
                 rMin = offset[kFrames][0]+np.max((0,(j-1)*dist[0]))
                 rMax = -offset[kFrames][0]+np.min((widthPaper,(j+1)*dist[0]))
@@ -520,6 +520,7 @@ def main():
                 
                 while len(X2)>500000:
                     del X2[0]
+            j0 = 0
                 
 
     except Exception as e: 
