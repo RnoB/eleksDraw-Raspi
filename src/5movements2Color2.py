@@ -357,8 +357,7 @@ def main():
  
 
     blinked.switchColor('g',[5,6])
-    draw = drawer.Drawer()
-    drawer.penInvert()
+
     draw.penUp()
     #draw.squareCorner(0,0,widthPaper,heightPaper)
     blinked.switchColor('g',[5,6,7])
