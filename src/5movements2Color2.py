@@ -309,7 +309,8 @@ def main():
     mouseThread = threading.Thread(target = mouseListener)
     mouseThread.daemon = True
     mouseThread.start()
-    draw = drawer.DrawerNet()    
+    draw = drawer.Drawer()
+    draw.penInvert()
     draw.penUp()
     draw.toPosition(0,0)
     set_brightness(.05)
