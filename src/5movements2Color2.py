@@ -13,7 +13,7 @@ import threading
 running = True
 
 widthPaper = 800
-heightPaper = 300 
+heightPaper = 100 
 #widthPaper = 148
 #heightPaper = 105
 
