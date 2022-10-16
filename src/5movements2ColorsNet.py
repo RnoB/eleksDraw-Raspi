@@ -13,8 +13,8 @@ import threading
 
 running = True
 
-widthPaper = 840
-heightPaper = 100 
+widthPaper = 800
+heightPaper = 100 + 200 * random.random()
 #widthPaper = 148
 #heightPaper = 105
 
