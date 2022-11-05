@@ -6,7 +6,7 @@ import struct
 import numpy as np
 
 drawerIP = "192.168.0.100"
-drawerIP2 = "192.168.0.101"
+drawerIP2 = "192.168.1.200"
 drawerPort = 9997
 
 drawerCode = {'penUp' : 21,'penDown' : 22,
