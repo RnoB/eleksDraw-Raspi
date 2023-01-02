@@ -50,7 +50,12 @@ class Drawer:
         if self.output:
             print(out)
 
-
+    def setPenUp(self,penUp0,penDown0):
+        self.penCode = [penUp0,penDown0]
+        
+        codeSmooth = np.arange(self.penCode[0]+1,self.penCode[1]+1,5)
+        self.penCodeSmooth.append((np.flip(codeSmooth)))
+        self.penCodeSmooth.append((codeSmooth))
 
     def xInvert(self):
         self.invX = -self.invX
