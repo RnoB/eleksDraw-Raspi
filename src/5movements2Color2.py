@@ -311,6 +311,8 @@ def main():
     mouseThread.start()
     draw = drawer.Drawer()
     draw.penInvert()
+    draw.xInvert()
+    draw.yInvert()
     draw.penUp()
     draw.toPosition(0,0)
     set_brightness(.05)
