@@ -310,7 +310,7 @@ def main():
     mouseThread.daemon = True
     mouseThread.start()
     draw = drawer.Drawer()
-    draw.penInvert()
+    draw.setPenUp(90,60)
     draw.xInvert()
     draw.yInvert()
     draw.penUp()
