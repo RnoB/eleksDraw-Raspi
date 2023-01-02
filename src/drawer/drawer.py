@@ -53,10 +53,10 @@ class Drawer:
 
 
     def xInvert(self):
-        invX = -invX
+        self.invX = -self.invX
 
     def yInvert(self):
-        invY = -invY
+        self.invY = -self.invY
 
     def penInvert(self,invert = True):
         codeSmooth = np.arange(self.penCode[0]+1,self.penCode[1]+1,5)
@@ -71,8 +71,8 @@ class Drawer:
             self.penCodeSmooth.append((codeSmooth))
 
     def toPosition(self,x0,y0,speed = 3500,polar = False):
-        x0 = invX * x0
-        y0 = invX * y0
+        x0 = self.invX * x0
+        y0 = self.invX * y0
 
         if polar:
 
@@ -84,8 +84,8 @@ class Drawer:
         self.sendCommand(gCode)
 
     def toPositionCurved(self,x0,y0,R,cw=True,speed = 3500):
-        x0 = invX * x0
-        y0 = invX * y0
+        x0 = self.invX * x0
+        y0 = self.invX * y0
         if cw:
             gCommand = 'G2'
         else:
@@ -211,15 +211,15 @@ class DrawerNet:
 
 
     def xInvert(self):
-        invX = -invX
+        self.invX = -self.invX
 
     def yInvert(self):
-        invY = -invY
+        self.invY = -self.invY
 
 
     def toPosition(self,x0,y0,speed = 3500,polar = False):
-        x0 = invX * x0
-        y0 = invX * y0
+        x0 = self.invX * x0
+        y0 = self.invX * y0
         drawNet.sendPosition(x0,y0)
 
     def toPositionCurved(self,x0,y0,R,cw=True,speed = 3500):
