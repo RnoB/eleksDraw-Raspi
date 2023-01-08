@@ -13,7 +13,7 @@ import threading
 running = True
 
 widthPaper = 800
-heightPaper = np.random.uniform(100,300) 
+heightPaper = 300#np.random.uniform(100,300) 
 #widthPaper = 148
 #heightPaper = 105
 
