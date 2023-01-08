@@ -386,14 +386,17 @@ def main():
 
 
     if np.random.random()<.12:
-        Nmin = np.random.randint(300,600)
+        #Nmin = np.random.randint(300,600)
+        #Nmax = np.random.randint(50,200)
+        Nmin = np.random.randint(300,800)
         Nmax = np.random.randint(50,200)
 
         nL = np.linspace(Nmin,Nmax,nx,dtype = int)
         if random.random()<.5:
             nL = np.flip(nL) 
     else:
-        nL = random.randint(250,350) * np.ones(nx, dtype=int)  
+        #nL = random.randint(250,350) * np.ones(nx, dtype=int)  
+        nL = random.randint(250,550) * np.ones(nx, dtype=int)  
 
 
     if np.random.random()<.098:
