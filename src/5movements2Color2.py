@@ -92,8 +92,8 @@ def animColor():
     show()
 
 def spacer(depth,nx0,nx=20):
-    scale = 500
-    heightMax=400
+    scale = 1000
+    heightMax=4000
     
     nx0=np.int(nx0)
     offsetY0 = []
