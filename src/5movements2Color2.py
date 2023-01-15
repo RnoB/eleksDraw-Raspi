@@ -372,7 +372,7 @@ def main():
     print("offsetX  : "+str(offsetX))
     print("offsetY : "+str(offsetY))
     print("dist : "+str(dist))
-    if np.max(sizeImage[0:nx,1])<heightPaper*.95
+    if np.max(sizeImage[0:nx,1])<heightPaper*.95:
         scale,nx,dist,offsetX,offsetY,sizeImage =  spacer(kinect.frames,0,nx*2)
         print("scale : "+str(scale))
         print("n     : "+str(nx))
