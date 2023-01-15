@@ -13,7 +13,7 @@ import threading
 running = True
 
 widthPaper = 800
-heightPaper = 400#np.random.uniform(100,400) 
+heightPaper = 300#np.random.uniform(100,400) 
 #widthPaper = 148
 #heightPaper = 105
 
@@ -349,7 +349,7 @@ def main():
             time.sleep(.1*deltaT)
             blinked.switchColor('k',[7])
         kinect.start()
-        kinect.getDepthFrames(nFrames = 100,delay=.01,maxDepth=2049)
+        kinect.getDepthFrames(nFrames = 50,delay=.01,maxDepth=2049)
         kinect.stop()
         blinked.switchColor('c',[1])
         kinect.backgroundSubstract(blur=True,level=15)
@@ -366,8 +366,8 @@ def main():
     nLines = 400
     size = 0
 
-    nx0=0
-    scale,nx,dist,offsetX,offsetY =  spacer(kinect.frames,nx0,100)
+    nx0=10
+    scale,nx,dist,offsetX,offsetY =  spacer(kinect.frames,nx0,40)
     print("scale : "+str(scale))
     print("n     : "+str(nx))
     print("offsetX  : "+str(offsetX))
