@@ -348,7 +348,7 @@ def main():
             time.sleep(.1*deltaT)
             blinked.switchColor('k',[7])
         kinect.start()
-        kinect.getDepthFrames(nFrames = 50,delay=.01,maxDepth=2049)
+        kinect.getDepthFrames(nFrames = 100,delay=.01,maxDepth=2049)
         kinect.stop()
         blinked.switchColor('c',[1])
         kinect.backgroundSubstract(blur=True,level=15)
@@ -372,8 +372,9 @@ def main():
     print("offsetX  : "+str(offsetX))
     print("offsetY : "+str(offsetY))
     print("dist : "+str(dist))
-    if np.max(sizeImage[0:nx,1])<heightPaper*.95:
-        scale,nx,dist,offsetX,offsetY,sizeImage =  spacer(kinect.frames,0,nx*2)
+    nx0 = nx
+    if np.max(sizeImage[nx0:nx0+nx,1])<heightPaper*.95:
+        scale,nx,dist,offsetX,offsetY,sizeImage =  spacer(kinect.frames,nx0,nx*2)
         print("scale : "+str(scale))
         print("n     : "+str(nx))
         print("offsetX  : "+str(offsetX))
