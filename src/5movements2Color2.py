@@ -115,10 +115,9 @@ def spacer(depth,nx0,nx=20):
         heightMax = np.max(sizeImage,axis = 0)[1]
     width = np.mean(sizeImage,axis = 0)[0]
     nx = np.int(round((.8+1*random.random())*widthPaper/width))
-    print(sizeImage)
     dist = ((widthPaper-10)-sizeImage[nx-1][0]+offset[0][0]-offset[nx-1][0])/(nx-1)
     #dist = dist - ((dist*(nx-1)+sizeImage[nx-1][0])-240)/(nx-1)
-    return scale,nx,dist,offsetX,offsetY
+    return scale,nx,dist,offsetX,offsetY,np.array(sizeImage)
 
 
 def scaler(x,y,scale=100,offsetX = 5,offsetY = 5,invert=False):
@@ -366,13 +365,20 @@ def main():
     nLines = 400
     size = 0
 
-    nx0=10
-    scale,nx,dist,offsetX,offsetY =  spacer(kinect.frames,nx0,40)
+    nx0=0
+    scale,nx,dist,offsetX,offsetY,sizeImage =  spacer(kinect.frames,0,100)
     print("scale : "+str(scale))
     print("n     : "+str(nx))
     print("offsetX  : "+str(offsetX))
     print("offsetY : "+str(offsetY))
     print("dist : "+str(dist))
+    if np.max(sizeImage[0:nx,1])<heightPaper*.95
+        scale,nx,dist,offsetX,offsetY,sizeImage =  spacer(kinect.frames,0,nx*2)
+        print("scale : "+str(scale))
+        print("n     : "+str(nx))
+        print("offsetX  : "+str(offsetX))
+        print("offsetY : "+str(offsetY))
+        print("dist : "+str(dist))
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
