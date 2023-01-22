@@ -362,7 +362,7 @@ def main():
     draw.penUp()
     #draw.squareCorner(0,0,widthPaper,heightPaper)
     blinked.switchColor('g',[5,6,7])
-    nLines = 400
+    nLines = 600
     size = 0
 
     nx0=0
@@ -395,8 +395,8 @@ def main():
     if np.random.random()<.12:
         #Nmin = np.random.randint(300,600)
         #Nmax = np.random.randint(50,200)
-        Nmin = np.random.randint(300,800)
-        Nmax = np.random.randint(50,200)
+        Nmin = np.random.randint(50,800)
+        Nmax = np.random.randint(600,1200)
 
         nL = np.linspace(Nmin,Nmax,nx,dtype = int)
         if random.random()<.5:
