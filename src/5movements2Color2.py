@@ -304,7 +304,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
 def main():
-
+    global pause
     mouseThread = threading.Thread(target = mouseListener)
     mouseThread.daemon = True
     mouseThread.start()
@@ -447,10 +447,7 @@ def main():
     else:
         noise = (1-np.random.power(11)) * np.ones(nx)
 
-    if np.random.random()<.19:
-        colors = 2
-    else:
-        colors = 1
+    colors = True
     A0=0
     X2 = []
 
@@ -461,10 +458,10 @@ def main():
     print("-- crops : " + str(crop) + "--")
     print("-- noise : " + str(noise) + "--")
     print("-- color : " + str(colors) + "--")
-    
+
+    nColors = 1
     try:
-        for l in range(0,colors):
-            print("color : "+str(l))
+        while colors:
             for j in range(0,nx):
 
                 blinked.progressColor(j/nx,'v','y',[4])
@@ -477,13 +474,15 @@ def main():
                 offsetY = offsetY0+j*dist
 
                 #print("offset : "+str((offsetX,offsetY)))
-                X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL[j],scale = scale,A0=A0,\
+                X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL[j]*nColors,scale = scale,A0=A0,\
                         offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[l]  ,speed = speed[l],cropFactor=crop[l],\
                         noise = noise[l])
-            if l==0:
-                time.sleep(0)
-                X2 = []
-                A0=math.pi/2.0
+            time.sleep(0)
+            pause = True
+            X2 = []
+            A0+=math.pi/2.0
+            nColors = .5+.5*np.random.random()
+            
             
 
     except Exception as e: 
