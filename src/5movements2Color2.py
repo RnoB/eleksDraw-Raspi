@@ -474,7 +474,7 @@ def main():
                 offsetY = offsetY0+j*dist
 
                 #print("offset : "+str((offsetX,offsetY)))
-                X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = nL[j]*nColors,scale = scale,A0=A0,\
+                X2 = drawing(kFrames,kinect.frames,angle,angleZ,draw,nLines = int(nL[j]*nColors),scale = scale,A0=A0,\
                         offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[l]  ,speed = speed[l],cropFactor=crop[l],\
                         noise = noise[l])
             time.sleep(0)
