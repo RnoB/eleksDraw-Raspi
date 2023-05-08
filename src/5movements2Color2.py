@@ -320,6 +320,10 @@ def main():
 
     while(not backgroundSub):
         time.sleep(.1)
+        if pause:
+            draw.toPosition(100,0)
+        else:
+            draw.toPosition(0,0)
     try:
         kinect = kinecter.kinect()
         blinked.switchColor('o',[1])
@@ -328,7 +332,11 @@ def main():
         kinect.stop()
         blinked.switchColor('p',[1])
         while(not drawLoop):
-            time.sleep(1)
+            time.sleep(1) 
+            if pause:
+                draw.toPosition(100,0)
+            else:
+                draw.toPosition(0,0)
         for k in range(0,6):
             time.sleep(.4)
             blinked.switchColor('r',[7])
