@@ -478,10 +478,13 @@ def main():
                         offsetX = offsetX,offsetY=offsetY,figurePosition = X2,distanceLine = d[j]  ,speed = speed[j],cropFactor=crop[j],\
                         noise = noise[j])
             time.sleep(0)
+            
+            draw.toPosition(0,0)
             pause = True
             X2 = []
             A0+=math.pi/2.0
             nColors = .5+.5*np.random.random()
+            
             
             
 
