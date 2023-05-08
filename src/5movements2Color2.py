@@ -321,7 +321,7 @@ def main():
     while(not backgroundSub):
         time.sleep(.1)
         if pause:
-            draw.toPosition(100,0)
+            draw.toPosition(0,100)
         else:
             draw.toPosition(0,0)
     try:
@@ -334,7 +334,7 @@ def main():
         while(not drawLoop):
             time.sleep(1) 
             if pause:
-                draw.toPosition(100,0)
+                draw.toPosition(0,100)
             else:
                 draw.toPosition(0,0)
         for k in range(0,6):
