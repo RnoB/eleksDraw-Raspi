@@ -139,6 +139,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
             nLines = 400,scale = 70,A0=0,
             resolution=.1,speed = .4,distanceLine=.8 ,distanceFigure = 5.0,
             noise = 0,offsetX = 0,offsetY=0,figurePosition = [],cropFactor = .3):
+    global pause
     kFrames = np.int(kFrames)
 
     imagePosition = []
