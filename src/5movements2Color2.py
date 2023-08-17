@@ -318,6 +318,7 @@ def main():
     set_brightness(.05)
     blinked.switchColor('g',[0])
 
+    nFrames = 100
 
     while(not backgroundSub):
         time.sleep(.1)
@@ -374,8 +375,14 @@ def main():
     nLines = 600
     size = 0
 
-    nx0=0
-    scale,nx,dist,offsetX,offsetY,sizeImage =  spacer(kinect.frames,0,100)
+    nx0 = 0
+    nx1 = 100
+    scale,nx,dist,offsetX,offsetY,sizeImage =  spacer(kinect.frames,int(nx0),int(nx1))
+    
+    nx0 = (nFrames-nx)/2
+    nx1 = 2*nx
+    scale,nx,dist,offsetX,offsetY,sizeImage =  spacer(kinect.frames,int(nx0),int(nx1))
+    
     print("scale : "+str(scale))
     print("n     : "+str(nx))
     print("offsetX  : "+str(offsetX))
