@@ -318,7 +318,6 @@ def main():
     set_brightness(.05)
     blinked.switchColor('g',[0])
 
-    nFrames = 100
 
     while(not backgroundSub):
         time.sleep(.1)
@@ -375,19 +374,14 @@ def main():
     nLines = 600
     size = 0
 
-    nx0 = 0
-    nx1 = 100
-    scale,nx,dist,offsetX,offsetY,sizeImage =  spacer(kinect.frames,int(nx0),int(nx1))
-    
-    nx0 = (nFrames-nx)/2
-    nx1 = 2*nx
-    scale,nx,dist,offsetX,offsetY,sizeImage =  spacer(kinect.frames,int(nx0),int(nx1))
-    
+    nx0=0
+    scale,nx,dist,offsetX,offsetY,sizeImage =  spacer(kinect.frames,0,100)
     print("scale : "+str(scale))
     print("n     : "+str(nx))
     print("offsetX  : "+str(offsetX))
     print("offsetY : "+str(offsetY))
     print("dist : "+str(dist))
+    print("size : "+str(sizeImage))
     nx0 = nx
     if np.max(sizeImage[nx0:nx0+nx,1])<heightPaper*.95:
         scale,nx,dist,offsetX,offsetY,sizeImage =  spacer(kinect.frames,nx0,nx*2)
@@ -396,6 +390,7 @@ def main():
         print("offsetX  : "+str(offsetX))
         print("offsetY : "+str(offsetY))
         print("dist : "+str(dist))
+        print("size : "+str(sizeImage))
     xu,yu = scaler(1,1,scale=scale,offsetX=0,offsetY=0)
     offsetA=[[-np.pi/3,0,np.pi/3],[-2*np.pi/3,np.pi,2*np.pi/3]]    
     blinked.switchColor('a',[0])
