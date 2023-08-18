@@ -27,7 +27,7 @@ pause = False
 def mouseListener():
     global backgroundSub
     global drawLoop
-    global pressed
+    global pause
     global colorK
     pressed = []
     for k in range(0,3):
@@ -36,9 +36,7 @@ def mouseListener():
     while running:
         try:
             for ev in dev.read_loop():
-                print(ev.type)
                 if ev.type == 1:
-                    print(ev.code)
                     if ev.code == 274:
                         pressed[0] = not pressed[0]
                         if pressed[0]:
