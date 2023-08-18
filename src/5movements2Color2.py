@@ -27,35 +27,33 @@ pause = False
 def mouseListener():
     global backgroundSub
     global drawLoop
-    global pause
+    global pressed
     global colorK
-    pressed = False
+    pressed = []
+    for k in range(0,3):
+        pressed.append(False)
     dev = InputDevice('/dev/input/event0')
-    for ev in dev.read_loop():
-        
-        if ev.type == 1:
-            if ev.code == 272:
-                backgroundSub = True
-                pressed = not pressed
-                if pressed and pause:
-                
-                    colorK +=1
-                    colorK = colorK%3
-                    #colorsChosen()
-            elif ev.code ==273:
-                drawLoop = True
-                pressed = not pressed
-                if pressed and pause:
-                    colorK -=1
-                    colorK = colorK%3
-                    #colorsChosen()
-
-            elif ev.code ==274:
-                pressed = not pressed
-                if pressed:
-                    pause = not pause
-                    print(pause)
-
+    while running:
+        try:
+            for ev in dev.read_loop():
+                if ev.type == 1:
+                    if ev.code == 274:
+                        pressed[0] = not pressed[0]
+                        if pressed[0]:
+                            pause = not pause
+                            print(pause)
+                    elif ev.code ==273:
+                        pressed[1] = not pressed[1]
+                        if pressed[1]:
+                            drawLoop = True
+                    elif ev.code ==272:
+                        pressed[2] = not pressed[2]
+                        if pressed[2]:
+                            backgroundSub = True
+        except:
+            pause = True
+            time.sleep(1)
+    
 
 
 def switchColor(col):
