@@ -51,7 +51,7 @@ def mouseListener():
                         if pressed[2]:
                             backgroundSub = True
         except:
-            pause = True
+            pause = False
             time.sleep(1)
     
 
