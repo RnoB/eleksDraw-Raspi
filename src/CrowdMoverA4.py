@@ -288,7 +288,7 @@ def drawing(kFrames,frames,angle,angleZ,draw,
         if size>0:
             #print("X : "+str(np.min(xLines))+" Y : "+str(np.min(yLines)))
             xLines = xLines[np.int(np.floor(cropFactor*len(xLines))):]
-            yLines = yLines[np.int(np.floor(cropFactor*len(xLines))):]
+            yLines = yLines[-np.int(np.floor(cropFactor*len(xLines))):]
             draw.lines(xLines,yLines)
             for position in linePosition:
                 imagePosition.append((round(position[0],distanceLine),round(position[1],distanceLine)))
