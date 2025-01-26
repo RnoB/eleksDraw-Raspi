@@ -311,7 +311,7 @@ def main():
     mouseThread = threading.Thread(target = mouseListener)
     mouseThread.daemon = True
     mouseThread.start()
-    draw = drawer.DrawerEsp("./settings.json")
+    draw = drawer.Drawer("./settings.json")
     
     draw.penUp()
     draw.toPosition(0,0)
