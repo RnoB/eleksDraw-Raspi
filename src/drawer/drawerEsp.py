@@ -4,7 +4,7 @@ import numpy as np
 import json
 
 
-class drawer:
+class Drawer:
 
     def sendCommand(self,cmd):
         self.writer.write(cmd+'\r\n')
