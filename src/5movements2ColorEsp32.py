@@ -306,13 +306,13 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
 
-def main():
+async def main():
     global pause
     mouseThread = threading.Thread(target = mouseListener)
     mouseThread.daemon = True
     mouseThread.start()
     draw = drawer.Drawer("./settings.json")
-    draw.start()
+    await draw.start()
     draw.penUp()
     draw.toPosition(0,0)
     set_brightness(.05)
