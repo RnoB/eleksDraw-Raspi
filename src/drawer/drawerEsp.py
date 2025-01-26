@@ -21,11 +21,11 @@ class Drawer:
         self.sendCommand(gCode)
 
     def toPosition(self,x,y):
-        x0 = self.invert[0] * x
-        y0 = self.invert[1] * y
-        gCode = 'G1X'+str(x0)+'Y'+str(y0)+'F'+str(self.speed)
+        x1 = self.invert[0] * x
+        y1 = self.invert[1] * y
+        gCode = 'G1X'+str(x1)+'Y'+str(y1)+'F'+str(self.speed)
         self.sendCommand(gCode)
-        time.sleep(np.sqrt(x0**2+y0**2)*60/self.speed)
+        time.sleep(np.sqrt((x0-self.x0)**2+(y0-self.y0)**2)*60/self.speed)
 
     def lines(self,x,y,xOffset=0,yOffset=0,speed=2000,polar=False,smooth=False):
         self.toPosition(x[0]+xOffset,y[0]+yOffset)
@@ -44,6 +44,8 @@ class Drawer:
 
 
     async def start(self):
+        self.x0 = 0
+        self.y0 = 0
         self.reader, self.writer = await telnetlib3.open_connection(self.settings["ip"], self.settings["port"])
         self.sendCommand("G90")
         self.sendCommand("G10")
