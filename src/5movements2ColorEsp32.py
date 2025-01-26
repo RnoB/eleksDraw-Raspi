@@ -312,7 +312,7 @@ def main():
     mouseThread.daemon = True
     mouseThread.start()
     draw = drawer.Drawer("./settings.json")
-    
+    draw.start()
     draw.penUp()
     draw.toPosition(0,0)
     set_brightness(.05)
