@@ -507,4 +507,4 @@ async def main():
     switchColor(1)
 
 if __name__ == "__main__":
-    await main()
+    asyncio.run(main()) 
