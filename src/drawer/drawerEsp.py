@@ -2,7 +2,7 @@ import asyncio
 import telnetlib3
 import numpy as np
 import json
-
+import time
 
 class Drawer:
 
