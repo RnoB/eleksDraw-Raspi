@@ -10,6 +10,7 @@ import time
 from evdev import InputDevice, categorize, ecodes
 import threading
 import json
+import asyncio
 running = True
 
 with open('settings.json') as f:
