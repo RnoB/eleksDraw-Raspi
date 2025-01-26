@@ -19,7 +19,7 @@ with open('settings.json') as f:
 
 widthPaper = settings["size"]["x"]
 heightPaper = settings["size"]["y"]
-print(widthPaper+.5)
+
 #np.random.uniform(100,400) 
 #widthPaper = 148
 #heightPaper = 105
