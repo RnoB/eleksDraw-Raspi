@@ -25,6 +25,7 @@ class Drawer:
         y0 = self.invert[1] * y
         gCode = 'G1X'+str(x0)+'Y'+str(y0)+'F'+str(self.speed)
         self.sendCommand(gCode)
+        time.sleep(60/self.speed)
 
     def lines(self,x,y,xOffset=0,yOffset=0,speed=2000,polar=False,smooth=False):
         self.toPosition(x[0]+xOffset,y[0]+yOffset)
