@@ -6,6 +6,11 @@ import json
 
 class Drawer:
 
+
+
+    def closeDrawer(self):
+        self.toPosition(0,0)
+        
     def sendCommand(self,cmd):
         self.writer.write(cmd+'\r\n')
 
