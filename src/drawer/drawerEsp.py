@@ -6,11 +6,6 @@ import json
 
 class Drawer:
 
-
-
-    def closeDrawer(self):
-        self.toPosition(0,0)
-        
     def sendCommand(self,cmd):
         self.writer.write(cmd+'\r\n')
 
@@ -28,13 +23,20 @@ class Drawer:
         gCode = 'G1X'+str(x0)+'Y'+str(y0)+'F'+str(self.speed)
         self.sendCommand(gCode)
 
-    def lines(self,X):
-        X = np.array(X)
-        self.toPosition(X[0,0],X[0,1])
+    def lines(self,x,y,xOffset=0,yOffset=0,speed=2000,polar=False,smooth=False):
+        self.toPosition(x[0]+xOffset,y[0]+yOffset)
         self.penDown()
-        for k in range(1,np.shape(np.array(X))[0]):
-            self.toPosition(X[k,0],X[k,1])
-        self.penUp()
+        k0=0
+        try:
+            for k in range(0,len(x)):
+                k0 = k
+                
+                self.toPosition(x[k]+xOffset,y[k]+yOffset)
+        except:
+            print('--- CRASH !!!! ---')
+            print("length : "+str(len(x)))
+            print("  k0   : "+str(k0))
+        self.penUp(smooth = smooth)
 
 
     async def start(self):
