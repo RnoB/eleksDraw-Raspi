@@ -82,13 +82,13 @@ class DrawerZ:
         xf = x0+length*math.cos(angle)+xOffset
         yf = y0+length*math.sin(angle)+yOffset
         self.toPosition(x0,y0)
-        self.penDown(smooth = smooth)
+        self.penDown()
         self.toPosition(xf,yf,speed)
-        self.penUp(smooth = smooth)
+        self.penUp()
 
     def lines(self,x,y,xOffset=0,yOffset=0,speed=2000,polar=False,smooth=False):
         self.toPosition(x[0]+xOffset,y[0]+yOffset,polar=polar,speed=2*speed)
-        self.penDown(smooth = smooth)
+        self.penDown()
         k0=0
         try:
             for k in range(0,len(x)):
@@ -99,7 +99,7 @@ class DrawerZ:
             print('--- CRASH !!!! ---')
             print("length : "+str(len(x)))
             print("  k0   : "+str(k0))
-        self.penUp(smooth = smooth)
+        self.penUp()
 
 
 
