@@ -26,7 +26,7 @@ class Drawer:
         y1 = self.invert[1] * y
         gCode = 'G1X'+str(x1)+'Y'+str(y1)+'F'+str(self.speed)
         self.sendCommand(gCode)
-        time.sleep(self.tSleep+np.sqrt((x1-self.x0)**2+(y1-self.y0)**2)*60/self.speed)
+        time.sleep(np.sqrt((x1-self.x0)**2+(y1-self.y0)**2)*60/self.speed)
         self.x0 = x1
         self.y0 = y1
 
@@ -45,8 +45,7 @@ class Drawer:
             print("  k0   : "+str(k0))
         self.penUp()
         
-    def setTSleep(self,t0):
-        self.tSleep = t0
+
 
     async def start(self):
         self.x0 = 0
@@ -55,7 +54,7 @@ class Drawer:
         self.sendCommand("G90")
         self.sendCommand("G10")
         self.sendCommand("G21")
-        self.tSleep = 0
+       
 
         
 
