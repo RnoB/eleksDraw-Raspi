@@ -32,6 +32,100 @@ def noiser(xMax):
     return xMax*random.random()
 
 
+class DrawerZ:
+
+    def sendCommand(self,gCode):
+        if self.output:
+            print(gCode)
+        self.s.flushInput()
+        self.s.write(gCode)
+        out = self.s.readline()
+        if self.output:
+            print(out)
+
+
+
+    def toPosition(self,x0,y0,speed = 3500,polar = False):
+        x0 = self.invert[0] * x0
+        y0 = self.invert[1] * y0
+
+        if polar:
+
+            lL = np.sqrt((self.dx + x0)**2+(self.dy+y0)**2)-self.dist
+            lR = np.sqrt((self.dx - x0)**2+(self.dy+y0)**2)-self.dist
+            x0 = lL
+            y0 = lR
+        gCode = (('G1X'+str(x0)+'Y'+str(y0)+'F'+str(speed)).strip()+'\r\n').encode('UTF-8')
+        self.sendCommand(gCode)
+
+
+
+
+    def closeDrawer(self):
+        self.toPosition(0,0)
+        self.s.flushInput()
+        self.s.write(('M30'.strip()+'\r\n').encode('UTF-8'))
+        self.s.readline()
+        self.s.close()
+
+    def penUp(self):
+        gCode = 'G1Z'+str(self.pen["up"])+'F'+str(self.pen["speed"])
+        self.sendCommand(gCode)
+
+    def penDown(self):
+        gCode = 'G1Z'+str(self.pen["down"])+'F'+str(self.pen["speed"])
+        self.sendCommand(gCode)
+
+    def line(self,x0,y0,xf=-999,yf=-999,length=1,angle=0,speed=2000,xOffset=0,yOffset=0,polar=False,smooth = False):
+        
+        xf = x0+length*math.cos(angle)+xOffset
+        yf = y0+length*math.sin(angle)+yOffset
+        self.toPosition(x0,y0)
+        self.penDown(smooth = smooth)
+        self.toPosition(xf,yf,speed)
+        self.penUp(smooth = smooth)
+
+    def lines(self,x,y,xOffset=0,yOffset=0,speed=2000,polar=False,smooth=False):
+        self.toPosition(x[0]+xOffset,y[0]+yOffset,polar=polar,speed=2*speed)
+        self.penDown(smooth = smooth)
+        k0=0
+        try:
+            for k in range(0,len(x)):
+                k0 = k
+                
+                self.toPosition(x[k]+xOffset,y[k]+yOffset,polar=polar,speed=speed)
+        except:
+            print('--- CRASH !!!! ---')
+            print("length : "+str(len(x)))
+            print("  k0   : "+str(k0))
+        self.penUp(smooth = smooth)
+
+
+
+
+
+    def __init__(self,path = "settings.json"):
+
+        with open('settings.json') as f:
+            self.settings = json.load(f)["machine"]
+        self.size = self.settings["size"]
+        self.invert = [int(1-2*self.settings["invert"]["x"]),int(1-2*self.settings["invert"]["y"])]
+        self.speed = self.settings["speed"]
+        self.pen = self.settings["pen"]
+        self.offset = self.settings["offset"] 
+        
+        
+
+        self.s = serial.Serial('/dev/ttyUSB0',115200)
+        self.s.write("\r\n\r\n".encode('UTF-8'))
+        time.sleep(2)
+        self.s.flushInput()
+        self.sendCommand('G90\r\n'.encode('UTF-8')) # Set to Absolute Positioning
+        self.sendCommand('G1Z0F10\r\n'.encode('UTF-8')) # linear movement no z position
+        self.sendCommand('G21\r\n'.encode('UTF-8')) # G21 ; Set Units to Millimeters
+        self.dist = np.sqrt(dx**2+dy**2)
+
+
 
 class Drawer:
     s = []
