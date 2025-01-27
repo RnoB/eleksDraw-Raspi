@@ -45,7 +45,7 @@ class Drawer:
             print("  k0   : "+str(k0))
         self.penUp()
         
-    def setTSleep(t0):
+    def setTSleep(self,t0):
         self.tSleep = t0
 
     async def start(self):
