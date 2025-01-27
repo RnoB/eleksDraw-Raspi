@@ -125,7 +125,7 @@ class DrawerZ:
         self.s.flushInput()
         self.sendCommand('G90') # Set to Absolute Positioning
         self.sendCommand('G1Z0F10') # linear movement no z position
-        self.sendCommand('G21')) # G21 ; Set Units to Millimeters
+        self.sendCommand('G21') # G21 ; Set Units to Millimeters
         
 
 
