@@ -125,7 +125,7 @@ class DrawerZ:
         self.sendCommand('G90\r\n'.encode('UTF-8')) # Set to Absolute Positioning
         self.sendCommand('G1Z0F10\r\n'.encode('UTF-8')) # linear movement no z position
         self.sendCommand('G21\r\n'.encode('UTF-8')) # G21 ; Set Units to Millimeters
-        self.dist = np.sqrt(dx**2+dy**2)
+        
 
 
 
