@@ -14,7 +14,7 @@
 		},
 		"pen":{
 			"up": 0,
-			"down":20,
+			"down":-30,
 			"speed":3000
 		},
 		"offset":{
