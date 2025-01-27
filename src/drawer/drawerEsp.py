@@ -51,9 +51,9 @@ class Drawer:
         self.x0 = 0
         self.y0 = 0
         self.reader, self.writer = await telnetlib3.open_connection(self.settings["ip"], self.settings["port"])
-        self.sendCommand("G90")
-        self.sendCommand("G10")
-        self.sendCommand("G21")
+        await self.sendCommand("G90")
+        await self.sendCommand("G10")
+        await self.sendCommand("G21")
         
         
 
