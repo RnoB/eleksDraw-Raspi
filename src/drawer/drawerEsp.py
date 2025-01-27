@@ -54,7 +54,7 @@ class Drawer(threading.Thread):
         self.sendCommand("G10")
         self.sendCommand("G21")
         while not self.stopEvent.is_set():
-            reply = await reader.read()
+            reply = await self.reader.read()
             print(reply)
         
 
