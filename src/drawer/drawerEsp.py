@@ -3,9 +3,9 @@ import telnetlib3
 import numpy as np
 import json
 import time
-import threading
 
-class Drawer(threading.Thread):
+
+class Drawer:
 
     def closeDrawer(self):
         self.toPosition(0,0)
@@ -53,15 +53,12 @@ class Drawer(threading.Thread):
         self.sendCommand("G90")
         self.sendCommand("G10")
         self.sendCommand("G21")
-        while not self.stopEvent.is_set():
-            reply = await self.reader.read()
-            print(reply)
+
         
 
 
     def __init__(self,path = "settings.json"):
-        super(Drawer, self).__init__()
-        self.stopEvent = threading.Event()
+
         with open('settings.json') as f:
             self.settings = json.load(f)["machine"]
         self.size = self.settings["size"]
