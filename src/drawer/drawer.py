@@ -114,6 +114,7 @@ class DrawerZ:
         self.speed = self.settings["speed"]
         self.pen = self.settings["pen"]
         self.offset = self.settings["offset"] 
+        self.output = False
         
         
 
