@@ -1,4 +1,4 @@
-from drawer import drawerEsp as drawer
+from drawer import drawer
 import traceback
 import colorsys
 from blinkt import set_pixel, set_brightness, show, clear
@@ -316,7 +316,7 @@ async def main():
     mouseThread = threading.Thread(target = mouseListener)
     mouseThread.daemon = True
     mouseThread.start()
-    draw = drawer.Drawer("./settings.json")
+    draw = drawer.DrawerZ("./settings.json")
     await draw.start()
     draw.penUp()
     draw.toPosition(0,0)
