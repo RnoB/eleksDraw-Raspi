@@ -36,6 +36,7 @@ def noiser(xMax):
 class DrawerZ:
 
     def sendCommand(self,gCode):
+        gCode = (gCode.strip()+'\r\n').encode('UTF-8')
         if self.output:
             print(gCode)
         self.s.flushInput()
@@ -56,7 +57,7 @@ class DrawerZ:
             lR = np.sqrt((self.dx - x0)**2+(self.dy+y0)**2)-self.dist
             x0 = lL
             y0 = lR
-        gCode = (('G1X'+str(x0)+'Y'+str(y0)+'F'+str(speed)).strip()+'\r\n').encode('UTF-8')
+        gCode = (('G1X'+str(x0)+'Y'+str(y0)+'F'+str(speed))
         self.sendCommand(gCode)
 
 
@@ -122,9 +123,9 @@ class DrawerZ:
         self.s.write("\r\n\r\n".encode('UTF-8'))
         time.sleep(2)
         self.s.flushInput()
-        self.sendCommand('G90\r\n'.encode('UTF-8')) # Set to Absolute Positioning
-        self.sendCommand('G1Z0F10\r\n'.encode('UTF-8')) # linear movement no z position
-        self.sendCommand('G21\r\n'.encode('UTF-8')) # G21 ; Set Units to Millimeters
+        self.sendCommand('G90') # Set to Absolute Positioning
+        self.sendCommand('G1Z0F10') # linear movement no z position
+        self.sendCommand('G21')) # G21 ; Set Units to Millimeters
         
 
 
