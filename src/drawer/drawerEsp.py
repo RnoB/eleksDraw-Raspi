@@ -46,7 +46,7 @@ class Drawer:
         self.penUp()
 
 
-    async def run(self):
+    async def start(self):
         self.x0 = 0
         self.y0 = 0
         self.reader, self.writer = await telnetlib3.open_connection(self.settings["ip"], self.settings["port"])
