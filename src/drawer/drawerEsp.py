@@ -60,7 +60,7 @@ class Drawer(threading.Thread):
 
 
     def __init__(self,path = "settings.json"):
-        super(Sensor, self).__init__()
+        super(Drawer, self).__init__()
         self.stopEvent = threading.Event()
         with open('settings.json') as f:
             self.settings = json.load(f)["machine"]
