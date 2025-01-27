@@ -12,7 +12,7 @@ class Drawer:
     async def sendCommand(self,cmd):
         self.writer.write(cmd+'\r\n')
         reply = await self.reader.read()
-        reply print('reply:', reply)
+        print('reply:', reply)
 
     async def penUp(self):
         gCode = 'G1Z'+str(self.pen["up"])+'F'+str(self.pen["speed"])
