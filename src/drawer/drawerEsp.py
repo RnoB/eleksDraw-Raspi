@@ -6,43 +6,45 @@ import time
 
 class Drawer:
 
-    def closeDrawer(self):
-        self.toPosition(0,0)
+    async def closeDrawer(self):
+        await self.toPosition(0,0)
 
-    def sendCommand(self,cmd):
+    async def sendCommand(self,cmd):
         self.writer.write(cmd+'\r\n')
+        reply = await self.reader.read()
+        reply print('reply:', reply)
 
-    def penUp(self):
+    async def penUp(self):
         gCode = 'G1Z'+str(self.pen["up"])+'F'+str(self.pen["speed"])
-        self.sendCommand(gCode)
+        await self.sendCommand(gCode)
 
-    def penDown(self):
+    async def penDown(self):
         gCode = 'G1Z'+str(self.pen["down"])+'F'+str(self.pen["speed"])
-        self.sendCommand(gCode)
+        await self.sendCommand(gCode)
 
-    def toPosition(self,x,y):
+    async def toPosition(self,x,y):
         x1 = self.invert[0] * x
         y1 = self.invert[1] * y
         gCode = 'G1X'+str(x1)+'Y'+str(y1)+'F'+str(self.speed)
-        self.sendCommand(gCode)
+        await self.sendCommand(gCode)
         time.sleep(np.sqrt((x1-self.x0)**2+(y1-self.y0)**2)*60/self.speed)
         self.x0 = x1
         self.y0 = y1
 
-    def lines(self,x,y,xOffset=0,yOffset=0,speed=2000,polar=False,smooth=False):
-        self.toPosition(x[0]+xOffset,y[0]+yOffset)
-        self.penDown()
+    async def lines(self,x,y,xOffset=0,yOffset=0,speed=2000,polar=False,smooth=False):
+        await self.toPosition(x[0]+xOffset,y[0]+yOffset)
+        await self.penDown()
         k0=0
         try:
             for k in range(0,len(x)):
                 k0 = k
                 
-                self.toPosition(x[k]+xOffset,y[k]+yOffset)
+                await self.toPosition(x[k]+xOffset,y[k]+yOffset)
         except:
             print('--- CRASH !!!! ---')
             print("length : "+str(len(x)))
             print("  k0   : "+str(k0))
-        self.penUp()
+        await self.penUp()
 
 
     async def start(self):
