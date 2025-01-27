@@ -57,7 +57,7 @@ class DrawerZ:
             lR = np.sqrt((self.dx - x0)**2+(self.dy+y0)**2)-self.dist
             x0 = lL
             y0 = lR
-        gCode = (('G1X'+str(x0)+'Y'+str(y0)+'F'+str(speed))
+        gCode = 'G1X'+str(x0)+'Y'+str(y0)+'F'+str(speed)
         self.sendCommand(gCode)
 
 
