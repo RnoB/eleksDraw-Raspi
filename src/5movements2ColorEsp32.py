@@ -311,13 +311,13 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
 
-async def main():
+def main():
     global pause
     mouseThread = threading.Thread(target = mouseListener)
     mouseThread.daemon = True
     mouseThread.start()
     draw = drawer.DrawerZ("./settings.json")
-    await draw.start()
+    #await draw.start()
     draw.penUp()
     draw.toPosition(0,0)
     set_brightness(.05)
@@ -511,4 +511,4 @@ async def main():
     switchColor(1)
 
 if __name__ == "__main__":
-    asyncio.run(main()) 
+    main() 
