@@ -57,7 +57,7 @@ class DrawerZ:
             lR = np.sqrt((self.dx - x0)**2+(self.dy+y0)**2)-self.dist
             x0 = lL
             y0 = lR
-        gCode = 'G1X'+str(x0)+'Y'+str(y0)+'F'+str(speed)
+        gCode = 'G1X'+str(x0)+'Y'+str(y0)+'F'+str(self.speed)
         self.sendCommand(gCode)
 
 
@@ -84,11 +84,11 @@ class DrawerZ:
         yf = y0+length*math.sin(angle)+yOffset
         self.toPosition(x0,y0)
         self.penDown()
-        self.toPosition(xf,yf,speed)
+        self.toPosition(xf,yf,self.speed)
         self.penUp()
 
     def lines(self,x,y,xOffset=0,yOffset=0,speed=2000,polar=False,smooth=False):
-        self.toPosition(x[0]+xOffset,y[0]+yOffset,polar=polar,speed=2*self.speed)
+        self.toPosition(x[0]+xOffset,y[0]+yOffset,polar=polar,speed=self.speed)
         self.penDown()
         k0=0
         try:
