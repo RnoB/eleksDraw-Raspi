@@ -88,14 +88,14 @@ class DrawerZ:
         self.penUp()
 
     def lines(self,x,y,xOffset=0,yOffset=0,speed=2000,polar=False,smooth=False):
-        self.toPosition(x[0]+xOffset,y[0]+yOffset,polar=polar,speed=2*speed)
+        self.toPosition(x[0]+xOffset,y[0]+yOffset,polar=polar,speed=2*self.speed)
         self.penDown()
         k0=0
         try:
             for k in range(0,len(x)):
                 k0 = k
                 
-                self.toPosition(x[k]+xOffset,y[k]+yOffset,polar=polar,speed=speed)
+                self.toPosition(x[k]+xOffset,y[k]+yOffset,polar=polar,speed=self.speed)
         except:
             print('--- CRASH !!!! ---')
             print("length : "+str(len(x)))
