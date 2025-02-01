@@ -26,10 +26,15 @@
 	},
 	"plot":{
 		"nFrames":100,
-		"nLines":20,
+		"nLines":{
+			"min":[10,20],
+			"max":[20,50],
+			"standard":[20,50]
+		},
 		"margin":{
 			"x":10,
 			"y":10
-		}
+		},
+		
 	}
 }
