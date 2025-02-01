@@ -413,15 +413,16 @@ def main():
     if np.random.random()<.12:
         #Nmin = np.random.randint(300,600)
         #Nmax = np.random.randint(50,200)
-        Nmin = np.random.randint(50,800)
-        Nmax = np.random.randint(600,1200)
-
+        #Nmin = np.random.randint(50,800)
+        #Nmax = np.random.randint(600,1200)
+        Nmin = np.random.randint(settings["nLines"]["min"][0],settings["nLines"]["min"][1])
+        Nmax = np.random.randint(settings["nLines"]["max"][0],settings["nLines"]["max"][1])
         nL = np.linspace(Nmin,Nmax,nx,dtype = int)
         if random.random()<.5:
             nL = np.flip(nL) 
     else:
         #nL = random.randint(250,350) * np.ones(nx, dtype=int)  
-        nL = random.randint(250,550) * np.ones(nx, dtype=int)  
+        nL = random.randint(settings["nLines"]["standard"][0],settings["nLines"]["standard"][1]) * np.ones(nx, dtype=int)  
 
 
     if np.random.random()<.098:
