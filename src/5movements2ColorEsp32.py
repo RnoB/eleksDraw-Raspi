@@ -312,11 +312,13 @@ def drawing(kFrames,frames,angle,angleZ,draw,
 
 
 def main():
+    with open('settings.json') as f:
+        settings = json.load(f)["plot"]
     global pause
     mouseThread = threading.Thread(target = mouseListener)
     mouseThread.daemon = True
     mouseThread.start()
-    draw = drawer.DrawerZ("./settings.json")
+    draw = drawer.DrawerZ("./.json")
     #await draw.start()
     draw.penUp()
     draw.toPosition(0,0)
@@ -376,7 +378,7 @@ def main():
     draw.penUp()
     #draw.squareCorner(0,0,widthPaper,heightPaper)
     blinked.switchColor('g',[5,6,7])
-    nLines = 600
+    nLines = settings["nLines"]
     size = 0
 
     nx0=0
