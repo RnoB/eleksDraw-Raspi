@@ -182,7 +182,7 @@ class kinect:
         
 
 
-    def getDepthFrames(self,delay=.01,nFrames=10,maxDepth=2049):
+    def getDepthFrames(self,delay=.01,nFrames=10,maxDepth=2049,step = 1):
         self.nFrames = nFrames
         self.delay = delay
         self.maxDepth = maxDepth
@@ -201,6 +201,8 @@ class kinect:
                 time.sleep(delay)
         else:
             for k in range(0,nFrames):
+                for j in range(0,step-1):
+                    freenect.sync_get_depth()
                 self.frames.append(np.float32(freenect.sync_get_depth()[0]))
                 progress = len(self.frames)/nFrames
                 if progress>previousProgress:
