@@ -118,14 +118,17 @@ class kinect:
         self.nFrames = nFrames
 
         self.fgbg = cv2.createBackgroundSubtractorMOG2() 
-        freenect.start_depth(self.dev)
-        freenect.set_depth_callback(self.dev,self.backAcq)
+        if self.sync:
+            freenect.start_depth(self.dev)
+            freenect.set_depth_callback(self.dev,self.backAcq)
         self.background = []
         previousProgress = -1
         while len(self.background)<nFrames:
-            
-            freenect.process_events(self.ctx)
-            time.sleep(.01)
+            if self.sync:
+                freenect.process_events(self.ctx)
+                time.sleep(.01)
+            else:
+                self.background.append(np.float32(freenect.sync_get_depth()[0]))
             progress = len(self.background)/nFrames
             if progress>previousProgress:
                 blinked.progressColor(progress,'c','o',pix = [2])
@@ -174,12 +177,6 @@ class kinect:
         if np.isnan(depth).all() or len(depth[~np.isnan(depth)])<self.nMin:
             print('all nan')
         else:
-        
-        
-            #depthMin = np.min(depth[~np.isnan(depth)])
-            #depthMax = np.max(depth[~np.isnan(depth)])
-        
-            #self.frames.append(1-(depth-depthMin)/(depthMax-depthMin))
             self.frames.append(depth)
         blinked.switchColor('g',[3])
         
@@ -189,43 +186,53 @@ class kinect:
         self.nFrames = nFrames
         self.delay = delay
         self.maxDepth = maxDepth
-        freenect.start_depth(self.dev)
-        freenect.set_depth_callback(self.dev,self.depthAcq)
+        if self.sync:
+            freenect.start_depth(self.dev)
+            freenect.set_depth_callback(self.dev,self.depthAcq)
         self.frames = []
         previousProgress = -1
-        while len(self.frames)<nFrames:
-            progress = len(self.frames)/nFrames
-            if progress>previousProgress:
-                blinked.progressColor(progress,'c','o',pix = [2])
-                previousProgress = progress
+        if self.sync:
+            while len(self.frames)<nFrames:
+                progress = len(self.frames)/nFrames
+                if progress>previousProgress:
+                    blinked.progressColor(progress,'c','o',pix = [2])
+                    previousProgress = progress
+                freenect.process_events(self.ctx)
+                time.sleep(delay)
+        else:
+            for k in range(0,nFrames):
+                self.frames.append(np.float32(freenect.sync_get_depth()[0]))
+                progress = len(self.frames)/nFrames
+                if progress>previousProgress:
+                    blinked.progressColor(progress,'c','o',pix = [2])
+                    previousProgress = progress
             
-            
-            freenect.process_events(self.ctx)
-            time.sleep(delay)
 
     def start(self,degs=10):
-        self.ctx = freenect.init()
-        if not self.ctx:
-            freenect.error_open_device()
-        self.dev = freenect.open_device(self.ctx, 0)
-        if not self.dev:
-            freenect.error_open_device()
-        freenect.set_tilt_degs(self.dev,-degs)
-        freenect.set_tilt_degs(self.dev,degs)
-        self.intialised == True
-        print('kinect Started')
+        if self.sync:
+            self.ctx = freenect.init()
+            if not self.ctx:
+                freenect.error_open_device()
+            self.dev = freenect.open_device(self.ctx, 0)
+            if not self.dev:
+                freenect.error_open_device()
+            freenect.set_tilt_degs(self.dev,-degs)
+            freenect.set_tilt_degs(self.dev,degs)
+            self.intialised == True
+            print('kinect Started')
 
     def stop(self):
-        freenect.close_device(self.dev)
-        freenect.shutdown(self.ctx)
-        print('kinect Stopped')
+        if self.sync:
+            freenect.close_device(self.dev)
+            freenect.shutdown(self.ctx)
+            print('kinect Stopped')
 
-    def __init__(self,output = False,nFrames = 10,delay = .5):
+    def __init__(self,output = False,nFrames = 10,delay = .5,sync = True):
         self.kinectWidth = 640
         self.kinectHeight = 480
         self.intialised = False
         self.record = False
-
+        self.sync = sync
         self.ctx = []
         self.dev = []
         self.frames = []
