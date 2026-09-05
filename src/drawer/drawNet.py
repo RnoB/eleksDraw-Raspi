@@ -259,7 +259,7 @@ def main():
 
     global running
     global draw
-    draw = drawer.DrawerZ()
+    draw = drawer.DrawerZ("/home/pi/settings.json")
     print(sys.argv)
     try:
         print(int(sys.argv[2]))
