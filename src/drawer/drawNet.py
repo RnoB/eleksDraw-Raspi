@@ -259,7 +259,7 @@ def main():
 
     global running
     global draw
-    draw = drawer.Drawer()
+    draw = drawer.DrawerZ()
     print(sys.argv)
     try:
         print(int(sys.argv[2]))
