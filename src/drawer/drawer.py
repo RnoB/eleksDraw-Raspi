@@ -108,7 +108,7 @@ class DrawerZ:
 
     def __init__(self,path = "settings.json"):
 
-        with open('settings.json') as f:
+        with open(path) as f:
             self.settings = json.load(f)["machine"]
         self.size = self.settings["size"]
         self.invert = [int(1-2*self.settings["invert"]["x"]),int(1-2*self.settings["invert"]["y"])]
